@@ -1,0 +1,12 @@
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\bin\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.deps.json
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\bin\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.dll
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\bin\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.pdb
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.csproj.AssemblyReference.cache
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.AssemblyInfoInputs.cache
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.AssemblyInfo.cs
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.csproj.CoreCompileInputs.cache
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.dll
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\refint\Thor.Units.Maui.dll
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\Thor.Units.Maui.pdb
+C:\Programming\Thunder Maui Units Library\Thunder Maui Units Library\obj\Release\net8.0-windows10.0.19041.0\ref\Thor.Units.Maui.dll
