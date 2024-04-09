@@ -4,9 +4,7 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-using System;
 using System.Diagnostics;
-using System.IO;
 using System.Xml;
 
 namespace Thor.Units
@@ -333,7 +331,7 @@ namespace Thor.Units
 		/// <summary>
 		/// Parses an XML node that represents a unit.
 		/// </summary>
-		/// <param name="groupName">Name of the group this unit is in.</param>
+		/// <param name="group">Name of the group this unit is in.</param>
 		/// <param name="unitnode">The node containing the unit information.</param>
 		/// <returns>A unit result value.</returns>
 		private UnitResult ParseUnitXMLNode(string filePath, UnitGroup group, XmlNode unitnode)
