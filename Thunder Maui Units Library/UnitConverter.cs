@@ -484,8 +484,8 @@ public class UnitConverter : IUnitConverter
 	/// <returns>True if units are compatible, else false.</returns>
 	public bool CompatibleUnits(string unitSymbol1, string unitSymbol2)
 	{
-		IUnitEntry u1 = GetUnitBySymbol(unitSymbol1);
-		IUnitEntry u2 = GetUnitBySymbol(unitSymbol2);
+		IUnitEntry? u1 = GetUnitBySymbol(unitSymbol1);
+		IUnitEntry? u2 = GetUnitBySymbol(unitSymbol2);
 
 		if (u1 == null || u2 == null)
 		{
@@ -520,8 +520,8 @@ public class UnitConverter : IUnitConverter
 	/// <returns>Unit result value.</returns>
 	private UnitResult AddUnitToGroup(string unitName, string groupName)
 	{
-		UnitEntry unit = this.m_Units[unitName];
-		UnitGroup group = this.m_UnitGroups[groupName];
+		UnitEntry? unit = this.m_Units[unitName];
+		UnitGroup? group = this.m_UnitGroups[groupName];
 
 		// Make sure the unit exists.
 		if (unit == null)
@@ -546,15 +546,15 @@ public class UnitConverter : IUnitConverter
 	/// </summary>
 	/// <param name="unitName">Name of the unit.</param>
 	/// <returns>The group the unit is in, or null if the unit is not valid.</returns>
-	private UnitGroup GetUnitGroup(string unitName)
+	private UnitGroup? GetUnitGroup(string unitName)
 	{
 		// Does the unit even exist?
-		if (this.m_Units[unitName] == null)
+		if (m_Units[unitName] == null)
 		{
 			return null;
 		}
 
-		// Iterate through every group
+		// Iterate through every group.
 		UnitGroup[] groups = this.m_UnitGroups.GetAllGroups();
 		foreach (UnitGroup group in groups)
 		{
@@ -587,18 +587,22 @@ public class UnitConverter : IUnitConverter
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry unit_from = GetUnitBySymbol(unitfrom);
+		IUnitEntry? unit_from = GetUnitBySymbol(unitfrom);
 
 		// Make sure both units are real units.
 		if (unit_from == null)
+		{
 			return UnitResult.BadUnit;
+		}
 
 		try
 		{
 			// Convert the value back to the standard
 			x = x + unit_from.PreAdder;
 			if (unit_from.Multiplier > 0.0)
+			{
 				x = x * unit_from.Multiplier;
+			}
 			x = x + unit_from.Adder;
 
 			output = x;
@@ -635,7 +639,7 @@ public class UnitConverter : IUnitConverter
 			return UnitResult.BadUnit;
 		}
 
-		// Make sure the units are of the same group
+		// Make sure the units are of the same group.
 		if (!this.CompatibleUnits(unit_from.Name, unit_to.Name))
 		{
 			return UnitResult.UnitMismatch;
@@ -761,8 +765,8 @@ public class UnitConverter : IUnitConverter
 	public UnitResult ParseUnitString(string input, out double val, out string unit)
 	{
 		// Defaults.
-		val = 0.0;
-		unit = "";
+		val		= 0.0;
+		unit	= "";
 
 		if (input == "")
 		{

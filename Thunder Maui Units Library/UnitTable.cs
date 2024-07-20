@@ -4,7 +4,6 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-using Microsoft.Maui.Media;
 using System.Collections;
 using System.Diagnostics;
 
@@ -32,14 +31,14 @@ public class UnitTable : DictionaryBase
 		{
 			unitName = unitName.ToLower();
 
-			//If we contain a unit matching the key then return it.
+			// If we contain a unit matching the key then return it.
 			if (this.Dictionary.Contains(unitName))
 			{
 				return this.Dictionary[unitName] as UnitEntry;
 			}
 			else
 			{
-				//Symbol doesn't exist.
+				// Symbol doesn't exist.
 				return null;
 			}
 		}
@@ -48,10 +47,10 @@ public class UnitTable : DictionaryBase
 		{
 			unitName = unitName.ToLower();
 
-			//Already added? Warn developer (this is probably not a good thing)
+			// Already added? Warn developer (this is probably not a good thing).
 			Debug.Assert( (!this.Dictionary.Contains(unitName)), "Unit table warning", String.Format("The unit with name '{0}' has been overwritten.", unitName) );
 
-			//Link the unit and its name in the table
+			// Link the unit and its name in the table.
 			this.Dictionary[unitName] = value;
 		}
 	}

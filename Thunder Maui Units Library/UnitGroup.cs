@@ -23,31 +23,9 @@ public class UnitGroup
 
 	#region Properties
 
-	public string Name
-	{
-		get
-		{
-			return m_Name;
-		}
+	public string Name { get => m_Name; set => m_Name = value; }
 
-		set
-		{
-			m_Name = value;
-		}
-	}
-
-	public UnitTable Units
-	{
-		get
-		{
-			return m_Units;
-		}
-
-		set
-		{
-			m_Units = value;
-		}
-	}
+	public UnitTable Units { get => m_Units; set => m_Units = value; }
 
 	#endregion
 
@@ -72,7 +50,7 @@ public class UnitGroup
 	/// <returns>True if the unit is in the group, else false.</returns>
 	public bool IsInGroup(string unitName)
 	{
-		return (m_Units[unitName] != null);
+		return m_Units[unitName] != null;
 	}
 
 	#endregion

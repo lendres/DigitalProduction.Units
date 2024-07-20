@@ -53,10 +53,10 @@ public class GroupTable : DictionaryBase
 		{
 			groupName = groupName.ToLower();
 
-			//Already added? Warn developer (this is probably not a good thing)
+			// Already added? Warn developer (this is probably not a good thing).
 			Debug.Assert( (!this.Dictionary.Contains(groupName)), "Group table warning", String.Format("The unit group with name '{0}' has been overwritten.", groupName) );
 
-			//Link the group to its name
+			// Link the group to its name.
 			this.Dictionary[groupName] = value;
 		} 
 	}
