@@ -107,6 +107,16 @@ public class GroupTable : DictionaryBase
 		return names;
 	}
 
+	/// <summary>
+	/// Gets a sorted List of the names of the groups in the group table.
+	/// </summary>
+	public List<string> GetSortedListOfGroupNames()
+	{
+		List<string> categoryNames = new(GetAllGroupNames());
+		categoryNames.Sort();
+		return categoryNames;
+	}
+
 	#endregion
 
 } // End class.

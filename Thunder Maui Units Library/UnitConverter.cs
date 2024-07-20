@@ -176,7 +176,7 @@ public class UnitConverter : IUnitConverter
 		}
 
 		// Get the root node.
-		System.Xml.XmlNode? root = xmlData[0];
+		System.Xml.XmlNode root = xmlData[0]!;
 
 		// Does the file not start with a "UnitFile" node? We have problems.
 		if (root.Name.ToLower() != "unitfile")
@@ -493,15 +493,6 @@ public class UnitConverter : IUnitConverter
 		}
 
 		return GetUnitGroup(u1.Name) == GetUnitGroup(u2.Name);
-	}
-
-	/// <summary>
-	/// Returns a list of all the units in a given group.
-	/// </summary>
-	/// <param name="groupName">Name of group to extract names from.</param>
-	public string[] GetListOfUnitsInGroup(string groupName)
-	{
-		return m_UnitGroups[groupName].Units.GetAllUnitNames();
 	}
 
 	/// <summary>

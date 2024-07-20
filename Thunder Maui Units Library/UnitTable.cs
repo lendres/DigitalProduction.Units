@@ -4,6 +4,7 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
+using Microsoft.Maui.Media;
 using System.Collections;
 using System.Diagnostics;
 
@@ -69,6 +70,16 @@ public class UnitTable : DictionaryBase
 		}
 
 		return names;
+	}
+
+	/// <summary>
+	/// Get a list of all the names of the UnitEntrys in this UnitTable.
+	/// </summary>
+	public List<string> GetSortedListOfUnitNames()
+	{
+		List<string> unitNames = new(GetAllUnitNames());
+		unitNames.Sort();
+		return unitNames;
 	}
 
 } // End class.
