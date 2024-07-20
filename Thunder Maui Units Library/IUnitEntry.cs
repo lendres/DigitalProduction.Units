@@ -4,39 +4,36 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-using System;
+namespace Thor.Units;
 
-namespace Thor.Units
+/// <summary>
+/// Interface to the unit entry class.
+/// </summary>
+public interface IUnitEntry
 {
-    /// <summary>
-    /// Interface to the unit entry class.
-    /// </summary>
-    public interface IUnitEntry
+    string Name
     {
-        string Name
-        {
-            get;
-        }
+        get;
+    }
 
-        string DefaultSymbol
-        {
-            get;
-        }
+    string DefaultSymbol
+    {
+        get;
+    }
 
-        double PreAdder
-        {
-            get;
-        }
+    double PreAdder
+    {
+        get;
+    }
 
-        double Adder
-        {
-            get;
-        }
+    double Adder
+    {
+        get;
+    }
 
-        double Multiplier
-        {
-            get;
-        }
+    double Multiplier
+    {
+        get;
+    }
 
-    } // End interface.
-} // End namespace.
+} // End interface.

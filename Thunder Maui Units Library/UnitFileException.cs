@@ -4,60 +4,56 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-using System;
+namespace Thor.Units;
 
-namespace Thor.Units
+/// <summary>
+/// Represents an exception generated when reading the unit file.
+/// </summary>
+public class UnitFileException : Exception
 {
+	#region Members
+
+	private string m_detail		= "";
+
+	#endregion
+
+	#region Construction
+
 	/// <summary>
-	/// Represents an exception generated when reading the unit file.
+	/// Creates an instance of the unit file exception.
 	/// </summary>
-	public class UnitFileException : Exception
+	/// <param name="message">Message to send with the exception.</param>
+	/// <param name="detail">Additional details about the exception.</param>
+	public UnitFileException(string message, string detail) :
+		base(message)
 	{
-		#region Members
+		m_detail = detail;
+	}
 
-		private string m_detail		= "";
+	/// <summary>
+	/// Creates an instance of the unit file exception.
+	/// </summary>
+	/// <param name="message">Message to send with the exception.</param>
+	public UnitFileException(string message) :
+		base(message)
+	{
+	}
 
-		#endregion
+	#endregion
 
-		#region Construction
+	#region Properties
 
-		/// <summary>
-		/// Creates an instance of the unit file exception.
-		/// </summary>
-		/// <param name="message">Message to send with the exception.</param>
-		/// <param name="detail">Additional details about the exception.</param>
-		public UnitFileException(string message, string detail) :
-			base(message)
+	/// <summary>
+	/// Gets additional details about the exception.
+	/// </summary>
+	public string Detail
+	{
+		get
 		{
-			m_detail = detail;
+			return m_detail;
 		}
+	}
 
-		/// <summary>
-		/// Creates an instance of the unit file exception.
-		/// </summary>
-		/// <param name="message">Message to send with the exception.</param>
-		public UnitFileException(string message) :
-			base(message)
-		{
-		}
+	#endregion
 
-		#endregion
-
-		#region Properties
-
-		/// <summary>
-		/// Gets additional details about the exception.
-		/// </summary>
-		public string Detail
-		{
-			get
-			{
-				return m_detail;
-			}
-		}
-
-		#endregion
-
-	} // End class.
-} // End namespace.
-
+} // End class.

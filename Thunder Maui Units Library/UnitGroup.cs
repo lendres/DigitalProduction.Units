@@ -1,81 +1,80 @@
-﻿namespace Thor.Units
+﻿namespace Thor.Units;
+
+/// <summary>
+/// Represents a group of units (i.e Temperature, Speed etc..).
+/// </summary>
+public class UnitGroup
 {
-	/// <summary>
-	/// Represents a group of units (i.e Temperature, Speed etc..).
-	/// </summary>
-	public class UnitGroup
+	#region Members
+
+	private string			m_Name			= "";
+	private UnitTable		m_Units			= new();
+
+	#endregion
+
+	#region Construction
+
+	public UnitGroup()
 	{
-		#region Members
+		m_Units = new UnitTable();
+	}
 
-		private string			m_Name			= "";
-		private UnitTable		m_Units			= new();
+	#endregion
 
-		#endregion
+	#region Properties
 
-		#region Construction
-
-		public UnitGroup()
+	public string Name
+	{
+		get
 		{
-			m_Units = new UnitTable();
+			return m_Name;
 		}
 
-		#endregion
-
-		#region Properties
-
-		public string Name
+		set
 		{
-			get
-			{
-				return m_Name;
-			}
+			m_Name = value;
+		}
+	}
 
-			set
-			{
-				m_Name = value;
-			}
+	public UnitTable Units
+	{
+		get
+		{
+			return m_Units;
 		}
 
-		public UnitTable Units
+		set
 		{
-			get
-			{
-				return m_Units;
-			}
-
-			set
-			{
-				m_Units = value;
-			}
+			m_Units = value;
 		}
+	}
 
-		#endregion
+	#endregion
 
-		#region Methods
+	#region Methods
 
-		/// <summary>
-		/// Adds a unit to the group.
-		/// </summary>
-		/// <param name="unit">Unit to add to the group.</param>
-		/// <returns>Unit result value.</returns>
-		public UnitResult AddUnit(UnitEntry unit)
-		{
-			m_Units[unit.Name] = unit;
-			return UnitResult.NoError;
-		}
+	/// <summary>
+	/// Adds a unit to the group.
+	/// </summary>
+	/// <param name="unit">Unit to add to the group.</param>
+	/// <returns>Unit result value.</returns>
+	public UnitResult AddUnit(UnitEntry unit)
+	{
+		m_Units[unit.Name] = unit;
+		return UnitResult.NoError;
+	}
 
-		/// <summary>
-		/// Gets a value that determines whether or not the specified unit
-		/// is in the group.
-		/// </summary>
-		/// <param name="unitName">Name of the unit to search for.</param>
-		/// <returns>True if the unit is in the group, else false.</returns>
-		public bool IsInGroup(string unitName)
-		{
-			return (m_Units[unitName] != null);
-		}
+	/// <summary>
+	/// Gets a value that determines whether or not the specified unit
+	/// is in the group.
+	/// </summary>
+	/// <param name="unitName">Name of the unit to search for.</param>
+	/// <returns>True if the unit is in the group, else false.</returns>
+	public bool IsInGroup(string unitName)
+	{
+		return (m_Units[unitName] != null);
+	}
 
-		#endregion
+	#endregion
 
-	} // End class.
-} // End namespace.
+} // End class.

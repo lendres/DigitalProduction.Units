@@ -5,36 +5,35 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 
-namespace Thor.Units
+namespace Thor.Units;
+
+/// <summary>
+/// Interface to the unit converter.
+/// </summary>
+public interface IUnitConverter
 {
-	/// <summary>
-	/// Interface to the unit converter.
-	/// </summary>
-	public interface IUnitConverter
-	{
-		bool CompatibleUnits(string unitSymbol1, string unitSymbol2);
+	bool CompatibleUnits(string unitSymbol1, string unitSymbol2);
 
-		UnitResult ConvertUnits(double val, string unitfrom, string unitto, out double output);
+	UnitResult ConvertUnits(double val, string unitfrom, string unitto, out double output);
 
-		UnitResult ConvertToStandard(double val, string unitfrom, out double output);
+	UnitResult ConvertToStandard(double val, string unitfrom, out double output);
 
-		UnitResult ConvertFromStandard(double val, string unitto, out double output);
+	UnitResult ConvertFromStandard(double val, string unitto, out double output);
 
-		DataString CreateDataString(string unitSymbol);
+	DataString CreateDataString(string unitSymbol);
 
-		DataString CreateDataString();
+	DataString CreateDataString();
 
-		UnitEntry? GetUnitByName(string unitName);
+	UnitEntry? GetUnitByName(string unitName);
 
-		UnitEntry? GetUnitBySymbol(string unitSymbol);
+	UnitEntry? GetUnitBySymbol(string unitSymbol);
 
-		void InitTables();
+	void InitTables();
 
-		UnitResult LoadUnitsFile(string filePath);
+	UnitResult LoadUnitsFile(string filePath);
 
-		event UnitEventHandler OnError;
+	event UnitEventHandler OnError;
 
-		UnitResult ParseUnitString(string input, out double val, out string unit);
+	UnitResult ParseUnitString(string input, out double val, out string unit);
 
-	} // End class.
-} // End namespace.
+} // End class.

@@ -1,26 +1,23 @@
-﻿using System;
+﻿namespace Thor.Units;
 
-namespace Thor.Units
+[Flags]
+public enum DataStringFlags : int
 {
-	[Flags]
-	public enum DataStringFlags : int
-	{
-		None,
+	None,
 
-		/// <summary>
-		/// Stops the data string unit being changed by reading user input.
-		/// </summary>
-		ForceUnit,
+	/// <summary>
+	/// Stops the data string unit being changed by reading user input.
+	/// </summary>
+	ForceUnit,
 
-		/// <summary>
-		/// Enforces a maximum value on the data string.
-		/// </summary>
-		UseMaxBound,
+	/// <summary>
+	/// Enforces a maximum value on the data string.
+	/// </summary>
+	UseMaxBound,
 
-		/// <summary>
-		/// Enforces a minimum value on the data string.
-		/// </summary>
-		UseMinBound
+	/// <summary>
+	/// Enforces a minimum value on the data string.
+	/// </summary>
+	UseMinBound
 
-	} // End enum.
-} // End namespace.
+} // End enum.

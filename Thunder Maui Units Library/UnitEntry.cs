@@ -1,104 +1,103 @@
-﻿namespace Thor.Units
+﻿namespace Thor.Units;
+
+/// <summary>
+/// Represents a single unit loaded from the units file.
+/// </summary>
+public class UnitEntry : IUnitEntry
 {
+	#region Members
+
+	private string					m_Name;
+	private string					m_DefaultSymbol;
+	private double					m_PreAdder;
+	private double					m_Adder;
+	private double					m_Multiplier;
+
+	#endregion
+
+	#region Construction
+
 	/// <summary>
-	/// Represents a single unit loaded from the units file.
+	/// Constructor.
 	/// </summary>
-	public class UnitEntry : IUnitEntry
+	public UnitEntry()
 	{
-		#region Members
+		m_Name          = "";
+		m_DefaultSymbol = "";
+		m_PreAdder      = 0.0;
+		m_Adder         = 0.0;
+		m_Multiplier    = 0.0;
+	}
 
-		private string					m_Name;
-		private string					m_DefaultSymbol;
-		private double					m_PreAdder;
-		private double					m_Adder;
-		private double					m_Multiplier;
+	#endregion
 
-		#endregion
+	#region Properties
 
-		#region Construction
-
-		/// <summary>
-		/// Constructor.
-		/// </summary>
-		public UnitEntry()
+	public string Name
+	{
+		get
 		{
-			m_Name          = "";
-			m_DefaultSymbol = "";
-			m_PreAdder      = 0.0;
-			m_Adder         = 0.0;
-			m_Multiplier    = 0.0;
+			return m_Name;
 		}
 
-		#endregion
-
-		#region Properties
-
-		public string Name
+		set
 		{
-			get
-			{
-				return m_Name;
-			}
+			m_Name = value;
+		}
+	}
 
-			set
-			{
-				m_Name = value;
-			}
+	public string DefaultSymbol
+	{
+		get
+		{
+			return m_DefaultSymbol;
 		}
 
-		public string DefaultSymbol
+		set
 		{
-			get
-			{
-				return m_DefaultSymbol;
-			}
+			m_DefaultSymbol = value;
+		}
+	}
 
-			set
-			{
-				m_DefaultSymbol = value;
-			}
+	public double PreAdder
+	{
+		get
+		{
+			return m_PreAdder;
 		}
 
-		public double PreAdder
+		set
 		{
-			get
-			{
-				return m_PreAdder;
-			}
+			m_PreAdder = value;
+		}
+	}
 
-			set
-			{
-				m_PreAdder = value;
-			}
+	public double Adder
+	{
+		get
+		{
+			return m_Adder;
 		}
 
-		public double Adder
+		set
 		{
-			get
-			{
-				return m_Adder;
-			}
+			m_Adder = value;
+		}
+	}
 
-			set
-			{
-				m_Adder = value;
-			}
+	public double Multiplier
+	{
+		get
+		{
+			return m_Multiplier;
 		}
 
-		public double Multiplier
+		set
 		{
-			get
-			{
-				return m_Multiplier;
-			}
-
-			set
-			{
-				m_Multiplier = value;
-			}
+			m_Multiplier = value;
 		}
+	}
 
-		#endregion
+	#endregion
 
-	} // End class.
-} // End namespace.
+} // End class.

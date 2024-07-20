@@ -5,72 +5,70 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 
-namespace Thor.Units
+namespace Thor.Units;
+
+/// <summary>
+/// Represents a set of parameters sent with events generated
+/// by the unit conversion class.
+/// </summary>
+public class UnitEventArgs
 {
+	#region Members
+
+	private string m_Message;
+	private string m_DetailMessage;
+
+	#endregion
+
+	#region Construction
+
 	/// <summary>
-	/// Represents a set of parameters sent with events generated
-	/// by the unit conversion class.
+	/// Creates an instance of unit event arguments.
 	/// </summary>
-	public class UnitEventArgs
+	/// <param name="message">Message to send with the event.</param>
+	/// <param name="detailmessage">More detail to send with the event.</param>
+	public UnitEventArgs(string message, string detailmessage)
 	{
-		#region Members
+		m_Message = message;
+		m_DetailMessage = detailmessage;
+	}
 
-		private string m_Message;
-		private string m_DetailMessage;
+	/// <summary>
+	/// Creates an instance of unit event arguments.
+	/// </summary>
+	/// <param name="message">Message to send with the event.</param>
+	public UnitEventArgs(string message)
+	{
+		m_Message = message;
+		m_DetailMessage = "";
+	}
 
-		#endregion
+	#endregion
 
-		#region Construction
+	#region Properties
 
-		/// <summary>
-		/// Creates an instance of unit event arguments.
-		/// </summary>
-		/// <param name="message">Message to send with the event.</param>
-		/// <param name="detailmessage">More detail to send with the event.</param>
-		public UnitEventArgs(string message, string detailmessage)
+	/// <summary>
+	/// Gets a small message associated with the event.
+	/// </summary>
+	public string Message
+	{
+		get
 		{
-			m_Message = message;
-			m_DetailMessage = detailmessage;
+			return m_Message;
 		}
+	}
 
-		/// <summary>
-		/// Creates an instance of unit event arguments.
-		/// </summary>
-		/// <param name="message">Message to send with the event.</param>
-		public UnitEventArgs(string message)
+	/// <summary>
+	/// Gets a more detailed message associated with the event.
+	/// </summary>
+	public string DetailMessage
+	{
+		get
 		{
-			m_Message = message;
-			m_DetailMessage = "";
+			return m_DetailMessage;
 		}
+	}
 
-		#endregion
+	#endregion
 
-		#region Properties
-
-		/// <summary>
-		/// Gets a small message associated with the event.
-		/// </summary>
-		public string Message
-		{
-			get
-			{
-				return m_Message;
-			}
-		}
-
-		/// <summary>
-		/// Gets a more detailed message associated with the event.
-		/// </summary>
-		public string DetailMessage
-		{
-			get
-			{
-				return m_DetailMessage;
-			}
-		}
-
-		#endregion
-
-	} // End class.
-} // End namespace.
-
+} // End class.
