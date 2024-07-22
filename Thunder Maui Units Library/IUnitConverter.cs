@@ -28,8 +28,6 @@ public interface IUnitConverter
 
 	UnitEntry? GetUnitBySymbol(string unitSymbol);
 
-	void InitTables();
-
 	UnitResult LoadUnitsFile(string filePath);
 
 	event UnitEventHandler OnError;
