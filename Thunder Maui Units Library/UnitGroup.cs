@@ -27,6 +27,8 @@ public class UnitGroup
 
 	public UnitTable Units { get => m_Units; set => m_Units = value; }
 
+	//public int NumberOfUnits {get => Units.Count; }
+
 	#endregion
 
 	#region Methods
