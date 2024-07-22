@@ -76,34 +76,12 @@ public class UnitConverter : IUnitConverter
 	/// <summary>
 	/// Units.
 	/// </summary>
-	public UnitTable Units
-	{
-		get
-		{
-			return m_Units;
-		}
-
-		set
-		{
-			m_Units = value;
-		}
-	}
+	public UnitTable Units { get => m_Units; set => m_Units = value; }
 
 	/// <summary>
 	/// Groups.
 	/// </summary>
-	public GroupTable Groups
-	{
-		get
-		{
-			return m_UnitGroups;
-		}
-
-		set
-		{
-			m_UnitGroups = value;
-		}
-	}
+	public GroupTable Groups { get => m_UnitGroups; set => 	m_UnitGroups = value; }
 
 	#endregion
 
@@ -520,8 +498,8 @@ public class UnitConverter : IUnitConverter
 	/// <returns>Unit result value.</returns>
 	private UnitResult AddUnitToGroup(string unitName, string groupName)
 	{
-		UnitEntry? unit = this.m_Units[unitName];
-		UnitGroup? group = this.m_UnitGroups[groupName];
+		UnitEntry? unit = m_Units[unitName];
+		UnitGroup? group = m_UnitGroups[groupName];
 
 		// Make sure the unit exists.
 		if (unit == null)
@@ -555,7 +533,7 @@ public class UnitConverter : IUnitConverter
 		}
 
 		// Iterate through every group.
-		UnitGroup[] groups = this.m_UnitGroups.GetAllGroups();
+		UnitGroup[] groups = m_UnitGroups.GetAllGroups();
 		foreach (UnitGroup group in groups)
 		{
 			if (group.IsInGroup(unitName))
@@ -630,17 +608,17 @@ public class UnitConverter : IUnitConverter
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry unit_from = GetUnitBySymbol(unitfrom);
-		IUnitEntry unit_to = GetUnitBySymbol(unitto);
+		IUnitEntry? unit_from	= GetUnitBySymbol(unitfrom);
+		IUnitEntry? unit_to		= GetUnitBySymbol(unitto);
 
 		// Make sure both units are real units.
-		if ((unit_from == null) || (unit_to == null))
+		if (unit_from == null || unit_to == null)
 		{
 			return UnitResult.BadUnit;
 		}
 
 		// Make sure the units are of the same group.
-		if (!this.CompatibleUnits(unit_from.Name, unit_to.Name))
+		if (!CompatibleUnits(unit_from.Name, unit_to.Name))
 		{
 			return UnitResult.UnitMismatch;
 		}
