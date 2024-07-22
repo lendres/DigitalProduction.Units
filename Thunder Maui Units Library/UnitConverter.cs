@@ -50,12 +50,9 @@ public class UnitConverter : IUnitConverter
 		m_UnitGroups  = new GroupTable();
 
 		// Create an Xml document to hold the units file in.
-		m_UnitsFile = new XmlDocument();
-		m_CurUnitsFileVersion = 0.0;
-
-		m_CurUnitFileName = "";
-
-		InitTables();
+		m_UnitsFile				= new XmlDocument();
+		m_CurUnitsFileVersion	= 0.0;
+		m_CurUnitFileName		= "";
 	}
 
 	/// <summary>
