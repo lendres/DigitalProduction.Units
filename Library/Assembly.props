@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+	<PropertyGroup>
+		<Title>Thunder Units Conversion Library</Title>
+		<Product>Thunder Units Conversion Library</Product>
+		<Copyright>Robert Harwood, Lance A. Endres</Copyright>
+		<Company>None</Company>
+		<Description>Units conversion library.</Description>
+	</PropertyGroup>
+</Project>
