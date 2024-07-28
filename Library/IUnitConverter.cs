@@ -16,9 +16,9 @@ public interface IUnitConverter
 
 	UnitResult ConvertUnits(double val, string unitfrom, string unitto, out double output);
 
-	UnitResult ConvertToStandard(double val, string unitfrom, out double output);
+	UnitResult ConvertToStandard(double val, string? unitfrom, out double output);
 
-	UnitResult ConvertFromStandard(double val, string unitto, out double output);
+	UnitResult ConvertFromStandard(double val, string? unitto, out double output);
 
 	DataString CreateDataString(string unitSymbol);
 
