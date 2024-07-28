@@ -4,7 +4,7 @@
 		<Title>Thunder Units Conversion Library</Title>
 		<Product>Thunder Units Conversion Library</Product>
 		<Copyright>Robert Harwood, Lance A. Endres</Copyright>
-		<Company></Company>
-		<Description>A collection of C# classes, utilities, and algorithms.</Description>
+		<Company>None</Company>
+		<Description>Units conversion library.</Description>
 	</PropertyGroup>
 </Project>
