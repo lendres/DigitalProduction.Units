@@ -11,6 +11,7 @@
 		<RepositoryUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</RepositoryUrl>
 		<PackageTags>Units;conversion;.Net;C#</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Authors>Robert Harwood, Lance A. Endres</Authors>
 	</PropertyGroup>
 
 	<!-- Import version information from the folder containing the project if the file exists -->
