@@ -5,6 +5,7 @@
 		<RootNamespace>Thor.Units</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<!-- Import version information from the folder containing the project if the file exists -->
