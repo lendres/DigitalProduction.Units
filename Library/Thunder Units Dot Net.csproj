@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>Thunder_Units_Dot_Net</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>Thor.Units</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<!-- Import version information from the folder containing the project if the file exists -->
+	<Import Project="$(MSBuildProjectDirectory)/Assembly.props" Condition="Exists('$(MSBuildProjectDirectory)/Assembly.props')" />
+	<Import Project="$(MSBuildProjectDirectory)/Version.props" Condition="Exists('$(MSBuildProjectDirectory)/Version.props')" />
 
 </Project>
