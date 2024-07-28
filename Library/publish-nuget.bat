@@ -1,7 +1,7 @@
 @echo off
 
 rem Get the api key.
-set /p api-key=<"../../../Keys/Nuget/api-key.txt
+set /p api-key=<"../../Keys/Nuget/api-key.txt
 echo API KEY: %api-key%
 
 rem Change to the package directory.
