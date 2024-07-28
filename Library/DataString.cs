@@ -29,7 +29,7 @@ public class DataString
 
 	#region Construction
 
-	internal DataString(UnitConverter uc, string unitSymbol)
+	internal DataString(UnitConverter uc, string? unitSymbol)
 	{
 		// Reference the unit converter that created us.
 		m_uniteConvert = uc;
@@ -56,7 +56,7 @@ public class DataString
 	/// </summary>
 	/// <param name="unitSymbol">Symbol of unit to set the datastring to.</param>
 	/// <returns>Unit result value.</returns>
-	public UnitResult SetUnit(string unitSymbol)
+	public UnitResult SetUnit(string? unitSymbol)
 	{
 		IUnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
 
@@ -83,39 +83,17 @@ public class DataString
 	/// <summary>
 	/// Gets a reference to the current unit of the data string.
 	/// </summary>
-	public IUnitEntry? Unit
-	{
-		get
-		{
-			return m_unit;
-		}
-	}
+	public IUnitEntry? Unit { get => m_unit; }
 
 	/// <summary>
 	/// Gets or sets the flags on this data string.
 	/// </summary>
-	public DataStringFlags Flags
-	{
-		get
-		{
-			return m_flags;
-		}
-		set
-		{
-			m_flags = value;
-		}
-	}
+	public DataStringFlags Flags { get => m_flags; set => m_flags = value; }
 
 	/// <summary>
 	/// Gets the unit converter associated with this data string.
 	/// </summary>
-	public IUnitConverter Converter
-	{
-		get
-		{
-			return m_uniteConvert;
-		}
-	}
+	public IUnitConverter Converter { get => m_uniteConvert; }
 
 	#endregion
 
@@ -128,9 +106,7 @@ public class DataString
 	/// <returns>Unit result code.</returns>
 	public UnitResult SetValue(string entry)
 	{
-		double		d;
-		string		unit;
-		UnitResult	res;
+		UnitResult  res;
 
 		res = ValidateEntry(entry);
 		if (res != UnitResult.NoError)
@@ -138,21 +114,21 @@ public class DataString
 			return res;
 		}
 
-		m_uniteConvert.ParseUnitString(entry, out d, out unit);
+		m_uniteConvert.ParseUnitString(entry, out double value, out string unit);
 
-		//Can we change the unit?
+		// Can we change the unit?
 		if ((m_flags & DataStringFlags.ForceUnit) > 0)
 		{
-			//Cant change the unit, so turn the given units into the unit we want
-			m_uniteConvert.ConvertUnits(d, unit, m_unit.Name, out d);
+			// Can't change the unit, so turn the given units into the unit we want
+			m_uniteConvert.ConvertUnits(value, unit, m_unit?.Name, out value);
 		}
 		else
 		{
-			//Change the data string unit to the given unit.
+			// Change the data string unit to the given unit.
 			SetUnit(unit);
 		}
 
-		SetValue(d);
+		SetValue(value);
 		return res;
 	}
 
@@ -164,7 +140,7 @@ public class DataString
 	public UnitResult SetValue(double val)
 	{
 		UnitResult res;
-		res = m_uniteConvert.ConvertToStandard(val, m_unit.Name, out m_value);
+		res = m_uniteConvert.ConvertToStandard(val, m_unit?.Name, out m_value);
 
 		if (res != UnitResult.NoError)
 		{
@@ -183,7 +159,7 @@ public class DataString
 	/// <returns>Unit result code.</returns>
 	public UnitResult GetValue(out double output)
 	{
-		return m_uniteConvert.ConvertFromStandard(m_value, m_unit.Name, out output);
+		return m_uniteConvert.ConvertFromStandard(m_value, m_unit?.Name, out output);
 	}
 
 	/// <summary>
@@ -193,19 +169,18 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult GetValue(out string output)
 	{
-		double d = 0.0;
-
 		output = "";
 
 		UnitResult res;
-		res = m_uniteConvert.ConvertFromStandard(m_value, m_unit.Name, out d);
+		double d;
+		res = m_uniteConvert.ConvertFromStandard(m_value, m_unit?.Name, out d);
 
 		if (res != UnitResult.NoError)
 		{
 			return res;
 		}
 
-		output = d.ToString() + " " + m_unit.DefaultSymbol;
+		output = d.ToString() + " " + m_unit?.DefaultSymbol;
 
 		return res;
 	}
@@ -218,7 +193,7 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult GetValueAs(string unitSymbol, out double output)
 	{
-		return m_uniteConvert.ConvertUnits(m_value, m_unit.Name, unitSymbol, out output);
+		return m_uniteConvert.ConvertUnits(m_value, m_unit?.Name, unitSymbol, out output);
 	}
 
 	/// <summary>
@@ -229,11 +204,10 @@ public class DataString
 	/// <returns>Unit result code.</returns>
 	public UnitResult GetValueAs(string unitSymbol, out string output)
 	{
-		double d = 0.0;
-
 		output = "";
 
-		//Convert the standard stored value into the current unit.
+		double d;
+		// Convert the standard stored value into the current unit.
 		UnitResult res = m_uniteConvert.ConvertFromStandard(m_value, unitSymbol, out d);
 		if (res != UnitResult.NoError)
 		{
@@ -241,10 +215,10 @@ public class DataString
 		}
 
 		//Get a reference to the unit.
-		IUnitEntry unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
+		IUnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
 
-		//Output the result
-		output = d.ToString() + " " + unit.DefaultSymbol;
+		// Output the result.
+		output = d.ToString() + " " + unit?.DefaultSymbol;
 		return res;
 	}
 	#endregion
@@ -258,19 +232,19 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult ValidateEntry(string entry)
 	{
-		string unit;
-		double d, x;
+		double d;
+		double x;
 		UnitResult res;
 
 		//Parse the entry.
-		res = m_uniteConvert.ParseUnitString(entry, out d, out unit);
+		res = m_uniteConvert.ParseUnitString(entry, out d, out string unit);
 		if (res != UnitResult.NoError)
 		{
 			return res;
 		}
 
 		// Make sure the units are compatible.
-		if (!m_uniteConvert.CompatibleUnits(unit, this.m_unit.DefaultSymbol))
+		if (!m_uniteConvert.CompatibleUnits(unit, m_unit?.DefaultSymbol))
 		{
 			return UnitResult.UnitMismatch;
 		}
@@ -308,12 +282,12 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult SetMaxBound(double maxbound, string unitSymbol)
 	{
-		if (!m_uniteConvert.CompatibleUnits(unitSymbol, this.m_unit.DefaultSymbol))
+		if (!m_uniteConvert.CompatibleUnits(unitSymbol, m_unit?.DefaultSymbol))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-		m_uniteConvert.ConvertToStandard(maxbound, unitSymbol, out this.m_maxbound);
+		m_uniteConvert.ConvertToStandard(maxbound, unitSymbol, out m_maxbound);
 
 		return UnitResult.NoError;
 	}
@@ -326,12 +300,12 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult SetMinBound(double minbound, string unitSymbol)
 	{
-		if (!m_uniteConvert.CompatibleUnits(unitSymbol, this.m_unit.DefaultSymbol))
+		if (!m_uniteConvert.CompatibleUnits(unitSymbol, m_unit?.DefaultSymbol))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-		m_uniteConvert.ConvertToStandard(minbound, unitSymbol, out this.m_minbound);
+		m_uniteConvert.ConvertToStandard(minbound, unitSymbol, out m_minbound);
 
 		return UnitResult.NoError;
 	}
@@ -365,22 +339,22 @@ public class DataString
 	/// </summary>
 	public static DataString operator +(DataString d1, DataString d2)
 	{
-		DataString result = new DataString((UnitConverter)d1.Converter, d1.Unit.DefaultSymbol);
+		DataString result = new((UnitConverter)d1.Converter, d1.Unit?.DefaultSymbol);
 
 		double x = 0.0;
 		double y = 0.0;
 		double z = 0.0;
 
 		d1.GetValue(out x);
-		d1.Converter.ConvertToStandard(x, d1.Unit.DefaultSymbol, out x);
+		d1.Converter.ConvertToStandard(x, d1.Unit?.DefaultSymbol, out x);
 
 		d2.GetValue(out y);
-		d2.Converter.ConvertToStandard(y, d2.Unit.DefaultSymbol, out y);
+		d2.Converter.ConvertToStandard(y, d2.Unit?.DefaultSymbol, out y);
 
 		z = x + y;
-		d1.Converter.ConvertFromStandard(z, d1.Unit.DefaultSymbol, out z);
+		d1.Converter.ConvertFromStandard(z, d1.Unit?.DefaultSymbol, out z);
 
-		result.SetUnit(d1.Unit.DefaultSymbol);
+		result.SetUnit(d1.Unit?.DefaultSymbol);
 		result.SetValue(z);
 		return result;
 	}
@@ -390,21 +364,21 @@ public class DataString
 	/// </summary>
 	public static DataString operator -(DataString d1, DataString d2)
 	{
-		DataString result = new DataString((UnitConverter)d1.Converter, d1.Unit.DefaultSymbol);
+		DataString result = new((UnitConverter)d1.Converter, d1.Unit?.DefaultSymbol);
 		double x = 0.0;
 		double y = 0.0;
 		double z = 0.0;
 
 		d1.GetValue(out x);
-		d1.Converter.ConvertToStandard(x, d1.Unit.DefaultSymbol, out x);
+		d1.Converter.ConvertToStandard(x, d1.Unit?.DefaultSymbol, out x);
 
 		d2.GetValue(out y);
-		d2.Converter.ConvertToStandard(y, d2.Unit.DefaultSymbol, out y);
+		d2.Converter.ConvertToStandard(y, d2.Unit?.DefaultSymbol, out y);
 
 		z = x - y;
-		d1.Converter.ConvertFromStandard(z, d1.Unit.DefaultSymbol, out z);
+		d1.Converter.ConvertFromStandard(z, d1.Unit?.DefaultSymbol, out z);
 
-		result.SetUnit(d1.Unit.DefaultSymbol);
+		result.SetUnit(d1.Unit?.DefaultSymbol);
 		result.SetValue(z);
 		return result;
 	}
@@ -414,21 +388,21 @@ public class DataString
 	/// </summary>
 	public static DataString operator *(DataString d1, DataString d2)
 	{
-		DataString result = new DataString((UnitConverter)d1.Converter, d1.Unit.DefaultSymbol);
+		DataString result = new((UnitConverter)d1.Converter, d1.Unit?.DefaultSymbol);
 		double x = 0.0;
 		double y = 0.0;
 		double z = 0.0;
 
 		d1.GetValue(out x);
-		d1.Converter.ConvertToStandard(x, d1.Unit.DefaultSymbol, out x);
+		d1.Converter.ConvertToStandard(x, d1.Unit?.DefaultSymbol, out x);
 
 		d2.GetValue(out y);
-		d2.Converter.ConvertToStandard(y, d2.Unit.DefaultSymbol, out y);
+		d2.Converter.ConvertToStandard(y, d2.Unit?.DefaultSymbol, out y);
 
 		z = x * y;
-		d1.Converter.ConvertFromStandard(z, d1.Unit.DefaultSymbol, out z);
+		d1.Converter.ConvertFromStandard(z, d1.Unit?.DefaultSymbol, out z);
 
-		result.SetUnit(d1.Unit.DefaultSymbol);
+		result.SetUnit(d1.Unit?.DefaultSymbol);
 		result.SetValue(z);
 		return result;
 	}
@@ -438,21 +412,21 @@ public class DataString
 	/// </summary>
 	public static DataString operator /(DataString d1, DataString d2)
 	{
-		DataString result = new DataString((UnitConverter)d1.Converter, d1.Unit.DefaultSymbol);
+		DataString result = new((UnitConverter)d1.Converter, d1.Unit?.DefaultSymbol);
 		double x = 0.0;
 		double y = 0.0;
 		double z = 0.0;
 
 		d1.GetValue(out x);
-		d1.Converter.ConvertToStandard(x, d1.Unit.DefaultSymbol, out x);
+		d1.Converter.ConvertToStandard(x, d1.Unit?.DefaultSymbol, out x);
 
 		d2.GetValue(out y);
-		d2.Converter.ConvertToStandard(y, d2.Unit.DefaultSymbol, out y);
+		d2.Converter.ConvertToStandard(y, d2.Unit?.DefaultSymbol, out y);
 
 		z = x / y;
-		d1.Converter.ConvertFromStandard(z, d1.Unit.DefaultSymbol, out z);
+		d1.Converter.ConvertFromStandard(z, d1.Unit?.DefaultSymbol, out z);
 
-		result.SetUnit(d1.Unit.DefaultSymbol);
+		result.SetUnit(d1.Unit?.DefaultSymbol);
 		result.SetValue(z);
 		return result;
 	}

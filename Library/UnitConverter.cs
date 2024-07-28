@@ -61,9 +61,9 @@ public class UnitConverter : IUnitConverter
 	public void InitTables()
 	{
 		// Clear everything out.
-		this.m_SymbolTable.Clear();
-		this.m_UnitGroups.Clear();
-		this.m_Units.Clear();
+		m_SymbolTable.Clear();
+		m_UnitGroups.Clear();
+		m_Units.Clear();
 	}
 
 	#endregion
@@ -110,14 +110,13 @@ public class UnitConverter : IUnitConverter
 	/// <returns>Unit result code.</returns>
 	public UnitResult LoadUnitsFile(string filePath)
 	{
-		string error = "";
-
 		// Make sure the units file exists.
 		if (!File.Exists(filePath))
 		{
 			return UnitResult.FileNotFound;
 		}
 
+		string error;
 		try
 		{
 			// Attempt to load the unit file...
@@ -389,10 +388,10 @@ public class UnitConverter : IUnitConverter
 					}
 					else
 					{
-						this.m_SymbolTable[unitprop.InnerText] = unit;
+						m_SymbolTable[unitprop.InnerText] = unit;
 
 						// Is this unit the default unit?
-						if (unitprop.Attributes["default"] != null)
+						if (unitprop.Attributes?["default"] != null)
 						{
 							unit.DefaultSymbol = unitprop.InnerText;
 						}
@@ -434,10 +433,15 @@ public class UnitConverter : IUnitConverter
 	/// </summary>
 	/// <param name="unitSymbol">Symbol of the unit.</param>
 	/// <returns>Reference to the unit entry, or null if symbol does not exist.</returns>
-	public UnitEntry? GetUnitBySymbol(string unitSymbol)
+	public UnitEntry? GetUnitBySymbol(string? unitSymbol)
 	{
+		if (unitSymbol == null)
+		{
+			return null;
+		}
+
 		// First check to see if they used the actual name of a unit then look at the symbol table.
-		if (this.m_Units[unitSymbol] != null)
+		if (m_Units[unitSymbol] != null)
 		{
 			return m_Units[unitSymbol];
 		}
@@ -457,7 +461,7 @@ public class UnitConverter : IUnitConverter
 	/// <param name="unitSymbol1">Symbol for the first unit.</param>
 	/// <param name="unitSymbol2">Symbol for the second unit.</param>
 	/// <returns>True if units are compatible, else false.</returns>
-	public bool CompatibleUnits(string unitSymbol1, string unitSymbol2)
+	public bool CompatibleUnits(string unitSymbol1, string? unitSymbol2)
 	{
 		IUnitEntry? u1 = GetUnitBySymbol(unitSymbol1);
 		IUnitEntry? u2 = GetUnitBySymbol(unitSymbol2);
@@ -478,7 +482,7 @@ public class UnitConverter : IUnitConverter
 	private UnitResult CreateNewGroup(string groupName)
 	{
 		// Create the new group
-		UnitGroup newgroup = new UnitGroup();
+		UnitGroup newgroup = new();
 		newgroup.Name = groupName;
 
 		// Add it to the group table
@@ -555,7 +559,7 @@ public class UnitConverter : IUnitConverter
 	/// <param name="unitfrom">Name of the current units the value is in.</param>
 	/// <param name="output">Variable to hold the converted value.</param>
 	/// <returns>A unit result value.</returns>
-	public UnitResult ConvertToStandard(double val, string unitfrom, out double output)
+	public UnitResult ConvertToStandard(double val, string? unitfrom, out double output)
 	{
 		double x = val;
 
@@ -598,7 +602,7 @@ public class UnitConverter : IUnitConverter
 	/// <param name="unitto">The name of the unit that the value is to be converted to.</param>
 	/// <param name="output">The converted value.</param>
 	/// <returns>Unit result value.</returns>
-	public UnitResult ConvertUnits(double val, string unitfrom, string unitto, out double output)
+	public UnitResult ConvertUnits(double val, string? unitfrom, string? unitto, out double output)
 	{
 		double x = val;
 
@@ -645,7 +649,7 @@ public class UnitConverter : IUnitConverter
 	/// <param name="unitto">The name of the unit that the value is to be converted to.</param>
 	/// <param name="output">The converted value.</param>
 	/// <returns>Unit result value.</returns>
-	public UnitResult ConvertFromStandard(double val, string unitto, out double output)
+	public UnitResult ConvertFromStandard(double val, string? unitto, out double output)
 	{
 		double x = val;
 
@@ -663,12 +667,12 @@ public class UnitConverter : IUnitConverter
 		try
 		{
 			// Convert to the new unit from the standard
-			x = x - unit_to.PreAdder;
+			x -= unit_to.PreAdder;
 			if (unit_to.Multiplier > 0.0)
 			{
-				x = x * Math.Pow(unit_to.Multiplier, -1);
+				x *= Math.Pow(unit_to.Multiplier, -1);
 			}
-			x = x - unit_to.Adder;
+			x -= unit_to.Adder;
 
 			output = x;
 		}
@@ -802,13 +806,13 @@ public class UnitConverter : IUnitConverter
 	/// <returns>The newly created data string.</returns>
 	public DataString CreateDataString()
 	{
-		DataString ds = new DataString(this, "");
+		DataString ds = new(this, "");
 		return ds;
 	}
 
 	public DataString CreateDataString(string unitSymbol)
 	{
-		DataString ds = new DataString(this, unitSymbol);
+		DataString ds = new(this, unitSymbol);
 		return ds;
 	}
 
