@@ -6,6 +6,7 @@
  */
 using System.Diagnostics;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Thor.Units;
 
@@ -26,7 +27,7 @@ public class UnitConverter : IUnitConverter
 
 	#region Members
 
-	public const double         UNITFILE_VERSION            =   1.0;
+	public const double         UNITFILE_VERSION            =   2.0;
 	public const double         FAILSAFE_VALUE              =   System.Double.NaN;
 	private SymbolTable         m_SymbolTable;
 	private UnitTable           m_Units;

@@ -43,7 +43,7 @@
 		+ Each unit *must* appear within a unit group.
 -->
 
-<UnitFile name="Default" version="1.00">
+<UnitFile name="Default" version="2.00">
 	<!-- Not specified/unknown section. -->
 	<UnitGroup name="Unknown">
 		<Unit name="unknown">
