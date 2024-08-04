@@ -15,7 +15,7 @@ namespace Thor.Units;
 /// Unit conversion class, contains methods for loading a unit file
 /// and converting units.
 /// </summary>
-[XmlRoot("UnitFile")]
+[XmlRoot("unitfile")]
 public class UnitConverter : IUnitConverter
 {
 	#region Events
@@ -73,6 +73,12 @@ public class UnitConverter : IUnitConverter
 
 	#region Properties
 
+	[XmlAttribute("name")]
+	public string Name { get; set; } = "Units";
+
+	[XmlAttribute("version")]
+	public string Version { get; set; } = "2.00";
+
 	/// <summary>
 	/// Units.
 	/// </summary>
@@ -82,6 +88,7 @@ public class UnitConverter : IUnitConverter
 	/// <summary>
 	/// Groups.
 	/// </summary>
+	[XmlElement("groups")]
 	public GroupTable Groups { get => m_UnitGroups; set => 	m_UnitGroups = value; }
 
 	#endregion

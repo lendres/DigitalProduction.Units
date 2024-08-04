@@ -1,4 +1,6 @@
-﻿namespace Thor.Units;
+﻿using System.Xml.Serialization;
+
+namespace Thor.Units;
 
 /// <summary>
 /// Represents a group of units (i.e Temperature, Speed etc..).
@@ -23,8 +25,10 @@ public class UnitGroup
 
 	#region Properties
 
+	[XmlElement("name")]
 	public string Name { get => m_Name; set => m_Name = value; }
 
+	[XmlElement("units")]
 	public UnitTable Units { get => m_Units; set => m_Units = value; }
 
 	//public int NumberOfUnits {get => Units.Count; }
