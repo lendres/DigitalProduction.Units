@@ -11,21 +11,24 @@ public class UnitTest1
 		_unitsConverter = (UnitConverter)InterfaceFactory.CreateUnitConverter();
 		_unitsConverter.OnError  += new UnitEventHandler(Converter_OnError);
 
-		string folder	= DigitalProduction.IO.Path.ChangeDirectoryDotDot(Directory.GetCurrentDirectory(), 4);
-		string path		= Path.Combine(folder, "Input Files/Units.xml");
+		Folder		= DigitalProduction.IO.Path.ChangeDirectoryDotDot(Directory.GetCurrentDirectory(), 4);
+		Folder		= Path.Combine(Folder, "Input Files");
+		string path	= Path.Combine(Folder, "Units v1.0.xml");
 
-		Debug.WriteLine("Root folder: " + folder);
+		Debug.WriteLine("Root folder: " + Folder);
 		Debug.WriteLine("File: " + path);
 
 		UnitResult result = _unitsConverter.LoadUnitsFile(path);
 		Trace.Assert(result != UnitResult.FileNotFound);
 	}
+
+	private string Folder { get; set; }
 	
 	[Fact]
 	public void Test1()
 	{
 
-		_unitsConverter.Serialize("_unitsoutput.xml");
+		_unitsConverter.Serialize(Path.Combine(Folder, "Units v2.0.xml"));
 	}
 
 
