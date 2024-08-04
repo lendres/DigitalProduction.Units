@@ -5,6 +5,7 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 using System.Diagnostics;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -14,6 +15,7 @@ namespace Thor.Units;
 /// Unit conversion class, contains methods for loading a unit file
 /// and converting units.
 /// </summary>
+[XmlRoot("UnitFile")]
 public class UnitConverter : IUnitConverter
 {
 	#region Events
@@ -74,6 +76,7 @@ public class UnitConverter : IUnitConverter
 	/// <summary>
 	/// Units.
 	/// </summary>
+	[XmlIgnore()]
 	public UnitTable Units { get => m_Units; set => m_Units = value; }
 
 	/// <summary>
@@ -373,7 +376,7 @@ public class UnitConverter : IUnitConverter
 			}
 			catch
 			{
-				SendUnitFileWarning("unit '{0}' has invalid '{1}' value. Unit skipped.", filePath, new object[] { unit.Name, unitprop.Name });
+				SendUnitFileWarning("unit '{0}' has invalid '{1}' value. Unit skipped.", filePath, [unit.Name, unitprop.Name]);
 				return UnitResult.GenericError;
 			}
 
@@ -385,7 +388,7 @@ public class UnitConverter : IUnitConverter
 				{
 					if (this.m_SymbolTable[unitprop.InnerText] != null)
 					{
-						SendUnitFileWarning("while parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, new object[] { unit.Name, unitprop.InnerText });
+						SendUnitFileWarning("while parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [unit.Name, unitprop.InnerText]);
 					}
 					else
 					{
@@ -400,7 +403,7 @@ public class UnitConverter : IUnitConverter
 				}
 				else
 				{
-					SendUnitFileWarning("unit '{0}' has an invalid symbol specified, symbol skipped.", filePath, new object[] { unit.Name });
+					SendUnitFileWarning("unit '{0}' has an invalid symbol specified, symbol skipped.", filePath, [unit.Name]);
 				}
 			}
 		}
@@ -413,6 +416,31 @@ public class UnitConverter : IUnitConverter
 
 		// All done!
 		return UnitResult.NoError;
+	}
+
+	#endregion
+
+	#region New XML
+
+	/// <summary>
+	/// Serialize an object.
+	/// </summary>
+	/// <param name="settings">SerializationSettings to use for writing.</param>
+	public void Serialize(string outputFile)
+	{
+		XmlWriterSettings xmlSettings = new()
+		{
+			Indent				= true,
+			NewLineOnAttributes	= true,
+			IndentChars			= "    ",
+			Encoding			= Encoding.ASCII
+		};
+
+		XmlSerializer serializer	= new(this.GetType());
+		XmlWriter xmlwriter			= XmlWriter.Create(outputFile, xmlSettings);
+
+		serializer.Serialize(xmlwriter, this);
+		xmlwriter.Close();
 	}
 
 	#endregion
@@ -702,7 +730,7 @@ public class UnitConverter : IUnitConverter
 
 		// Split the numbers on the ^ operator.
 		string[] numbers;
-		numbers = input.Split(new char[] { '^' });
+		numbers = input.Split(['^']);
 
 		if (numbers.Length == 1)
 		{
