@@ -4,6 +4,7 @@
  * 
  * Please see included license.txt file for information on redistribution and usage.
  */
+using DigitalProduction.XML.Serialization;
 using System.Collections;
 using System.Diagnostics;
 
@@ -12,7 +13,7 @@ namespace Thor.Units;
 /// <summary>
 /// Contains a table of unit groups.
 /// </summary>
-public class GroupTable : DictionaryBase
+public class GroupTable : SerializableDictionary<string, UnitGroup>
 {
 	#region Construction
 
@@ -31,16 +32,16 @@ public class GroupTable : DictionaryBase
 	/// <summary>
 	/// Given a unit name as the key, returns the associated unit entry.
 	/// </summary>
-	public UnitGroup? this[string groupName]
+	public new UnitGroup? this[string groupName]
 	{
 		get
 		{
 			groupName = groupName.ToLower();
 
 			// If we contain a group matching the key then return it.
-			if (this.Dictionary.Contains(groupName))
+			if (ContainsKey(groupName))
 			{
-				return this.Dictionary[groupName] as UnitGroup;
+				return base[groupName] as UnitGroup;
 			}
 			else
 			{
@@ -51,13 +52,15 @@ public class GroupTable : DictionaryBase
 		
 		set
 		{
+			Trace.Assert(value != null);
+
 			groupName = groupName.ToLower();
 
 			// Already added? Warn developer (this is probably not a good thing).
-			Debug.Assert( (!this.Dictionary.Contains(groupName)), "Group table warning", String.Format("The unit group with name '{0}' has been overwritten.", groupName) );
+			Debug.Assert( (!ContainsKey(groupName)), "Group table warning", String.Format("The unit group with name '{0}' has been overwritten.", groupName) );
 
 			// Link the group to its name.
-			this.Dictionary[groupName] = value;
+			base[groupName] = value;
 		} 
 	}
 
@@ -74,13 +77,13 @@ public class GroupTable : DictionaryBase
 		UnitGroup[] unitGroups;
 
 		// Lock the table (so only we can use it).
-		lock (this.Dictionary.SyncRoot)
+		lock (((IDictionary)this).SyncRoot)
 		{
-			unitGroups = new UnitGroup[this.Count];
+			unitGroups = new UnitGroup[Count];
 			int i = 0;
 
 			// Build an array of all the groups in the table.
-			foreach (UnitGroup unitGroup in this.Dictionary.Values)
+			foreach (UnitGroup unitGroup in Values)
 			{
 				unitGroups[i] = unitGroup;
 				i++;
@@ -96,10 +99,10 @@ public class GroupTable : DictionaryBase
 	/// </summary>
 	public string[] GetAllGroupNames()
 	{
-		string[] names = new string[this.Count];
+		string[] names = new string[Count];
 
 		int i = 0;
-		foreach (UnitGroup unitGroup in this.Dictionary.Values)
+		foreach (UnitGroup unitGroup in Values)
 		{
 			names[i++] = unitGroup.Name;
 		}

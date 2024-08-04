@@ -431,7 +431,7 @@ public class UnitConverter : IUnitConverter
 		XmlWriterSettings xmlSettings = new()
 		{
 			Indent				= true,
-			NewLineOnAttributes	= true,
+			NewLineOnAttributes	= false,
 			IndentChars			= "    ",
 			Encoding			= Encoding.ASCII
 		};

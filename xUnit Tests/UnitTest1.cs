@@ -1,17 +1,34 @@
+using System.Diagnostics;
 using Thor.Units;
 
 namespace xUnitTests;
 
 public class UnitTest1
 {
+	UnitConverter	_unitsConverter;
+	public UnitTest1()
+	{
+		_unitsConverter = (UnitConverter)InterfaceFactory.CreateUnitConverter();
+		_unitsConverter.OnError  += new UnitEventHandler(Converter_OnError);
+
+		string folder	= DigitalProduction.IO.Path.ChangeDirectoryDotDot(Directory.GetCurrentDirectory(), 4);
+		string path		= Path.Combine(folder, "Input Files/Units.xml");
+
+		Debug.WriteLine("Root folder: " + folder);
+		Debug.WriteLine("File: " + path);
+
+		UnitResult result = _unitsConverter.LoadUnitsFile(path);
+		Trace.Assert(result != UnitResult.FileNotFound);
+	}
+	
 	[Fact]
 	public void Test1()
 	{
-		UnitConverter unitsConverter = (UnitConverter)InterfaceFactory.CreateUnitConverter();
-		unitsConverter.OnError  += new UnitEventHandler(Converter_OnError);
 
-		unitsConverter.Serialize("unitsoutput.xml");
+		_unitsConverter.Serialize("_unitsoutput.xml");
 	}
+
+
 
 	/// <summary>
 	/// Error handler for converter.
