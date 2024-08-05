@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CCA28BC-458F-4578-BA29-91526D3E79C1}"
 	ProjectSection(SolutionItems) = preProject
 		Input Files\Units v1.0.xml = Input Files\Units v1.0.xml
+		Input Files\Units v2.0.xml = Input Files\Units v2.0.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit Tests", "xUnit Tests\xUnit Tests.csproj", "{64FB265A-B99C-4016-B45E-D8891DA5EF49}"

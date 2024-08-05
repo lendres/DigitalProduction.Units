@@ -5,7 +5,6 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 using DigitalProduction.XML.Serialization;
-using System.Collections;
 using System.Diagnostics;
 
 namespace Thor.Units;
@@ -13,7 +12,7 @@ namespace Thor.Units;
 /// <summary>
 /// Contains a table, mapping units to their names.
 /// </summary>
-public class UnitTable : SerializableDictionary<string, UnitEntry>
+public class UnitTable : CustomSerializableDictionary<string, UnitEntry, UnitKeyValuePair>
 {
 	/// <summary>
 	/// Constructor, clears the table and readies it for use.

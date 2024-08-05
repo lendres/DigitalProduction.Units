@@ -25,7 +25,7 @@ public class UnitGroup
 
 	#region Properties
 
-	[XmlElement("name")]
+	[XmlAttribute("name")]
 	public string Name { get => m_Name; set => m_Name = value; }
 
 	[XmlElement("units")]

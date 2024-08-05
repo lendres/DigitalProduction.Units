@@ -4,6 +4,7 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
+using DigitalProduction.XML.Serialization;
 using System.Diagnostics;
 using System.Text;
 using System.Xml;
@@ -390,7 +391,7 @@ public class UnitConverter : IUnitConverter
 			// Parse the symbol properties.
 			if (unitprop.Name.ToLower() == "symbol")
 			{
-				//Put the value into the symbol table
+				// Put the value into the symbol table.
 				if ((unitprop.InnerText != "") && (unitprop.InnerText != null))
 				{
 					if (this.m_SymbolTable[unitprop.InnerText] != null)
@@ -402,9 +403,13 @@ public class UnitConverter : IUnitConverter
 						m_SymbolTable[unitprop.InnerText] = unit;
 
 						// Is this unit the default unit?
-						if (unitprop.Attributes?["default"] != null)
+						if (unitprop.Attributes?["default"] == null || unitprop.Attributes?["default"]!.Value.ToLower() == "true")
 						{
 							unit.DefaultSymbol = unitprop.InnerText;
+						}
+						else
+						{
+							unit.AlternateSymbol = unitprop.InnerText;
 						}
 					}
 				}
@@ -414,6 +419,11 @@ public class UnitConverter : IUnitConverter
 				}
 			}
 		}
+
+		//if (unit.AlternateSymbol == "")
+		//{
+		//	unit.AlternateSymbol = unit.DefaultSymbol;
+		//}
 
 		// Add the unit to the unit table.
 		m_Units[unit.Name] = unit;
@@ -432,22 +442,71 @@ public class UnitConverter : IUnitConverter
 	/// <summary>
 	/// Serialize an object.
 	/// </summary>
-	/// <param name="settings">SerializationSettings to use for writing.</param>
 	public void Serialize(string outputFile)
 	{
-		XmlWriterSettings xmlSettings = new()
+			SerializationSettings settings              = new(this, outputFile);
+			settings.XmlSettings.NewLineOnAttributes    = false;
+			Serialization.SerializeObject(settings);
+	}
+
+	public static UnitConverter Deserialize(string path)
+	{
+		UnitConverter? unitConverter = Serialization.DeserializeObject<UnitConverter>(path) ??
+			throw new Exception("Unable to deserialize the units systems.");
+
+		//unitConverter.ValidateRead(path);
+
+		return unitConverter;
+	}
+
+	private UnitResult ValidateRead(string filePath)
+	{
+		double version = 0;
+		string error;
+		try
 		{
-			Indent				= true,
-			NewLineOnAttributes	= false,
-			IndentChars			= "    ",
-			Encoding			= Encoding.ASCII
-		};
+			version = Convert.ToDouble(Version);
+		}
+		catch
+		{
+		}
+		if (version > UNITFILE_VERSION)
+		{
+			// File version is greater than the maximum we support.
+			error = "Error parsing '{0}' - file version indicates it is made for a newer version of the unit conversion library.";
+			error = String.Format(error, filePath);
+			throw new UnitFileException(error);
+		}
+		if (version == 0.0)
+		{
+			// File version is 0.0, probably failed to convert to a double.
+			error = "Error parsing '{0}' - file has no valid version number.";
+			error = String.Format(error, filePath);
+			throw new UnitFileException(error);
+		}
 
-		XmlSerializer serializer	= new(this.GetType());
-		XmlWriter xmlwriter			= XmlWriter.Create(outputFile, xmlSettings);
+		// Don't allow duplicate units.
+		//SendUnitFileWarning("duplicate unit with name '{0}' was found and ignored.", filePath, new object[] { unit.Name });
+		//return UnitResult.UnitExists;
 
-		serializer.Serialize(xmlwriter, this);
-		xmlwriter.Close();
+		foreach (UnitGroup unitGroup in m_UnitGroups.Values)
+		{
+			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
+			{
+				if (m_SymbolTable[unitEntry.DefaultSymbol] != null)
+				{
+					SendUnitFileWarning("while parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [m_CurUnitFileName, unitEntry.DefaultSymbol]);
+				}
+				else
+				{
+					m_SymbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+					m_Units[unitEntry.Name]					= unitEntry;
+				}
+			}
+
+		}
+
+		return UnitResult.NoError;
 	}
 
 	#endregion

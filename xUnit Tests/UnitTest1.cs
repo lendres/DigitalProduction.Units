@@ -27,11 +27,13 @@ public class UnitTest1
 	[Fact]
 	public void Test1()
 	{
+		string path = Path.Combine(Folder, "Units v2.0.xml");
+		_unitsConverter.Serialize(path);
 
-		_unitsConverter.Serialize(Path.Combine(Folder, "Units v2.0.xml"));
+		UnitConverter unitsConverter = UnitConverter.Deserialize(path);
+
+		Assert.Equal(_unitsConverter.Groups.Count, unitsConverter.Groups.Count);
 	}
-
-
 
 	/// <summary>
 	/// Error handler for converter.

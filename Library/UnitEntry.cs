@@ -36,6 +36,9 @@ public class UnitEntry : IUnitEntry
 	[XmlElement("defaultsymbol")]
 	public string DefaultSymbol { get => m_DefaultSymbol; set => m_DefaultSymbol = value; }
 
+	[XmlElement("alternatesymbol")]
+	public string AlternateSymbol { get; set; } = "";
+
 	[XmlElement("preadder")]
 	public double PreAdder { get => m_PreAdder; set => m_PreAdder = value; }
 

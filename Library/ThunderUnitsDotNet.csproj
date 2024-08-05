@@ -28,7 +28,7 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="DigitalProductionDotNetLibrary" Version="0.1.3" />
+	  <PackageReference Include="DigitalProductionDotNetLibrary" Version="0.1.5" />
 	</ItemGroup>
 
 </Project>

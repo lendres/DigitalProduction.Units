@@ -7,13 +7,16 @@
 using DigitalProduction.XML.Serialization;
 using System.Collections;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace Thor.Units;
 
 /// <summary>
 /// Contains a table of unit groups.
 /// </summary>
-public class GroupTable : SerializableDictionary<string, UnitGroup>
+[XmlRoot("groups")]
+public class GroupTable : CustomSerializableDictionary<string, UnitGroup, GroupKeyValuePair>
+//public class GroupTable : SerializableDictionary<string, UnitGroup>
 {
 	#region Construction
 
