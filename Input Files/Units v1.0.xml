@@ -237,7 +237,7 @@
 			<Multiply>1e-005</Multiply>
 		</Unit>
 		
-		<Unit name="pound force">
+		<Unit name="pound_force">
 			<Symbol>lbf</Symbol>
 			<Multiply>4.448221615</Multiply>
 		</Unit>
@@ -247,17 +247,17 @@
 			<Multiply>4448.221615</Multiply>
 		</Unit>
 		
-		<Unit name="ton force">
+		<Unit name="ton_force">
 			<Symbol>tonf</Symbol>
-			<Multiply>8896.443</Multiply>
+			<Multiply>8896.44323</Multiply>
 		</Unit>
 
-		<Unit name="kilogram force">
+		<Unit name="kilogram_force">
 			<Symbol>kgf</Symbol>
 			<Multiply>9.80665</Multiply>
 		</Unit>
 		
-		<Unit name="metric ton">
+		<Unit name="metric_ton">
 			<Symbol>m ton</Symbol>
 			<Multiply>9806.65</Multiply>
 		</Unit>
@@ -316,12 +316,12 @@
 			<Multiply>0.01</Multiply>
 		</Unit>
 
-		<Unit name="pound foot">
+		<Unit name="pound_force foot">
 			<Symbol>lb-ft</Symbol>
 			<Multiply>1.3558180656</Multiply>
 		</Unit>
 
-		<Unit name="pound inch">
+		<Unit name="pound_force inch">
 			<Symbol>lb-in</Symbol>
 			<Multiply>0.112984775</Multiply>
 		</Unit>
@@ -476,7 +476,7 @@
 			<Multiply>1</Multiply>
 		</Unit>
 		
-		<Unit name="horse power">
+		<Unit name="horsepower">
 			<Symbol>hp</Symbol>
 			<Multiply>745.69987</Multiply>
 		</Unit>
@@ -525,7 +525,7 @@
 			<Multiply>4.1868</Multiply>
 		</Unit>
 		
-		<Unit name="british thermal unit">
+		<Unit name="british_thermal_unit">
 			<Symbol>Btu</Symbol>
 			<Multiply>1055.05585</Multiply>
 		</Unit>
@@ -648,12 +648,12 @@
 			<Multiply>101325</Multiply>
 		</Unit>
 
-		<Unit name="centimeters of mercury">
+		<Unit name="centimeters_of_mercury">
 			<Symbol>cmHzg</Symbol>
 			<Multiply>1333.22</Multiply>
 		</Unit>
 
-		<Unit name="inches of mercury">
+		<Unit name="inches_of_mercury">
 			<Symbol>inHg</Symbol>
 			<Multiply>3386.389</Multiply>
 		</Unit>

@@ -364,9 +364,9 @@
                             <multiplier>1E-05</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="pound force">
+                    <unitkeyvaluepair name="pound_force">
                         <unit>
-                            <name>pound force</name>
+                            <name>pound_force</name>
                             <defaultsymbol>lbf</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -384,19 +384,19 @@
                             <multiplier>4448.221615</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="ton force">
+                    <unitkeyvaluepair name="ton_force">
                         <unit>
-                            <name>ton force</name>
+                            <name>ton_force</name>
                             <defaultsymbol>tonf</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
                             <adder>0</adder>
-                            <multiplier>8896.443</multiplier>
+                            <multiplier>8896.44323</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="kilogram force">
+                    <unitkeyvaluepair name="kilogram_force">
                         <unit>
-                            <name>kilogram force</name>
+                            <name>kilogram_force</name>
                             <defaultsymbol>kgf</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -404,9 +404,9 @@
                             <multiplier>9.80665</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="metric ton">
+                    <unitkeyvaluepair name="metric_ton">
                         <unit>
-                            <name>metric ton</name>
+                            <name>metric_ton</name>
                             <defaultsymbol>m ton</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -520,9 +520,9 @@
                             <multiplier>0.01</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="pound foot">
+                    <unitkeyvaluepair name="pound_force foot">
                         <unit>
-                            <name>pound foot</name>
+                            <name>pound_force foot</name>
                             <defaultsymbol>lb-ft</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -530,9 +530,9 @@
                             <multiplier>1.3558180656</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="pound inch">
+                    <unitkeyvaluepair name="pound_force inch">
                         <unit>
-                            <name>pound inch</name>
+                            <name>pound_force inch</name>
                             <defaultsymbol>lb-in</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -834,9 +834,9 @@
                             <multiplier>1</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="horse power">
+                    <unitkeyvaluepair name="horsepower">
                         <unit>
-                            <name>horse power</name>
+                            <name>horsepower</name>
                             <defaultsymbol>hp</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -930,9 +930,9 @@
                             <multiplier>4.1868</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="british thermal unit">
+                    <unitkeyvaluepair name="british_thermal_unit">
                         <unit>
-                            <name>british thermal unit</name>
+                            <name>british_thermal_unit</name>
                             <defaultsymbol>Btu</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -1174,9 +1174,9 @@
                             <multiplier>101325</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="centimeters of mercury">
+                    <unitkeyvaluepair name="centimeters_of_mercury">
                         <unit>
-                            <name>centimeters of mercury</name>
+                            <name>centimeters_of_mercury</name>
                             <defaultsymbol>cmHzg</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
@@ -1184,9 +1184,9 @@
                             <multiplier>1333.22</multiplier>
                         </unit>
                     </unitkeyvaluepair>
-                    <unitkeyvaluepair name="inches of mercury">
+                    <unitkeyvaluepair name="inches_of_mercury">
                         <unit>
-                            <name>inches of mercury</name>
+                            <name>inches_of_mercury</name>
                             <defaultsymbol>inHg</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
