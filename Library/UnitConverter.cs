@@ -454,7 +454,8 @@ public class UnitConverter : IUnitConverter
 		UnitConverter? unitConverter = Serialization.DeserializeObject<UnitConverter>(path) ??
 			throw new Exception("Unable to deserialize the units systems.");
 
-		//unitConverter.ValidateRead(path);
+		unitConverter.ValidateRead(path);
+		unitConverter.PopulateDataStructures(path);
 
 		return unitConverter;
 	}
@@ -485,9 +486,15 @@ public class UnitConverter : IUnitConverter
 			throw new UnitFileException(error);
 		}
 
-		// Don't allow duplicate units.
+		return UnitResult.NoError;
+	}
+
+	private UnitResult PopulateDataStructures(string filePath)
+	{
+ 		// Don't allow duplicate units.
 		//SendUnitFileWarning("duplicate unit with name '{0}' was found and ignored.", filePath, new object[] { unit.Name });
 		//return UnitResult.UnitExists;
+		UnitResult result = UnitResult.NoError;
 
 		foreach (UnitGroup unitGroup in m_UnitGroups.Values)
 		{
@@ -495,18 +502,28 @@ public class UnitConverter : IUnitConverter
 			{
 				if (m_SymbolTable[unitEntry.DefaultSymbol] != null)
 				{
-					SendUnitFileWarning("while parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [m_CurUnitFileName, unitEntry.DefaultSymbol]);
+					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [m_CurUnitFileName, unitEntry.DefaultSymbol]);
+					result = UnitResult.UnitExists;
+
 				}
 				else
 				{
-					m_SymbolTable[unitEntry.DefaultSymbol]	= unitEntry;
-					m_Units[unitEntry.Name]					= unitEntry;
+					if (m_Units[unitEntry.Name] != null)
+					{
+						SendUnitFileWarning("Duplicate unit with name '{0}' was found and ignored.", filePath, [unitEntry.Name]);
+						result = UnitResult.UnitExists;
+					}
+					else
+					{
+						m_SymbolTable[unitEntry.DefaultSymbol]  = unitEntry;
+						m_Units[unitEntry.Name]                 = unitEntry;
+					}
 				}
 			}
 
 		}
 
-		return UnitResult.NoError;
+		return result;
 	}
 
 	#endregion
