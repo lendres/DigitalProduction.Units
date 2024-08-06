@@ -28,7 +28,6 @@ public class ConversionTests
 
 		Assert.Equal(UnitResult.NoError, result);
 		Assert.Equal(3.28083989501312, convertedValue, 0.0000001);
-
 	}
 
 	[Fact]
@@ -46,6 +45,5 @@ public class ConversionTests
 
 		Assert.Equal(UnitResult.NoError, result);
 		Assert.Equal(3.28083989501312, convertedValue, 0.0000001);
-
 	}
 }
