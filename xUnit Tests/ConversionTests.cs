@@ -49,7 +49,6 @@ public class ConversionTests
 		string outUnits	= "ft";
 
 		UnitConverter unitConverter	= UnitFileLoading.LoadVersionTwoFile();
-		//unitConverter	= UnitFileLoading.LoadVersionTwoFile();
 		UnitResult result			= unitConverter.ParseUnitString(input, out double value, out string inUnits);
 
 		Assert.Equal(UnitResult.NoError, result);
