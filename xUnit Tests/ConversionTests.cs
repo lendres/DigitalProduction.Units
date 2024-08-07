@@ -14,6 +14,18 @@ public class ConversionTests
 	}
 
 	[Fact]
+	public void VersionConversionTest()
+	{
+		UnitConverter unitConverterV1 = UnitFileLoading.LoadVersionOneFile();
+
+		// Serialize as V2, then deserialize it.
+		unitConverterV1.Serialize(UnitFileLoading.PathV2);
+		UnitConverter unitConverterV2 = UnitFileLoading.LoadVersionTwoFile();
+
+		Assert.Equal(unitConverterV1.Groups.Count, unitConverterV2.Groups.Count);
+	}
+
+	[Fact]
 	public void VerstionOneTest()
 	{
 		string input	= "1 m";
@@ -37,6 +49,7 @@ public class ConversionTests
 		string outUnits	= "ft";
 
 		UnitConverter unitConverter	= UnitFileLoading.LoadVersionTwoFile();
+		//unitConverter	= UnitFileLoading.LoadVersionTwoFile();
 		UnitResult result			= unitConverter.ParseUnitString(input, out double value, out string inUnits);
 
 		Assert.Equal(UnitResult.NoError, result);
