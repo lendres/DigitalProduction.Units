@@ -11,12 +11,6 @@ namespace Thor.Units;
 /// </summary>
 public class UnitFileException : Exception
 {
-	#region Members
-
-	private string m_detail		= "";
-
-	#endregion
-
 	#region Construction
 
 	/// <summary>
@@ -27,7 +21,7 @@ public class UnitFileException : Exception
 	public UnitFileException(string message, string detail) :
 		base(message)
 	{
-		m_detail = detail;
+		Detail = detail;
 	}
 
 	/// <summary>
@@ -46,13 +40,7 @@ public class UnitFileException : Exception
 	/// <summary>
 	/// Gets additional details about the exception.
 	/// </summary>
-	public string Detail
-	{
-		get
-		{
-			return m_detail;
-		}
-	}
+	public string Detail { get; private set; } = "";
 
 	#endregion
 

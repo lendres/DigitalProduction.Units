@@ -8,18 +8,10 @@
 namespace Thor.Units;
 
 /// <summary>
-/// Represents a set of parameters sent with events generated
-/// by the unit conversion class.
+/// Represents a set of parameters sent with events generated  by the unit conversion class.
 /// </summary>
 public class UnitEventArgs
 {
-	#region Members
-
-	private string m_Message;
-	private string m_DetailMessage;
-
-	#endregion
-
 	#region Construction
 
 	/// <summary>
@@ -29,8 +21,8 @@ public class UnitEventArgs
 	/// <param name="detailmessage">More detail to send with the event.</param>
 	public UnitEventArgs(string message, string detailmessage)
 	{
-		m_Message = message;
-		m_DetailMessage = detailmessage;
+		Message			= message;
+		DetailMessage	= detailmessage;
 	}
 
 	/// <summary>
@@ -39,8 +31,8 @@ public class UnitEventArgs
 	/// <param name="message">Message to send with the event.</param>
 	public UnitEventArgs(string message)
 	{
-		m_Message		= message;
-		m_DetailMessage	= "";
+		Message			= message;
+		DetailMessage	= "";
 	}
 
 	#endregion
@@ -50,12 +42,12 @@ public class UnitEventArgs
 	/// <summary>
 	/// Gets a small message associated with the event.
 	/// </summary>
-	public string Message { get => m_Message; }
+	public string Message { get; private set; }
 
 	/// <summary>
 	/// Gets a more detailed message associated with the event.
 	/// </summary>
-	public string DetailMessage { get => m_DetailMessage; }
+	public string DetailMessage { get; private set; }
 
 	#endregion
 
