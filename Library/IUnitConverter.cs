@@ -28,8 +28,6 @@ public interface IUnitConverter
 
 	UnitEntry? GetUnitBySymbol(string unitSymbol);
 
-	UnitResult LoadUnitsFile(string filePath);
-
 	event UnitEventHandler OnError;
 
 	UnitResult ParseUnitString(string input, out double val, out string unit);

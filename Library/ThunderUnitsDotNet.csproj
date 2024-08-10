@@ -27,5 +27,8 @@
 	    <PackagePath>\</PackagePath>
 	  </None>
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="DigitalProductionDotNetLibrary" Version="0.1.5" />
+	</ItemGroup>
 
 </Project>

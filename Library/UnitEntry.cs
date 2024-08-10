@@ -1,4 +1,6 @@
-﻿namespace Thor.Units;
+﻿using System.Xml.Serialization;
+
+namespace Thor.Units;
 
 /// <summary>
 /// Represents a single unit loaded from the units file.
@@ -28,14 +30,22 @@ public class UnitEntry : IUnitEntry
 
 	#region Properties
 
+	[XmlElement("name")]
 	public string Name { get => m_Name; set => m_Name = value;	}
-
+	
+	[XmlElement("defaultsymbol")]
 	public string DefaultSymbol { get => m_DefaultSymbol; set => m_DefaultSymbol = value; }
 
+	[XmlElement("alternatesymbol")]
+	public string AlternateSymbol { get; set; } = "";
+
+	[XmlElement("preadder")]
 	public double PreAdder { get => m_PreAdder; set => m_PreAdder = value; }
 
+	[XmlElement("adder")]
 	public double Adder { get => m_Adder; set => m_Adder = value; }
 
+	[XmlElement("multiplier")]
 	public double Multiplier { get => m_Multiplier; set => m_Multiplier = value; }
 
 	#endregion
