@@ -57,14 +57,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
+		<PackageReference Include="DigitalProductionMauiLibrary" Version="0.1.3" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\ParsePage.xaml.cs">
-	    <DependentUpon>ParsePage.xaml</DependentUpon>
+	  <ProjectReference Include="..\Library\ThunderUnitsDotNet.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\ParseView.xaml.cs">
+	    <DependentUpon>ParseView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ParseView.xaml.cs">
+	    <DependentUpon>ParseView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
