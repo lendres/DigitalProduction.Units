@@ -6,7 +6,6 @@
  */
 using DigitalProduction.XML.Serialization;
 using System.Diagnostics;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -94,7 +93,7 @@ public class UnitConverter : IUnitConverter
 
 	#endregion
 
-	#region XML Unit File Methods
+	#region Messaging
 
 	/// <summary>
 	/// Sends a specially formed error message regarding the loading of a unit file.
@@ -115,329 +114,9 @@ public class UnitConverter : IUnitConverter
 		OnError?.Invoke(this, new UnitEventArgs(error));
 	}
 
-	/// <summary>
-	/// Given the path to a units file, loads the file.
-	/// </summary>
-	/// <param name="filePath">Path to a units file.</param>
-	/// <returns>Unit result code.</returns>
-	public UnitResult LoadUnitsFile(string filePath)
-	{
-		// Make sure the units file exists.
-		if (!File.Exists(filePath))
-		{
-			return UnitResult.FileNotFound;
-		}
-
-		string error;
-		try
-		{
-			// Attempt to load the unit file...
-			m_UnitsFile.Load(filePath);
-		}
-		catch (XmlException ex)
-		{
-			// Create the exception string.
-			error = "Error parsing '{0}' at line {1}, position {2}.";
-			error = String.Format(error, filePath, ex.LineNumber, ex.LinePosition);
-
-			// Throw the exception.
-			throw new UnitFileException(error, ex.Message);
-		}
-
-		// Reinitialize the data tables.
-		InitTables();
-
-		m_CurUnitFileName = "";
-		m_CurUnitsFileVersion = 0.0;
-
-		// Get a reference to a list of the XML data.
-		XmlNodeList xmlData = m_UnitsFile.GetElementsByTagName("*");
-
-		// No XML nodes? This is wrong.
-		if (xmlData.Count == 0)
-		{
-			error = "Error parsing units file '{0}' - file contains no data.";
-			error = String.Format(error, filePath);
-			throw new UnitFileException(error);
-		}
-
-		// Get the root node.
-		System.Xml.XmlNode root = xmlData[0]!;
-
-		// Does the file not start with a "UnitFile" node? We have problems.
-		if (root.Name.ToLower() != "unitfile")
-		{
-			error = "Error parsing units file '{0}' - the file appears corrupt or incomplete.";
-			error = String.Format(error, filePath);
-			throw new UnitFileException(error);
-		}
-
-		// Store off the name of the units file if there is one.
-		if (root.Attributes["name"] != null)
-		{
-			m_CurUnitFileName = root.Attributes["name"].Value;
-		}
-		else
-		{
-			// Units file has no internal name set on it.
-			SendUnitFileWarning("file has no internal units name - using default.", filePath, null);
-			m_CurUnitFileName = "Units";
-		}
-
-		// Check units file version.
-		if (root.Attributes["version"] != null)
-		{
-			try
-			{
-				m_CurUnitsFileVersion = Convert.ToDouble(root.Attributes["version"].Value);
-			}
-			catch
-			{
-				m_CurUnitsFileVersion = 0.0;
-			}
-
-			if (m_CurUnitsFileVersion == 0.0)
-			{
-				// File version is 0.0, probably failed to convert to a double.
-				error = "Error parsing '{0}' - file has no valid version number.";
-				error = String.Format(error, filePath);
-				throw new UnitFileException(error);
-			}
-
-			if (m_CurUnitsFileVersion > UNITFILE_VERSION)
-			{
-				// File version is greater than the maximum we support.
-				error = "Error parsing '{0}' - file version indicates it is made for a newer version of the unit conversion library.";
-				error = String.Format(error, filePath);
-				throw new UnitFileException(error);
-			}
-		}
-		else
-		{
-			// No version information was found at all.
-			error = "Error parsing '{0}' - file has no version number specified.";
-			error = String.Format(error, filePath);
-			throw new UnitFileException(error);
-		}
-
-		int i = 0;
-
-		// Parse all the unit groups and add them.
-		for (i = 0; i < root.ChildNodes.Count; i++)
-		{
-			XmlNode groupnode = root.ChildNodes[i];
-
-			// Ignore comments.
-			if (groupnode.Name.ToLower() == "#comment")
-			{
-				continue;
-			}
-
-			if (groupnode.Name.ToLower() != "unitgroup")
-			{
-				SendUnitFileWarning("bad tag found while parsing groups (tag was '{0}'), tag ignored.", filePath, new object[] { groupnode.Name });
-			}
-			else
-			{
-				ParseGroupXMLNode(filePath, groupnode);
-			}
-		}
-
-		// We were successful.
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
-	/// Parses a group node in the unit XML document.
-	/// </summary>
-	/// <param name="groupnode">The XML node to parse.</param>
-	/// <returns>A unit result value.</returns>
-	private UnitResult ParseGroupXMLNode(string filePath, XmlNode groupnode)
-	{
-		int i = 0;
-
-		if (groupnode.Attributes == null)
-		{
-			SendUnitFileWarning("Group not an element or does not have attributes, ignoring group.", filePath, null);
-			return UnitResult.GenericError;
-		}
-
-		// Check the group has a name.
-		if (groupnode.Attributes["name"] == null)
-		{
-			SendUnitFileWarning("Found a group with no name, ignoring group.", filePath, null);
-			return UnitResult.GenericError;
-		}
-
-		// Create the group.
-		UnitResult res = CreateNewGroup(groupnode.Attributes["name"].Value);
-
-		// Make sure the group was created.
-		if (res != UnitResult.NoError)
-		{
-			SendUnitFileWarning("Failed to create group entry, skipping group.", filePath, null);
-			return UnitResult.GenericError;
-		}
-
-		// Get a reference to the group we just created.
-		UnitGroup group = this.m_UnitGroups[groupnode.Attributes["name"].Value];
-
-		// Parse all the units.
-		for (i = 0; i < groupnode.ChildNodes.Count; i++)
-		{
-			// Get the node reference for the current unit.
-			XmlNode? unitnode = groupnode.ChildNodes[i];
-
-			if (unitnode == null)
-			{
-				continue;
-			}
-
-			// Ignore comments.
-			if (unitnode.Name.ToLower() == "#comment")
-			{
-				continue;
-			}
-
-			if (unitnode.Name.ToLower() != "unit")
-			{
-				SendUnitFileWarning("Bad tag found while parsing units of group '{0}' (tag was '{1}'), tag ignored.", filePath, new object[] { group.Name, unitnode.Name });
-			}
-			else
-			{
-				// Parse out the unit
-				res = ParseUnitXMLNode(filePath, group, unitnode);
-			}
-		}
-
-		// Completed successfully.
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
-	/// Parses an XML node that represents a unit.
-	/// </summary>
-	/// <param name="group">Name of the group this unit is in.</param>
-	/// <param name="unitnode">The node containing the unit information.</param>
-	/// <returns>A unit result value.</returns>
-	private UnitResult ParseUnitXMLNode(string filePath, UnitGroup group, XmlNode unitnode)
-	{
-		int i = 0;
-
-		UnitEntry unit = new UnitEntry();
-
-		// Make sure the unit has a name.
-		if (unitnode.Attributes["name"] == null)
-		{
-			SendUnitFileWarning("found a unit in group '{0}' with no name, ignored.", filePath, new object[] { group.Name });
-			return UnitResult.GenericError;
-		}
-
-		// Store off the name.
-		unit.Name = unitnode.Attributes["name"].Value;
-		unit.DefaultSymbol = unit.Name.ToLower();
-
-		// Don't allow duplicate units.
-		if (GetUnitByName(unit.Name) != null)
-		{
-			SendUnitFileWarning("duplicate unit with name '{0}' was found and ignored.", filePath, new object[] { unit.Name });
-			return UnitResult.UnitExists;
-		}
-
-		// Get every unit property.
-		for (i = 0; i < unitnode.ChildNodes.Count; i++)
-		{
-			XmlNode unitprop = unitnode.ChildNodes[i];
-
-			//Ignore comments.
-			if (unitprop.Name.ToLower() == "#comment")
-				continue;
-
-			try
-			{
-				if (unitprop.Name.ToLower() == "multiply")
-				{
-					double x;
-					if (ParseNumberString(unitprop.InnerText, out x) != UnitResult.NoError)
-					{
-						throw new System.Exception();
-					}
-
-					unit.Multiplier = x;
-
-					//unit.m_Multiplier = Convert.ToDouble(unitprop.InnerText);
-				}
-				else
-				{
-					if (unitprop.Name.ToLower() == "add")
-					{
-						unit.Adder = Convert.ToDouble(unitprop.InnerText);
-					}
-					else
-					{
-						if (unitprop.Name.ToLower() == "preadd")
-						{
-							unit.PreAdder = Convert.ToDouble(unitprop.InnerText);
-						}
-					}
-				}
-			}
-			catch
-			{
-				SendUnitFileWarning("unit '{0}' has invalid '{1}' value. Unit skipped.", filePath, [unit.Name, unitprop.Name]);
-				return UnitResult.GenericError;
-			}
-
-			// Parse the symbol properties.
-			if (unitprop.Name.ToLower() == "symbol")
-			{
-				// Put the value into the symbol table.
-				if ((unitprop.InnerText != "") && (unitprop.InnerText != null))
-				{
-					if (this.m_SymbolTable[unitprop.InnerText] != null)
-					{
-						SendUnitFileWarning("while parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [unit.Name, unitprop.InnerText]);
-					}
-					else
-					{
-						m_SymbolTable[unitprop.InnerText] = unit;
-
-						// Is this unit the default unit?
-						if (unitprop.Attributes?["default"] == null || unitprop.Attributes?["default"]!.Value.ToLower() == "true")
-						{
-							unit.DefaultSymbol = unitprop.InnerText;
-						}
-						else
-						{
-							unit.AlternateSymbol = unitprop.InnerText;
-						}
-					}
-				}
-				else
-				{
-					SendUnitFileWarning("unit '{0}' has an invalid symbol specified, symbol skipped.", filePath, [unit.Name]);
-				}
-			}
-		}
-
-		//if (unit.AlternateSymbol == "")
-		//{
-		//	unit.AlternateSymbol = unit.DefaultSymbol;
-		//}
-
-		// Add the unit to the unit table.
-		m_Units[unit.Name] = unit;
-
-		// Add the unit to the group
-		AddUnitToGroup(unit.Name, group.Name);
-
-		// All done!
-		return UnitResult.NoError;
-	}
-
 	#endregion
 
-	#region New XML
+	#region Serialization
 
 	/// <summary>
 	/// Serialize an object.
@@ -449,6 +128,10 @@ public class UnitConverter : IUnitConverter
 			Serialization.SerializeObject(settings);
 	}
 
+	/// <summary>
+	/// Deserialize a file.
+	/// </summary>
+	/// <param name="path">Path of file to deserialize.</param>
 	public static UnitConverter Deserialize(string path)
 	{
 		UnitConverter? unitConverter = Serialization.DeserializeObject<UnitConverter>(path) ??
@@ -460,6 +143,10 @@ public class UnitConverter : IUnitConverter
 		return unitConverter;
 	}
 
+	/// <summary>
+	/// Validate the read file.
+	/// </summary>
+	/// <param name="filePath">Path of the file read.  Only used for reporting errors.</param>
 	private UnitResult ValidateRead(string filePath)
 	{
 		double version = 0;
@@ -489,17 +176,19 @@ public class UnitConverter : IUnitConverter
 		return UnitResult.NoError;
 	}
 
+	/// <summary>
+	/// Establish the data structions after reading a file.
+	/// </summary>
+	/// <param name="filePath">Path of the file read.  Only used for reporting errors.</param>
 	private UnitResult PopulateDataStructures(string filePath)
 	{
- 		// Don't allow duplicate units.
-		//SendUnitFileWarning("duplicate unit with name '{0}' was found and ignored.", filePath, new object[] { unit.Name });
-		//return UnitResult.UnitExists;
 		UnitResult result = UnitResult.NoError;
 
 		foreach (UnitGroup unitGroup in m_UnitGroups.Values)
 		{
 			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
 			{
+				// Don't allow duplicate units.
 				if (m_SymbolTable[unitEntry.DefaultSymbol] != null)
 				{
 					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [m_CurUnitFileName, unitEntry.DefaultSymbol]);
