@@ -1,16 +1,11 @@
-﻿namespace UnitsConversionDemo
+﻿using UnitsConversionDemo.ViewModels;
+
+namespace UnitsConversionDemo;
+
+public partial class ParseView : ContentPage
 {
-	public partial class ParseView : ContentPage
+	public ParseView()
 	{
-
-		public ParseView()
-		{
-			InitializeComponent();
-		}
-
-		private void OnCounterClicked(object sender, EventArgs e)
-		{
-
-		}
+		InitializeComponent();
 	}
 }

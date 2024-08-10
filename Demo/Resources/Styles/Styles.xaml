@@ -393,7 +393,22 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Page" ApplyToDerivedTypes="True">
+	<Style TargetType="Label" x:Key="SmallLabelBase">
+		<Setter Property="VerticalTextAlignment" Value="Start"/>
+		<Setter Property="HorizontalTextAlignment" Value="Start"/>
+		<Setter Property="HorizontalOptions" Value="Start"/>
+		<Setter Property="VerticalOptions" Value="Start"/>
+	</Style>
+	<Style TargetType="Label" Class="TitleLabel" BasedOn="{StaticResource SmallLabelBase}">
+		<Setter Property="TextColor" Value="{StaticResource ControlTitleLight}"/>
+		<Setter Property="FontSize" Value="14"/>
+	</Style>
+
+	<Style TargetType="VerticalStackLayout" Class="TitleVerticalStackStyle">
+		<Setter Property="Spacing" Value="6"/>
+	</Style>
+
+	<Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
     </Style>
