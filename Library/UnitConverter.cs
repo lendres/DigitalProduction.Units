@@ -31,9 +31,9 @@ public class UnitConverter
 
 	public const double				UNITFILE_VERSION            =   2.0;
 	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
-	private readonly SymbolTable	m_SymbolTable;
-	private UnitTable				m_Units;
-	private GroupTable				m_UnitGroups;
+	private readonly SymbolTable	_symbolTable;
+	private UnitTable				_units;
+	private GroupTable				_unitGroups;
 
 	#endregion
 
@@ -45,9 +45,9 @@ public class UnitConverter
 	public UnitConverter()
 	{
 		// Set up the tables we need
-		m_SymbolTable = new SymbolTable();
-		m_Units       = new UnitTable();
-		m_UnitGroups  = new GroupTable();
+		_symbolTable = new SymbolTable();
+		_units       = new UnitTable();
+		_unitGroups  = new GroupTable();
 	}
 
 	/// <summary>
@@ -56,9 +56,9 @@ public class UnitConverter
 	public void InitTables()
 	{
 		// Clear everything out.
-		m_SymbolTable.Clear();
-		m_UnitGroups.Clear();
-		m_Units.Clear();
+		_symbolTable.Clear();
+		_unitGroups.Clear();
+		_units.Clear();
 	}
 
 	#endregion
@@ -75,13 +75,13 @@ public class UnitConverter
 	/// Units.
 	/// </summary>
 	[XmlIgnore()]
-	public UnitTable Units { get => m_Units; set => m_Units = value; }
+	public UnitTable Units { get => _units; set => _units = value; }
 
 	/// <summary>
 	/// Groups.
 	/// </summary>
 	[XmlElement("groups")]
-	public GroupTable Groups { get => m_UnitGroups; set => 	m_UnitGroups = value; }
+	public GroupTable Groups { get => _unitGroups; set => 	_unitGroups = value; }
 
 	#endregion
 
@@ -92,15 +92,15 @@ public class UnitConverter
 	/// </summary>
 	/// <param name="message">Message to send.</param>
 	/// <param name="filePath">Path of the unit file.</param>
-	/// <param name="args">Optional format arguments.</param>
-	private void SendUnitFileWarning(string message, string filePath, object[]? args)
+	/// <param name="arguments">Optional format arguments.</param>
+	private void SendUnitFileWarning(string message, string filePath, object[]? arguments)
 	{
 		string error = "Error in units file '"+ filePath + "' - ";
 		error += message;
 
-		if (args != null)
+		if (arguments != null)
 		{
-			error = String.Format(error, args);
+			error = String.Format(error, arguments);
 		}
 
 		OnError?.Invoke(this, new UnitEventArgs(error));
@@ -123,14 +123,14 @@ public class UnitConverter
 	/// <summary>
 	/// Deserialize a file.
 	/// </summary>
-	/// <param name="path">Path of file to deserialize.</param>
-	public static UnitConverter Deserialize(string path)
+	/// <param name="filePath">Path of file to deserialize.</param>
+	public static UnitConverter Deserialize(string filePath)
 	{
-		UnitConverter? unitConverter = Serialization.DeserializeObject<UnitConverter>(path) ??
+		UnitConverter? unitConverter = Serialization.DeserializeObject<UnitConverter>(filePath) ??
 			throw new Exception("Unable to deserialize the units systems.");
 
-		unitConverter.ValidateRead(path);
-		unitConverter.PopulateDataStructures(path);
+		unitConverter.ValidateRead(filePath);
+		unitConverter.PopulateDataStructures(filePath);
 
 		return unitConverter;
 	}
@@ -176,12 +176,12 @@ public class UnitConverter
 	{
 		UnitResult result = UnitResult.NoError;
 
-		foreach (UnitGroup unitGroup in m_UnitGroups.Values)
+		foreach (UnitGroup unitGroup in _unitGroups.Values)
 		{
 			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
 			{
 				// Don't allow duplicate units.
-				if (m_SymbolTable[unitEntry.DefaultSymbol] != null)
+				if (_symbolTable[unitEntry.DefaultSymbol] != null)
 				{
 					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [filePath, unitEntry.DefaultSymbol]);
 					result = UnitResult.UnitExists;
@@ -189,15 +189,15 @@ public class UnitConverter
 				}
 				else
 				{
-					if (m_Units[unitEntry.Name] != null)
+					if (_units[unitEntry.Name] != null)
 					{
 						SendUnitFileWarning("Duplicate unit with name '{0}' was found and ignored.", filePath, [unitEntry.Name]);
 						result = UnitResult.UnitExists;
 					}
 					else
 					{
-						m_SymbolTable[unitEntry.DefaultSymbol]  = unitEntry;
-						m_Units[unitEntry.Name]                 = unitEntry;
+						_symbolTable[unitEntry.DefaultSymbol]  = unitEntry;
+						_units[unitEntry.Name]                 = unitEntry;
 					}
 				}
 			}
@@ -218,7 +218,7 @@ public class UnitConverter
 	/// <returns>Reference to the unit entry, or null if not found.</returns>
 	public UnitEntry? GetUnitByName(string unitName)
 	{
-		return m_Units[unitName];
+		return _units[unitName];
 	}
 
 	/// <summary>
@@ -234,13 +234,13 @@ public class UnitConverter
 		}
 
 		// First check to see if they used the actual name of a unit then look at the symbol table.
-		if (m_Units[unitSymbol] != null)
+		if (_units[unitSymbol] != null)
 		{
-			return m_Units[unitSymbol];
+			return _units[unitSymbol];
 		}
 		else
 		{
-			return m_SymbolTable[unitSymbol];
+			return _symbolTable[unitSymbol];
 		}
 	}
 
@@ -256,15 +256,15 @@ public class UnitConverter
 	/// <returns>True if units are compatible, else false.</returns>
 	public bool CompatibleUnits(string unitSymbol1, string? unitSymbol2)
 	{
-		IUnitEntry? u1 = GetUnitBySymbol(unitSymbol1);
-		IUnitEntry? u2 = GetUnitBySymbol(unitSymbol2);
+		UnitEntry? unitEntry1 = GetUnitBySymbol(unitSymbol1);
+		UnitEntry? unitEntry2 = GetUnitBySymbol(unitSymbol2);
 
-		if (u1 == null || u2 == null)
+		if (unitEntry1 == null || unitEntry2 == null)
 		{
 			return false;
 		}
 
-		return GetUnitGroup(u1.Name) == GetUnitGroup(u2.Name);
+		return GetUnitGroup(unitEntry1.Name) == GetUnitGroup(unitEntry2.Name);
 	}
 
 	/// <summary>
@@ -275,13 +275,13 @@ public class UnitConverter
 	private UnitGroup? GetUnitGroup(string unitName)
 	{
 		// Does the unit even exist?
-		if (m_Units[unitName] == null)
+		if (_units[unitName] == null)
 		{
 			return null;
 		}
 
 		// Iterate through every group.
-		UnitGroup[] groups = m_UnitGroups.GetAllGroups();
+		UnitGroup[] groups = _unitGroups.GetAllGroups();
 		foreach (UnitGroup group in groups)
 		{
 			if (group.IsInGroup(unitName))
@@ -302,21 +302,21 @@ public class UnitConverter
 	/// <summary>
 	/// Given a value and the current unit, converts the value back to the standard.
 	/// </summary>
-	/// <param name="val">Value to convert.</param>
-	/// <param name="unitfrom">Name of the current units the value is in.</param>
+	/// <param name="value">Value to convert.</param>
+	/// <param name="unitFrom">Name of the current units the value is in.</param>
 	/// <param name="output">Variable to hold the converted value.</param>
 	/// <returns>A unit result value.</returns>
-	public UnitResult ConvertToStandard(double val, string? unitfrom, out double output)
+	public UnitResult ConvertToStandard(double value, string? unitFrom, out double output)
 	{
-		double x = val;
+		double x = value;
 
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry? unit_from = GetUnitBySymbol(unitfrom);
+		UnitEntry? unitEntryFrom = GetUnitBySymbol(unitFrom);
 
 		// Make sure both units are real units.
-		if (unit_from == null)
+		if (unitEntryFrom == null)
 		{
 			return UnitResult.BadUnit;
 		}
@@ -324,12 +324,12 @@ public class UnitConverter
 		try
 		{
 			// Convert the value back to the standard
-			x += unit_from.PreAdder;
-			if (unit_from.Multiplier > 0.0)
+			x += unitEntryFrom.PreAdder;
+			if (unitEntryFrom.Multiplier > 0.0)
 			{
-				x *= unit_from.Multiplier;
+				x *= unitEntryFrom.Multiplier;
 			}
-			x += unit_from.Adder;
+			x += unitEntryFrom.Adder;
 
 			output = x;
 		}
@@ -344,44 +344,43 @@ public class UnitConverter
 	/// <summary>
 	/// Performs a unit conversion between two units, given a value to convert.
 	/// </summary>
-	/// <param name="val">The value to convert.</param>
-	/// <param name="unitfrom">The name of the unit the value is currently in.</param>
-	/// <param name="unitto">The name of the unit that the value is to be converted to.</param>
+	/// <param name="value">The value to convert.</param>
+	/// <param name="unitFrom">The name of the unit the value is currently in.</param>
+	/// <param name="unitTo">The name of the unit that the value is to be converted to.</param>
 	/// <param name="output">The converted value.</param>
 	/// <returns>Unit result value.</returns>
-	public UnitResult ConvertUnits(double val, string? unitfrom, string? unitto, out double output)
+	public UnitResult ConvertUnits(double value, string? unitFrom, string? unitTo, out double output)
 	{
-		double x = val;
+		double x = value;
 
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry? unit_from	= GetUnitBySymbol(unitfrom);
-		IUnitEntry? unit_to		= GetUnitBySymbol(unitto);
+		UnitEntry? unitEntryFrom	= GetUnitBySymbol(unitFrom);
+		UnitEntry? unitEntryTo		= GetUnitBySymbol(unitTo);
 
 		// Make sure both units are real units.
-		if (unit_from == null || unit_to == null)
+		if (unitEntryFrom == null || unitEntryTo == null)
 		{
 			return UnitResult.BadUnit;
 		}
 
 		// Make sure the units are of the same group.
-		if (!CompatibleUnits(unit_from.Name, unit_to.Name))
+		if (!CompatibleUnits(unitEntryFrom.Name, unitEntryTo.Name))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-		UnitResult conv_res;
-		conv_res = ConvertToStandard(x, unit_from.Name, out x);
-		if (conv_res != UnitResult.NoError)
+		UnitResult result = ConvertToStandard(x, unitEntryFrom.Name, out x);
+		if (result != UnitResult.NoError)
 		{
-			return conv_res;
+			return result;
 		}
 
-		conv_res = ConvertFromStandard(x, unit_to.Name, out x);
-		if (conv_res != UnitResult.NoError)
+		result = ConvertFromStandard(x, unitEntryTo.Name, out x);
+		if (result != UnitResult.NoError)
 		{
-			return conv_res;
+			return result;
 		}
 
 		output = x;
@@ -392,21 +391,21 @@ public class UnitConverter
 	/// <summary>
 	/// Performs a unit conversion from the standard value into the specified unit.
 	/// </summary>
-	/// <param name="val">The value to convert.</param>
-	/// <param name="unitto">The name of the unit that the value is to be converted to.</param>
+	/// <param name="value">The value to convert.</param>
+	/// <param name="unitTo">The name of the unit that the value is to be converted to.</param>
 	/// <param name="output">The converted value.</param>
 	/// <returns>Unit result value.</returns>
-	public UnitResult ConvertFromStandard(double val, string? unitto, out double output)
+	public UnitResult ConvertFromStandard(double value, string? unitTo, out double output)
 	{
-		double x = val;
+		double x = value;
 
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry? unit_to = GetUnitBySymbol(unitto);
+		UnitEntry? unitEntryTo = GetUnitBySymbol(unitTo);
 
 		// Make sure both units are real units.
-		if (unit_to == null)
+		if (unitEntryTo == null)
 		{
 			return UnitResult.BadUnit;
 		}
@@ -414,12 +413,12 @@ public class UnitConverter
 		try
 		{
 			// Convert to the new unit from the standard
-			x -= unit_to.PreAdder;
-			if (unit_to.Multiplier > 0.0)
+			x -= unitEntryTo.PreAdder;
+			if (unitEntryTo.Multiplier > 0.0)
 			{
-				x *= Math.Pow(unit_to.Multiplier, -1);
+				x *= Math.Pow(unitEntryTo.Multiplier, -1);
 			}
-			x -= unit_to.Adder;
+			x -= unitEntryTo.Adder;
 
 			output = x;
 		}
@@ -440,13 +439,13 @@ public class UnitConverter
 	/// Given a string in the format "[value] [unit]", splits and returns the parts.
 	/// </summary>
 	/// <param name="input">Input string in the format "[value] [unit]" to be parsed.</param>
-	/// <param name="val">Output variable that will hold the value.</param>
+	/// <param name="value">Output variable that will hold the value.</param>
 	/// <param name="unit">Output variable that will hold the unit.</param>
 	/// <returns>Unit result code.</returns>
-	public UnitResult ParseUnitString(string input, out double val, out string unit)
+	public UnitResult ParseUnitString(string input, out double value, out string unit)
 	{
 		// Defaults.
-		val		= 0.0;
+		value	= 0.0;
 		unit	= "";
 
 		if (input == "")
@@ -478,7 +477,7 @@ public class UnitConverter
 
 		try
 		{
-			val = Convert.ToDouble(s1);
+			value = Convert.ToDouble(s1);
 		}
 		catch
 		{
@@ -505,14 +504,14 @@ public class UnitConverter
 	/// <returns>The newly created data string.</returns>
 	public DataString CreateDataString()
 	{
-		DataString ds = new(this, "");
-		return ds;
+		DataString dataString = new(this, "");
+		return dataString;
 	}
 
 	public DataString CreateDataString(string unitSymbol)
 	{
-		DataString ds = new(this, unitSymbol);
-		return ds;
+		DataString dataString = new(this, unitSymbol);
+		return dataString;
 	}
 
 	#endregion

@@ -9,8 +9,8 @@ public class UnitGroup
 {
 	#region Members
 
-	private string			m_Name			= "";
-	private UnitTable		m_Units			= new();
+	private string			_name			= "";
+	private UnitTable		_units			= new();
 
 	#endregion
 
@@ -18,7 +18,7 @@ public class UnitGroup
 
 	public UnitGroup()
 	{
-		m_Units = new UnitTable();
+		Units = new UnitTable();
 	}
 
 	#endregion
@@ -26,10 +26,10 @@ public class UnitGroup
 	#region Properties
 
 	[XmlAttribute("name")]
-	public string Name { get => m_Name; set => m_Name = value; }
+	public string Name { get => _name; set => _name = value; }
 
 	[XmlElement("units")]
-	public UnitTable Units { get => m_Units; set => m_Units = value; }
+	public UnitTable Units { get => _units; set => _units = value; }
 
 	//public int NumberOfUnits {get => Units.Count; }
 
@@ -44,7 +44,7 @@ public class UnitGroup
 	/// <returns>Unit result value.</returns>
 	public UnitResult AddUnit(UnitEntry unit)
 	{
-		m_Units[unit.Name] = unit;
+		_units[unit.Name] = unit;
 		return UnitResult.NoError;
 	}
 
@@ -56,7 +56,7 @@ public class UnitGroup
 	/// <returns>True if the unit is in the group, else false.</returns>
 	public bool IsInGroup(string unitName)
 	{
-		return m_Units[unitName] != null;
+		return _units[unitName] != null;
 	}
 
 	#endregion

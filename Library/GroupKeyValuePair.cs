@@ -1,8 +1,8 @@
-﻿using System.Xml.Serialization;
+﻿using DigitalProduction.XML.Serialization;
 using System.Xml;
-using Thor.Units;
+using System.Xml.Serialization;
 
-namespace DigitalProduction.XML.Serialization;
+namespace Thor.Units;
 
 /// <summary>
 /// Add serialization to a dictionary.
