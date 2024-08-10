@@ -16,7 +16,7 @@ namespace Thor.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter : IUnitConverter
+public class UnitConverter
 {
 	#region Events
 
@@ -29,14 +29,11 @@ public class UnitConverter : IUnitConverter
 
 	#region Members
 
-	public const double         UNITFILE_VERSION            =   2.0;
-	public const double         FAILSAFE_VALUE              =   System.Double.NaN;
-	private SymbolTable         m_SymbolTable;
-	private UnitTable           m_Units;
-	private GroupTable          m_UnitGroups;
-	private XmlDocument         m_UnitsFile;
-	private string              m_CurUnitFileName;
-	private double              m_CurUnitsFileVersion;
+	public const double				UNITFILE_VERSION            =   2.0;
+	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
+	private readonly SymbolTable	m_SymbolTable;
+	private UnitTable				m_Units;
+	private GroupTable				m_UnitGroups;
 
 	#endregion
 
@@ -51,11 +48,6 @@ public class UnitConverter : IUnitConverter
 		m_SymbolTable = new SymbolTable();
 		m_Units       = new UnitTable();
 		m_UnitGroups  = new GroupTable();
-
-		// Create an Xml document to hold the units file in.
-		m_UnitsFile				= new XmlDocument();
-		m_CurUnitsFileVersion	= 0.0;
-		m_CurUnitFileName		= "";
 	}
 
 	/// <summary>
@@ -191,7 +183,7 @@ public class UnitConverter : IUnitConverter
 				// Don't allow duplicate units.
 				if (m_SymbolTable[unitEntry.DefaultSymbol] != null)
 				{
-					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [m_CurUnitFileName, unitEntry.DefaultSymbol]);
+					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [filePath, unitEntry.DefaultSymbol]);
 					result = UnitResult.UnitExists;
 
 				}
@@ -276,52 +268,6 @@ public class UnitConverter : IUnitConverter
 	}
 
 	/// <summary>
-	/// Creates a new unit group and adds it to the group table.
-	/// </summary>
-	/// <param name="groupName">Name of the new group.</param>
-	/// <returns>Unit result value.</returns>
-	private UnitResult CreateNewGroup(string groupName)
-	{
-		// Create the new group
-		UnitGroup newgroup = new();
-		newgroup.Name = groupName;
-
-		// Add it to the group table
-		m_UnitGroups[groupName] = newgroup;
-
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
-	/// Adds the named unit to the specified group.
-	/// </summary>
-	/// <param name="unitName">Name of the unit.</param>
-	/// <param name="groupName">Name of the group to add the unit to.</param>
-	/// <returns>Unit result value.</returns>
-	private UnitResult AddUnitToGroup(string unitName, string groupName)
-	{
-		UnitEntry? unit = m_Units[unitName];
-		UnitGroup? group = m_UnitGroups[groupName];
-
-		// Make sure the unit exists.
-		if (unit == null)
-		{
-			return UnitResult.UnitNotFound;
-		}
-
-		// Make sure the group exists.
-		if (group == null)
-		{
-			return UnitResult.GroupNotFound;
-		}
-
-		// Add the unit.
-		group.AddUnit(unit);
-
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
 	/// Given the name of a unit, searches for the unit group it belongs to.
 	/// </summary>
 	/// <param name="unitName">Name of the unit.</param>
@@ -378,12 +324,12 @@ public class UnitConverter : IUnitConverter
 		try
 		{
 			// Convert the value back to the standard
-			x = x + unit_from.PreAdder;
+			x += unit_from.PreAdder;
 			if (unit_from.Multiplier > 0.0)
 			{
-				x = x * unit_from.Multiplier;
+				x *= unit_from.Multiplier;
 			}
-			x = x + unit_from.Adder;
+			x += unit_from.Adder;
 
 			output = x;
 		}
@@ -491,51 +437,6 @@ public class UnitConverter : IUnitConverter
 	#region Parsing Routines
 
 	/// <summary>
-	/// Parses a number string with operators.
-	/// </summary>
-	/// <param name="input">String containing numbers and operators.</param>
-	/// <param name="val">Output value.</param>
-	private UnitResult ParseNumberString(string input, out double val)
-	{
-		// Default value.
-		val = 0.0;
-
-		// Split the numbers on the ^ operator.
-		string[] numbers;
-		numbers = input.Split(['^']);
-
-		if (numbers.Length == 1)
-		{
-			// Only one value, so there was no ^ operator present.
-			// so just return the one number.
-			try
-			{
-				val = Convert.ToDouble(numbers[0]);
-			}
-			catch
-			{
-				return UnitResult.BadValue;
-			}
-		}
-		else
-		{
-			// There is a ^ operator, so try to use it.
-			try
-			{
-				val = Convert.ToDouble(numbers[0]);
-				val = Math.Pow(val, Convert.ToDouble(numbers[1]));
-			}
-			catch
-			{
-				return UnitResult.BadValue;
-			}
-		}
-
-		return UnitResult.NoError;
-	}
-
-
-	/// <summary>
 	/// Given a string in the format "[value] [unit]", splits and returns the parts.
 	/// </summary>
 	/// <param name="input">Input string in the format "[value] [unit]" to be parsed.</param>
@@ -554,12 +455,8 @@ public class UnitConverter : IUnitConverter
 		}
 
 		int i = 0;
-
-		string s1 = "";
-		string s2 = "";
-
 		// Look for the first letter or punctuation character.
-		for (i = 0; i < input.Length; i++)
+		for (; i < input.Length; i++)
 		{
 			if (Char.IsLetter(input, i))// || Char.IsPunctuation(input, i))
 			{
@@ -567,9 +464,10 @@ public class UnitConverter : IUnitConverter
 			}
 		}
 
-		s1 = input.Substring(0, i);
+		string s1 = input.Substring(0, i);
 		s1 = s1.Trim();
-		s2 = input.Substring(i);
+
+		string s2 = input.Substring(i);
 		s2 = s2.Trim();
 
 		// No value? default to 0.
