@@ -93,7 +93,7 @@ public class DataString
 	/// <summary>
 	/// Gets the unit converter associated with this data string.
 	/// </summary>
-	public IUnitConverter Converter { get => m_uniteConvert; }
+	public UnitConverter Converter { get => m_uniteConvert; }
 
 	#endregion
 

@@ -16,7 +16,7 @@ namespace Thor.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter : IUnitConverter
+public class UnitConverter
 {
 	#region Events
 
@@ -34,7 +34,6 @@ public class UnitConverter : IUnitConverter
 	private SymbolTable         m_SymbolTable;
 	private UnitTable           m_Units;
 	private GroupTable          m_UnitGroups;
-	private XmlDocument         m_UnitsFile;
 	private string              m_CurUnitFileName;
 	private double              m_CurUnitsFileVersion;
 
@@ -53,7 +52,6 @@ public class UnitConverter : IUnitConverter
 		m_UnitGroups  = new GroupTable();
 
 		// Create an Xml document to hold the units file in.
-		m_UnitsFile				= new XmlDocument();
 		m_CurUnitsFileVersion	= 0.0;
 		m_CurUnitFileName		= "";
 	}
