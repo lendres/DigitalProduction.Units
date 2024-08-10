@@ -43,7 +43,7 @@
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
 				<Label Text="Messages" StyleClass="TitleLabel"/>
 				<Frame Padding="8">
-					<Label Text="{Binding Message}"/>
+					<Label Text="{Binding Message}" LineBreakMode="WordWrap"/>
 				</Frame>
 			</VerticalStackLayout>
 

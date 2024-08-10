@@ -7,9 +7,11 @@ public static class UnitFileIO
 {
 	public static string	FileNameV2		= "Units v2.0.xml";
 
-	public static string Folder { get; set; } = "";
+	public static string	Folder { get; private set; } = "";
 
-	public static string PathV2 { get =>  Path.Combine(Folder, FileNameV2); }
+	public static string	PathV2 { get =>  Path.Combine(Folder, FileNameV2); }
+
+	public static string	Message { get; private set; } = "";
 
 	static UnitFileIO()
 	{
@@ -19,13 +21,22 @@ public static class UnitFileIO
 		Debug.WriteLine("Root folder: " + Folder);
 	}
 
-	public static UnitConverter LoadVersionTwoFile()
+	public static UnitConverter? LoadVersionTwoFile()
 	{
-		string path	= Path.Combine(Folder, FileNameV2);
+		Debug.WriteLine("File: " + PathV2);
+		Message = "";
+		UnitConverter? unitConverter = null;
 
-		Debug.WriteLine("File: " + path);
+		try
+		{
+			unitConverter = UnitConverter.Deserialize(PathV2);
+		}
+		catch (Exception exception)
+		{
+			Message = exception.Message;
+		}
 
-		return UnitConverter.Deserialize(path);
+		return unitConverter;
 	}
 
 	/// <summary>

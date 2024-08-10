@@ -30,6 +30,12 @@ public partial class ParsingViewModel : ObservableObject
 	public ParsingViewModel()
     {
 		UnitsConverter = UnitFileIO.LoadVersionTwoFile();
+		if (UnitsConverter == null)
+		{
+			Message =	"The Units file could not be loaded." + Environment.NewLine +
+						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
+						"Message: " + UnitFileIO.Message;
+		}
 	}
 
 	partial void OnInputChanged(string value)
