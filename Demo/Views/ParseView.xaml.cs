@@ -1,9 +1,9 @@
 ﻿namespace UnitsConversionDemo
 {
-	public partial class ParsePage : ContentPage
+	public partial class ParseView : ContentPage
 	{
 
-		public ParsePage()
+		public ParseView()
 		{
 			InitializeComponent();
 		}

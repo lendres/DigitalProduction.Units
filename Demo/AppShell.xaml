@@ -9,7 +9,7 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:ParsePage}"
-        Route="ParsePage" />
+        ContentTemplate="{DataTemplate local:ParseView}"
+        Route="ParseView" />
 
 </Shell>

@@ -8,12 +8,12 @@
 
     <NavigationPage Title="Convert by Parsing" IconImageSource="{StaticResource TabOne}">
         <x:Arguments>
-			<local:ParsePage Title="Convert by Parsing" />
+			<local:ParseView Title="Convert by Parsing" />
         </x:Arguments>
     </NavigationPage>
 	<NavigationPage Title="Two" IconImageSource="{StaticResource TabTwo}">
 		<x:Arguments>
-			<local:ParsePage Title="Two" />
+			<local:ParseView Title="Two" />
 		</x:Arguments>
 	</NavigationPage>
 
