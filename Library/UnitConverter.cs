@@ -29,13 +29,13 @@ public class UnitConverter
 
 	#region Members
 
-	public const double         UNITFILE_VERSION            =   2.0;
-	public const double         FAILSAFE_VALUE              =   System.Double.NaN;
-	private SymbolTable         m_SymbolTable;
-	private UnitTable           m_Units;
-	private GroupTable          m_UnitGroups;
-	private string              m_CurUnitFileName;
-	private double              m_CurUnitsFileVersion;
+	public const double				UNITFILE_VERSION            =   2.0;
+	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
+	private readonly SymbolTable	m_SymbolTable;
+	private UnitTable				m_Units;
+	private GroupTable				m_UnitGroups;
+	private readonly string			m_CurUnitFileName;
+	private readonly double			m_CurUnitsFileVersion;
 
 	#endregion
 
@@ -274,52 +274,6 @@ public class UnitConverter
 	}
 
 	/// <summary>
-	/// Creates a new unit group and adds it to the group table.
-	/// </summary>
-	/// <param name="groupName">Name of the new group.</param>
-	/// <returns>Unit result value.</returns>
-	private UnitResult CreateNewGroup(string groupName)
-	{
-		// Create the new group
-		UnitGroup newgroup = new();
-		newgroup.Name = groupName;
-
-		// Add it to the group table
-		m_UnitGroups[groupName] = newgroup;
-
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
-	/// Adds the named unit to the specified group.
-	/// </summary>
-	/// <param name="unitName">Name of the unit.</param>
-	/// <param name="groupName">Name of the group to add the unit to.</param>
-	/// <returns>Unit result value.</returns>
-	private UnitResult AddUnitToGroup(string unitName, string groupName)
-	{
-		UnitEntry? unit = m_Units[unitName];
-		UnitGroup? group = m_UnitGroups[groupName];
-
-		// Make sure the unit exists.
-		if (unit == null)
-		{
-			return UnitResult.UnitNotFound;
-		}
-
-		// Make sure the group exists.
-		if (group == null)
-		{
-			return UnitResult.GroupNotFound;
-		}
-
-		// Add the unit.
-		group.AddUnit(unit);
-
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
 	/// Given the name of a unit, searches for the unit group it belongs to.
 	/// </summary>
 	/// <param name="unitName">Name of the unit.</param>
@@ -487,51 +441,6 @@ public class UnitConverter
 	#endregion
 
 	#region Parsing Routines
-
-	/// <summary>
-	/// Parses a number string with operators.
-	/// </summary>
-	/// <param name="input">String containing numbers and operators.</param>
-	/// <param name="val">Output value.</param>
-	private UnitResult ParseNumberString(string input, out double val)
-	{
-		// Default value.
-		val = 0.0;
-
-		// Split the numbers on the ^ operator.
-		string[] numbers;
-		numbers = input.Split(['^']);
-
-		if (numbers.Length == 1)
-		{
-			// Only one value, so there was no ^ operator present.
-			// so just return the one number.
-			try
-			{
-				val = Convert.ToDouble(numbers[0]);
-			}
-			catch
-			{
-				return UnitResult.BadValue;
-			}
-		}
-		else
-		{
-			// There is a ^ operator, so try to use it.
-			try
-			{
-				val = Convert.ToDouble(numbers[0]);
-				val = Math.Pow(val, Convert.ToDouble(numbers[1]));
-			}
-			catch
-			{
-				return UnitResult.BadValue;
-			}
-		}
-
-		return UnitResult.NoError;
-	}
-
 
 	/// <summary>
 	/// Given a string in the format "[value] [unit]", splits and returns the parts.
