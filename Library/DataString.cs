@@ -15,14 +15,14 @@ public class DataString
 {
 	#region Members
 
-	private DataStringFlags						m_flags;
-	private readonly UnitConverter				m_uniteConvert;
+	private DataStringFlags						_flags;
+	private readonly UnitConverter				_uniteConvert;
 
-	private double								m_maxbound;
-	private double								m_minbound;
+	private double								_maxbound;
+	private double								_minbound;
 
-	private double								m_value;
-	private UnitEntry?							m_unit;
+	private double								_value;
+	private UnitEntry?							_unit;
 
 	public event EventHandler?					OnValueChanged;
 	public event EventHandler?					OnUnitChanged;
@@ -34,16 +34,16 @@ public class DataString
 	internal DataString(UnitConverter uc, string? unitSymbol)
 	{
 		// Reference the unit converter that created us.
-		m_uniteConvert = uc;
+		_uniteConvert = uc;
 
-		m_flags = DataStringFlags.None;
+		_flags = DataStringFlags.None;
 
 		// Default unit is the blank unit
-		m_unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
+		_unit = _uniteConvert.GetUnitBySymbol(unitSymbol);
 
-		m_unit ??= m_uniteConvert.GetUnitBySymbol("");
+		_unit ??= _uniteConvert.GetUnitBySymbol("");
 
-		m_value = 0.0;
+		_value = 0.0;
 	}
 
 	#endregion
@@ -57,7 +57,7 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult SetUnit(string? unitSymbol)
 	{
-		UnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
+		UnitEntry? unit = _uniteConvert.GetUnitBySymbol(unitSymbol);
 
 		if (unit == null)
 		{
@@ -66,12 +66,12 @@ public class DataString
 		else
 		{
 			//If its the same don't touch it.
-			if (unit == m_unit)
+			if (unit == _unit)
 			{
 				return UnitResult.NoError;
 			}
 
-			m_unit = unit;
+			_unit = unit;
 
 			OnUnitChanged?.Invoke(this, EventArgs.Empty);
 
@@ -82,17 +82,17 @@ public class DataString
 	/// <summary>
 	/// Gets a reference to the current unit of the data string.
 	/// </summary>
-	public UnitEntry? Unit { get => m_unit; }
+	public UnitEntry? Unit { get => _unit; }
 
 	/// <summary>
 	/// Gets or sets the flags on this data string.
 	/// </summary>
-	public DataStringFlags Flags { get => m_flags; set => m_flags = value; }
+	public DataStringFlags Flags { get => _flags; set => _flags = value; }
 
 	/// <summary>
 	/// Gets the unit converter associated with this data string.
 	/// </summary>
-	public UnitConverter Converter { get => m_uniteConvert; }
+	public UnitConverter Converter { get => _uniteConvert; }
 
 	#endregion
 
@@ -105,21 +105,21 @@ public class DataString
 	/// <returns>Unit result code.</returns>
 	public UnitResult SetValue(string entry)
 	{
-		UnitResult  res;
+		UnitResult  unitResults;
 
-		res = ValidateEntry(entry);
-		if (res != UnitResult.NoError)
+		unitResults = ValidateEntry(entry);
+		if (unitResults != UnitResult.NoError)
 		{
-			return res;
+			return unitResults;
 		}
 
-		m_uniteConvert.ParseUnitString(entry, out double value, out string unit);
+		_uniteConvert.ParseUnitString(entry, out double value, out string unit);
 
 		// Can we change the unit?
-		if ((m_flags & DataStringFlags.ForceUnit) > 0)
+		if ((_flags & DataStringFlags.ForceUnit) > 0)
 		{
 			// Can't change the unit, so turn the given units into the unit we want
-			m_uniteConvert.ConvertUnits(value, unit, m_unit?.Name, out value);
+			_uniteConvert.ConvertUnits(value, unit, _unit?.Name, out value);
 		}
 		else
 		{
@@ -128,7 +128,7 @@ public class DataString
 		}
 
 		SetValue(value);
-		return res;
+		return unitResults;
 	}
 
 	/// <summary>
@@ -138,17 +138,17 @@ public class DataString
 	/// <returns>Unit result code.</returns>
 	public UnitResult SetValue(double val)
 	{
-		UnitResult res;
-		res = m_uniteConvert.ConvertToStandard(val, m_unit?.Name, out m_value);
+		UnitResult unitResult;
+		unitResult = _uniteConvert.ConvertToStandard(val, _unit?.Name, out _value);
 
-		if (res != UnitResult.NoError)
+		if (unitResult != UnitResult.NoError)
 		{
-			return res;
+			return unitResult;
 		}
 
 		OnValueChanged?.Invoke(this, EventArgs.Empty);
 
-		return res;
+		return unitResult;
 	}
 
 	/// <summary>
@@ -158,7 +158,7 @@ public class DataString
 	/// <returns>Unit result code.</returns>
 	public UnitResult GetValue(out double output)
 	{
-		return m_uniteConvert.ConvertFromStandard(m_value, m_unit?.Name, out output);
+		return _uniteConvert.ConvertFromStandard(_value, _unit?.Name, out output);
 	}
 
 	/// <summary>
@@ -171,14 +171,14 @@ public class DataString
 		output = "";
 
 		UnitResult res;
-		res = m_uniteConvert.ConvertFromStandard(m_value, m_unit?.Name, out double d);
+		res = _uniteConvert.ConvertFromStandard(_value, _unit?.Name, out double d);
 
 		if (res != UnitResult.NoError)
 		{
 			return res;
 		}
 
-		output = d.ToString() + " " + m_unit?.DefaultSymbol;
+		output = d.ToString() + " " + _unit?.DefaultSymbol;
 
 		return res;
 	}
@@ -191,7 +191,7 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult GetValueAs(string unitSymbol, out double output)
 	{
-		return m_uniteConvert.ConvertUnits(m_value, m_unit?.Name, unitSymbol, out output);
+		return _uniteConvert.ConvertUnits(_value, _unit?.Name, unitSymbol, out output);
 	}
 
 	/// <summary>
@@ -205,14 +205,14 @@ public class DataString
 		output = "";
 
 		// Convert the standard stored value into the current unit.
-		UnitResult res = m_uniteConvert.ConvertFromStandard(m_value, unitSymbol, out double d);
+		UnitResult res = _uniteConvert.ConvertFromStandard(_value, unitSymbol, out double d);
 		if (res != UnitResult.NoError)
 		{
 			return res;
 		}
 
 		//Get a reference to the unit.
-		UnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
+		UnitEntry? unit = _uniteConvert.GetUnitBySymbol(unitSymbol);
 
 		// Output the result.
 		output = d.ToString() + " " + unit?.DefaultSymbol;
@@ -232,31 +232,31 @@ public class DataString
 		UnitResult res;
 
 		//Parse the entry.
-		res = m_uniteConvert.ParseUnitString(entry, out double d, out string unit);
+		res = _uniteConvert.ParseUnitString(entry, out double d, out string unit);
 		if (res != UnitResult.NoError)
 		{
 			return res;
 		}
 
 		// Make sure the units are compatible.
-		if (!m_uniteConvert.CompatibleUnits(unit, m_unit?.DefaultSymbol))
+		if (!_uniteConvert.CompatibleUnits(unit, _unit?.DefaultSymbol))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-		m_uniteConvert.ConvertToStandard(d, unit, out double x);
+		_uniteConvert.ConvertToStandard(d, unit, out double x);
 
-		if ((this.m_flags & DataStringFlags.UseMaxBound) > 0)
+		if ((this._flags & DataStringFlags.UseMaxBound) > 0)
 		{
-			if (x > this.m_maxbound)
+			if (x > this._maxbound)
 			{
 				return UnitResult.ValueTooHigh;
 			}
 		}
 
-		if ((this.m_flags & DataStringFlags.UseMinBound) > 0)
+		if ((this._flags & DataStringFlags.UseMinBound) > 0)
 		{
-			if (x < this.m_minbound)
+			if (x < this._minbound)
 			{
 				return UnitResult.ValueTooLow;
 			}
@@ -277,12 +277,12 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult SetMaxBound(double maxbound, string unitSymbol)
 	{
-		if (!m_uniteConvert.CompatibleUnits(unitSymbol, m_unit?.DefaultSymbol))
+		if (!_uniteConvert.CompatibleUnits(unitSymbol, _unit?.DefaultSymbol))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-		m_uniteConvert.ConvertToStandard(maxbound, unitSymbol, out m_maxbound);
+		_uniteConvert.ConvertToStandard(maxbound, unitSymbol, out _maxbound);
 
 		return UnitResult.NoError;
 	}
@@ -295,12 +295,12 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult SetMinBound(double minbound, string unitSymbol)
 	{
-		if (!m_uniteConvert.CompatibleUnits(unitSymbol, m_unit?.DefaultSymbol))
+		if (!_uniteConvert.CompatibleUnits(unitSymbol, _unit?.DefaultSymbol))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-		m_uniteConvert.ConvertToStandard(minbound, unitSymbol, out m_minbound);
+		_uniteConvert.ConvertToStandard(minbound, unitSymbol, out _minbound);
 
 		return UnitResult.NoError;
 	}

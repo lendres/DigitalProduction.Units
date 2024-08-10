@@ -7,9 +7,6 @@ namespace Thor.Units;
 /// </summary>
 public class UnitEntry
 {
-	#region Members
-	#endregion
-
 	#region Construction
 
 	/// <summary>
