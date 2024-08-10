@@ -34,8 +34,6 @@ public class UnitConverter
 	private readonly SymbolTable	m_SymbolTable;
 	private UnitTable				m_Units;
 	private GroupTable				m_UnitGroups;
-	private readonly string			m_CurUnitFileName;
-	private readonly double			m_CurUnitsFileVersion;
 
 	#endregion
 
@@ -50,10 +48,6 @@ public class UnitConverter
 		m_SymbolTable = new SymbolTable();
 		m_Units       = new UnitTable();
 		m_UnitGroups  = new GroupTable();
-
-		// Create an Xml document to hold the units file in.
-		m_CurUnitsFileVersion	= 0.0;
-		m_CurUnitFileName		= "";
 	}
 
 	/// <summary>
@@ -189,7 +183,7 @@ public class UnitConverter
 				// Don't allow duplicate units.
 				if (m_SymbolTable[unitEntry.DefaultSymbol] != null)
 				{
-					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [m_CurUnitFileName, unitEntry.DefaultSymbol]);
+					SendUnitFileWarning("While parsing unit '{0}' - a duplicate symbol was found and ignored ({1}).", filePath, [filePath, unitEntry.DefaultSymbol]);
 					result = UnitResult.UnitExists;
 
 				}
@@ -330,12 +324,12 @@ public class UnitConverter
 		try
 		{
 			// Convert the value back to the standard
-			x = x + unit_from.PreAdder;
+			x += unit_from.PreAdder;
 			if (unit_from.Multiplier > 0.0)
 			{
-				x = x * unit_from.Multiplier;
+				x *= unit_from.Multiplier;
 			}
-			x = x + unit_from.Adder;
+			x += unit_from.Adder;
 
 			output = x;
 		}
@@ -461,12 +455,8 @@ public class UnitConverter
 		}
 
 		int i = 0;
-
-		string s1 = "";
-		string s2 = "";
-
 		// Look for the first letter or punctuation character.
-		for (i = 0; i < input.Length; i++)
+		for (; i < input.Length; i++)
 		{
 			if (Char.IsLetter(input, i))// || Char.IsPunctuation(input, i))
 			{
@@ -474,9 +464,10 @@ public class UnitConverter
 			}
 		}
 
-		s1 = input.Substring(0, i);
+		string s1 = input.Substring(0, i);
 		s1 = s1.Trim();
-		s2 = input.Substring(i);
+
+		string s2 = input.Substring(i);
 		s2 = s2.Trim();
 
 		// No value? default to 0.
