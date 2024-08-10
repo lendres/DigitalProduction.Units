@@ -256,8 +256,8 @@ public class UnitConverter
 	/// <returns>True if units are compatible, else false.</returns>
 	public bool CompatibleUnits(string unitSymbol1, string? unitSymbol2)
 	{
-		IUnitEntry? u1 = GetUnitBySymbol(unitSymbol1);
-		IUnitEntry? u2 = GetUnitBySymbol(unitSymbol2);
+		UnitEntry? u1 = GetUnitBySymbol(unitSymbol1);
+		UnitEntry? u2 = GetUnitBySymbol(unitSymbol2);
 
 		if (u1 == null || u2 == null)
 		{
@@ -313,7 +313,7 @@ public class UnitConverter
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry? unit_from = GetUnitBySymbol(unitfrom);
+		UnitEntry? unit_from = GetUnitBySymbol(unitfrom);
 
 		// Make sure both units are real units.
 		if (unit_from == null)
@@ -356,8 +356,8 @@ public class UnitConverter
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry? unit_from	= GetUnitBySymbol(unitfrom);
-		IUnitEntry? unit_to		= GetUnitBySymbol(unitto);
+		UnitEntry? unit_from	= GetUnitBySymbol(unitfrom);
+		UnitEntry? unit_to		= GetUnitBySymbol(unitto);
 
 		// Make sure both units are real units.
 		if (unit_from == null || unit_to == null)
@@ -403,7 +403,7 @@ public class UnitConverter
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
-		IUnitEntry? unit_to = GetUnitBySymbol(unitto);
+		UnitEntry? unit_to = GetUnitBySymbol(unitto);
 
 		// Make sure both units are real units.
 		if (unit_to == null)

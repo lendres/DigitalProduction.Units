@@ -22,7 +22,7 @@ public class DataString
 	private double								m_minbound;
 
 	private double								m_value;
-	private IUnitEntry?							m_unit;
+	private UnitEntry?							m_unit;
 
 	public event EventHandler?					OnValueChanged;
 	public event EventHandler?					OnUnitChanged;
@@ -57,7 +57,7 @@ public class DataString
 	/// <returns>Unit result value.</returns>
 	public UnitResult SetUnit(string? unitSymbol)
 	{
-		IUnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
+		UnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
 
 		if (unit == null)
 		{
@@ -82,7 +82,7 @@ public class DataString
 	/// <summary>
 	/// Gets a reference to the current unit of the data string.
 	/// </summary>
-	public IUnitEntry? Unit { get => m_unit; }
+	public UnitEntry? Unit { get => m_unit; }
 
 	/// <summary>
 	/// Gets or sets the flags on this data string.
@@ -212,7 +212,7 @@ public class DataString
 		}
 
 		//Get a reference to the unit.
-		IUnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
+		UnitEntry? unit = m_uniteConvert.GetUnitBySymbol(unitSymbol);
 
 		// Output the result.
 		output = d.ToString() + " " + unit?.DefaultSymbol;
