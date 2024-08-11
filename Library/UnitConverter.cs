@@ -75,13 +75,13 @@ public class UnitConverter
 	/// Units.
 	/// </summary>
 	[XmlIgnore()]
-	public UnitTable Units { get => _units; set => _units = value; }
+	public UnitTable UnitTable { get => _units; set => _units = value; }
 
 	/// <summary>
 	/// Groups.
 	/// </summary>
 	[XmlElement("groups")]
-	public GroupTable Groups { get => _unitGroups; set => 	_unitGroups = value; }
+	public GroupTable GroupTable { get => _unitGroups; set => 	_unitGroups = value; }
 
 	#endregion
 
