@@ -8,10 +8,9 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 {
 	#region Construction
 
-	public UnitsGroupView(UnitsGroupViewModel	viewModel)
+	public UnitsGroupView()
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
 	}
 
 	#endregion

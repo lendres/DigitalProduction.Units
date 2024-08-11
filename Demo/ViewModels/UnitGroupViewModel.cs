@@ -3,34 +3,35 @@ using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
 using DigitalProduction.Validation;
 using DigitalProduction.ViewModels;
+using Microsoft.Maui.Media;
 using System.Collections.ObjectModel;
 using Thor.Units;
 
 namespace Data.Translation.ViewModels;
 
-[QueryProperty(nameof(UnitsConverter), "UnitsConverter")]
+[QueryProperty(nameof(UnitConverter), "UnitsConverter")]
+[QueryProperty(nameof(UnitGroup), "UnitGroup")]
 public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 {
 	#region Fields
 
+	private UnitConverter?					_unitConverter;
+	private UnitGroup?						_unitGroup;
+
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_name								= new();
-	private readonly string					_previousName						= "";
-	private readonly List<string>			_existingNames;
+	private string							_previousName						= "";
+	private List<string>					_existingNames						= new();
 
 	[ObservableProperty]
-	private bool							_isSubmittable;
+	private bool							_isSubmittable						= false;
 
 	#endregion
 
 	#region Construction
 
-	public UnitsGroupViewModel(UnitConverter unitsConverter, UnitGroup unitGroup)
+	public UnitsGroupViewModel()
 	{
-		UnitsConverter	= unitsConverter;
-		UnitGroup		= unitGroup;
-		_existingNames	= UnitsConverter.GroupTable.GetSortedListOfGroupNames();
-		Items			= new ObservableCollection<UnitEntry>(unitGroup.Units.Values);
 		Initialize();
 	}
 
@@ -38,8 +39,27 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		
 	#region Properties
 
-	public UnitConverter UnitsConverter { get; set; }
-	public UnitGroup UnitGroup { get; set; }
+	public UnitConverter? UnitConverter
+	{
+		get => _unitConverter;
+		set
+		{
+			System.Diagnostics.Debug.Assert(value != null);
+			_unitConverter	= value;
+			_existingNames	= _unitConverter.GroupTable.GetSortedListOfGroupNames();
+		}
+	}
+
+	public UnitGroup? UnitGroup
+	{
+		get => _unitGroup;
+		set
+		{
+			System.Diagnostics.Debug.Assert(value != null);
+			_unitGroup	= value;
+			Items		= new ObservableCollection<UnitEntry>(_unitGroup.Units.Values);
+		}
+	}
 	
 	#endregion
 

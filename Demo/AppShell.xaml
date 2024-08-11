@@ -5,11 +5,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UnitsConversionDemo"
     Shell.FlyoutBehavior="Disabled"
-    Title="UnitsConversionDemo">
+	FlyoutWidth="100"
+	FlyoutBackgroundColor="{StaticResource Primary}"
+	FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:ParseView}"
-        Route="ParseView" />
+        Route="ParseView" />-->
+
+	<Shell.ItemTemplate>
+		<DataTemplate>
+			<Grid ColumnDefinitions="70" RowDefinitions="40,40" Style="{StaticResource FloutItemStyle}">
+				<Image
+					Grid.Row="0"
+					Source="{Binding FlyoutIcon}"
+					VerticalOptions="End"
+					HorizontalOptions="Center"                               
+					HeightRequest="25"
+					WidthRequest="25"/>
+				<Label
+					Grid.Row="1"
+					x:Name="_flyoutLabel"
+					Text="{Binding Title}"
+					FontAttributes="Bold"
+					FontSize="Small"
+					HorizontalOptions="FillAndExpand"
+					VerticalTextAlignment="Start"
+					HorizontalTextAlignment="Center"/>
+			</Grid>
+		</DataTemplate>
+	</Shell.ItemTemplate>
+
+	<FlyoutItem Title="Parsing" Style="{StaticResource ParseFlyout}">
+		<ShellContent ContentTemplate="{DataTemplate local:ParseView}"/>
+	</FlyoutItem>
+	<FlyoutItem Title="Edit" Style="{StaticResource UnitsGroupsFlyout}">
+		<ShellContent ContentTemplate="{DataTemplate local:UnitsGroupsView}"/>
+	</FlyoutItem>
 
 </Shell>
