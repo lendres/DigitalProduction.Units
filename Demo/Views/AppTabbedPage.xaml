@@ -11,9 +11,9 @@
 			<local:ParseView Title="Convert by Parsing" />
         </x:Arguments>
     </NavigationPage>
-	<NavigationPage Title="Two" IconImageSource="{StaticResource TabTwo}">
+	<NavigationPage Title="Edit Units" IconImageSource="{StaticResource TabTwo}">
 		<x:Arguments>
-			<local:ParseView Title="Two" />
+			<local:UnitsView Title="Edit Units" />
 		</x:Arguments>
 	</NavigationPage>
 

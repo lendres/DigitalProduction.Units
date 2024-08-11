@@ -3,6 +3,7 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
 	xmlns:local="clr-namespace:UnitsConversionDemo">
 
     <Style TargetType="ActivityIndicator">
@@ -460,4 +461,78 @@
                Color="{StaticResource Primary}"
                Glyph="{x:Static local:IconFont.DiceFour}"/>
 
+	<!-- Control Styles -->
+	<Style TargetType="Label" x:Key="LargeErrorMessageStyle">
+		<Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontAttributes" Value="Bold"/>
+		<Setter Property="LineBreakMode" Value="WordWrap"/>
+		<Setter Property="WidthRequest" Value="750"/>
+		<Setter Property="HorizontalOptions" Value="Center"/>
+	</Style>
+
+	<!-- DataGrid -->
+	<Style TargetType="ContentView" Class="DataGridContentViewStyle" >
+		<Setter Property="HorizontalOptions" Value="Start"/>
+		<Setter Property="VerticalOptions" Value="Fill"/>
+		<Setter Property="Padding" Value="6,0"/>
+	</Style>
+	<Style TargetType="Label" Class="DataGridLabelStyle">
+		<Setter Property="HorizontalOptions" Value="Start"/>
+		<Setter Property="VerticalOptions" Value="Center"/>
+	</Style>
+
+	<Style TargetType="Label" x:Key="DataGridTitle">
+		<Setter Property="FontAttributes" Value="Bold" />
+		<Setter Property="TextColor" Value="Black" />
+		<Setter Property="FontSize" Value="18" />
+		<Setter Property="HorizontalOptions" Value="Center" />
+		<Setter Property="VerticalOptions" Value="Center" />
+		<Setter Property="LineBreakMode" Value="TailTruncation" />
+	</Style>
+
+	<DataTemplate x:Key="DataGridDefaultCellTempate" x:DataType="x:String">
+		<ContentView StyleClass="DataGridContentViewStyle">
+			<Label Text="{Binding}" StyleClass="DataGridLabelStyle"/>
+		</ContentView>
+	</DataTemplate>
+
+	<dg:PaletteCollection x:Key="DataGridColorPalette">
+		<Color>#F2F2F2</Color>
+		<Color>White</Color>
+	</dg:PaletteCollection>
+
+	<Style TargetType="Label" Class="Title">
+		<Setter Property="FontSize" Value="22"/>
+		<Setter Property="FontFamily" Value="OpenSans-Semibold"/>
+		<Setter Property="FontAttributes" Value="Bold" />
+		<Setter Property="HorizontalOptions" Value="Center" />
+	</Style>
+
+	<Style TargetType="Grid" Class="PageGridStyle">
+		<Setter Property="RowSpacing" Value="10"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="RowDefinitions" Value="Auto,*"/>
+	</Style>
+
+	<Style TargetType="HorizontalStackLayout" x:Key="ButtonRowStyleBase">
+		<Setter Property="Spacing" Value="20"/>
+		<Setter Property="Padding" Value="0"/>
+	</Style>
+
+	<Style TargetType="HorizontalStackLayout" BasedOn="{StaticResource ButtonRowStyleBase}" Class="TopButtonRowStyle">
+	</Style>
+
+	<Style TargetType="Button" Class="StandardSizeButtonStyle">
+		<Setter Property="HeightRequest" Value="38"/>
+		<Setter Property="WidthRequest" Value="100"/>
+		<Setter Property="VerticalOptions" Value="Center"/>
+	</Style>
+
+	<Style TargetType="Button" Class="WideButtonStyle">
+		<Setter Property="HeightRequest" Value="38"/>
+		<Setter Property="WidthRequest" Value="140"/>
+		<Setter Property="VerticalOptions" Value="Center"/>
+	</Style>
+	
 </ResourceDictionary>

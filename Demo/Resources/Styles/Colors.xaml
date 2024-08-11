@@ -48,4 +48,12 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+	<Color x:Key="ErrorColor">DarkRed</Color>
+	<Color x:Key="DataGridActiveRowColor">#8899AA</Color>
+	<Color x:Key="DataGridHeaderBackgroundColor">#E0E6F8</Color>
+	<Color x:Key="DataGridFooterBackgroundColor">#E0E6F8</Color>
+	<Color x:Key="DataGridBorderColor">#CCCCCC</Color>
+	<Color x:Key="DataGridBackgroundColor">#CCCCCC</Color>
+
 </ResourceDictionary>

@@ -6,9 +6,9 @@
 	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
 	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
-	xmlns:viewmodel="clr-namespace:Data.Translation.ViewModels"
+	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
 	x:DataType="viewmodel:UnitsViewModel"
-	x:Class="Data.Translation.Pages.UnitsView">
+	x:Class="UnitsConversionDemo.UnitsView">
 
 	<ContentPage.BindingContext>
 		<viewmodel:UnitsViewModel/>
@@ -73,7 +73,6 @@
 
 			<dg:DataGrid
 				Grid.Row="1"
-				x:Name="_dataGrid"
 				IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
 				ItemsSource="{Binding Items}" SelectionMode="{Binding SelectionMode}"
 				SelectedItem="{Binding SelectedItem}" RowToEdit="{Binding ItemToEdit}"

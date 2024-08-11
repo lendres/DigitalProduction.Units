@@ -1,7 +1,7 @@
-﻿using Data.Translation.ViewModels;
+﻿using UnitsConversionDemo.ViewModels;
 using DigitalProduction.UI;
 
-namespace Data.Translation.Pages;
+namespace UnitsConversionDemo;
 
 public partial class UnitsView : DigitalProductionMainPage
 {
