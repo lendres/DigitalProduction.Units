@@ -16,15 +16,19 @@ public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGro
 
 	#endregion
 
+	#region Construction
+
 	public UnitsViewModelBase()
     {
 	}
+
+	#endregion
 
 	partial void OnUnitsConverterChanged(UnitConverter? value)
 	{
 		try
 		{
-			UnitGroup[]? unitGroups = UnitsConverter?.Groups.GetAllGroups();
+			UnitGroup[]? unitGroups = UnitsConverter?.GroupTable.GetAllGroups();
 			Items = unitGroups != null ? new ObservableCollection<UnitGroup>(unitGroups) : null;
 		}
 		catch

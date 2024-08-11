@@ -10,9 +10,12 @@
 	x:DataType="viewmodel:UnitsViewModel"
 	x:Class="UnitsConversionDemo.UnitsGroupView">
 
-	<ContentPage.BindingContext>
+	<!--<ContentPage.BindingContext>
 		<viewmodel:UnitsViewModel/>
-	</ContentPage.BindingContext>
+	</ContentPage.BindingContext>-->
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Back" Clicked="OnNavigateBack"></ToolbarItem>
+	</ContentPage.ToolbarItems>
 
 	<ContentPage.Resources>
 		<toolkit:IsNullConverter x:Key="IsNullConverter"/>
@@ -91,12 +94,14 @@
 				<dg:DataGrid.Columns>
 
 					<!-- Name column. -->
-					<dg:DataGridColumn Title="Category" PropertyName="Name" Width="0.5*" SortingEnabled="true"
+					<dg:DataGridColumn Title="Name" PropertyName="Name" Width="0.5*" SortingEnabled="true"
 						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
-					<!-- Description column. -->
-					<!--<dg:DataGridColumn Title="Description" PropertyName="Description" Width="1.0*" SortingEnabled="false"
-						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>-->
+					<dg:DataGridColumn Title="Default Symbol" PropertyName="DefaultSymbol" Width="0.5*" SortingEnabled="true"
+						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
+
+					<dg:DataGridColumn Title="Alternate Symbol" PropertyName="DefaultSymbol" Width="0.5*" SortingEnabled="true"
+						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
 				</dg:DataGrid.Columns>
 			</dg:DataGrid>

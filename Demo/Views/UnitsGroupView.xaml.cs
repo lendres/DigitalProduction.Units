@@ -1,5 +1,6 @@
 ﻿using UnitsConversionDemo.ViewModels;
 using DigitalProduction.UI;
+using Data.Translation.ViewModels;
 
 namespace UnitsConversionDemo;
 
@@ -7,9 +8,10 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 {
 	#region Construction
 
-	public UnitsGroupView()
+	public UnitsGroupView(UnitsGroupViewModel	viewModel)
 	{
 		InitializeComponent();
+		BindingContext = viewModel;
 	}
 
 	#endregion
@@ -57,6 +59,12 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 			viewModel?.Delete();
 		}
 	}
+
+	void OnNavigateBack(object sender, EventArgs eventArgs)
+	{
+		Shell.Current.GoToAsync("../");
+	}
+
 
 	#endregion
 
