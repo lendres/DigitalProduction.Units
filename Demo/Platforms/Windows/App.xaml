@@ -5,4 +5,9 @@
     xmlns:maui="using:Microsoft.Maui"
     xmlns:local="using:UnitsConversionDemo.WinUI">
 
+	<maui:MauiWinUIApplication.Resources>
+		<SolidColorBrush x:Key="SystemControlForegroundAccentBrush"  Color="transparent"/>
+		<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="SystemControlForegroundAccentBrush"/>
+	</maui:MauiWinUIApplication.Resources>
+
 </maui:MauiWinUIApplication>

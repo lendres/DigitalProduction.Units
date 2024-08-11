@@ -9,11 +9,10 @@
 		<viewmodel:ParsingViewModel/>
 	</ContentPage.BindingContext>
 
-	<ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25"
-			WidthRequest="500">
+	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
+		<Label Grid.Row="0" Text="Convert by Parsing Text" StyleClass="Title"/>
+		
+		<VerticalStackLayout Grid.Row="1" Padding="30,0" Spacing="25">
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
 				<Label Text="Input" StyleClass="TitleLabel"/>
@@ -48,6 +47,6 @@
 			</VerticalStackLayout>
 
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

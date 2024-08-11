@@ -1,10 +1,10 @@
-﻿namespace UnitsConversionDemo
+﻿namespace UnitsConversionDemo;
+
+public partial class AppShell : Shell
 {
-	public partial class AppShell : Shell
+	public AppShell()
 	{
-		public AppShell()
-		{
-			InitializeComponent();
-		}
+		InitializeComponent();
+		Routing.RegisterRoute(nameof(UnitsGroupView), typeof(UnitsGroupView));
 	}
 }
