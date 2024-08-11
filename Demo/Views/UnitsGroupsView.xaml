@@ -8,7 +8,7 @@
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
 	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
 	x:DataType="viewmodel:UnitsViewModel"
-	x:Class="UnitsConversionDemo.UnitsView">
+	x:Class="UnitsConversionDemo.UnitsGroups">
 
 	<ContentPage.BindingContext>
 		<viewmodel:UnitsViewModel/>

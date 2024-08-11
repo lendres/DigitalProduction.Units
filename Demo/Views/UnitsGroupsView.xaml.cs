@@ -3,11 +3,11 @@ using DigitalProduction.UI;
 
 namespace UnitsConversionDemo;
 
-public partial class UnitsView : DigitalProductionMainPage
+public partial class UnitsGroups : DigitalProductionMainPage
 {
 	#region Construction
 
-	public UnitsView()
+	public UnitsGroups()
 	{
 		InitializeComponent();
 	}

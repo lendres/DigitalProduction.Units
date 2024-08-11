@@ -13,7 +13,7 @@
     </NavigationPage>
 	<NavigationPage Title="Edit Units" IconImageSource="{StaticResource TabTwo}">
 		<x:Arguments>
-			<local:UnitsView Title="Edit Units" />
+			<local:UnitsGroups Title="Edit Units" />
 		</x:Arguments>
 	</NavigationPage>
 
