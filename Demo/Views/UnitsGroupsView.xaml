@@ -8,7 +8,7 @@
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
 	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
 	x:DataType="viewmodel:UnitsViewModel"
-	x:Class="UnitsConversionDemo.UnitsGroups">
+	x:Class="UnitsConversionDemo.UnitsGroupsView">
 
 	<ContentPage.BindingContext>
 		<viewmodel:UnitsViewModel/>
@@ -20,7 +20,7 @@
 	</ContentPage.Resources>
 
 	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
-		<Label Grid.Row="0" Text="Units Management" StyleClass="Title"/>
+		<Label Grid.Row="0" Text="Unit Groups" StyleClass="Title"/>
 
 		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
 

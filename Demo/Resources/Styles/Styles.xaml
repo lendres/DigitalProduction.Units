@@ -444,12 +444,12 @@
                FontFamily="FontAwesome"
                Size="22"
                Color="{StaticResource Primary}"
-               Glyph="{x:Static local:IconFont.DiceOne}"/>
+               Glyph="{x:Static local:IconFont.Vial}"/>
 	<FontImage x:Key="TabTwo"
                FontFamily="FontAwesome"
                Size="22"
                Color="{StaticResource Primary}"
-               Glyph="{x:Static local:IconFont.DiceTwo}"/>
+               Glyph="{x:Static local:IconFont.Pen}"/>
 	<FontImage x:Key="TabThree"
                FontFamily="FontAwesome"
                Size="22"

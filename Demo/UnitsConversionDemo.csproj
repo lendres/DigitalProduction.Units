@@ -73,9 +73,18 @@
 	  <Compile Update="Views\ParseView.xaml.cs">
 	    <DependentUpon>ParseView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\UnitsGroupView.xaml.cs">
+	    <DependentUpon>UnitsGroupView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\UnitsGroupsView.xaml.cs">
 	    <DependentUpon>UnitsGroupsView.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\UnitsGroupView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
