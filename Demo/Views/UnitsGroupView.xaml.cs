@@ -1,5 +1,6 @@
 ﻿using DigitalProduction.UI;
 using UnitsConversionDemo.ViewModels;
+using Thor.Units;
 
 namespace UnitsConversionDemo;
 
@@ -18,7 +19,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 	
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
-		UnitsViewModel? unitsViewModel = BindingContext as UnitsViewModel;
+		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
 		//ConfigurationViewModel	viewModel	= new(Interface.ConfigurationList?.ConfigurationNames ?? []);
@@ -33,10 +34,10 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 
 	async void OnEdit(object sender, EventArgs eventArgs)
 	{
-		UnitsViewModel? unitsViewModel = BindingContext as UnitsViewModel;
+		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
-		//UnitGroup unitGroup			= new(unitsViewModel.SelectedItem!);
+		UnitEntry unitEntry			= unitsViewModel.SelectedItem!;
 		//ConfigurationViewModel  viewModel   = new(unitGroup, Interface.ConfigurationList?.ConfigurationNames ?? []);
 		//ConfigurationView       view        = new(viewModel);
 		//object?                 result      = await Shell.Current.ShowPopupAsync(view);

@@ -98,10 +98,10 @@
 					<dg:DataGridColumn Title="Name" PropertyName="Name" Width="0.5*" SortingEnabled="true"
 						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
-					<dg:DataGridColumn Title="Default Symbol" PropertyName="DefaultSymbol" Width="0.5*" SortingEnabled="true"
+					<dg:DataGridColumn Title="Default Symbol" PropertyName="DefaultSymbol" Width="0.25*" SortingEnabled="true"
 						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
-					<dg:DataGridColumn Title="Alternate Symbol" PropertyName="AlternateSymbol" Width="0.5*" SortingEnabled="true"
+					<dg:DataGridColumn Title="Alt Symbol" PropertyName="AlternateSymbol" Width="0.25*" SortingEnabled="true"
 						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
 				</dg:DataGrid.Columns>

@@ -94,7 +94,7 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 	{
 		if (Name.Validate())
 		{
-			UnitGroup.Name = Name.Value ?? "";
+			UnitGroup!.Name = Name.Value ?? "";
 		}
 		ValidateSubmittable();
 	}

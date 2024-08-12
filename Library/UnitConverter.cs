@@ -31,9 +31,9 @@ public class UnitConverter
 
 	public const double				UNITFILE_VERSION            =   2.0;
 	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
-	private readonly SymbolTable	_symbolTable;
-	private UnitTable				_units;
-	private GroupTable				_unitGroups;
+	private SymbolTable				_symbolTable;
+	private UnitTable				_unitTable;
+	private GroupTable				_groupTable;
 
 	#endregion
 
@@ -46,8 +46,8 @@ public class UnitConverter
 	{
 		// Set up the tables we need
 		_symbolTable = new SymbolTable();
-		_units       = new UnitTable();
-		_unitGroups  = new GroupTable();
+		_unitTable       = new UnitTable();
+		_groupTable  = new GroupTable();
 	}
 
 	/// <summary>
@@ -57,8 +57,8 @@ public class UnitConverter
 	{
 		// Clear everything out.
 		_symbolTable.Clear();
-		_unitGroups.Clear();
-		_units.Clear();
+		_groupTable.Clear();
+		_unitTable.Clear();
 	}
 
 	#endregion
@@ -75,13 +75,13 @@ public class UnitConverter
 	/// Units.
 	/// </summary>
 	[XmlIgnore()]
-	public UnitTable UnitTable { get => _units; set => _units = value; }
+	public UnitTable UnitTable { get => _unitTable; set => _unitTable = value; }
 
 	/// <summary>
 	/// Groups.
 	/// </summary>
 	[XmlElement("groups")]
-	public GroupTable GroupTable { get => _unitGroups; set => 	_unitGroups = value; }
+	public GroupTable GroupTable { get => _groupTable; set => 	_groupTable = value; }
 
 	#endregion
 
@@ -176,7 +176,7 @@ public class UnitConverter
 	{
 		UnitResult result = UnitResult.NoError;
 
-		foreach (UnitGroup unitGroup in _unitGroups.Values)
+		foreach (UnitGroup unitGroup in _groupTable.Values)
 		{
 			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
 			{
@@ -189,15 +189,15 @@ public class UnitConverter
 				}
 				else
 				{
-					if (_units[unitEntry.Name] != null)
+					if (_unitTable[unitEntry.Name] != null)
 					{
 						SendUnitFileWarning("Duplicate unit with name '{0}' was found and ignored.", filePath, [unitEntry.Name]);
 						result = UnitResult.UnitExists;
 					}
 					else
 					{
-						_symbolTable[unitEntry.DefaultSymbol]  = unitEntry;
-						_units[unitEntry.Name]                 = unitEntry;
+						_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+						_unitTable[unitEntry.Name]				= unitEntry;
 					}
 				}
 			}
@@ -218,7 +218,7 @@ public class UnitConverter
 	/// <returns>Reference to the unit entry, or null if not found.</returns>
 	public UnitEntry? GetUnitByName(string unitName)
 	{
-		return _units[unitName];
+		return _unitTable[unitName];
 	}
 
 	/// <summary>
@@ -234,14 +234,24 @@ public class UnitConverter
 		}
 
 		// First check to see if they used the actual name of a unit then look at the symbol table.
-		if (_units[unitSymbol] != null)
+		if (_unitTable[unitSymbol] != null)
 		{
-			return _units[unitSymbol];
+			return _unitTable[unitSymbol];
 		}
 		else
 		{
 			return _symbolTable[unitSymbol];
 		}
+	}
+
+	public void RemoveUnit(string name)
+	{
+		UnitEntry unitEntry = _unitTable[name];
+		System.Diagnostics.Debug.Assert(unitEntry != null);
+
+		_symbolTable.Remove(unitEntry.DefaultSymbol);
+		_unitTable.Remove(name);
+		_groupTable.Remove(name);
 	}
 
 	#endregion
@@ -275,13 +285,13 @@ public class UnitConverter
 	private UnitGroup? GetUnitGroup(string unitName)
 	{
 		// Does the unit even exist?
-		if (_units[unitName] == null)
+		if (_unitTable[unitName] == null)
 		{
 			return null;
 		}
 
 		// Iterate through every group.
-		UnitGroup[] groups = _unitGroups.GetAllGroups();
+		UnitGroup[] groups = _groupTable.GetAllGroups();
 		foreach (UnitGroup group in groups)
 		{
 			if (group.IsInGroup(unitName))
