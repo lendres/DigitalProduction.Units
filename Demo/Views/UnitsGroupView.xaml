@@ -7,11 +7,11 @@
 	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
 	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
-	x:DataType="viewmodel:UnitsViewModel"
+	x:DataType="viewmodel:UnitGroupViewModel"
 	x:Class="UnitsConversionDemo.UnitsGroupView">
 
 	<ContentPage.BindingContext>
-		<viewmodel:UnitsViewModel/>
+		<viewmodel:UnitGroupViewModel/>
 	</ContentPage.BindingContext>
 	
 	<ContentPage.ToolbarItems>
@@ -65,14 +65,14 @@
 						Clicked="OnDelete"/>
 				</HorizontalStackLayout>
 
-				<Button 
+				<!--<Button 
 					Grid.Column="1"
 					Text="Save Units"
 					IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
 					IsEnabled="{Binding Modified}"
 					StyleClass="WideButtonStyle"
 					HorizontalOptions="End"
-					Command="{Binding SaveUnitsCommand}" />
+					Command="{Binding SaveUnitsCommand}" />-->
 			</Grid>
 
 			<dg:DataGrid
@@ -101,7 +101,7 @@
 					<dg:DataGridColumn Title="Default Symbol" PropertyName="DefaultSymbol" Width="0.5*" SortingEnabled="true"
 						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
-					<dg:DataGridColumn Title="Alternate Symbol" PropertyName="DefaultSymbol" Width="0.5*" SortingEnabled="true"
+					<dg:DataGridColumn Title="Alternate Symbol" PropertyName="AlternateSymbol" Width="0.5*" SortingEnabled="true"
 						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
 
 				</dg:DataGrid.Columns>

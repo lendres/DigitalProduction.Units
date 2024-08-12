@@ -3,15 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
 using DigitalProduction.Validation;
 using DigitalProduction.ViewModels;
-using Microsoft.Maui.Media;
 using System.Collections.ObjectModel;
 using Thor.Units;
 
-namespace Data.Translation.ViewModels;
+namespace UnitsConversionDemo.ViewModels;
 
 [QueryProperty(nameof(UnitConverter), "UnitsConverter")]
 [QueryProperty(nameof(UnitGroup), "UnitGroup")]
-public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
+public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 {
 	#region Fields
 
@@ -30,7 +29,7 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	#region Construction
 
-	public UnitsGroupViewModel()
+	public UnitGroupViewModel()
 	{
 		Initialize();
 	}
@@ -58,6 +57,7 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 			System.Diagnostics.Debug.Assert(value != null);
 			_unitGroup	= value;
 			Items		= new ObservableCollection<UnitEntry>(_unitGroup.Units.Values);
+			InitializeValues();
 		}
 	}
 	
@@ -74,7 +74,7 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	private void InitializeValues()
 	{
-		Name.Value = UnitGroup.Name;
+		Name.Value = UnitGroup?.Name ?? "";
 	}
 
 	private void AddValidations()

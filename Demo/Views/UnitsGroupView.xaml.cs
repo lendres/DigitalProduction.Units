@@ -1,6 +1,5 @@
-﻿using UnitsConversionDemo.ViewModels;
-using DigitalProduction.UI;
-using Data.Translation.ViewModels;
+﻿using DigitalProduction.UI;
+using UnitsConversionDemo.ViewModels;
 
 namespace UnitsConversionDemo;
 
