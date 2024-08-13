@@ -244,14 +244,17 @@ public class UnitConverter
 		}
 	}
 
-	public void RemoveUnit(string name)
+	public void RemoveUnit(string unitName, string groupName)
 	{
-		UnitEntry unitEntry = _unitTable[name];
+		UnitEntry? unitEntry = _unitTable[unitName];
 		System.Diagnostics.Debug.Assert(unitEntry != null);
 
 		_symbolTable.Remove(unitEntry.DefaultSymbol);
-		_unitTable.Remove(name);
-		_groupTable.Remove(name);
+		_unitTable.Remove(unitName);
+
+		UnitGroup? unitGroup = _groupTable[groupName];
+		System.Diagnostics.Debug.Assert(unitGroup != null);
+		unitGroup.Units.Remove(unitName);
 	}
 
 	#endregion

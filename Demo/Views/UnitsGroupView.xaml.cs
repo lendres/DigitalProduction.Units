@@ -54,7 +54,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 
 		if (result)
 		{
-			UnitsViewModel? viewModel = BindingContext as UnitsViewModel;
+			UnitGroupViewModel? viewModel = BindingContext as UnitGroupViewModel;
 			viewModel?.Delete();
 		}
 	}

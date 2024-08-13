@@ -47,13 +47,6 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 			{"UnitsConverter",  unitsViewModel.UnitsConverter},
 			{"UnitGroup",  unitsViewModel.SelectedItem!}
 		});
-
-		//object?                 result      = await Shell.Current.ShowPopupAsync(view);
-
-		//if (result is bool boolResult && boolResult)
-		//{
-		//	unitsViewModel.ReplaceSelected(viewModel.UnitGroup);
-		//}
 	}
 
 	async void OnDelete(object sender, EventArgs eventArgs)
