@@ -6,7 +6,7 @@ using DigitalProduction.ViewModels;
 using System.Collections.ObjectModel;
 using Thor.Units;
 
-namespace UnitsConversionDemo.ViewModels;
+namespace Thor.Maui.ViewModels;
 
 [QueryProperty(nameof(UnitConverter), "UnitsConverter")]
 [QueryProperty(nameof(UnitGroup), "UnitGroup")]

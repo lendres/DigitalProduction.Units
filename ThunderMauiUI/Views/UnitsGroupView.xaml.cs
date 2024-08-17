@@ -1,8 +1,8 @@
 ﻿using DigitalProduction.UI;
-using UnitsConversionDemo.ViewModels;
+using Thor.Maui.ViewModels;
 using Thor.Units;
 
-namespace UnitsConversionDemo;
+namespace Thor.Maui;
 
 public partial class UnitsGroupView : DigitalProductionMainPage
 {

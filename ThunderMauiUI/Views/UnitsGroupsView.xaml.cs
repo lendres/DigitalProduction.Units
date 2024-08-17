@@ -1,9 +1,9 @@
-﻿using UnitsConversionDemo.ViewModels;
+﻿using Thor.Maui.ViewModels;
 using DigitalProduction.UI;
 using Thor.Units;
 using CommunityToolkit.Mvvm.Input;
 
-namespace UnitsConversionDemo;
+namespace Thor.Maui;
 
 public partial class UnitsGroupsView : DigitalProductionMainPage
 {
