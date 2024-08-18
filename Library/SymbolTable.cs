@@ -32,7 +32,7 @@ internal class SymbolTable : Dictionary<string, UnitEntry>
 	/// <summary>
 	/// Given a symbol as the key, returns the associated unit entry.
 	/// </summary>
-	public UnitEntry? this[string symbolName]
+	public new UnitEntry? this[string symbolName]
 	{
 		get
 		{

@@ -3,10 +3,11 @@ using CommunityToolkit.Mvvm.Input;
 using DigitalProduction.ViewModels;
 using System.Collections.ObjectModel;
 using Thor.Units;
+using Thor.Maui;
 
 namespace UnitsConversionDemo.ViewModels;
 
-public partial class UnitsViewModel : UnitsViewModelBase
+public partial class UnitsViewModel : UnitsViewModelBase, IUnitsViewModel
 {
 
 	#region Fields

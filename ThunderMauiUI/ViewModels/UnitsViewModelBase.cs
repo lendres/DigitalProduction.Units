@@ -4,7 +4,7 @@ using DigitalProduction.ViewModels;
 using System.Collections.ObjectModel;
 using Thor.Units;
 
-namespace Thor.Maui.ViewModels;
+namespace Thor.Maui;
 
 public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGroup>
 {

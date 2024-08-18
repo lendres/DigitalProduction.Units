@@ -6,7 +6,7 @@ using DigitalProduction.ViewModels;
 using System.Collections.ObjectModel;
 using Thor.Units;
 
-namespace Thor.Maui.ViewModels;
+namespace Thor.Maui;
 
 [QueryProperty(nameof(UnitConverter), "UnitsConverter")]
 [QueryProperty(nameof(UnitGroup), "UnitGroup")]
@@ -101,6 +101,7 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	public override void Delete()
 	{	
+		System.Diagnostics.Debug.Assert(Name.Value != null);
 		UnitConverter!.RemoveUnit(SelectedItem!.Name, Name.Value);
 		base.Delete();
 	}

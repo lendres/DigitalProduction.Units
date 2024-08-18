@@ -6,7 +6,7 @@
 	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
 	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
-	xmlns:viewmodel="clr-namespace:Thor.Maui.ViewModels"
+	xmlns:viewmodel="clr-namespace:Thor.Maui"
 	x:DataType="viewmodel:UnitGroupViewModel"
 	x:Class="Thor.Maui.UnitsGroupView">
 

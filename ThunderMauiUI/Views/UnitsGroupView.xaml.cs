@@ -1,5 +1,5 @@
 ﻿using DigitalProduction.UI;
-using Thor.Maui.ViewModels;
+using Thor.Maui;
 using Thor.Units;
 
 namespace Thor.Maui;

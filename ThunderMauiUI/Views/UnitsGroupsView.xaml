@@ -6,16 +6,12 @@
 	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
 	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
-	xmlns:viewmodel="clr-namespace:Thor.Maui.ViewModels"
-	x:DataType="viewmodel:UnitsViewModel"
+	xmlns:viewmodel="clr-namespace:Thor.Maui"
+	x:DataType="viewmodel:IUnitsViewModel"
 	x:Class="Thor.Maui.UnitsGroupsView">
 
-	<ContentPage.BindingContext>
-		<viewmodel:UnitsViewModel/>
-	</ContentPage.BindingContext>
-
 	<ContentPage.Resources>
-		<toolkit:IsNullConverter x:Key="IsNullConverter"/>
+		<toolkit:IsNullConverter x:Key="IsNullConverter" x:Name="_IsNullConverter"/>
 		<toolkit:IsNotNullConverter x:Key="IsNotNullConverter"/>
 	</ContentPage.Resources>
 

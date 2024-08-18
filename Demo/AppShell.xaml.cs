@@ -5,6 +5,6 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
-		Routing.RegisterRoute(nameof(UnitsGroupView), typeof(UnitsGroupView));
+		Routing.RegisterRoute(nameof(Thor.Maui.UnitsGroupView), typeof(Thor.Maui.UnitsGroupView));
 	}
 }

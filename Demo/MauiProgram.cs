@@ -35,8 +35,8 @@ public static class MauiProgram
 	{
 		services.AddSingleton<ParsingViewModel>();
 		services.AddSingleton<ParseView>();
-		services.AddTransient<UnitsGroupView>();
-		services.AddTransient<UnitGroupViewModel>();
+		services.AddTransient<Thor.Maui.UnitsGroupView>();
+		services.AddTransient<Thor.Maui.UnitGroupViewModel>();
 	}
 
 
