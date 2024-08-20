@@ -6,7 +6,7 @@ using Thor.Units;
 
 namespace Thor.Maui;
 
-public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGroup>
+public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<UnitGroup>
 {
 	#region Fields
 
@@ -17,7 +17,7 @@ public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGro
 
 	#region Construction
 
-	public UnitsViewModelBase()
+	public UnitsGroupsViewModelBase()
     {
 	}
 
@@ -35,8 +35,7 @@ public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGro
 			Items = null;
 		}
 	}
-
-	
+		
 	[RelayCommand]
 	public async Task<bool> SaveUnits()
 	{
