@@ -1,5 +1,4 @@
 ﻿using DigitalProduction.UI;
-using Thor.Maui;
 using Thor.Units;
 
 namespace Thor.Maui;
@@ -64,7 +63,5 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		Shell.Current.GoToAsync("../");
 	}
 
-
 	#endregion
-
 }

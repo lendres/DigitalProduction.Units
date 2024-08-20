@@ -7,7 +7,7 @@
 	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
 	xmlns:viewmodel="clr-namespace:Thor.Maui"
-	x:DataType="viewmodel:IUnitsViewModel"
+	x:DataType="viewmodel:IUnitsGroupsViewModel"
 	x:Class="Thor.Maui.UnitsGroupsView">
 
 	<ContentPage.Resources>

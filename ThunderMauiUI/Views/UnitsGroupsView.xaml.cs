@@ -9,7 +9,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 {
 	#region Construction
 
-	public UnitsGroupsView(IUnitsViewModel viewModel)
+	public UnitsGroupsView(IUnitsGroupsViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
@@ -21,7 +21,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
-		IUnitsViewModel? unitsViewModel = BindingContext as IUnitsViewModel;
+		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
 		//ConfigurationViewModel	viewModel	= new(Interface.ConfigurationList?.ConfigurationNames ?? []);
@@ -36,7 +36,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 
 	async void OnEdit(object sender, EventArgs eventArgs)
 	{
-		IUnitsViewModel? unitsViewModel = BindingContext as IUnitsViewModel;
+		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 		System.Diagnostics.Debug.Assert(unitsViewModel.UnitsConverter != null);
 
@@ -56,7 +56,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 
 		if (result)
 		{
-			IUnitsViewModel? viewModel = BindingContext as IUnitsViewModel;
+			IUnitsGroupsViewModel? viewModel = BindingContext as IUnitsGroupsViewModel;
 			viewModel?.Delete();
 		}
 	}

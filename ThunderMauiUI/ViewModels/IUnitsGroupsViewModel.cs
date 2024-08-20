@@ -8,9 +8,9 @@ using Thor.Units;
 
 namespace Thor.Maui;
 
-public interface IUnitsViewModel
+public interface IUnitsGroupsViewModel
 {
-	#region Fields
+	#region Properties
 
 	bool									Modified { get; set; }
 
@@ -40,6 +40,9 @@ public interface IUnitsViewModel
 
 	#endregion
 
+	#region Methods
+
 	void Delete();
 
+	#endregion
 }

@@ -10,11 +10,6 @@
 	FlyoutBackgroundColor="{StaticResource Primary}"
 	FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}">
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:ParseView}"
-        Route="ParseView" />-->
-
 	<Shell.ItemTemplate>
 		<DataTemplate>
 			<Grid ColumnDefinitions="70" RowDefinitions="40,40" Style="{StaticResource FloutItemStyle}">
@@ -38,11 +33,11 @@
 		</DataTemplate>
 	</Shell.ItemTemplate>
 
-	<FlyoutItem Title="Parsing" Style="{StaticResource ParseFlyout}">
-		<ShellContent ContentTemplate="{DataTemplate local:ParseView}"/>
-	</FlyoutItem>
 	<FlyoutItem Title="Edit" Style="{StaticResource UnitsGroupsFlyout}">
 		<ShellContent ContentTemplate="{DataTemplate thormaui:UnitsGroupsView}"/>
+	</FlyoutItem>
+	<FlyoutItem Title="Parsing" Style="{StaticResource ParseFlyout}">
+		<ShellContent ContentTemplate="{DataTemplate local:ParseView}"/>
 	</FlyoutItem>
 
 </Shell>

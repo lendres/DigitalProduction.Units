@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace UnitsConversionDemo.ViewModels;
 
-public partial class UnitsViewModel : UnitsViewModelBase, IUnitsViewModel
+public partial class UnitsViewModel : UnitsViewModelBase, IUnitsGroupsViewModel
 {
 
 	#region Fields
