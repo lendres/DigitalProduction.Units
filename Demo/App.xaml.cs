@@ -1,12 +1,11 @@
-﻿namespace UnitsConversionDemo
-{
-	public partial class App : Application
-	{
-		public App()
-		{
-			InitializeComponent();
+﻿namespace UnitsConversionDemo;
 
-			MainPage = new AppShell();
-		}
+public partial class App : Application
+{
+	public App()
+	{
+		InitializeComponent();
+
+		MainPage = new AppShell();
 	}
 }

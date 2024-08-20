@@ -8,7 +8,6 @@ namespace Thor.Maui;
 
 public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGroup>
 {
-
 	#region Fields
 
 	[ObservableProperty]
@@ -37,8 +36,9 @@ public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGro
 		}
 	}
 
+	
 	[RelayCommand]
-	private async Task<bool> SaveUnits()
+	public async Task<bool> SaveUnits()
 	{
 		if (UnitsConverter != null)
 		{
@@ -53,8 +53,5 @@ public abstract partial class UnitsViewModelBase : DataGridBaseViewModel<UnitGro
 		return false;
 	}
 
-	/// <summary>
-	/// Write this object to a file.  The Path must be set and represent a valid path or this method will throw an exception.
-	/// </summary>
-	public abstract Task<bool> SerializeAsync();
+	protected abstract Task<bool> SerializeAsync();
 }

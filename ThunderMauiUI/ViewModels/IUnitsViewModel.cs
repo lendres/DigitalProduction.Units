@@ -14,9 +14,9 @@ public interface IUnitsViewModel
 
 	bool									Modified { get; set; }
 
-	ObservableCollection<UnitGroup>			Items { get; set; }
+	ObservableCollection<UnitGroup>?		Items { get; set; }
 
-	UnitGroup								SelectedItem { get; set; }
+	UnitGroup?								SelectedItem { get; set; }
 
 	UnitGroup?								ItemToEdit { get; set; }
 
@@ -32,18 +32,14 @@ public interface IUnitsViewModel
 
 	UnitConverter?							UnitsConverter { get; set; }
 
-	ICommand								SaveUnitsCommand { get; set; }
+	IAsyncRelayCommand						SaveUnitsCommand { get; }
 
-	ICommand								RefreshCommand { get; set; }
+	IRelayCommand 							RefreshCommand { get; }
 
-	ICommand								TappedCommand { get; set; }
+	IRelayCommand<object>					TappedCommand { get; }
 
 	#endregion
 
 	void Delete();
 
-	/// <summary>
-	/// Write this object to a file.  The Path must be set and represent a valid path or this method will throw an exception.
-	/// </summary>
-	Task<bool> SerializeAsync();
 }
