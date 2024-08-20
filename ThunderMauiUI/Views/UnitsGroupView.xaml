@@ -24,7 +24,7 @@
 	</ContentPage.Resources>
 
 	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
-		<Label Grid.Row="0" Text="Unit Group" StyleClass="Title"/>
+		<Label Grid.Row="0" Text="{Binding Name.Value}" StyleClass="Title"/>
 
 		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
 

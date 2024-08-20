@@ -99,14 +99,18 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		ValidateSubmittable();
 	}
 
+	public bool ValidateSubmittable() => IsSubmittable = Name.IsValid;
+
+	#endregion
+
+	#region Methods
+
 	public override void Delete()
 	{	
 		System.Diagnostics.Debug.Assert(Name.Value != null);
 		UnitConverter!.RemoveUnit(SelectedItem!.Name, Name.Value);
 		base.Delete();
 	}
-
-	public bool ValidateSubmittable() => IsSubmittable = Name.IsValid;
 
 	#endregion
 }
