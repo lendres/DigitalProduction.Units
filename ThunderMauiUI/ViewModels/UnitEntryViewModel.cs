@@ -29,6 +29,12 @@ public partial class UnitEntryViewModel : ObservableObject
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_preadder							= new();
 
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	private ValidatableObject<string>		_multiplier							= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	private ValidatableObject<string>		_postadder							= new();
+
 	[ObservableProperty]
 	private bool							_isSubmittable						= false;
 
@@ -92,7 +98,7 @@ public partial class UnitEntryViewModel : ObservableObject
 	private void InitializeValues()
 	{
 		Name.Value		= UnitEntry?.Name ?? "";
-		Preadder.Value	= UnitEntry?.PreAdder.ToString() ?? "0";
+		Preadder.Value	= UnitEntry?.Preadder.ToString() ?? "0";
 	}
 
 	private void AddValidations()
@@ -127,7 +133,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		if (Preadder.Validate())
 		{
 			double.TryParse(Preadder.Value, out double numeric);
-			UnitEntry!.PreAdder = numeric;
+			UnitEntry!.Preadder = numeric;
 		}
 		ValidateSubmittable();
 	}

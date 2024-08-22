@@ -337,12 +337,12 @@ public class UnitConverter
 		try
 		{
 			// Convert the value back to the standard
-			x += unitEntryFrom.PreAdder;
+			x += unitEntryFrom.Preadder;
 			if (unitEntryFrom.Multiplier > 0.0)
 			{
 				x *= unitEntryFrom.Multiplier;
 			}
-			x += unitEntryFrom.Adder;
+			x += unitEntryFrom.Postadder;
 
 			output = x;
 		}
@@ -426,12 +426,12 @@ public class UnitConverter
 		try
 		{
 			// Convert to the new unit from the standard
-			x -= unitEntryTo.PreAdder;
+			x -= unitEntryTo.Preadder;
 			if (unitEntryTo.Multiplier > 0.0)
 			{
 				x *= Math.Pow(unitEntryTo.Multiplier, -1);
 			}
-			x -= unitEntryTo.Adder;
+			x -= unitEntryTo.Postadder;
 
 			output = x;
 		}

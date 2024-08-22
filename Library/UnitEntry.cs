@@ -24,9 +24,9 @@ public class UnitEntry
 		Name			= unitEntry.Name;
 		DefaultSymbol	= unitEntry.DefaultSymbol;
 		AlternateSymbol	= unitEntry.AlternateSymbol;
-		PreAdder		= unitEntry.PreAdder;
-		Adder			= unitEntry.Adder;
+		Preadder		= unitEntry.Preadder;
 		Multiplier		= unitEntry.Multiplier;
+		Postadder		= unitEntry.Postadder;
 	}
 
 	#endregion
@@ -43,14 +43,13 @@ public class UnitEntry
 	public string AlternateSymbol { get; set; } = "";
 
 	[XmlElement("preadder")]
-	public double PreAdder { get; set; } = 0;
-
-	[XmlElement("adder")]
-	public double Adder { get; set; } = 0;
+	public double Preadder { get; set; } = 0;
 
 	[XmlElement("multiplier")]
 	public double Multiplier { get; set; } = 0;
 
+	[XmlElement("adder")]
+	public double Postadder { get; set; } = 0;
 	#endregion
 
 } // End class.

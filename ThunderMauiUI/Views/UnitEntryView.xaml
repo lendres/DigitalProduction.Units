@@ -10,7 +10,7 @@
 	x:DataType="viewmodel:UnitEntryViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Frame StyleClass="PopupFrameStyle" MinimumWidthRequest="550" MaximumHeightRequest="742">
+	<Frame StyleClass="PopupFrameStyle" MinimumWidthRequest="300" >
 
 		<Frame.Resources>
 			<ResourceDictionary>
@@ -69,19 +69,19 @@
 			</VerticalStackLayout>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
-				<Label Text="Adder" StyleClass="TitleLabel"/>
+				<Label Text="Multiplier (zero means no multiplication is done)" StyleClass="TitleLabel"/>
 				<Entry
-					Placeholder="Adder"
-					Text="{Binding UnitEntry.Adder}"
+					Placeholder="Multiplier"
+					Text="{Binding UnitEntry.Multiplier}"
 					HorizontalOptions="FillAndExpand"
 					StyleClass="EntryStyle"/>
 			</VerticalStackLayout>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
-				<Label Text="Multiplier" StyleClass="TitleLabel"/>
+				<Label Text="Postadder" StyleClass="TitleLabel"/>
 				<Entry
-					Placeholder="Multiplier"
-					Text="{Binding UnitEntry.Multiplier}"
+					Placeholder="Postadder"
+					Text="{Binding UnitEntry.Postadder}"
 					HorizontalOptions="FillAndExpand"
 					StyleClass="EntryStyle"/>
 			</VerticalStackLayout>
