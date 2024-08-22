@@ -13,7 +13,7 @@ namespace Thor.Units;
 /// <summary>
 /// Contains a table, mapping unit symbols to the unit class.
 /// </summary>
-internal class SymbolTable : Dictionary<string, UnitEntry>
+public class SymbolTable : Dictionary<string, UnitEntry>
 {
 	#region Construction
 

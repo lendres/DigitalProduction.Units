@@ -6,8 +6,6 @@ using Thor.Units;
 
 namespace Thor.Maui;
 
-[QueryProperty(nameof(UnitConverter), "UnitsConverter")]
-[QueryProperty(nameof(UnitGroup), "UnitGroup")]
 public partial class UnitEntryViewModel : ObservableObject
 {
 	#region Fields
@@ -15,25 +13,20 @@ public partial class UnitEntryViewModel : ObservableObject
 	[ObservableProperty]
 	private string							_title;
 
-	private UnitConverter?					_unitConverter;
-	private UnitGroup?						_unitGroup;
+	private readonly UnitConverter			_unitConverter;
+	private readonly UnitGroup				_unitGroup;
 
 	[ObservableProperty]
 	private UnitEntry						_unitEntry;
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_name								= new();
-	private string							_previousName						= "";
-	private List<string>					_existingNames						= new();
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_defaultSymbol						= new();
-	private string							_previousDefaultSymbol				= "";
-	private List<string>					_existingSymbols					= new();
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_alternateSymbol					= new();
-	private string							_previousAlternateSymbol			= "";
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_preadder							= new();
@@ -51,48 +44,27 @@ public partial class UnitEntryViewModel : ObservableObject
 
 	#region Construction
 
-	public UnitEntryViewModel(UnitGroup unitGroup)
+	public UnitEntryViewModel(UnitGroup unitGroup, UnitConverter unitConverter)
 	{
-		UnitEntry	= new();
-		UnitGroup	= unitGroup;
-		Title		= "Add Unit Entry";
+		UnitEntry		= new();
+		_unitGroup		= unitGroup;
+		_unitConverter	= unitConverter;
+		Title			= "Add Unit Entry";
 		Initialize();
 	}
 
-	public UnitEntryViewModel(UnitEntry unitEntry, UnitGroup unitGroup)
+	public UnitEntryViewModel(UnitEntry unitEntry, UnitGroup unitGroup, UnitConverter unitConverter)
 	{
-		UnitEntry	= unitEntry;
-		UnitGroup	= unitGroup;
-		Title		= "Edit Unit Entry";
+		UnitEntry		= unitEntry;
+		_unitGroup		= unitGroup;
+		_unitConverter	= unitConverter;
+		Title			= "Edit Unit Entry";
 		Initialize();
 	}
 
 	#endregion
 		
 	#region Properties
-
-	public UnitConverter? UnitConverter
-	{
-		get => _unitConverter;
-		set
-		{
-			System.Diagnostics.Debug.Assert(value != null);
-			_unitConverter	= value;
-			_existingNames	= _unitConverter.GroupTable.GetSortedListOfGroupNames();
-		}
-	}
-
-	public UnitGroup? UnitGroup
-	{
-		get => _unitGroup;
-		set
-		{
-			System.Diagnostics.Debug.Assert(value != null);
-			_unitGroup	= value;
-			InitializeValues();
-		}
-	}
-	
 	#endregion
 
 	#region Initialize and Validation
@@ -120,8 +92,8 @@ public partial class UnitEntryViewModel : ObservableObject
 		Name.Validations.Add(new IsNotDuplicateStringRule 
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _existingNames,
-			ExcludeValue			= _previousName
+			Values					= _unitConverter.UnitTable.Keys.ToList(),
+			ExcludeValue			= UnitEntry.Name
 		});
 		ValidateName();
 
@@ -129,16 +101,16 @@ public partial class UnitEntryViewModel : ObservableObject
 		DefaultSymbol.Validations.Add(new IsNotDuplicateStringRule
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _existingSymbols,
-			ExcludeValue			= _previousDefaultSymbol
+			Values					= _unitConverter.SymbolTable.Keys.ToList(),
+			ExcludeValue			= UnitEntry.DefaultSymbol
 		});
 		ValidateDefaultSymbol();
 
-		Name.Validations.Add(new IsNotDuplicateStringRule
+		AlternateSymbol.Validations.Add(new IsNotDuplicateStringRule
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _existingSymbols,
-			ExcludeValue			= _previousAlternateSymbol
+			Values					= _unitConverter.SymbolTable.Keys.ToList(),
+			ExcludeValue			= UnitEntry.AlternateSymbol
 		});
 		ValidateAlternateSymbol();
 
@@ -190,7 +162,8 @@ public partial class UnitEntryViewModel : ObservableObject
 	{
 		if (Preadder.Validate())
 		{
-			double.TryParse(Preadder.Value, out double numeric);
+			// Value was already validated so we don't need to check the result of the TryParse.
+			_ = double.TryParse(Preadder.Value, out double numeric);
 			UnitEntry!.Preadder = numeric;
 		}
 		ValidateSubmittable();
@@ -201,7 +174,8 @@ public partial class UnitEntryViewModel : ObservableObject
 	{
 		if (Multiplier.Validate())
 		{
-			double.TryParse(Multiplier.Value, out double numeric);
+			// Value was already validated so we don't need to check the result of the TryParse.
+			_ = double.TryParse(Multiplier.Value, out double numeric);
 			UnitEntry!.Multiplier = numeric;
 		}
 		ValidateSubmittable();
@@ -212,7 +186,8 @@ public partial class UnitEntryViewModel : ObservableObject
 	{
 		if (Postadder.Validate())
 		{
-			double.TryParse(Postadder.Value, out double numeric);
+			// Value was already validated so we don't need to check the result of the TryParse.
+			_ = double.TryParse(Postadder.Value, out double numeric);
 			UnitEntry!.Postadder = numeric;
 		}
 		ValidateSubmittable();

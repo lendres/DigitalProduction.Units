@@ -23,7 +23,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
-		UnitEntryViewModel  viewModel	= new(unitsViewModel.UnitGroup!);
+		UnitEntryViewModel  viewModel	= new(unitsViewModel.UnitGroup!, unitsViewModel.UnitConverter!);
 		UnitEntryView       view		= new(viewModel);
 		object?				result		= await Shell.Current.ShowPopupAsync(view);
 
@@ -39,7 +39,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
 		UnitEntry			unitEntry	= new(unitsViewModel.SelectedItem!);
-		UnitEntryViewModel  viewModel	= new(unitEntry, unitsViewModel.UnitGroup!);
+		UnitEntryViewModel  viewModel	= new(unitEntry, unitsViewModel.UnitGroup!, unitsViewModel.UnitConverter!);
 		UnitEntryView       view		= new(viewModel);
 		object?				result		= await Shell.Current.ShowPopupAsync(view);
 

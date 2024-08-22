@@ -31,9 +31,10 @@ public class UnitConverter
 
 	public const double				UNITFILE_VERSION            =   2.0;
 	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
-	private SymbolTable				_symbolTable;
-	private UnitTable				_unitTable;
+	
 	private GroupTable				_groupTable;
+	private readonly SymbolTable				_symbolTable;
+	private readonly UnitTable				_unitTable;
 
 	#endregion
 
@@ -72,16 +73,23 @@ public class UnitConverter
 	public string Version { get; set; } = "2.00";
 
 	/// <summary>
-	/// Units.
-	/// </summary>
-	[XmlIgnore()]
-	public UnitTable UnitTable { get => _unitTable; set => _unitTable = value; }
-
-	/// <summary>
 	/// Groups.
 	/// </summary>
 	[XmlElement("groups")]
 	public GroupTable GroupTable { get => _groupTable; set => 	_groupTable = value; }
+
+	
+	/// <summary>
+	/// Units.
+	/// </summary>
+	[XmlIgnore()]
+	public SymbolTable SymbolTable { get => _symbolTable;}
+
+	/// <summary>
+	/// Units.
+	/// </summary>
+	[XmlIgnore()]
+	public UnitTable UnitTable { get => _unitTable;}
 
 	#endregion
 
