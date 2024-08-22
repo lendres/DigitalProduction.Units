@@ -58,9 +58,14 @@
 				<Label Text="Preadder" StyleClass="TitleLabel"/>
 				<Entry
 					Placeholder="Preadder"
-					Text="{Binding UnitEntry.PreAdder}"
+					Text="{Binding Preadder.Value}"
 					HorizontalOptions="FillAndExpand"
-					StyleClass="EntryStyle"/>
+					StyleClass="EntryStyle">
+					<Entry.Behaviors>
+						<toolkit:EventToCommandBehavior Command="{Binding ValidatePreadderCommand}" EventName="TextChanged"/>
+					</Entry.Behaviors>
+				</Entry>
+				<Label Text="{Binding Preadder.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
 			</VerticalStackLayout>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">

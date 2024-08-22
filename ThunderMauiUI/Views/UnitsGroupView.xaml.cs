@@ -38,7 +38,8 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
-		UnitEntryViewModel  viewModel	= new(unitsViewModel.SelectedItem!, unitsViewModel.UnitGroup!);
+		UnitEntry			unitEntry	= new(unitsViewModel.SelectedItem!);
+		UnitEntryViewModel  viewModel	= new(unitEntry, unitsViewModel.UnitGroup!);
 		UnitEntryView       view		= new(viewModel);
 		object?				result		= await Shell.Current.ShowPopupAsync(view);
 

@@ -46,8 +46,8 @@ public partial class UnitEntryViewModel : ObservableObject
 
 	public UnitEntryViewModel(UnitEntry unitEntry, UnitGroup unitGroup)
 	{
-		UnitEntry = unitEntry;
-		UnitGroup = unitGroup;
+		UnitEntry	= unitEntry;
+		UnitGroup	= unitGroup;
 		Title		= "Edit Unit Entry";
 		Initialize();
 	}
@@ -91,7 +91,8 @@ public partial class UnitEntryViewModel : ObservableObject
 
 	private void InitializeValues()
 	{
-		Name.Value = UnitEntry?.Name ?? "";
+		Name.Value		= UnitEntry?.Name ?? "";
+		Preadder.Value	= UnitEntry?.PreAdder.ToString() ?? "0";
 	}
 
 	private void AddValidations()
@@ -104,6 +105,10 @@ public partial class UnitEntryViewModel : ObservableObject
 			ExcludeValue			= _previousName
 		});
 		ValidateName();
+
+		Preadder.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A preadder is required.  If none is required, use \"0\"." });
+		Preadder.Validations.Add(new IsNumericRule { ValidationMessage = "The preadder must be numeric." });
+		ValidatePreadder();
 	}
 
 	[RelayCommand]
@@ -111,7 +116,18 @@ public partial class UnitEntryViewModel : ObservableObject
 	{
 		if (Name.Validate())
 		{
-			UnitGroup!.Name = Name.Value ?? "";
+			UnitEntry!.Name = Name.Value ?? "";
+		}
+		ValidateSubmittable();
+	}
+
+	[RelayCommand]
+	private void ValidatePreadder()
+	{
+		if (Preadder.Validate())
+		{
+			double.TryParse(Preadder.Value, out double numeric);
+			UnitEntry!.PreAdder = numeric;
 		}
 		ValidateSubmittable();
 	}

@@ -16,6 +16,19 @@ public class UnitEntry
 	{
 	}
 
+	/// <summary>
+	/// Copy constructor.
+	/// </summary>
+	public UnitEntry(UnitEntry unitEntry)
+	{
+		Name			= unitEntry.Name;
+		DefaultSymbol	= unitEntry.DefaultSymbol;
+		AlternateSymbol	= unitEntry.AlternateSymbol;
+		PreAdder		= unitEntry.PreAdder;
+		Adder			= unitEntry.Adder;
+		Multiplier		= unitEntry.Multiplier;
+	}
+
 	#endregion
 
 	#region Properties
