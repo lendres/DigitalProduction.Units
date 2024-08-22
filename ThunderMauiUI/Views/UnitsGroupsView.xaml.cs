@@ -1,17 +1,18 @@
-﻿using UnitsConversionDemo.ViewModels;
+﻿using Thor.Maui;
 using DigitalProduction.UI;
 using Thor.Units;
 using CommunityToolkit.Mvvm.Input;
 
-namespace UnitsConversionDemo;
+namespace Thor.Maui;
 
 public partial class UnitsGroupsView : DigitalProductionMainPage
 {
 	#region Construction
 
-	public UnitsGroupsView()
+	public UnitsGroupsView(IUnitsGroupsViewModel viewModel)
 	{
 		InitializeComponent();
+		BindingContext = viewModel;
 	}
 
 	#endregion
@@ -20,7 +21,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
-		UnitsViewModel? unitsViewModel = BindingContext as UnitsViewModel;
+		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
 		//ConfigurationViewModel	viewModel	= new(Interface.ConfigurationList?.ConfigurationNames ?? []);
@@ -35,7 +36,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 
 	async void OnEdit(object sender, EventArgs eventArgs)
 	{
-		UnitsViewModel? unitsViewModel = BindingContext as UnitsViewModel;
+		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 		System.Diagnostics.Debug.Assert(unitsViewModel.UnitsConverter != null);
 
@@ -55,7 +56,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 
 		if (result)
 		{
-			UnitsViewModel? viewModel = BindingContext as UnitsViewModel;
+			IUnitsGroupsViewModel? viewModel = BindingContext as IUnitsGroupsViewModel;
 			viewModel?.Delete();
 		}
 	}

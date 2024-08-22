@@ -6,7 +6,7 @@ using DigitalProduction.ViewModels;
 using System.Collections.ObjectModel;
 using Thor.Units;
 
-namespace UnitsConversionDemo.ViewModels;
+namespace Thor.Maui;
 
 [QueryProperty(nameof(UnitConverter), "UnitsConverter")]
 [QueryProperty(nameof(UnitGroup), "UnitGroup")]
@@ -99,13 +99,18 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		ValidateSubmittable();
 	}
 
+	public bool ValidateSubmittable() => IsSubmittable = Name.IsValid;
+
+	#endregion
+
+	#region Methods
+
 	public override void Delete()
 	{	
+		System.Diagnostics.Debug.Assert(Name.Value != null);
 		UnitConverter!.RemoveUnit(SelectedItem!.Name, Name.Value);
 		base.Delete();
 	}
-
-	public bool ValidateSubmittable() => IsSubmittable = Name.IsValid;
 
 	#endregion
 }

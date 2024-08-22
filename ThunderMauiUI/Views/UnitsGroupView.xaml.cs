@@ -1,9 +1,10 @@
-﻿using DigitalProduction.UI;
-using UnitsConversionDemo.ViewModels;
+﻿using CommunityToolkit.Maui.Views;
+using DigitalProduction.UI;
 using Thor.Units;
 
-namespace UnitsConversionDemo;
+namespace Thor.Maui;
 
+[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class UnitsGroupView : DigitalProductionMainPage
 {
 	#region Construction
@@ -22,14 +23,14 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
-		//ConfigurationViewModel	viewModel	= new(Interface.ConfigurationList?.ConfigurationNames ?? []);
-		//ConfigurationView		view		= new(viewModel);
-		//object?					result		= await Shell.Current.ShowPopupAsync(view);
+		UnitEntryViewModel  viewModel	= new(unitsViewModel.UnitGroup!, unitsViewModel.UnitConverter!);
+		UnitEntryView       view		= new(viewModel);
+		object?				result		= await Shell.Current.ShowPopupAsync(view);
 
-		//if (result is bool boolResult && boolResult)
-		//{
-		//	UnitsViewModel?.Insert(viewModel.Configuration);
-		//}
+		if (result is bool boolResult && boolResult)
+		{
+			//UnitsViewModel?.Insert(viewModel.Configuration);
+		}
 	}
 
 	async void OnEdit(object sender, EventArgs eventArgs)
@@ -37,15 +38,15 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
-		UnitEntry unitEntry			= unitsViewModel.SelectedItem!;
-		//ConfigurationViewModel  viewModel   = new(unitGroup, Interface.ConfigurationList?.ConfigurationNames ?? []);
-		//ConfigurationView       view        = new(viewModel);
-		//object?                 result      = await Shell.Current.ShowPopupAsync(view);
+		UnitEntry			unitEntry	= new(unitsViewModel.SelectedItem!);
+		UnitEntryViewModel  viewModel	= new(unitEntry, unitsViewModel.UnitGroup!, unitsViewModel.UnitConverter!);
+		UnitEntryView       view		= new(viewModel);
+		object?				result		= await Shell.Current.ShowPopupAsync(view);
 
-		//if (result is bool boolResult && boolResult)
-		//{
-		//	unitsViewModel.ReplaceSelected(viewModel.UnitGroup);
-		//}
+		if (result is bool boolResult && boolResult)
+		{
+			//	unitsViewModel.ReplaceSelected(viewModel.UnitGroup);
+		}
 	}
 
 	async void OnDelete(object sender, EventArgs eventArgs)
@@ -64,7 +65,5 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 		Shell.Current.GoToAsync("../");
 	}
 
-
 	#endregion
-
 }

@@ -6,9 +6,9 @@
 	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
 	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
-	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
+	xmlns:viewmodel="clr-namespace:Thor.Maui"
 	x:DataType="viewmodel:UnitGroupViewModel"
-	x:Class="UnitsConversionDemo.UnitsGroupView">
+	x:Class="Thor.Maui.UnitsGroupView">
 
 	<ContentPage.BindingContext>
 		<viewmodel:UnitGroupViewModel/>
@@ -24,7 +24,7 @@
 	</ContentPage.Resources>
 
 	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
-		<Label Grid.Row="0" Text="Unit Group" StyleClass="Title"/>
+		<Label Grid.Row="0" Text="{Binding Name.Value}" StyleClass="Title"/>
 
 		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
 

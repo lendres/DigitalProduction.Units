@@ -58,7 +58,7 @@
 	<ItemGroup>
 		<PackageReference Include="akgul.Maui.DataGrid" Version="4.0.4" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
-		<PackageReference Include="DigitalProductionMauiLibrary" Version="0.1.4" />
+		<PackageReference Include="DigitalProductionMauiLibrary" Version="0.2.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -66,24 +66,13 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Library\ThunderUnitsDotNet.csproj" />
+	  <ProjectReference Include="..\ThunderMauiUI\ThunderUnitsMauiUI.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="Views\ParseView.xaml.cs">
 	    <DependentUpon>ParseView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\UnitsGroupView.xaml.cs">
-	    <DependentUpon>UnitsGroupView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\UnitsGroupsView.xaml.cs">
-	    <DependentUpon>UnitsGroupsView.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Views\UnitsGroupView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
