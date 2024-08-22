@@ -35,6 +35,7 @@
 	<Color x:Key="Active">#F7B548</Color>
 	<Color x:Key="Inactive">#ACACAC</Color>
 	<Color x:Key="ControlTitleLight">#6E6E6E</Color>
+	<Color x:Key="BackgroundDark">#081B25</Color>
 
 	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>

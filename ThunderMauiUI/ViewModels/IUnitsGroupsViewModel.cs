@@ -1,13 +1,18 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using DigitalProduction.ViewModels;
-using System.Collections.Immutable;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Thor.Units;
 
 namespace Thor.Maui;
 
+/// <summary>
+/// Interface for a UnitsGroupsViewModel.
+/// An application that wants to use the UnitsGroupsViewModel should derive from the <see cref="UnitsGroupsViewModelBase"/> class
+/// and implement this interface.
+/// 
+/// See:
+/// https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/generators/relaycommand
+/// for information on the relay command data types.
+/// </summary>
 public interface IUnitsGroupsViewModel
 {
 	#region Properties

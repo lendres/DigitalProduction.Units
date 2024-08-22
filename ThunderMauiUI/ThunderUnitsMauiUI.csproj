@@ -32,6 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\UnitEntryView.xaml.cs">
+	    <DependentUpon>UnitEntryView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\UnitsGroupsView.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
