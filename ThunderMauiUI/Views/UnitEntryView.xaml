@@ -40,18 +40,28 @@
 				<Label Text="Default Symbol" StyleClass="TitleLabel"/>
 				<Entry
 					Placeholder="Default Symbol"
-					Text="{Binding UnitEntry.DefaultSymbol}"
+					Text="{Binding DefaultSymbol.Value}"
 					HorizontalOptions="FillAndExpand"
-					StyleClass="EntryStyle"/>
+					StyleClass="EntryStyle">
+					<Entry.Behaviors>
+						<toolkit:EventToCommandBehavior Command="{Binding ValidateDefaultSymbolCommand}" EventName="TextChanged"/>
+					</Entry.Behaviors>
+				</Entry>
+				<Label Text="{Binding DefaultSymbol.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
 			</VerticalStackLayout>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
 				<Label Text="Alternate Symbol" StyleClass="TitleLabel"/>
 				<Entry
 					Placeholder="Alternate Symbol"
-					Text="{Binding UnitEntry.AlternateSymbol}"
+					Text="{Binding AlternateSymbol.Value}"
 					HorizontalOptions="FillAndExpand"
-					StyleClass="EntryStyle"/>
+					StyleClass="EntryStyle">
+					<Entry.Behaviors>
+						<toolkit:EventToCommandBehavior Command="{Binding ValidateAlternateSymbolCommand}" EventName="TextChanged"/>
+					</Entry.Behaviors>
+				</Entry>
+				<Label Text="{Binding AlternateSymbol.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
 			</VerticalStackLayout>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">

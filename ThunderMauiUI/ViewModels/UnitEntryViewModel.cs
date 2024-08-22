@@ -27,6 +27,15 @@ public partial class UnitEntryViewModel : ObservableObject
 	private List<string>					_existingNames						= new();
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	private ValidatableObject<string>		_defaultSymbol						= new();
+	private string							_previousDefaultSymbol				= "";
+	private List<string>					_existingSymbols					= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	private ValidatableObject<string>		_alternateSymbol					= new();
+	private string							_previousAlternateSymbol			= "";
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_preadder							= new();
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
@@ -97,22 +106,41 @@ public partial class UnitEntryViewModel : ObservableObject
 
 	private void InitializeValues()
 	{
-		Name.Value			= UnitEntry?.Name ?? "";
-		Preadder.Value		= UnitEntry?.Preadder.ToString() ?? "0";
-		Multiplier.Value	= UnitEntry?.Multiplier.ToString() ?? "0";
-		Postadder.Value		= UnitEntry?.Postadder.ToString() ?? "0";
+		Name.Value				= UnitEntry?.Name ?? "";
+		DefaultSymbol.Value		= UnitEntry?.DefaultSymbol ?? "";
+		AlternateSymbol.Value	= UnitEntry?.AlternateSymbol?? "";
+		Preadder.Value			= UnitEntry?.Preadder.ToString() ?? "0";
+		Multiplier.Value		= UnitEntry?.Multiplier.ToString() ?? "0";
+		Postadder.Value			= UnitEntry?.Postadder.ToString() ?? "0";
 	}
 
 	private void AddValidations()
 	{
 		Name.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A name is required." });
-		Name.Validations.Add(new IsNotDuplicateStringRule
+		Name.Validations.Add(new IsNotDuplicateStringRule 
 		{
 			ValidationMessage		= "The value is already in use.",
 			Values					= _existingNames,
 			ExcludeValue			= _previousName
 		});
 		ValidateName();
+
+		DefaultSymbol.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A default symbol is required." });
+		DefaultSymbol.Validations.Add(new IsNotDuplicateStringRule
+		{
+			ValidationMessage		= "The value is already in use.",
+			Values					= _existingSymbols,
+			ExcludeValue			= _previousDefaultSymbol
+		});
+		ValidateDefaultSymbol();
+
+		Name.Validations.Add(new IsNotDuplicateStringRule
+		{
+			ValidationMessage		= "The value is already in use.",
+			Values					= _existingSymbols,
+			ExcludeValue			= _previousAlternateSymbol
+		});
+		ValidateAlternateSymbol();
 
 		Preadder.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A preadder is required.  If none is required, use \"0\"." });
 		Preadder.Validations.Add(new IsNumericRule { ValidationMessage = "The preadder must be numeric." });
@@ -133,6 +161,26 @@ public partial class UnitEntryViewModel : ObservableObject
 		if (Name.Validate())
 		{
 			UnitEntry!.Name = Name.Value ?? "";
+		}
+		ValidateSubmittable();
+	}
+
+	[RelayCommand]
+	private void ValidateDefaultSymbol()
+	{
+		if (DefaultSymbol.Validate())
+		{
+			UnitEntry!.DefaultSymbol = DefaultSymbol.Value ?? "";
+		}
+		ValidateSubmittable();
+	}
+
+	[RelayCommand]
+	private void ValidateAlternateSymbol()
+	{
+		if (AlternateSymbol.Validate())
+		{
+			UnitEntry!.AlternateSymbol = AlternateSymbol.Value ?? "";
 		}
 		ValidateSubmittable();
 	}
@@ -173,8 +221,5 @@ public partial class UnitEntryViewModel : ObservableObject
 	public bool ValidateSubmittable() => IsSubmittable =
 		Name.IsValid && Preadder.IsValid && Multiplier.IsValid && Postadder.IsValid;
 
-	#endregion
-
-	#region Methods
 	#endregion
 }
