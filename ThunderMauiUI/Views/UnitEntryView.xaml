@@ -72,18 +72,28 @@
 				<Label Text="Multiplier (zero means no multiplication is done)" StyleClass="TitleLabel"/>
 				<Entry
 					Placeholder="Multiplier"
-					Text="{Binding UnitEntry.Multiplier}"
+					Text="{Binding Multiplier.Value}"
 					HorizontalOptions="FillAndExpand"
-					StyleClass="EntryStyle"/>
+					StyleClass="EntryStyle">
+					<Entry.Behaviors>
+						<toolkit:EventToCommandBehavior Command="{Binding ValidateMultiplierCommand}" EventName="TextChanged"/>
+					</Entry.Behaviors>
+				</Entry>
+				<Label Text="{Binding Multiplier.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
 			</VerticalStackLayout>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
 				<Label Text="Postadder" StyleClass="TitleLabel"/>
 				<Entry
 					Placeholder="Postadder"
-					Text="{Binding UnitEntry.Postadder}"
+					Text="{Binding Postadder.Value}"
 					HorizontalOptions="FillAndExpand"
-					StyleClass="EntryStyle"/>
+					StyleClass="EntryStyle">
+					<Entry.Behaviors>
+						<toolkit:EventToCommandBehavior Command="{Binding ValidatePostadderCommand}" EventName="TextChanged"/>
+					</Entry.Behaviors>
+				</Entry>
+				<Label Text="{Binding Postadder.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
 			</VerticalStackLayout>
 
 			<HorizontalStackLayout Padding="0" StyleClass="BottomButtonRowStyle">

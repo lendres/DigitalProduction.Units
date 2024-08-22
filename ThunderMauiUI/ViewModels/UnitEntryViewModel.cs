@@ -97,8 +97,10 @@ public partial class UnitEntryViewModel : ObservableObject
 
 	private void InitializeValues()
 	{
-		Name.Value		= UnitEntry?.Name ?? "";
-		Preadder.Value	= UnitEntry?.Preadder.ToString() ?? "0";
+		Name.Value			= UnitEntry?.Name ?? "";
+		Preadder.Value		= UnitEntry?.Preadder.ToString() ?? "0";
+		Multiplier.Value	= UnitEntry?.Multiplier.ToString() ?? "0";
+		Postadder.Value		= UnitEntry?.Postadder.ToString() ?? "0";
 	}
 
 	private void AddValidations()
@@ -115,6 +117,14 @@ public partial class UnitEntryViewModel : ObservableObject
 		Preadder.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A preadder is required.  If none is required, use \"0\"." });
 		Preadder.Validations.Add(new IsNumericRule { ValidationMessage = "The preadder must be numeric." });
 		ValidatePreadder();
+
+		Multiplier.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A multiplier is required.  If none is required, use \"0\"." });
+		Multiplier.Validations.Add(new IsNumericRule { ValidationMessage = "The multiplier must be numeric." });
+		ValidateMultiplier();
+
+		Postadder.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A postadder is required.  If none is required, use \"0\"." });
+		Postadder.Validations.Add(new IsNumericRule { ValidationMessage = "The postadder must be numeric." });
+		ValidatePostadder();
 	}
 
 	[RelayCommand]
@@ -138,7 +148,30 @@ public partial class UnitEntryViewModel : ObservableObject
 		ValidateSubmittable();
 	}
 
-	public bool ValidateSubmittable() => IsSubmittable = Name.IsValid;
+	[RelayCommand]
+	private void ValidateMultiplier()
+	{
+		if (Multiplier.Validate())
+		{
+			double.TryParse(Multiplier.Value, out double numeric);
+			UnitEntry!.Multiplier = numeric;
+		}
+		ValidateSubmittable();
+	}
+
+	[RelayCommand]
+	private void ValidatePostadder()
+	{
+		if (Postadder.Validate())
+		{
+			double.TryParse(Postadder.Value, out double numeric);
+			UnitEntry!.Postadder = numeric;
+		}
+		ValidateSubmittable();
+	}
+
+	public bool ValidateSubmittable() => IsSubmittable =
+		Name.IsValid && Preadder.IsValid && Multiplier.IsValid && Postadder.IsValid;
 
 	#endregion
 
