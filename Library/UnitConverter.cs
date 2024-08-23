@@ -252,7 +252,20 @@ public class UnitConverter
 		}
 	}
 
-	public void RemoveUnit(string unitName, string groupName)
+	public void AddUnit(string groupName, UnitEntry unitEntry)
+	{
+ 		_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+		_unitTable[unitEntry.Name]				= unitEntry;
+		_groupTable[groupName]?.AddUnit(unitEntry);
+	}
+
+	public void ReplaceUnit(string groupName, string originallyUnitName, UnitEntry newEntry)
+	{
+		RemoveUnit(groupName, originallyUnitName);
+		AddUnit(groupName, newEntry);
+	}
+
+	public void RemoveUnit(string groupName, string unitName)
 	{
 		UnitEntry? unitEntry = _unitTable[unitName];
 		System.Diagnostics.Debug.Assert(unitEntry != null);

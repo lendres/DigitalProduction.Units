@@ -19,8 +19,6 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_name								= new();
-	private string							_previousName						= "";
-	private List<string>					_existingNames						= new();
 
 	[ObservableProperty]
 	private bool							_isSubmittable						= false;
@@ -31,7 +29,6 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	public UnitGroupViewModel()
 	{
-		Initialize();
 	}
 
 	#endregion
@@ -45,7 +42,7 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		{
 			System.Diagnostics.Debug.Assert(value != null);
 			_unitConverter	= value;
-			_existingNames	= _unitConverter.GroupTable.GetSortedListOfGroupNames();
+			Initialize();
 		}
 	}
 
@@ -57,7 +54,7 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 			System.Diagnostics.Debug.Assert(value != null);
 			_unitGroup	= value;
 			Items		= new ObservableCollection<UnitEntry>(_unitGroup.Units.Values);
-			InitializeValues();
+			Initialize();
 		}
 	}
 	
@@ -79,12 +76,13 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	private void AddValidations()
 	{
+		Name.Validations.Clear();
 		Name.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A name is required." });
 		Name.Validations.Add(new IsNotDuplicateStringRule
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _existingNames,
-			ExcludeValue			= _previousName
+			Values					= _unitConverter?.GroupTable.GetSortedListOfGroupNames(),
+			ExcludeValue			= UnitGroup?.Name
 		});
 		ValidateName();
 	}
@@ -105,10 +103,32 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	#region Methods
 
+	public override void ReplaceSelected(UnitEntry newItem)
+	{
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(UnitGroup != null);
+		System.Diagnostics.Debug.Assert(SelectedItem != null);
+
+		UnitConverter.ReplaceUnit(UnitGroup.Name, SelectedItem.Name, newItem);
+		base.ReplaceSelected(newItem);
+	}
+
+	public override void Insert(UnitEntry item, int position = 0)
+	{
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(UnitGroup != null);
+
+		UnitConverter.AddUnit(UnitGroup.Name, item);
+		base.Insert(item, position);
+	}
+
 	public override void Delete()
 	{	
-		System.Diagnostics.Debug.Assert(Name.Value != null);
-		UnitConverter!.RemoveUnit(SelectedItem!.Name, Name.Value);
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(UnitGroup != null);
+		System.Diagnostics.Debug.Assert(SelectedItem != null);
+
+		UnitConverter.RemoveUnit(UnitGroup.Name, SelectedItem.Name);
 		base.Delete();
 	}
 
