@@ -40,7 +40,7 @@ public static class MauiProgram
 
 		services.AddTransient<Thor.Maui.UnitsGroupsView>();
 		services.AddTransient<Thor.Maui.UnitsGroupView>();
-		services.AddTransient<Thor.Maui.IUnitsGroupsViewModel, UnitsViewModel>();
+		services.AddTransient<Thor.Maui.IUnitsGroupsViewModel, UnitsGroupsViewModel>();
 		services.AddTransient<Thor.Maui.UnitGroupViewModel>();
 	}
 

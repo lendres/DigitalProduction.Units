@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace UnitsConversionDemo.ViewModels;
 
-public partial class UnitsViewModel : UnitsGroupsViewModelBase, IUnitsGroupsViewModel
+public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGroupsViewModel
 {
 
 	#region Fields
@@ -17,7 +17,7 @@ public partial class UnitsViewModel : UnitsGroupsViewModelBase, IUnitsGroupsView
 
 	#endregion
 
-	public UnitsViewModel()
+	public UnitsGroupsViewModel()
     {
 		UnitsConverter = UnitFileIO.LoadVersionTwoFile();
 	}
