@@ -23,6 +23,8 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 
 	#endregion
 
+	#region File Related Methods
+
 	partial void OnUnitsConverterChanged(UnitConverter? value)
 	{
 		try
@@ -53,4 +55,34 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 	}
 
 	protected abstract Task<bool> SerializeAsync();
+
+	#endregion
+
+	#region Methods
+
+	public override void ReplaceSelected(UnitGroup newItem)
+	{
+		//System.Diagnostics.Debug.Assert(UnitConverter != null);
+
+		//UnitConverter.ReplaceUnit(UnitGroup.Name, SelectedItem.Name, newItem);
+		base.ReplaceSelected(newItem);
+	}
+
+	public override void Insert(UnitGroup item, int position = 0)
+	{
+		//System.Diagnostics.Debug.Assert(UnitConverter != null);
+
+		//UnitConverter.AddUnit(UnitGroup.Name, item);
+		base.Insert(item, position);
+	}
+
+	public override void Delete()
+	{	
+		//System.Diagnostics.Debug.Assert(UnitGroup != null);
+
+		//UnitConverter.RemoveUnit(UnitGroup.Name, SelectedItem.Name);
+		base.Delete();
+	}
+
+	#endregion
 }

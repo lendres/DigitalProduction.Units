@@ -31,6 +31,4 @@ public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGrou
 		//return true;
 		return true;
 	}
-
-
 }
