@@ -329,6 +329,44 @@ public class UnitConverter
 		return null;
 	}
 
+	public void AddGroup(UnitGroup unitGroup)
+	{
+		_groupTable[unitGroup.Name] = unitGroup;
+
+		foreach (UnitEntry unitEntry in unitGroup.Units.Values)
+		{
+			_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+			_unitTable[unitEntry.Name]				= unitEntry;
+		}
+	}
+
+	public void ReplaceGroup(string groupName, UnitGroup unitGroup)
+	{
+		RemoveGroup(groupName);
+		AddGroup(unitGroup);
+	}
+
+	public void RemoveGroup(string groupName)
+	{
+		UnitGroup? unitGroup = _groupTable[groupName];
+		System.Diagnostics.Debug.Assert(unitGroup != null);
+
+		foreach (UnitEntry unitEntry in unitGroup.Units.Values)
+		{
+			_symbolTable.Remove(unitEntry.Name);
+			_unitTable.Remove(unitEntry.Name);
+		}
+		_groupTable.Remove(groupName);
+	}
+
+	public void RenameGroup(string oldGroupName, string newGroupName)
+	{
+		UnitGroup unitGroup = _groupTable[oldGroupName];
+
+		_groupTable.Remove(oldGroupName);
+		_groupTable[newGroupName] = unitGroup;
+	}
+
 	#endregion
 
 	#region Conversion Methods
