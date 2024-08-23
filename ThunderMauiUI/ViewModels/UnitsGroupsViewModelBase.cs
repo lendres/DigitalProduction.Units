@@ -11,7 +11,7 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 	#region Fields
 
 	[ObservableProperty]
-	private UnitConverter?						_unitsConverter;
+	private UnitConverter?						_unitConverter;
 
 	#endregion
 
@@ -25,11 +25,11 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 
 	#region File Related Methods
 
-	partial void OnUnitsConverterChanged(UnitConverter? value)
+	partial void OnUnitConverterChanged(UnitConverter? value)
 	{
 		try
 		{
-			UnitGroup[]? unitGroups = UnitsConverter?.GroupTable.GetAllGroups();
+			UnitGroup[]? unitGroups = UnitConverter?.GroupTable.GetAllGroups();
 			Items = unitGroups != null ? new ObservableCollection<UnitGroup>(unitGroups) : null;
 		}
 		catch
@@ -41,7 +41,7 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 	[RelayCommand]
 	public async Task<bool> SaveUnits()
 	{
-		if (UnitsConverter != null)
+		if (UnitConverter != null)
 		{
 			bool success = await SerializeAsync();
 			if (success)
@@ -62,25 +62,27 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 
 	public override void ReplaceSelected(UnitGroup newItem)
 	{
-		//System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(SelectedItem != null);
 
-		//UnitConverter.ReplaceUnit(UnitGroup.Name, SelectedItem.Name, newItem);
+		UnitConverter.ReplaceGroup(SelectedItem.Name, newItem);
 		base.ReplaceSelected(newItem);
 	}
 
 	public override void Insert(UnitGroup item, int position = 0)
 	{
-		//System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
 
-		//UnitConverter.AddUnit(UnitGroup.Name, item);
+		UnitConverter.AddGroup(item);
 		base.Insert(item, position);
 	}
 
 	public override void Delete()
 	{	
-		//System.Diagnostics.Debug.Assert(UnitGroup != null);
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(SelectedItem != null);
 
-		//UnitConverter.RemoveUnit(UnitGroup.Name, SelectedItem.Name);
+		UnitConverter.RemoveGroup(SelectedItem.Name);
 		base.Delete();
 	}
 

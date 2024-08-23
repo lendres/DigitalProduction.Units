@@ -35,7 +35,7 @@ public interface IUnitsGroupsViewModel
 
 	//static ImmutableList<SelectionMode>		SelectionModes { get; set; }
 
-	UnitConverter?							UnitsConverter { get; set; }
+	UnitConverter?							UnitConverter { get; set; }
 
 	IAsyncRelayCommand						SaveUnitsCommand { get; }
 

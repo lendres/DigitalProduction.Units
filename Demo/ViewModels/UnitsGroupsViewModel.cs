@@ -19,7 +19,7 @@ public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGrou
 
 	public UnitsGroupsViewModel()
     {
-		UnitsConverter = UnitFileIO.LoadVersionTwoFile();
+		UnitConverter = UnitFileIO.LoadVersionTwoFile();
 	}
 
 

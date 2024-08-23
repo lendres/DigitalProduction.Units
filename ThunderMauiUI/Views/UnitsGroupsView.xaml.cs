@@ -38,14 +38,14 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	{
 		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
-		System.Diagnostics.Debug.Assert(unitsViewModel.UnitsConverter != null);
+		System.Diagnostics.Debug.Assert(unitsViewModel.UnitConverter != null);
 
 		//UnitGroupViewModel	viewModel	= new(unitsViewModel.UnitsConverter, unitsViewModel.SelectedItem!);
 		//UnitsGroupView		view		= new(viewModel);
 		
 		await Shell.Current.GoToAsync(nameof(UnitsGroupView), true, new Dictionary<string, object>
 		{
-			{"UnitsConverter",  unitsViewModel.UnitsConverter},
+			{"UnitsConverter",  unitsViewModel.UnitConverter},
 			{"UnitGroup",  unitsViewModel.SelectedItem!}
 		});
 	}
