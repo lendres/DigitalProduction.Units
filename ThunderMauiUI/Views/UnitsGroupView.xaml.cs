@@ -29,7 +29,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 
 		if (result is bool boolResult && boolResult)
 		{
-			//UnitsViewModel?.Insert(viewModel.Configuration);
+			unitsViewModel?.Insert(viewModel.UnitEntry);
 		}
 	}
 
@@ -45,7 +45,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 
 		if (result is bool boolResult && boolResult)
 		{
-			//	unitsViewModel.ReplaceSelected(viewModel.UnitGroup);
+			unitsViewModel.ReplaceSelected(viewModel.UnitEntry);
 		}
 	}
 
