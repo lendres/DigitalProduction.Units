@@ -1,7 +1,6 @@
-﻿using Thor.Maui;
+﻿using CommunityToolkit.Maui.Views;
 using DigitalProduction.UI;
 using Thor.Units;
-using CommunityToolkit.Mvvm.Input;
 
 namespace Thor.Maui;
 
@@ -22,31 +21,35 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
 		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
-		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
-		//ConfigurationViewModel	viewModel	= new(Interface.ConfigurationList?.ConfigurationNames ?? []);
-		//ConfigurationView		view		= new(viewModel);
-		//object?					result		= await Shell.Current.ShowPopupAsync(view);
+        // Get the name of the new UnitGroup.
+        NameViewModel	viewModel	= new();
+        NameView		view		= new(viewModel);
+        object? result = await Shell.Current.ShowPopupAsync(view);
 
-		//if (result is bool boolResult && boolResult)
-		//{
-		//	UnitsViewModel?.Insert(viewModel.Configuration);
-		//}
+		if (result is bool boolResult && boolResult)
+		{
+			await Edit(unitsViewModel, new UnitGroup() { Name = viewModel.Name });
+		}
 	}
 
 	async void OnEdit(object sender, EventArgs eventArgs)
 	{
 		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
+
+		await Edit(unitsViewModel, unitsViewModel?.SelectedItem);
+	}
+
+	private async Task Edit(IUnitsGroupsViewModel? unitsViewModel, UnitGroup? unitGroup)
+	{
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 		System.Diagnostics.Debug.Assert(unitsViewModel.UnitConverter != null);
+		System.Diagnostics.Debug.Assert(unitGroup != null);
 
-		//UnitGroupViewModel	viewModel	= new(unitsViewModel.UnitsConverter, unitsViewModel.SelectedItem!);
-		//UnitsGroupView		view		= new(viewModel);
-		
 		await Shell.Current.GoToAsync(nameof(UnitsGroupView), true, new Dictionary<string, object>
 		{
 			{"UnitsConverter",  unitsViewModel.UnitConverter},
-			{"UnitGroup",  unitsViewModel.SelectedItem!}
+			{"UnitGroup",  unitGroup}
 		});
 	}
 

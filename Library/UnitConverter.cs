@@ -361,7 +361,8 @@ public class UnitConverter
 
 	public void RenameGroup(string oldGroupName, string newGroupName)
 	{
-		UnitGroup unitGroup = _groupTable[oldGroupName];
+		UnitGroup? unitGroup = _groupTable[oldGroupName];
+		System.Diagnostics.Debug.Assert(unitGroup != null);
 
 		_groupTable.Remove(oldGroupName);
 		_groupTable[newGroupName] = unitGroup;
