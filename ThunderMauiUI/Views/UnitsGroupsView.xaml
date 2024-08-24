@@ -15,7 +15,7 @@
 		<toolkit:IsNotNullConverter x:Key="IsNotNullConverter"/>
 	</ContentPage.Resources>
 
-	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
+	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="700">
 		<Label Grid.Row="0" Text="Unit Groups" StyleClass="Title"/>
 
 		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
@@ -48,7 +48,15 @@
 						HorizontalOptions="Start"
 						Clicked="OnEdit"/>
 
-					<Button 
+                    <Button 
+						Text="Rename"
+						IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
+						IsEnabled="{Binding SelectedItem, Converter={StaticResource IsNotNullConverter}}"
+						StyleClass="StandardSizeButtonStyle"
+						HorizontalOptions="Start"
+						Clicked="OnRename"/>
+
+                    <Button 
 						Text="Delete"
 						IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
 						IsEnabled="{Binding SelectedItem, Converter={StaticResource IsNotNullConverter}}"

@@ -25,7 +25,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
         // Get the name of the new UnitGroup.
         NameViewModel	viewModel	= new();
         NameView		view		= new(viewModel);
-        object? result = await Shell.Current.ShowPopupAsync(view);
+        object?			result		= await Shell.Current.ShowPopupAsync(view);
 
 		if (result is bool boolResult && boolResult)
 		{
@@ -40,7 +40,25 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 		await Edit(unitsViewModel, unitsViewModel?.SelectedItem);
 	}
 
-	private async Task Edit(IUnitsGroupsViewModel? unitsViewModel, UnitGroup? unitGroup)
+    async void OnRename(object sender, EventArgs eventArgs)
+    {
+        IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
+
+        System.Diagnostics.Debug.Assert(unitsViewModel != null);
+        System.Diagnostics.Debug.Assert(unitsViewModel.UnitConverter != null);
+
+        // Get the name of the new UnitGroup.
+        NameViewModel	viewModel	= new(unitsViewModel.SelectedItem!.Name, unitsViewModel.UnitConverter.GroupTable.GetSortedListOfGroupNames());
+        NameView		view		= new(viewModel);
+        object?			result		= await Shell.Current.ShowPopupAsync(view);
+
+        if (result is bool boolResult && boolResult)
+        {
+            unitsViewModel.RenameSelected(viewModel.Name);
+        }
+    }
+
+    private async Task Edit(IUnitsGroupsViewModel? unitsViewModel, UnitGroup? unitGroup)
 	{
 		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 		System.Diagnostics.Debug.Assert(unitsViewModel.UnitConverter != null);

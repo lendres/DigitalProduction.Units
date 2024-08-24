@@ -77,7 +77,17 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 		base.Insert(item, position);
 	}
 
-	public override void Delete()
+    public void RenameSelected(string name)
+    {
+        System.Diagnostics.Debug.Assert(UnitConverter != null);
+        System.Diagnostics.Debug.Assert(SelectedItem != null);
+
+		SelectedItem.Name = name;
+
+        base.ReplaceSelected(SelectedItem);
+    }
+
+    public override void Delete()
 	{	
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
 		System.Diagnostics.Debug.Assert(SelectedItem != null);

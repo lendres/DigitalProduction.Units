@@ -47,7 +47,10 @@ public interface IUnitsGroupsViewModel
 
 	#region Methods
 
-	void Delete();
+	void RenameSelected(string name);
+
+
+    void Delete();
 
 	#endregion
 }
