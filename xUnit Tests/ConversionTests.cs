@@ -12,8 +12,6 @@ public class ConversionTests
 {
 	public ConversionTests()
 	{
-		ObservableCollection<string> units = new ObservableCollection<string>();
-		units.Insert(0, "new");
 	}
 
 	[Fact]

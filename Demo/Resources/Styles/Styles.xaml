@@ -605,7 +605,7 @@
 		<Setter Property="Color" Value="Transparent"/>
 	</Style>
 	<Style TargetType="Frame" Class="PopupFrameStyle">
-		<Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource BackgroundDark}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Gray900}}"/>
 		<Setter Property="CornerRadius" Value="20"/>
 	</Style>
 	

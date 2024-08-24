@@ -83,7 +83,7 @@
 				RefreshingEnabled="true" PullToRefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
 				BorderColor="{StaticResource DataGridBorderColor}" BorderThickness="{Binding BorderThickness}"
 				HeaderBackground="{StaticResource DataGridHeaderBackgroundColor}" HeaderBordersVisible="{Binding HeaderBordersVisible}"
-				BackgroundColor="{StaticResource DataGridBackgroundColor}"
+				BackgroundColor="{AppThemeBinding Light={StaticResource DataGridBackgroundColorLight}, Dark={StaticResource DataGridBackgroundColorDark}}"
 				FooterBackground="{StaticResource DataGridFooterBackgroundColor}"
 				PaginationEnabled="false"
 				ActiveRowColor="{StaticResource DataGridActiveRowColor}"

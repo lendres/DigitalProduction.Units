@@ -30,7 +30,7 @@
     <Color x:Key="Gray500">#6E6E6E</Color>
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray800">#212121</Color>
-    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray900">#171717</Color>
     <Color x:Key="Gray950">#141414</Color>
 
 	<Color x:Key="Active">#F7B548</Color>
@@ -59,6 +59,7 @@
 	<Color x:Key="DataGridHeaderBackgroundColor">#E0E6F8</Color>
 	<Color x:Key="DataGridFooterBackgroundColor">#E0E6F8</Color>
 	<Color x:Key="DataGridBorderColor">#CCCCCC</Color>
-	<Color x:Key="DataGridBackgroundColor">#CCCCCC</Color>
+    <Color x:Key="DataGridBackgroundColorLight">#CCCCCC</Color>
+    <Color x:Key="DataGridBackgroundColorDark">#171717</Color>
 
 </ResourceDictionary>
