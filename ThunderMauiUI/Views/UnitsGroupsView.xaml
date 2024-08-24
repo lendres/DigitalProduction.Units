@@ -79,7 +79,7 @@
 				FooterBackground="{StaticResource DataGridFooterBackgroundColor}"
 				PaginationEnabled="false"
 				ActiveRowColor="{StaticResource DataGridActiveRowColor}"
-				RowsBackgroundColorPalette="{StaticResource DataGridColorPalette}"
+				RowsBackgroundColorPalette="{AppThemeBinding Light={StaticResource DataGridColorPaletteLight}, Dark={StaticResource DataGridColorPaletteDark}}"
 				HeaderLabelStyle="{StaticResource DataGridTitle}"
 				RowHeight="36" HeaderHeight="40"
 				RowTappedCommand="{Binding TappedCommand}">

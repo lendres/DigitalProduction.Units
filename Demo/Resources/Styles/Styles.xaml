@@ -27,7 +27,7 @@
 	</Style>
 
 	<Style TargetType="Button">
-		<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+		<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
 		<Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
 		<Setter Property="FontFamily" Value="OpenSansRegular"/>
 		<Setter Property="FontSize" Value="14"/>
@@ -42,12 +42,17 @@
 					<VisualState x:Name="Normal" />
 					<VisualState x:Name="Disabled">
 						<VisualState.Setters>
-							<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+							<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 							<Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
 						</VisualState.Setters>
 					</VisualState>
 					<VisualState x:Name="PointerOver" />
-				</VisualStateGroup>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Blue200Accent}, Dark={StaticResource Blue200Accent}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
 			</VisualStateGroupList>
 		</Setter>
 	</Style>
@@ -459,7 +464,7 @@
 
 	<Style TargetType="Label" x:Key="DataGridTitle">
 		<Setter Property="FontAttributes" Value="Bold" />
-		<Setter Property="TextColor" Value="Black" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
 		<Setter Property="FontSize" Value="18" />
 		<Setter Property="HorizontalOptions" Value="Center" />
 		<Setter Property="VerticalOptions" Value="Center" />
@@ -472,11 +477,17 @@
 		</ContentView>
 	</DataTemplate>
 
-	<dg:PaletteCollection x:Key="DataGridColorPalette">
+	<dg:PaletteCollection x:Key="DataGridColorPaletteLight">
 		<Color>#F2F2F2</Color>
 		<Color>White</Color>
 	</dg:PaletteCollection>
 
+    <dg:PaletteCollection x:Key="DataGridColorPaletteDark">
+        <Color>#404040</Color>
+        <Color>#292929</Color>
+    </dg:PaletteCollection>
+
+    <!-- Page Styles -->
 	<Style TargetType="Label" Class="Title">
 		<Setter Property="FontSize" Value="22"/>
 		<Setter Property="FontFamily" Value="OpenSans-Semibold"/>
