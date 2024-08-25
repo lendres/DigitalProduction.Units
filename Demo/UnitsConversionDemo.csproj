@@ -70,6 +70,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\EditMainView.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ParseView.xaml.cs">
 	    <DependentUpon>ParseView.xaml</DependentUpon>
 	  </Compile>
@@ -77,6 +80,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Images\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\EditMainView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

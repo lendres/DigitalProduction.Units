@@ -600,6 +600,13 @@
 		<Setter Property="FontSize" Value="12"/>
 	</Style>
 
+	<Style TargetType="Grid" Class="FileBrowsingGridStyle">
+		<Setter Property="RowDefinitions" Value="27,Auto,16"/>
+		<Setter Property="RowSpacing" Value="0"/>
+		<Setter Property="ColumnDefinitions" Value="*,100"/>
+		<Setter Property="ColumnSpacing" Value="8"/>
+	</Style>
+
 	<!-- Popups. -->
 	<Style TargetType="toolkit:Popup" ApplyToDerivedTypes="True">
 		<Setter Property="Color" Value="Transparent"/>

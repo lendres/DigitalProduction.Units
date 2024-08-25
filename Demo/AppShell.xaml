@@ -34,7 +34,7 @@
 	</Shell.ItemTemplate>
 
 	<FlyoutItem Title="Edit" Style="{StaticResource UnitsGroupsFlyout}">
-		<ShellContent ContentTemplate="{DataTemplate thormaui:UnitsGroupsView}"/>
+		<ShellContent ContentTemplate="{DataTemplate local:EditMainView}"/>
 	</FlyoutItem>
 	<FlyoutItem Title="Parsing" Style="{StaticResource ParseFlyout}">
 		<ShellContent ContentTemplate="{DataTemplate local:ParseView}"/>
