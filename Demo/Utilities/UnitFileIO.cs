@@ -23,13 +23,18 @@ public static class UnitFileIO
 
 	public static UnitConverter? LoadVersionTwoFile()
 	{
-		Debug.WriteLine("File: " + PathV2);
+		return LoadVersionTwoFile(PathV2);;
+	}
+
+	public static UnitConverter? LoadVersionTwoFile(string path)
+	{
+		Debug.WriteLine("File: " + path);
 		Message = "";
 		UnitConverter? unitConverter = null;
 
 		try
 		{
-			unitConverter = UnitConverter.Deserialize(PathV2);
+			unitConverter = UnitConverter.Deserialize(path);
 		}
 		catch (Exception exception)
 		{

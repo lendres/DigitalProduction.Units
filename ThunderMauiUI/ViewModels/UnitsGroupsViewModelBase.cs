@@ -6,6 +6,7 @@ using Thor.Units;
 
 namespace Thor.Maui;
 
+[QueryProperty(nameof(UnitConverter), "UnitConverter")]
 public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<UnitGroup>
 {
 	#region Fields

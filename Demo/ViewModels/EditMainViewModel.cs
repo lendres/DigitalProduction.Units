@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DigitalProduction.Validation;
 using Thor.Units;
 
@@ -10,10 +11,10 @@ public partial class EditMainViewModel : ObservableObject
 	#region Fields
 
 	[ObservableProperty]
-	private UnitConverter?				_unitsConverter;
+	private UnitConverter?				_unitConverter;
 
 	[ObservableProperty]
-	private string						_input								= "";
+	private string						_input							= "";
 
 	[ObservableProperty]
 	private string						_message							= "";
@@ -36,17 +37,85 @@ public partial class EditMainViewModel : ObservableObject
 	private bool						_isSubmittable;
 
 
-
 	#endregion
+
+	#region Construction
 
 	public EditMainViewModel()
     {
-		UnitsConverter = UnitFileIO.LoadVersionTwoFile();
-		if (UnitsConverter == null)
+		InputFile.Value			= UnitFileIO.PathV2;
+		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.PathV2);
+		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.PathV2);
+		AddValidations();
+	}
+
+	#endregion
+
+	#region Validation
+
+	private void AddValidations()
+	{
+		InputFile.Validations.Add(new IsNotNullOrEmptyRule	{ ValidationMessage = "A file name is required." });
+		InputFile.Validations.Add(new FileExistsRule		{ ValidationMessage = "The file does not exist." });
+		ValidateInputFile();
+
+		OutputDirectory.Validations.Add(new IsNotNullOrEmptyRule		{ ValidationMessage = "A directory is required." });
+		OutputDirectory.Validations.Add(new DirectoryNameIsValidRule	{ ValidationMessage = "The directory path is not valid." });
+		ValidateOutputDirectory();
+
+		OutputFileName.Validations.Add(new IsNotNullOrEmptyRule	{ ValidationMessage = "A file name is required." });
+		OutputFileName.Validations.Add(new FileNameIsValidRule	{ ValidationMessage = "The file name is not valid." });
+		ValidateOutputFileName();
+	}
+
+	[RelayCommand]
+	private void ValidateInputFile()
+	{
+		InputFile.Validate();
+		ValidateSubmittable();
+	}
+
+	[RelayCommand]
+	private void ValidateOutputDirectory()
+	{
+		OutputDirectory.Validate();
+		ValidateSubmittable();
+		SetOutputFullPath();
+	}
+
+	[RelayCommand]
+	private void ValidateOutputFileName()
+	{
+		OutputFileName.Validate();
+		ValidateSubmittable();
+		SetOutputFullPath();
+	}
+
+	public bool ValidateSubmittable() => IsSubmittable = InputFile.IsValid && OutputDirectory.IsValid && OutputFileName.IsValid;
+
+	private void SetOutputFullPath()
+	{
+		if (OutputDirectory.IsValid && OutputFileName.IsValid)
 		{
-			Message =	"The Units file could not be loaded." + Environment.NewLine +
+			OutputFileFullPath = Path.Combine(OutputDirectory.Value!, OutputFileName.Value!);
+		}
+	}
+
+	#endregion
+
+	public void OnSubmit()
+	{
+		UnitConverter = UnitFileIO.LoadVersionTwoFile(InputFile.Value!);
+
+		if (UnitConverter == null)
+		{
+			Message = "The Units file could not be loaded." + Environment.NewLine +
 						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
 						"Message: " + UnitFileIO.Message;
+		}
+		else
+		{
+			Message = "";
 		}
 	}
 }

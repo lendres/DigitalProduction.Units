@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Views;
 using DigitalProduction.UI;
 using DigitalProduction.ViewModels;
 using Thor.Maui;
+using Thor.Units;
 using UnitsConversionDemo.ViewModels;
 
 namespace UnitsConversionDemo;
@@ -82,19 +83,23 @@ public partial class EditMainView : ContentPage
 		Submit();
 	}
 
-	async private void Submit()
+	async private void Submit() 
 	{
 		EditMainViewModel? viewModel = BindingContext as EditMainViewModel;
 		System.Diagnostics.Debug.Assert(viewModel != null);
 		
-
-		//if (translationInput is not null)
-		//{
-		//	await Shell.Current.GoToAsync(nameof(UnitsGroupsView), true, new Dictionary<string, object>
-		//	{
-		//		{"TranslationInput",  translationInput}
-		//	});
-		//}
+		viewModel.OnSubmit();
+		if (viewModel.UnitConverter == null)
+		{
+			await DisplayAlert("Error", viewModel.Message, "Ok");
+		}
+		else
+		{
+			await Shell.Current.GoToAsync(nameof(UnitsGroupsView), true, new Dictionary<string, object>
+			{
+				{"UnitConverter",  viewModel.UnitConverter}
+			});
+		}
 	}
 
 	#endregion
