@@ -10,6 +10,12 @@
 	x:DataType="viewmodel:UnitGroupViewModel"
 	x:Class="Thor.Maui.UnitsGroupView">
 
+	<Shell.BackButtonBehavior>
+		<BackButtonBehavior Command="{Binding BackCommand}"
+                            BindingContext="{Binding Source={x:Reference self}, Path=BindingContext}"
+                            IconOverride="back_arrow.png" />
+	</Shell.BackButtonBehavior>
+
 	<ContentPage.BindingContext>
 		<viewmodel:UnitGroupViewModel/>
 	</ContentPage.BindingContext>

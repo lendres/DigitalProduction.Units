@@ -10,6 +10,39 @@
 	FlyoutBackgroundColor="{StaticResource Primary}"
 	FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}">
 
+	<!--<Shell.BackButtonBehavior>
+		--><!--Command="{Binding BackCommand}"--><!--
+		<BackButtonBehavior
+                            IconOverride="back_arrow.png" 
+							TextOverride="Back"/>
+	</Shell.BackButtonBehavior>-->
+
+	<Shell.BackButtonBehavior>
+		<BackButtonBehavior Command="{Binding GoBackCommand}">
+			<BackButtonBehavior.TextOverride>
+				<OnPlatform x:TypeArguments="x:String">
+					<OnPlatform.Platforms>
+						<On Platform="iOS" Value="Go Back" />
+						<On Platform="Windows" Value="Go Back" />
+					</OnPlatform.Platforms>
+				</OnPlatform>
+			</BackButtonBehavior.TextOverride>
+		</BackButtonBehavior>
+	</Shell.BackButtonBehavior>
+
+	<!--<Shell.BackButtonBehavior>
+		<BackButtonBehavior Command="{Binding GoBackCommand}">
+			<BackButtonBehavior.TextOverride>
+				<OnPlatform x:TypeArguments="x:String">
+					<OnPlatform.Platforms>
+						<On Platform="iOS" Value="Go Back" />
+						<On Platform="Windows" Value="Go Back" />
+					</OnPlatform.Platforms>
+				</OnPlatform>
+			</BackButtonBehavior.TextOverride>
+		</BackButtonBehavior>
+	</Shell.BackButtonBehavior>-->
+
 	<Shell.ItemTemplate>
 		<DataTemplate>
 			<Grid ColumnDefinitions="70" RowDefinitions="40,40" Style="{StaticResource FloutItemStyle}">

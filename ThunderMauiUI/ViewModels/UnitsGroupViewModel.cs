@@ -132,5 +132,11 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		base.Delete();
 	}
 
+	[RelayCommand]
+	public void Back()
+	{
+		Shell.Current.GoToAsync("../");
+	}
+
 	#endregion
 }
