@@ -82,6 +82,10 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 		}
 	}
 
-	#endregion
+	void OnNavigateBack(object sender, EventArgs eventArgs)
+	{
+		Shell.Current.GoToAsync("../");
+	}
 
+	#endregion
 }

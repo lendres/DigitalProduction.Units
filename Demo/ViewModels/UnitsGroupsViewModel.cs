@@ -8,19 +8,14 @@ using System.Windows.Input;
 
 namespace UnitsConversionDemo.ViewModels;
 
+[QueryProperty(nameof(OutputFilePath), "OutputFilePath")]
 public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGroupsViewModel
 {
-
-	#region Fields
-
-	//public ICommand								SaveUnitsCommand { get; set; }
-
-	#endregion
-
 	public UnitsGroupsViewModel()
     {
-		UnitConverter = UnitFileIO.LoadVersionTwoFile();
 	}
+
+	public string? OutputFilePath { get; set; } = null;
 
 
 	/// <summary>
@@ -28,7 +23,12 @@ public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGrou
 	/// </summary>
 	async protected override Task<bool> SerializeAsync()
 	{
-		//return true;
-		return true;
+		System.Diagnostics.Debug.Assert(UnitConverter != null);
+		System.Diagnostics.Debug.Assert(OutputFilePath != null);
+
+		return await Task.Run(() =>
+		{
+			return UnitConverter.Serialize(OutputFilePath);
+		});
 	}
 }

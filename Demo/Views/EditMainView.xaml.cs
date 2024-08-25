@@ -97,7 +97,8 @@ public partial class EditMainView : ContentPage
 		{
 			await Shell.Current.GoToAsync(nameof(UnitsGroupsView), true, new Dictionary<string, object>
 			{
-				{"UnitConverter",  viewModel.UnitConverter}
+				{"UnitConverter",  viewModel.UnitConverter},
+				{"OutputFilePath", viewModel.OutputFileFullPath}
 			});
 		}
 	}

@@ -121,11 +121,19 @@ public class UnitConverter
 	/// <summary>
 	/// Serialize an object.
 	/// </summary>
-	public void Serialize(string outputFile)
+	public bool Serialize(string outputFile)
 	{
+		try
+		{
 			SerializationSettings settings              = new(this, outputFile);
 			settings.XmlSettings.NewLineOnAttributes    = false;
 			Serialization.SerializeObject(settings);
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
 	}
 
 	/// <summary>
