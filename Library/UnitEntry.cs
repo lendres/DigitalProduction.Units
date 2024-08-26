@@ -46,7 +46,7 @@ public class UnitEntry
 	public double Preadder { get; set; } = 0;
 
 	[XmlElement("multiplier")]
-	public double Multiplier { get; set; } = 0;
+	public double Multiplier { get; set; } = 1;
 
 	[XmlElement("adder")]
 	public double Postadder { get; set; } = 0;

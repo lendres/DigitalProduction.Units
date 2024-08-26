@@ -82,7 +82,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		DefaultSymbol.Value		= UnitEntry?.DefaultSymbol ?? "";
 		AlternateSymbol.Value	= UnitEntry?.AlternateSymbol?? "";
 		Preadder.Value			= UnitEntry?.Preadder.ToString() ?? "0";
-		Multiplier.Value		= UnitEntry?.Multiplier.ToString() ?? "0";
+		Multiplier.Value		= UnitEntry?.Multiplier.ToString() ?? "1";
 		Postadder.Value			= UnitEntry?.Postadder.ToString() ?? "0";
 	}
 
