@@ -447,7 +447,7 @@ public class UnitConverter : IModified
 
 		try
 		{
-			// Convert the value back to the standard
+			// Convert the value back to the standard.
 			x += unitEntryFrom.Preadder;
 			if (unitEntryFrom.Multiplier > 0.0)
 			{
