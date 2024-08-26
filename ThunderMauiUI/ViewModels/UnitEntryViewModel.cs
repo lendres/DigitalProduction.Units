@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
 using DigitalProduction.Validation;
+using Microsoft.Maui.Media;
 using Thor.Units;
 
 namespace Thor.Maui;
@@ -36,6 +37,9 @@ public partial class UnitEntryViewModel : ObservableObject
 
 	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
 	private ValidatableObject<string>		_postadder							= new();
+
+	[ObservableProperty]
+	private string							_conversionMessage					= "";
 
 	[ObservableProperty]
 	private bool							_isSubmittable						= false;
@@ -73,7 +77,7 @@ public partial class UnitEntryViewModel : ObservableObject
 	{
 		InitializeValues();
 		AddValidations();
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
 	private void InitializeValues()
@@ -134,7 +138,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		{
 			UnitEntry!.Name = Name.Value ?? "";
 		}
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
 	[RelayCommand]
@@ -144,7 +148,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		{
 			UnitEntry!.DefaultSymbol = DefaultSymbol.Value ?? "";
 		}
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
 	[RelayCommand]
@@ -154,7 +158,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		{
 			UnitEntry!.AlternateSymbol = AlternateSymbol.Value ?? "";
 		}
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
 	[RelayCommand]
@@ -166,7 +170,7 @@ public partial class UnitEntryViewModel : ObservableObject
 			_ = double.TryParse(Preadder.Value, out double numeric);
 			UnitEntry!.Preadder = numeric;
 		}
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
 	[RelayCommand]
@@ -178,7 +182,7 @@ public partial class UnitEntryViewModel : ObservableObject
 			_ = double.TryParse(Multiplier.Value, out double numeric);
 			UnitEntry!.Multiplier = numeric;
 		}
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
 	[RelayCommand]
@@ -190,11 +194,39 @@ public partial class UnitEntryViewModel : ObservableObject
 			_ = double.TryParse(Postadder.Value, out double numeric);
 			UnitEntry!.Postadder = numeric;
 		}
-		ValidateSubmittable();
+		ValidateDependent();
 	}
 
-	public bool ValidateSubmittable() => IsSubmittable =
-		Name.IsValid && Preadder.IsValid && Multiplier.IsValid && Postadder.IsValid;
+	private void ValidateDependent()
+	{
+		ValidateSubmittable();
+		ConvertExample();
+	}
+	
+	private bool ValidateSubmittable() => IsSubmittable = Name.IsValid && DefaultSymbol.IsValid && AlternateSymbol.IsValid && AreNumericalValuesValid();
+
+	private bool AreNumericalValuesValid() => Preadder.IsValid && Multiplier.IsValid && Postadder.IsValid;
+
+	private void ConvertExample()
+	{
+		if (!AreNumericalValuesValid())
+		{
+			ConversionMessage = "Convesion values are not valid.";
+			return;
+		}
+
+		if (_unitGroup.Units.Count == 0)
+		{
+			ConversionMessage = "Convesion not possible, no other units defined.";
+			return;
+		}
+
+		UnitEntry defaultUnit = _unitGroup.Units.First().Value;
+
+		UnitResult result = _unitConverter.ConvertUnits(1, UnitEntry, defaultUnit, out double outputValue);
+
+		ConversionMessage = "1 " + UnitEntry.DefaultSymbol + " is " + String.Format("{0:0.0#####}", outputValue) + " " + defaultUnit.Name;
+	}
 
 	#endregion
 }
