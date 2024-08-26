@@ -432,18 +432,32 @@ public class UnitConverter : IModified
 	/// <returns>A unit result value.</returns>
 	public UnitResult ConvertToStandard(double value, string? unitFrom, out double output)
 	{
+		UnitEntry? unitEntryFrom = GetUnitBySymbol(unitFrom);
+
+		// Make sure the unit exists.
+		if (unitEntryFrom == null)
+		{
+			// Default to the fail safe value.
+			output = FAILSAFE_VALUE;
+			return UnitResult.BadUnit;
+		}
+
+		return ConvertToStandard(value, unitEntryFrom, out output);
+	}
+
+	/// <summary>
+	/// Given a value and the current unit, converts the value back to the standard.
+	/// </summary>
+	/// <param name="value">Value to convert.</param>
+	/// <param name="unitEntryFrom">UnitEntry the current units the value is in.</param>
+	/// <param name="output">Variable to hold the converted value.</param>
+	/// <returns>A unit result value.</returns>
+	public UnitResult ConvertToStandard(double value, UnitEntry unitEntryFrom, out double output)
+	{
 		double x = value;
 
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
-
-		UnitEntry? unitEntryFrom = GetUnitBySymbol(unitFrom);
-
-		// Make sure both units are real units.
-		if (unitEntryFrom == null)
-		{
-			return UnitResult.BadUnit;
-		}
 
 		try
 		{
@@ -475,13 +489,26 @@ public class UnitConverter : IModified
 	/// <returns>Unit result value.</returns>
 	public UnitResult ConvertUnits(double value, string? unitFrom, string? unitTo, out double output)
 	{
+		UnitEntry? unitEntryFrom	= GetUnitBySymbol(unitFrom);
+		UnitEntry? unitEntryTo		= GetUnitBySymbol(unitTo);
+
+		return ConvertUnits(value, unitEntryFrom, unitEntryTo, out output);
+	}
+
+	/// <summary>
+	/// Performs a unit conversion between two units, given a value to convert.
+	/// </summary>
+	/// <param name="value">The value to convert.</param>
+	/// <param name="unitEntryFrom">The UnitEntry the value is currently in.</param>
+	/// <param name="unitEntryTo">The UnitEntry that the value is to be converted to.</param>
+	/// <param name="output">The converted value.</param>
+	/// <returns>Unit result value.</returns>
+	public UnitResult ConvertUnits(double value, UnitEntry? unitEntryFrom, UnitEntry? unitEntryTo, out double output)
+	{
 		double x = value;
 
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
-
-		UnitEntry? unitEntryFrom	= GetUnitBySymbol(unitFrom);
-		UnitEntry? unitEntryTo		= GetUnitBySymbol(unitTo);
 
 		// Make sure both units are real units.
 		if (unitEntryFrom == null || unitEntryTo == null)
@@ -495,13 +522,13 @@ public class UnitConverter : IModified
 			return UnitResult.UnitMismatch;
 		}
 
-		UnitResult result = ConvertToStandard(x, unitEntryFrom.Name, out x);
+		UnitResult result = ConvertToStandard(x, unitEntryFrom, out x);
 		if (result != UnitResult.NoError)
 		{
 			return result;
 		}
 
-		result = ConvertFromStandard(x, unitEntryTo.Name, out x);
+		result = ConvertFromStandard(x, unitEntryTo, out x);
 		if (result != UnitResult.NoError)
 		{
 			return result;
@@ -521,18 +548,32 @@ public class UnitConverter : IModified
 	/// <returns>Unit result value.</returns>
 	public UnitResult ConvertFromStandard(double value, string? unitTo, out double output)
 	{
-		double x = value;
-
-		// Default to the fail safe value.
-		output = FAILSAFE_VALUE;
-
 		UnitEntry? unitEntryTo = GetUnitBySymbol(unitTo);
 
 		// Make sure both units are real units.
 		if (unitEntryTo == null)
 		{
+			// Default to the fail safe value.
+			output = FAILSAFE_VALUE;
 			return UnitResult.BadUnit;
 		}
+
+		return ConvertFromStandard(value, unitTo, out output);
+	}
+
+	/// <summary>
+	/// Performs a unit conversion from the standard value into the specified unit.
+	/// </summary>
+	/// <param name="value">The value to convert.</param>
+	/// <param name="unitEntryTo">UnitEntry that the value is to be converted to.</param>
+	/// <param name="output">The converted value.</param>
+	/// <returns>Unit result value.</returns>
+	public UnitResult ConvertFromStandard(double value, UnitEntry unitEntryTo, out double output)
+	{
+		double x = value;
+
+		// Default to the fail safe value.
+		output = FAILSAFE_VALUE;
 
 		try
 		{
