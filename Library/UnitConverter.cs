@@ -4,6 +4,8 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
+using DigitalProduction.Delegates;
+using DigitalProduction.Interface;
 using DigitalProduction.XML.Serialization;
 using System.Diagnostics;
 using System.Xml;
@@ -16,7 +18,7 @@ namespace Thor.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter
+public class UnitConverter : IModified
 {
 	#region Events
 
@@ -25,15 +27,23 @@ public class UnitConverter
 	/// </summary>
 	public event UnitEventHandler? OnError;
 
+	/// <summary>
+	/// Event for when the object was modified.
+	/// </summary>
+	public event ModifiedEventHandler? OnModifiedChanged;
+
 	#endregion
 
-	#region Members
+	#region Fields
 
 	public const double				UNITFILE_VERSION            =   2.0;
 	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
+	
+	private GroupTable				_groupTable;
 	private readonly SymbolTable	_symbolTable;
-	private UnitTable				_units;
-	private GroupTable				_unitGroups;
+	private readonly UnitTable		_unitTable;
+
+	private bool					_modified					= false;
 
 	#endregion
 
@@ -46,8 +56,8 @@ public class UnitConverter
 	{
 		// Set up the tables we need
 		_symbolTable = new SymbolTable();
-		_units       = new UnitTable();
-		_unitGroups  = new GroupTable();
+		_unitTable       = new UnitTable();
+		_groupTable  = new GroupTable();
 	}
 
 	/// <summary>
@@ -57,8 +67,8 @@ public class UnitConverter
 	{
 		// Clear everything out.
 		_symbolTable.Clear();
-		_unitGroups.Clear();
-		_units.Clear();
+		_groupTable.Clear();
+		_unitTable.Clear();
 	}
 
 	#endregion
@@ -72,16 +82,41 @@ public class UnitConverter
 	public string Version { get; set; } = "2.00";
 
 	/// <summary>
-	/// Units.
-	/// </summary>
-	[XmlIgnore()]
-	public UnitTable UnitTable { get => _units; set => _units = value; }
-
-	/// <summary>
 	/// Groups.
 	/// </summary>
 	[XmlElement("groups")]
-	public GroupTable GroupTable { get => _unitGroups; set => 	_unitGroups = value; }
+	public GroupTable GroupTable { get => _groupTable; set => 	_groupTable = value; }
+
+	
+	/// <summary>
+	/// Units.
+	/// </summary>
+	[XmlIgnore()]
+	public SymbolTable SymbolTable { get => _symbolTable;}
+
+	/// <summary>
+	/// Units.
+	/// </summary>
+	[XmlIgnore()]
+	public UnitTable UnitTable { get => _unitTable;}
+
+	///	<summary>
+	///	Specifies if the project has been modified since last being saved/loaded.
+	///	</summary>
+	[XmlIgnore()]
+	public bool Modified
+	{
+		get => _modified;
+
+		set
+		{
+			if (_modified != value)
+			{
+				_modified = value;
+				RaiseOnModifiedChangedEvent();
+			}
+		}
+	}
 
 	#endregion
 
@@ -113,11 +148,20 @@ public class UnitConverter
 	/// <summary>
 	/// Serialize an object.
 	/// </summary>
-	public void Serialize(string outputFile)
+	public bool Serialize(string outputFile)
 	{
+		try
+		{
 			SerializationSettings settings              = new(this, outputFile);
 			settings.XmlSettings.NewLineOnAttributes    = false;
 			Serialization.SerializeObject(settings);
+			Modified									= false;
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
 	}
 
 	/// <summary>
@@ -176,7 +220,7 @@ public class UnitConverter
 	{
 		UnitResult result = UnitResult.NoError;
 
-		foreach (UnitGroup unitGroup in _unitGroups.Values)
+		foreach (UnitGroup unitGroup in _groupTable.Values)
 		{
 			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
 			{
@@ -189,15 +233,15 @@ public class UnitConverter
 				}
 				else
 				{
-					if (_units[unitEntry.Name] != null)
+					if (_unitTable[unitEntry.Name] != null)
 					{
 						SendUnitFileWarning("Duplicate unit with name '{0}' was found and ignored.", filePath, [unitEntry.Name]);
 						result = UnitResult.UnitExists;
 					}
 					else
 					{
-						_symbolTable[unitEntry.DefaultSymbol]  = unitEntry;
-						_units[unitEntry.Name]                 = unitEntry;
+						_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+						_unitTable[unitEntry.Name]				= unitEntry;
 					}
 				}
 			}
@@ -206,6 +250,15 @@ public class UnitConverter
 
 		return result;
 	}
+
+	#endregion
+
+	#region Modification
+
+	/// <summary>
+	/// Access for manually firing event for external sources.
+	/// </summary>
+	private void RaiseOnModifiedChangedEvent() => OnModifiedChanged?.Invoke(_modified);
 
 	#endregion
 
@@ -218,7 +271,7 @@ public class UnitConverter
 	/// <returns>Reference to the unit entry, or null if not found.</returns>
 	public UnitEntry? GetUnitByName(string unitName)
 	{
-		return _units[unitName];
+		return _unitTable[unitName];
 	}
 
 	/// <summary>
@@ -234,14 +287,43 @@ public class UnitConverter
 		}
 
 		// First check to see if they used the actual name of a unit then look at the symbol table.
-		if (_units[unitSymbol] != null)
+		if (_unitTable[unitSymbol] != null)
 		{
-			return _units[unitSymbol];
+			return _unitTable[unitSymbol];
 		}
 		else
 		{
 			return _symbolTable[unitSymbol];
 		}
+	}
+
+	public void AddUnit(string groupName, UnitEntry unitEntry)
+	{
+ 		_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+		_unitTable[unitEntry.Name]				= unitEntry;
+		_groupTable[groupName]?.AddUnit(unitEntry);
+		Modified = true;
+	}
+
+	public void ReplaceUnit(string groupName, string originallyUnitName, UnitEntry newEntry)
+	{
+		RemoveUnit(groupName, originallyUnitName);
+		AddUnit(groupName, newEntry);
+		Modified = true;
+	}
+
+	public void RemoveUnit(string groupName, string unitName)
+	{
+		UnitEntry? unitEntry = _unitTable[unitName];
+		System.Diagnostics.Debug.Assert(unitEntry != null);
+
+		_symbolTable.Remove(unitEntry.DefaultSymbol);
+		_unitTable.Remove(unitName);
+
+		UnitGroup? unitGroup = _groupTable[groupName];
+		System.Diagnostics.Debug.Assert(unitGroup != null);
+		unitGroup.Units.Remove(unitName);
+		Modified = true;
 	}
 
 	#endregion
@@ -275,13 +357,13 @@ public class UnitConverter
 	private UnitGroup? GetUnitGroup(string unitName)
 	{
 		// Does the unit even exist?
-		if (_units[unitName] == null)
+		if (_unitTable[unitName] == null)
 		{
 			return null;
 		}
 
 		// Iterate through every group.
-		UnitGroup[] groups = _unitGroups.GetAllGroups();
+		UnitGroup[] groups = _groupTable.GetAllGroups();
 		foreach (UnitGroup group in groups)
 		{
 			if (group.IsInGroup(unitName))
@@ -293,6 +375,49 @@ public class UnitConverter
 		// Should never happen.
 		Debug.Fail("Unit error", "A unit that does not belong to any group has been detected in GetUnitGroup() - the unit was '" + unitName + "'.");
 		return null;
+	}
+
+	public void AddGroup(UnitGroup unitGroup)
+	{
+		_groupTable[unitGroup.Name] = unitGroup;
+
+		foreach (UnitEntry unitEntry in unitGroup.Units.Values)
+		{
+			_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
+			_unitTable[unitEntry.Name]				= unitEntry;
+		}
+		Modified = true;
+	}
+
+	public void ReplaceGroup(string groupName, UnitGroup unitGroup)
+	{
+		RemoveGroup(groupName);
+		AddGroup(unitGroup);
+		Modified = true;
+	}
+
+	public void RemoveGroup(string groupName)
+	{
+		UnitGroup? unitGroup = _groupTable[groupName];
+		System.Diagnostics.Debug.Assert(unitGroup != null);
+
+		foreach (UnitEntry unitEntry in unitGroup.Units.Values)
+		{
+			_symbolTable.Remove(unitEntry.Name);
+			_unitTable.Remove(unitEntry.Name);
+		}
+		_groupTable.Remove(groupName);
+		Modified = true;
+	}
+
+	public void RenameGroup(string oldGroupName, string newGroupName)
+	{
+		UnitGroup? unitGroup = _groupTable[oldGroupName];
+		System.Diagnostics.Debug.Assert(unitGroup != null);
+
+		_groupTable.Remove(oldGroupName);
+		_groupTable[newGroupName] = unitGroup;
+		Modified = true;
 	}
 
 	#endregion
@@ -324,12 +449,12 @@ public class UnitConverter
 		try
 		{
 			// Convert the value back to the standard
-			x += unitEntryFrom.PreAdder;
+			x += unitEntryFrom.Preadder;
 			if (unitEntryFrom.Multiplier > 0.0)
 			{
 				x *= unitEntryFrom.Multiplier;
 			}
-			x += unitEntryFrom.Adder;
+			x += unitEntryFrom.Postadder;
 
 			output = x;
 		}
@@ -413,12 +538,12 @@ public class UnitConverter
 		try
 		{
 			// Convert to the new unit from the standard
-			x -= unitEntryTo.PreAdder;
+			x -= unitEntryTo.Preadder;
 			if (unitEntryTo.Multiplier > 0.0)
 			{
 				x *= Math.Pow(unitEntryTo.Multiplier, -1);
 			}
-			x -= unitEntryTo.Adder;
+			x -= unitEntryTo.Postadder;
 
 			output = x;
 		}

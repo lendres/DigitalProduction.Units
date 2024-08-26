@@ -4,6 +4,7 @@
  * 
  * Please see included license.txt file for information on redistribution and usage.
  */
+using DigitalProduction.XML.Serialization;
 using System.Collections;
 using System.Diagnostics;
 
@@ -12,7 +13,7 @@ namespace Thor.Units;
 /// <summary>
 /// Contains a table, mapping unit symbols to the unit class.
 /// </summary>
-internal class SymbolTable : DictionaryBase
+public class SymbolTable : Dictionary<string, UnitEntry>
 {
 	#region Construction
 
@@ -31,14 +32,14 @@ internal class SymbolTable : DictionaryBase
 	/// <summary>
 	/// Given a symbol as the key, returns the associated unit entry.
 	/// </summary>
-	public UnitEntry? this[string symbolName]
+	public new UnitEntry? this[string symbolName]
 	{
 		get
 		{
 			//If we contain a symbol matching the key then return it.
-			if (this.Dictionary.Contains(symbolName))
+			if (ContainsKey(symbolName))
 			{
-				return this.Dictionary[symbolName] as UnitEntry;
+				return base[symbolName] as UnitEntry;
 			}
 			else
 			{
@@ -49,11 +50,13 @@ internal class SymbolTable : DictionaryBase
 		
 		set
 		{
-			// Already added? Warn developer (this is probably not a good thing).
-			Debug.Assert((!this.Dictionary.Contains(symbolName)), "Symbol table warning", String.Format("The symbol '{0}' has been overwritten.", symbolName));
+			Trace.Assert(value != null);
+			
+			// Already added?  Warn developer (this is probably not a good thing).
+			Debug.Assert((!ContainsKey(symbolName)), "Symbol table warning", String.Format("The symbol '{0}' has been overwritten.", symbolName));
 
 			//Link the symbol to the unit
-			this.Dictionary[symbolName] = value;
+			base[symbolName] = value;
 		} 
 	}
 
