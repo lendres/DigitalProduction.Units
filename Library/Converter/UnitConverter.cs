@@ -4,7 +4,6 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-using DigitalProduction.Delegates;
 using DigitalProduction.Interface;
 using DigitalProduction.XML.Serialization;
 using System.Diagnostics;
