@@ -24,7 +24,6 @@ public partial class ParsingViewModel : ObservableObject
 	[ObservableProperty]
 	private string						_message				= "";
 
-
 	#endregion
 
 	public ParsingViewModel()

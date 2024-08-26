@@ -107,6 +107,13 @@
 				</VerticalStackLayout>
 			</Grid>
 
+			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
+				<Label Text="Example Output" StyleClass="TitleLabel"/>
+				<Frame Padding="8">
+					<Label Text="{Binding ConversionMessage}" LineBreakMode="WordWrap"/>
+				</Frame>
+			</VerticalStackLayout>
+
 			<HorizontalStackLayout Padding="0" StyleClass="BottomButtonRowStyle">
 				<Button 
 					Text="Save"
