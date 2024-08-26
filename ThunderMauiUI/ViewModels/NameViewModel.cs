@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
 using DigitalProduction.Validation;
-using Thor.Units;
 
 namespace Thor.Maui;
 
