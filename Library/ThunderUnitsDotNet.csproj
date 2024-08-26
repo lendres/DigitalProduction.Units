@@ -15,8 +15,8 @@
 	</PropertyGroup>
 
 	<!-- Import version information from the folder containing the project if the file exists -->
-	<Import Project="$(MSBuildProjectDirectory)/Assembly.props" Condition="Exists('$(MSBuildProjectDirectory)/Assembly.props')" />
-	<Import Project="$(MSBuildProjectDirectory)/Version.props" Condition="Exists('$(MSBuildProjectDirectory)/Version.props')" />
+	<Import Project="$(MSBuildProjectDirectory)/Publishing/Assembly.props" Condition="Exists('$(MSBuildProjectDirectory)/Publishing/Assembly.props')" />
+	<Import Project="$(MSBuildProjectDirectory)/Publishing/Version.props" Condition="Exists('$(MSBuildProjectDirectory)/Publishing/Version.props')" />
 	<ItemGroup>
 	  <None Include="..\LICENSE">
 	    <Pack>True</Pack>
