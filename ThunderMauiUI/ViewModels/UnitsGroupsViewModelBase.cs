@@ -30,13 +30,22 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 	{
 		try
 		{
-			UnitGroup[]? unitGroups = UnitConverter?.GroupTable.GetAllGroups();
-			Items = unitGroups != null ? new ObservableCollection<UnitGroup>(unitGroups) : null;
+			if (UnitConverter != null)
+			{ 
+				UnitGroup[]? unitGroups = UnitConverter.GroupTable.GetAllGroups();
+				Items = unitGroups != null ? new ObservableCollection<UnitGroup>(unitGroups) : null;
+				UnitConverter.OnModifiedChanged += OnModifiedChanged;
+			}
 		}
 		catch
 		{
 			Items = null;
 		}
+	}
+
+	private void OnModifiedChanged(bool modified)
+	{
+		Modified = modified;
 	}
 		
 	[RelayCommand]

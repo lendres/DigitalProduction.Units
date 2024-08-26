@@ -72,6 +72,15 @@ public class GroupTable : CustomSerializableDictionary<string, UnitGroup, GroupK
 	#region Methods
 
 	/// <summary>
+	/// Override Remove to convert the name to lower.
+	/// </summary>
+	/// <param name="groupName">Name of the group.</param>
+	public new void Remove(string groupName)
+	{
+		base.Remove(groupName.ToLower());
+	}
+
+	/// <summary>
 	/// Gets an array of all the groups in the group table.
 	/// </summary>
 	/// <returns>Array of UnitGroup objects representing all of the groups in the group table.</returns>

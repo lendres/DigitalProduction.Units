@@ -1,10 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using DigitalProduction.ViewModels;
-using System.Collections.ObjectModel;
+﻿using Thor.Maui;
 using Thor.Units;
-using Thor.Maui;
-using System.Windows.Input;
 
 namespace UnitsConversionDemo.ViewModels;
 

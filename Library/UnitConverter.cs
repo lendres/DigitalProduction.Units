@@ -4,6 +4,8 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
+using DigitalProduction.Delegates;
+using DigitalProduction.Interface;
 using DigitalProduction.XML.Serialization;
 using System.Diagnostics;
 using System.Xml;
@@ -16,7 +18,7 @@ namespace Thor.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter
+public class UnitConverter : IModified
 {
 	#region Events
 
@@ -25,16 +27,23 @@ public class UnitConverter
 	/// </summary>
 	public event UnitEventHandler? OnError;
 
+	/// <summary>
+	/// Event for when the object was modified.
+	/// </summary>
+	public event ModifiedEventHandler? OnModifiedChanged;
+
 	#endregion
 
-	#region Members
+	#region Fields
 
 	public const double				UNITFILE_VERSION            =   2.0;
 	public const double				FAILSAFE_VALUE              =   System.Double.NaN;
 	
 	private GroupTable				_groupTable;
-	private readonly SymbolTable				_symbolTable;
-	private readonly UnitTable				_unitTable;
+	private readonly SymbolTable	_symbolTable;
+	private readonly UnitTable		_unitTable;
+
+	private bool					_modified					= false;
 
 	#endregion
 
@@ -91,6 +100,24 @@ public class UnitConverter
 	[XmlIgnore()]
 	public UnitTable UnitTable { get => _unitTable;}
 
+	///	<summary>
+	///	Specifies if the project has been modified since last being saved/loaded.
+	///	</summary>
+	[XmlIgnore()]
+	public bool Modified
+	{
+		get => _modified;
+
+		set
+		{
+			if (_modified != value)
+			{
+				_modified = value;
+				RaiseOnModifiedChangedEvent();
+			}
+		}
+	}
+
 	#endregion
 
 	#region Messaging
@@ -128,6 +155,7 @@ public class UnitConverter
 			SerializationSettings settings              = new(this, outputFile);
 			settings.XmlSettings.NewLineOnAttributes    = false;
 			Serialization.SerializeObject(settings);
+			Modified									= false;
 			return true;
 		}
 		catch
@@ -225,6 +253,15 @@ public class UnitConverter
 
 	#endregion
 
+	#region Modification
+
+	/// <summary>
+	/// Access for manually firing event for external sources.
+	/// </summary>
+	private void RaiseOnModifiedChangedEvent() => OnModifiedChanged?.Invoke(_modified);
+
+	#endregion
+
 	#region Unit Related Methods
 
 	/// <summary>
@@ -265,12 +302,14 @@ public class UnitConverter
  		_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
 		_unitTable[unitEntry.Name]				= unitEntry;
 		_groupTable[groupName]?.AddUnit(unitEntry);
+		Modified = true;
 	}
 
 	public void ReplaceUnit(string groupName, string originallyUnitName, UnitEntry newEntry)
 	{
 		RemoveUnit(groupName, originallyUnitName);
 		AddUnit(groupName, newEntry);
+		Modified = true;
 	}
 
 	public void RemoveUnit(string groupName, string unitName)
@@ -284,6 +323,7 @@ public class UnitConverter
 		UnitGroup? unitGroup = _groupTable[groupName];
 		System.Diagnostics.Debug.Assert(unitGroup != null);
 		unitGroup.Units.Remove(unitName);
+		Modified = true;
 	}
 
 	#endregion
@@ -346,12 +386,14 @@ public class UnitConverter
 			_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
 			_unitTable[unitEntry.Name]				= unitEntry;
 		}
+		Modified = true;
 	}
 
 	public void ReplaceGroup(string groupName, UnitGroup unitGroup)
 	{
 		RemoveGroup(groupName);
 		AddGroup(unitGroup);
+		Modified = true;
 	}
 
 	public void RemoveGroup(string groupName)
@@ -365,6 +407,7 @@ public class UnitConverter
 			_unitTable.Remove(unitEntry.Name);
 		}
 		_groupTable.Remove(groupName);
+		Modified = true;
 	}
 
 	public void RenameGroup(string oldGroupName, string newGroupName)
@@ -374,6 +417,7 @@ public class UnitConverter
 
 		_groupTable.Remove(oldGroupName);
 		_groupTable[newGroupName] = unitGroup;
+		Modified = true;
 	}
 
 	#endregion
