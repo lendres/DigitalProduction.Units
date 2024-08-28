@@ -10,11 +10,37 @@
 	x:DataType="viewmodel:UnitGroupViewModel"
 	x:Class="Thor.Maui.UnitsGroupView">
 
+
+	<Shell.TitleView>
+		<HorizontalStackLayout Margin="0" >
+			<ImageButton Source="back_arrow.png" WidthRequest="10" HeightRequest="10" Command="{Binding BackCommand}" Margin="0"
+               VerticalOptions="Center" />
+
+			<Label Text="About" HorizontalOptions="Center" VerticalOptions="Center" Margin="4,0,4,0"></Label>
+		</HorizontalStackLayout>
+	</Shell.TitleView>
+
+
 	<Shell.BackButtonBehavior>
+		<BackButtonBehavior  IsVisible="False"  IsEnabled="False" Command="{Binding BackCommand}" />
+	</Shell.BackButtonBehavior>
+
+	<!--<Shell.TitleView>
+		<ImageButton Command="{Binding BackCommand}"
+                     HeightRequest="30"
+                     HorizontalOptions="Start"
+                     Source="back_arrow.png"
+                     WidthRequest="30" />
+	</Shell.TitleView>
+	<Shell.BackButtonBehavior>
+		<BackButtonBehavior IsVisible="True" IconOverride="back_arrow.png" Command="{Binding BackCommand}"/>
+	</Shell.BackButtonBehavior>-->
+
+	<!--<Shell.BackButtonBehavior>
 		<BackButtonBehavior Command="{Binding BackCommand}"
                             BindingContext="{Binding Source={x:Reference self}, Path=BindingContext}"
                             IconOverride="back_arrow.png" />
-	</Shell.BackButtonBehavior>
+	</Shell.BackButtonBehavior>-->
 
 	<ContentPage.BindingContext>
 		<viewmodel:UnitGroupViewModel/>

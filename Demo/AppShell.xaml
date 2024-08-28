@@ -17,7 +17,7 @@
 							TextOverride="Back"/>
 	</Shell.BackButtonBehavior>-->
 
-	<Shell.BackButtonBehavior>
+	<!--<Shell.BackButtonBehavior>
 		<BackButtonBehavior Command="{Binding GoBackCommand}">
 			<BackButtonBehavior.TextOverride>
 				<OnPlatform x:TypeArguments="x:String">
@@ -28,7 +28,7 @@
 				</OnPlatform>
 			</BackButtonBehavior.TextOverride>
 		</BackButtonBehavior>
-	</Shell.BackButtonBehavior>
+	</Shell.BackButtonBehavior>-->
 
 	<!--<Shell.BackButtonBehavior>
 		<BackButtonBehavior Command="{Binding GoBackCommand}">

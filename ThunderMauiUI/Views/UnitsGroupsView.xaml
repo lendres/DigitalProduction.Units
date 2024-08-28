@@ -15,6 +15,7 @@
 	</Shell.BackButtonBehavior>-->
 
 
+
 	<ContentPage.Resources>
 		<toolkit:IsNullConverter x:Key="IsNullConverter" x:Name="_IsNullConverter"/>
 		<toolkit:IsNotNullConverter x:Key="IsNotNullConverter"/>
