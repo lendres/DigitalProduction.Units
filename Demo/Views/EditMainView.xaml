@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:dp="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
+	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
+	xmlns:dpbehaviors="clr-namespace:DigitalProduction.Behaviors;assembly=DigitalProductionMauiLibrary"								
+	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
+	x:Class="UnitsConversionDemo.EditMainView">
+
+    <ContentPage.BindingContext>
+        <viewmodel:EditMainViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <dpconverters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+    </ContentPage.Resources>
+
+    <!--<ContentPage.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Exit" Clicked="OnExit"/>
+		</MenuBarItem>
+		<MenuBarItem Text="Help">
+			<MenuFlyoutItem Text="About" Clicked="OnAbout"/>
+		</MenuBarItem>
+	</ContentPage.MenuBarItems>-->
+
+    <ScrollView>
+        <VerticalStackLayout StyleClass="VerticalLayoutStyle" MaximumWidthRequest="800">
+            <!-- Title -->
+            <Label Text="Input and Output" StyleClass="Title"/>
+
+            <!-- Input File -->
+            <Grid StyleClass="FileBrowsingGridStyle">
+                <Label Grid.Row="0" Text="Input File" StyleClass="TitleLabel"/>
+                <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
+					x:Name="InputFileEntry"
+					Placeholder="Input File"
+					Text="{Binding InputFile.Value}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding ValidateInputFileCommand}" EventName="TextChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Grid.Row="2" Grid.Column="0" StyleClass="InvalidLabelStyle"
+					Text="{Binding InputFile.Errors, Converter={StaticResource FirstValidationErrorConverter}}"/>
+                <Button Grid.Row="1" Grid.Column="1" StyleClass="StandardWidthButtonStyle" HorizontalOptions="Center" VerticalOptions="Fill"
+					Text="Browse" SemanticProperties.Hint="Browse for the input file."
+					Clicked="OnBrowseForInputFile"/>
+            </Grid>
+
+            <!-- Output File -->
+            <Grid StyleClass="FileBrowsingGridStyle">
+                <Label Grid.Row="0" Text="Output Directory" StyleClass="TitleLabel"/>
+                <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
+					x:Name="OutputDirectoryEntry"
+					Placeholder="Output Directory"
+					Text="{Binding OutputDirectory.Value}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding ValidateOutputDirectoryCommand}" EventName="TextChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Grid.Row="2" Grid.Column="0" StyleClass="InvalidLabelStyle"
+					Text="{Binding OutputDirectory.Errors, Converter={StaticResource FirstValidationErrorConverter}}"/>
+                <Button Grid.Row="1" Grid.Column="1" StyleClass="StandardWidthButtonStyle" HorizontalOptions="Center" VerticalOptions="Fill"
+					Text="Browse" SemanticProperties.Hint="Browse for the output file."
+					Clicked="OnBrowseOutputDirectory"/>
+            </Grid>
+
+            <Grid StyleClass="FileBrowsingGridStyle">
+                <Label Grid.Row="0" Text="Output File Name" StyleClass="TitleLabel"/>
+                <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
+					x:Name="OutputFileEntry"
+					Placeholder="Output File Name"
+					Text="{Binding OutputFileName.Value}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding ValidateOutputFileNameCommand}" EventName="TextChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Grid.Row="2" Grid.Column="0" StyleClass="InvalidLabelStyle"
+					Text="{Binding OutputFileName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"/>
+            </Grid>
+
+            <Button
+				Text="Edit"
+				StyleClass="StandardHeightButtonStyle"
+				IsEnabled="{Binding IsSubmittable}"
+				Clicked="OnSubmit"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

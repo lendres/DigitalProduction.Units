@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dpui:PopupView
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	xmlns:dpconverters="clr-namespace:DigitalProduction.Converters;assembly=DigitalProductionMauiLibrary"
+	xmlns:viewmodel="clr-namespace:Thor.Maui"
+	xmlns:dpui="clr-namespace:DigitalProduction.UI;assembly=DigitalProductionMauiLibrary"
+	x:Class="Thor.Maui.UnitEntryView"
+	x:DataType="viewmodel:UnitEntryViewModel"
+	CanBeDismissedByTappingOutsideOfPopup="False">
+
+	<Frame StyleClass="PopupFrameStyle" MinimumWidthRequest="400" >
+
+		<Frame.Resources>
+			<ResourceDictionary>
+				<dpconverters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+			</ResourceDictionary>
+		</Frame.Resources>
+
+		<VerticalStackLayout StyleClass="VerticalLayoutStyle">
+			<Label Text="{Binding Title}" StyleClass="Title" HorizontalOptions="Start"/>
+
+			<Grid RowSpacing="10" Padding="0" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="200,200" ColumnSpacing="10">
+				<VerticalStackLayout Grid.Row="0" Grid.Column="0"  StyleClass="TitleVerticalStackStyle">
+					<Label Text="Name" StyleClass="TitleLabel"/>
+					<Entry
+						Placeholder="Name"
+						Loaded="OnLoadedSetFocus"
+						Text="{Binding Name.Value}"
+						HorizontalOptions="FillAndExpand">
+						<Entry.Behaviors>
+							<toolkit:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="TextChanged"/>
+						</Entry.Behaviors>
+					</Entry>
+					<Label Text="{Binding Name.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
+				</VerticalStackLayout>
+
+				<VerticalStackLayout Grid.Row="1" Grid.Column="0" StyleClass="TitleVerticalStackStyle">
+					<Label Text="Default Symbol" StyleClass="TitleLabel"/>
+					<Entry
+						Placeholder="Default Symbol"
+						Text="{Binding DefaultSymbol.Value}"
+						HorizontalOptions="FillAndExpand"
+						StyleClass="EntryStyle">
+						<Entry.Behaviors>
+							<toolkit:EventToCommandBehavior Command="{Binding ValidateDefaultSymbolCommand}" EventName="TextChanged"/>
+						</Entry.Behaviors>
+					</Entry>
+					<Label Text="{Binding DefaultSymbol.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
+				</VerticalStackLayout>
+
+				<VerticalStackLayout Grid.Row="2" Grid.Column="0" StyleClass="TitleVerticalStackStyle">
+					<Label Text="Alternate Symbol" StyleClass="TitleLabel"/>
+					<Entry
+						Placeholder="Alternate Symbol"
+						Text="{Binding AlternateSymbol.Value}"
+						HorizontalOptions="FillAndExpand"
+						StyleClass="EntryStyle">
+						<Entry.Behaviors>
+							<toolkit:EventToCommandBehavior Command="{Binding ValidateAlternateSymbolCommand}" EventName="TextChanged"/>
+						</Entry.Behaviors>
+					</Entry>
+					<Label Text="{Binding AlternateSymbol.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
+				</VerticalStackLayout>
+
+				<VerticalStackLayout Grid.Row="0" Grid.Column="1" StyleClass="TitleVerticalStackStyle">
+					<Label Text="Preadder" StyleClass="TitleLabel"/>
+					<Entry
+						Placeholder="Preadder"
+						Text="{Binding Preadder.Value}"
+						HorizontalOptions="FillAndExpand"
+						StyleClass="EntryStyle">
+						<Entry.Behaviors>
+							<toolkit:EventToCommandBehavior Command="{Binding ValidatePreadderCommand}" EventName="TextChanged"/>
+						</Entry.Behaviors>
+					</Entry>
+					<Label Text="{Binding Preadder.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
+				</VerticalStackLayout>
+
+				<VerticalStackLayout Grid.Row="1" Grid.Column="1" StyleClass="TitleVerticalStackStyle">
+					<Label Text="Multiplier" StyleClass="TitleLabel"/>
+					<Entry
+						Placeholder="Multiplier"
+						Text="{Binding Multiplier.Value}"
+						HorizontalOptions="FillAndExpand"
+						StyleClass="EntryStyle">
+						<Entry.Behaviors>
+							<toolkit:EventToCommandBehavior Command="{Binding ValidateMultiplierCommand}" EventName="TextChanged"/>
+						</Entry.Behaviors>
+					</Entry>
+					<Label Text="{Binding Multiplier.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
+				</VerticalStackLayout>
+
+				<VerticalStackLayout Grid.Row="2" Grid.Column="1" StyleClass="TitleVerticalStackStyle">
+					<Label Text="Postadder" StyleClass="TitleLabel"/>
+					<Entry
+						Placeholder="Postadder"
+						Text="{Binding Postadder.Value}"
+						HorizontalOptions="FillAndExpand"
+						StyleClass="EntryStyle">
+						<Entry.Behaviors>
+							<toolkit:EventToCommandBehavior Command="{Binding ValidatePostadderCommand}" EventName="TextChanged"/>
+						</Entry.Behaviors>
+					</Entry>
+					<Label Text="{Binding Postadder.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
+				</VerticalStackLayout>
+			</Grid>
+
+			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
+				<Label Text="Example Output" StyleClass="TitleLabel"/>
+				<Frame Padding="8">
+					<Label Text="{Binding ConversionMessage}" LineBreakMode="WordWrap"/>
+				</Frame>
+			</VerticalStackLayout>
+
+			<HorizontalStackLayout Padding="0" StyleClass="BottomButtonRowStyle">
+				<Button 
+					Text="Save"
+					HorizontalOptions="End"
+					StyleClass="StandardSizeButtonStyle"
+					Clicked="OnSaveButtonClicked"/>
+				<Button 
+					Text="Cancel"
+					StyleClass="StandardSizeButtonStyle"
+					HorizontalOptions="End"
+					Clicked="OnCancelButtonClicked"/>
+			</HorizontalStackLayout>
+
+		</VerticalStackLayout>
+	</Frame>
+</dpui:PopupView>

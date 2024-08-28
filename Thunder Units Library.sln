@@ -7,8 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThunderUnitsDotNet", "Libra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CCA28BC-458F-4578-BA29-91526D3E79C1}"
 	ProjectSection(SolutionItems) = preProject
-		Input Files\Units.xml = Input Files\Units.xml
+		Input Files\Units v1.0.xml = Input Files\Units v1.0.xml
+		Input Files\Units v2.0.xml = Input Files\Units v2.0.xml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnit Tests", "xUnit Tests\xUnit Tests.csproj", "{64FB265A-B99C-4016-B45E-D8891DA5EF49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitsConversionDemo", "Demo\UnitsConversionDemo.csproj", "{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThunderUnitsMauiUI", "ThunderMauiUI\ThunderUnitsMauiUI.csproj", "{8240C3EE-B279-441E-8305-F2E61223B5B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +27,20 @@ Global
 		{7C3E243B-61D3-4C2E-844D-6579AC4A6162}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C3E243B-61D3-4C2E-844D-6579AC4A6162}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C3E243B-61D3-4C2E-844D-6579AC4A6162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FB265A-B99C-4016-B45E-D8891DA5EF49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FB265A-B99C-4016-B45E-D8891DA5EF49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FB265A-B99C-4016-B45E-D8891DA5EF49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FB265A-B99C-4016-B45E-D8891DA5EF49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA114265-FEE1-432B-A2B6-FE3E37DA8C14}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8240C3EE-B279-441E-8305-F2E61223B5B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8240C3EE-B279-441E-8305-F2E61223B5B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8240C3EE-B279-441E-8305-F2E61223B5B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8240C3EE-B279-441E-8305-F2E61223B5B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

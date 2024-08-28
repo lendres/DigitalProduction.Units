@@ -1,0 +1,1271 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<unitfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Units" version="2.00">
+    <groups>
+        <unitgroupkeyvaluepair name="unknown">
+            <unitgroup name="Unknown">
+                <units>
+                    <unitkeyvaluepair name="unknown">
+                        <unit>
+                            <name>unknown</name>
+                            <defaultsymbol>unknown</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="unitless">
+            <unitgroup name="Unitless">
+                <units>
+                    <unitkeyvaluepair name="none">
+                        <unit>
+                            <name>none</name>
+                            <defaultsymbol>none</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="temperature">
+            <unitgroup name="Temperature">
+                <units>
+                    <unitkeyvaluepair name="kelvin">
+                        <unit>
+                            <name>kelvin</name>
+                            <defaultsymbol>K</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="celsius">
+                        <unit>
+                            <name>celsius</name>
+                            <defaultsymbol>C</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0</multiplier>
+                            <adder>273.15</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="centigrade">
+                        <unit>
+                            <name>centigrade</name>
+                            <defaultsymbol>centigrade</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0</multiplier>
+                            <adder>273.15</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="fahrenheit">
+                        <unit>
+                            <name>fahrenheit</name>
+                            <defaultsymbol>F</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>-32</preadder>
+                            <multiplier>0.5555555555555556</multiplier>
+                            <adder>273.15</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="millikelvin">
+                        <unit>
+                            <name>millikelvin</name>
+                            <defaultsymbol>mK</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="microkelvin">
+                        <unit>
+                            <name>microkelvin</name>
+                            <defaultsymbol>uK</defaultsymbol>
+                            <alternatesymbol>&#xB5;K</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="nanokelvin">
+                        <unit>
+                            <name>nanokelvin</name>
+                            <defaultsymbol>nK</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-09</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilokelvin">
+                        <unit>
+                            <name>kilokelvin</name>
+                            <defaultsymbol>kK</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="megakelvin">
+                        <unit>
+                            <name>megakelvin</name>
+                            <defaultsymbol>MK</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="reaumur">
+                        <unit>
+                            <name>reaumur</name>
+                            <defaultsymbol>R</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.555555555555556</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="mass">
+            <unitgroup name="Mass">
+                <units>
+                    <unitkeyvaluepair name="kilogram">
+                        <unit>
+                            <name>kilogram</name>
+                            <defaultsymbol>kg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="gram">
+                        <unit>
+                            <name>gram</name>
+                            <defaultsymbol>g</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="milligram">
+                        <unit>
+                            <name>milligram</name>
+                            <defaultsymbol>mg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="microgram">
+                        <unit>
+                            <name>microgram</name>
+                            <defaultsymbol>ug</defaultsymbol>
+                            <alternatesymbol>&#xB5;g</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1E-09</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="nanogram">
+                        <unit>
+                            <name>nanogram</name>
+                            <defaultsymbol>ng</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-12</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="megagram">
+                        <unit>
+                            <name>megagram</name>
+                            <defaultsymbol>Mg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="gigagram">
+                        <unit>
+                            <name>gigagram</name>
+                            <defaultsymbol>Gg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="ton">
+                        <unit>
+                            <name>ton</name>
+                            <defaultsymbol>ton</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>907.18474</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="stone">
+                        <unit>
+                            <name>stone</name>
+                            <defaultsymbol>stone</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>6.35029318</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="hundredweight">
+                        <unit>
+                            <name>hundredweight</name>
+                            <defaultsymbol>cwt</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>50.80234544</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pound">
+                        <unit>
+                            <name>pound</name>
+                            <defaultsymbol>lb</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.453592</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="ounce">
+                        <unit>
+                            <name>ounce</name>
+                            <defaultsymbol>oz</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0283495</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="slug">
+                        <unit>
+                            <name>slug</name>
+                            <defaultsymbol>slug</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>14.593902937</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="time">
+            <unitgroup name="Time">
+                <units>
+                    <unitkeyvaluepair name="second">
+                        <unit>
+                            <name>second</name>
+                            <defaultsymbol>s</defaultsymbol>
+                            <alternatesymbol>sec</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="minute">
+                        <unit>
+                            <name>minute</name>
+                            <defaultsymbol>min</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>60</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="hour">
+                        <unit>
+                            <name>hour</name>
+                            <defaultsymbol>hr</defaultsymbol>
+                            <alternatesymbol>h</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>3600</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="day">
+                        <unit>
+                            <name>day</name>
+                            <defaultsymbol>d</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>86400</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="year">
+                        <unit>
+                            <name>year</name>
+                            <defaultsymbol>yr</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>31536000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilosecond">
+                        <unit>
+                            <name>kilosecond</name>
+                            <defaultsymbol>ks</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="force">
+            <unitgroup name="Force">
+                <units>
+                    <unitkeyvaluepair name="newton">
+                        <unit>
+                            <name>newton</name>
+                            <defaultsymbol>N</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="dyne">
+                        <unit>
+                            <name>dyne</name>
+                            <defaultsymbol>dyn</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-05</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pound_force">
+                        <unit>
+                            <name>pound_force</name>
+                            <defaultsymbol>lbf</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>4.448221615</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kip">
+                        <unit>
+                            <name>kip</name>
+                            <defaultsymbol>kip</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>4448.221615</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="ton_force">
+                        <unit>
+                            <name>ton_force</name>
+                            <defaultsymbol>tonf</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>8896.44323</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilogram_force">
+                        <unit>
+                            <name>kilogram_force</name>
+                            <defaultsymbol>kgf</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>9.80665</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="metric_ton">
+                        <unit>
+                            <name>metric_ton</name>
+                            <defaultsymbol>m ton</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>9806.65</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="meganewton">
+                        <unit>
+                            <name>meganewton</name>
+                            <defaultsymbol>MN</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="giganewton">
+                        <unit>
+                            <name>giganewton</name>
+                            <defaultsymbol>GN</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilonewton">
+                        <unit>
+                            <name>kilonewton</name>
+                            <defaultsymbol>kN</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="millinewton">
+                        <unit>
+                            <name>millinewton</name>
+                            <defaultsymbol>mN</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="micronewton">
+                        <unit>
+                            <name>micronewton</name>
+                            <defaultsymbol>uN</defaultsymbol>
+                            <alternatesymbol>&#xB5;N</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="nanonewton">
+                        <unit>
+                            <name>nanonewton</name>
+                            <defaultsymbol>nN</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-09</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="torque">
+            <unitgroup name="Torque">
+                <units>
+                    <unitkeyvaluepair name="newton meter">
+                        <unit>
+                            <name>newton meter</name>
+                            <defaultsymbol>N-m</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="decanewton meter">
+                        <unit>
+                            <name>decanewton meter</name>
+                            <defaultsymbol>daN-m</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilonewton meter">
+                        <unit>
+                            <name>kilonewton meter</name>
+                            <defaultsymbol>kN-m</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="newton centimeter">
+                        <unit>
+                            <name>newton centimeter</name>
+                            <defaultsymbol>N-cm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.01</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pound_force foot">
+                        <unit>
+                            <name>pound_force foot</name>
+                            <defaultsymbol>lb-ft</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1.3558180656</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pound_force inch">
+                        <unit>
+                            <name>pound_force inch</name>
+                            <defaultsymbol>lb-in</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.112984775</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="momentum">
+            <unitgroup name="Momentum">
+                <units>
+                    <unitkeyvaluepair name="kilogram meters per second">
+                        <unit>
+                            <name>kilogram meters per second</name>
+                            <defaultsymbol>kg.m/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pound feet per hour">
+                        <unit>
+                            <name>pound feet per hour</name>
+                            <defaultsymbol>lb.ft/hr</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="speed">
+            <unitgroup name="Speed">
+                <units>
+                    <unitkeyvaluepair name="meters per second">
+                        <unit>
+                            <name>meters per second</name>
+                            <defaultsymbol>m/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilometers per hour">
+                        <unit>
+                            <name>kilometers per hour</name>
+                            <defaultsymbol>kph</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.2777777777778</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="meters per minute">
+                        <unit>
+                            <name>meters per minute</name>
+                            <defaultsymbol>m/min</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.016666666666666666</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="centimeters per second">
+                        <unit>
+                            <name>centimeters per second</name>
+                            <defaultsymbol>cm/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.01</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="meters per hour">
+                        <unit>
+                            <name>meters per hour</name>
+                            <defaultsymbol>m/h</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0002777778</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="miles per hour">
+                        <unit>
+                            <name>miles per hour</name>
+                            <defaultsymbol>mph</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.44704</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="feet per second">
+                        <unit>
+                            <name>feet per second</name>
+                            <defaultsymbol>ft/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.3048</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="feet per hour">
+                        <unit>
+                            <name>feet per hour</name>
+                            <defaultsymbol>ft/h</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>8.466666666667E-05</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="inches per second">
+                        <unit>
+                            <name>inches per second</name>
+                            <defaultsymbol>inches/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0254</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="knot">
+                        <unit>
+                            <name>knot</name>
+                            <defaultsymbol>knot</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.514444</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="length">
+            <unitgroup name="Length">
+                <units>
+                    <unitkeyvaluepair name="meter">
+                        <unit>
+                            <name>meter</name>
+                            <defaultsymbol>m</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="yard">
+                        <unit>
+                            <name>yard</name>
+                            <defaultsymbol>yd</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.9144</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="foot">
+                        <unit>
+                            <name>foot</name>
+                            <defaultsymbol>ft</defaultsymbol>
+                            <alternatesymbol>'</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>0.3048</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="chain">
+                        <unit>
+                            <name>chain</name>
+                            <defaultsymbol>chain</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>20.1168</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="mile">
+                        <unit>
+                            <name>mile</name>
+                            <defaultsymbol>mile</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1609.344</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilometer">
+                        <unit>
+                            <name>kilometer</name>
+                            <defaultsymbol>km</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="megameter">
+                        <unit>
+                            <name>megameter</name>
+                            <defaultsymbol>Mm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="gigameter">
+                        <unit>
+                            <name>gigameter</name>
+                            <defaultsymbol>Gm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="furlong">
+                        <unit>
+                            <name>furlong</name>
+                            <defaultsymbol>furlong</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>201.168</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="thou">
+                        <unit>
+                            <name>thou</name>
+                            <defaultsymbol>thou</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>2.54E-05</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="micron">
+                        <unit>
+                            <name>micron</name>
+                            <defaultsymbol>um</defaultsymbol>
+                            <alternatesymbol>&#xB5;m</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="inch">
+                        <unit>
+                            <name>inch</name>
+                            <defaultsymbol>in</defaultsymbol>
+                            <alternatesymbol>"</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>0.0254</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="centimeter">
+                        <unit>
+                            <name>centimeter</name>
+                            <defaultsymbol>cm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.01</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="millimeter">
+                        <unit>
+                            <name>millimeter</name>
+                            <defaultsymbol>mm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="power">
+            <unitgroup name="Power">
+                <units>
+                    <unitkeyvaluepair name="watt">
+                        <unit>
+                            <name>watt</name>
+                            <defaultsymbol>W</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="horsepower">
+                        <unit>
+                            <name>horsepower</name>
+                            <defaultsymbol>hp</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>745.69987</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="megawatt">
+                        <unit>
+                            <name>megawatt</name>
+                            <defaultsymbol>MW</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilowatt">
+                        <unit>
+                            <name>kilowatt</name>
+                            <defaultsymbol>kW</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="microwatt">
+                        <unit>
+                            <name>microwatt</name>
+                            <defaultsymbol>uW</defaultsymbol>
+                            <alternatesymbol>&#xB5;W</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="nanowatt">
+                        <unit>
+                            <name>nanowatt</name>
+                            <defaultsymbol>nW</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-09</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="milliwatt">
+                        <unit>
+                            <name>milliwatt</name>
+                            <defaultsymbol>mW</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="energy">
+            <unitgroup name="Energy">
+                <units>
+                    <unitkeyvaluepair name="joule">
+                        <unit>
+                            <name>joule</name>
+                            <defaultsymbol>J</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="erg">
+                        <unit>
+                            <name>erg</name>
+                            <defaultsymbol>erg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-07</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="calorie">
+                        <unit>
+                            <name>calorie</name>
+                            <defaultsymbol>cal</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>4.1868</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="british_thermal_unit">
+                        <unit>
+                            <name>british_thermal_unit</name>
+                            <defaultsymbol>Btu</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1055.05585</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="therm">
+                        <unit>
+                            <name>therm</name>
+                            <defaultsymbol>therm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>105505585000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="millijoule">
+                        <unit>
+                            <name>millijoule</name>
+                            <defaultsymbol>mJ</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="megajoule">
+                        <unit>
+                            <name>megajoule</name>
+                            <defaultsymbol>MJ</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilojoule">
+                        <unit>
+                            <name>kilojoule</name>
+                            <defaultsymbol>kJ</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="gigajoule">
+                        <unit>
+                            <name>gigajoule</name>
+                            <defaultsymbol>GJ</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="microjoule">
+                        <unit>
+                            <name>microjoule</name>
+                            <defaultsymbol>uJ</defaultsymbol>
+                            <alternatesymbol>&#xB5;J</alternatesymbol>
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="nanojoule">
+                        <unit>
+                            <name>nanojoule</name>
+                            <defaultsymbol>nJ</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-09</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="angle">
+            <unitgroup name="Angle">
+                <units>
+                    <unitkeyvaluepair name="radian">
+                        <unit>
+                            <name>radian</name>
+                            <defaultsymbol>rad</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="degree">
+                        <unit>
+                            <name>degree</name>
+                            <defaultsymbol>deg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.01745329251994</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="gradian">
+                        <unit>
+                            <name>gradian</name>
+                            <defaultsymbol>grad</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0</multiplier>
+                            <adder>0.01570796326795</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="revolution">
+                        <unit>
+                            <name>revolution</name>
+                            <defaultsymbol>rev</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>6.28318530718</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="angular speed">
+            <unitgroup name="Angular Speed">
+                <units>
+                    <unitkeyvaluepair name="radians per second">
+                        <unit>
+                            <name>radians per second</name>
+                            <defaultsymbol>rad/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="degrees per second">
+                        <unit>
+                            <name>degrees per second</name>
+                            <defaultsymbol>deg/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0174532925</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="revolutions per minute">
+                        <unit>
+                            <name>revolutions per minute</name>
+                            <defaultsymbol>rev/m</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.10471975512</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="revolutions per second">
+                        <unit>
+                            <name>revolutions per second</name>
+                            <defaultsymbol>rev/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>6.28318530718</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="acceleration">
+            <unitgroup name="Acceleration">
+                <units>
+                    <unitkeyvaluepair name="gravity">
+                        <unit>
+                            <name>gravity</name>
+                            <defaultsymbol>grav</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="inches per second^2">
+                        <unit>
+                            <name>inches per second^2</name>
+                            <defaultsymbol>inch/s/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0025900792</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="feet per second^2">
+                        <unit>
+                            <name>feet per second^2</name>
+                            <defaultsymbol>ft/s/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0310809502</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="meters per second^2">
+                        <unit>
+                            <name>meters per second^2</name>
+                            <defaultsymbol>m/s/s</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.1019716213</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="pressure">
+            <unitgroup name="Pressure">
+                <units>
+                    <unitkeyvaluepair name="pascal">
+                        <unit>
+                            <name>pascal</name>
+                            <defaultsymbol>Pa</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="atmosphere">
+                        <unit>
+                            <name>atmosphere</name>
+                            <defaultsymbol>atm</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>101325</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="centimeters_of_mercury">
+                        <unit>
+                            <name>centimeters_of_mercury</name>
+                            <defaultsymbol>cmHzg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1333.22</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="inches_of_mercury">
+                        <unit>
+                            <name>inches_of_mercury</name>
+                            <defaultsymbol>inHg</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>3386.389</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilopascal">
+                        <unit>
+                            <name>kilopascal</name>
+                            <defaultsymbol>kPa</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="megapascal">
+                        <unit>
+                            <name>megapascal</name>
+                            <defaultsymbol>Mpa</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pounds per square foot">
+                        <unit>
+                            <name>pounds per square foot</name>
+                            <defaultsymbol>lbs/ft^2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>47.88025</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="pounds per square inch">
+                        <unit>
+                            <name>pounds per square inch</name>
+                            <defaultsymbol>lbs/in^2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>6894.757</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="bar">
+                        <unit>
+                            <name>bar</name>
+                            <defaultsymbol>bar</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>100000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="decibar">
+                        <unit>
+                            <name>decibar</name>
+                            <defaultsymbol>dbar</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="millibar">
+                        <unit>
+                            <name>millibar</name>
+                            <defaultsymbol>mbar</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>100</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+    </groups>
+</unitfile>
