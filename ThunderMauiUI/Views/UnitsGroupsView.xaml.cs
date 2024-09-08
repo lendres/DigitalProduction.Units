@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Maui.Views;
-using DigitalProduction.UI;
+using DigitalProduction.Controls;
 using Thor.Units;
 
 namespace Thor.Maui;

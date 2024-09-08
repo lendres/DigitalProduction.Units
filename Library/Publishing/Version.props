@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 	<PropertyGroup>
-		<Major Condition=" '$(Major)' == '' ">0</Major>
-		<Minor Condition=" '$(Minor)' == '' ">6</Minor>
-		<BuildNumber Condition=" '$(BuildNumber)' == '' ">1</BuildNumber>
+		<Major Condition=" '$(Major)' == '' ">2</Major>
+		<Minor Condition=" '$(Minor)' == '' ">0</Minor>
+		<BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
 		<!--<InformationalVersion>This is a prerelease package.</InformationalVersion>-->
 
 		<VersionPrefix Condition=" '$(Major)' != '' and '$(Minor)' != '' and '$(BuildNumber)' != ''">$(Major).$(Minor).$(BuildNumber)</VersionPrefix>
