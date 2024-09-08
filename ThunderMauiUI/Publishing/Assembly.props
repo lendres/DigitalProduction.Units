@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+	<PropertyGroup>
+		<Title>Thunder Units Maui Interface Components</Title>
+		<Product>Thunder Units Maui Interface Components</Product>
+		<Copyright>Lance A. Endres</Copyright>
+		<Company>None</Company>
+		<Description>Interface components for using the Thunder Units conversion library in .Net Maui.</Description>
+	</PropertyGroup>
+</Project>
