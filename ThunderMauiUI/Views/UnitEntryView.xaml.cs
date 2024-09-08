@@ -1,4 +1,4 @@
-﻿using DigitalProduction.UI;
+﻿using DigitalProduction.Views;
 
 namespace Thor.Maui;
 
