@@ -1,9 +1,5 @@
 ﻿using CommunityToolkit.Maui.Storage;
-using CommunityToolkit.Maui.Views;
-using DigitalProduction.UI;
-using DigitalProduction.ViewModels;
 using Thor.Maui;
-using Thor.Units;
 using UnitsConversionDemo.ViewModels;
 
 namespace UnitsConversionDemo;
@@ -18,16 +14,6 @@ public partial class EditMainView : ContentPage
 	public EditMainView()
 	{
 		InitializeComponent();
-	}
-
-	#endregion
-
-	#region Menu Events
-
-	async void OnAbout(object sender, EventArgs eventArgs)
-	{
-		AboutView1		view		= new(new AboutViewModel(true));
-		object?			result		= await Shell.Current.ShowPopupAsync(view);
 	}
 
 	#endregion
