@@ -14,10 +14,6 @@
 		<viewmodel:UnitGroupViewModel/>
 	</ContentPage.BindingContext>
 	
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Back" Clicked="OnNavigateBack"></ToolbarItem>
-	</ContentPage.ToolbarItems>
-
 	<ContentPage.Resources>
 		<toolkit:IsNullConverter x:Key="IsNullConverter"/>
 		<toolkit:IsNotNullConverter x:Key="IsNotNullConverter"/>

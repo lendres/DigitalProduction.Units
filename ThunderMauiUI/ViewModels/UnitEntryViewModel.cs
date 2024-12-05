@@ -223,9 +223,10 @@ public partial class UnitEntryViewModel : ObservableObject
 
 		UnitEntry defaultUnit = _unitGroup.Units.First().Value;
 
-		UnitResult result = _unitConverter.ConvertUnits(1, UnitEntry, defaultUnit, out double outputValue);
+		UnitResult result = _unitConverter.UnsafeConvertUnits(1, UnitEntry, defaultUnit, out double outputValue);
+		System.Diagnostics.Debug.Assert(result == UnitResult.NoError, "An error occured during conversion.");
 
-		ConversionMessage = "1 " + UnitEntry.DefaultSymbol + " is " + String.Format("{0:0.0#####}", outputValue) + " " + defaultUnit.Name;
+		ConversionMessage = "1 " + UnitEntry.DefaultSymbol + " is " + String.Format("{0:0.0#####}", outputValue) + " " + defaultUnit.DefaultSymbol;
 	}
 
 	#endregion

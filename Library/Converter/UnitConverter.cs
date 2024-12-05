@@ -505,8 +505,6 @@ public class UnitConverter : IModified
 	/// <returns>Unit result value.</returns>
 	public UnitResult ConvertUnits(double value, UnitEntry? unitEntryFrom, UnitEntry? unitEntryTo, out double output)
 	{
-		double x = value;
-
 		// Default to the fail safe value.
 		output = FAILSAFE_VALUE;
 
@@ -522,19 +520,44 @@ public class UnitConverter : IModified
 			return UnitResult.UnitMismatch;
 		}
 
-		UnitResult result = ConvertToStandard(x, unitEntryFrom, out x);
-		if (result != UnitResult.NoError)
-		{
-			return result;
-		}
 
-		result = ConvertFromStandard(x, unitEntryTo, out x);
+		double x = value;
+		
+		UnitResult result = UnsafeConvertUnits(x, unitEntryFrom, unitEntryTo, out x);
 		if (result != UnitResult.NoError)
 		{
 			return result;
 		}
 
 		output = x;
+
+		return UnitResult.NoError;
+	}
+
+	/// <summary>
+	/// Does not perform error checking while converting units.  Should only be used when the input is known to be valid
+	/// and there is justification for skipping the error checking.
+	/// 
+	/// Performs a unit conversion between two units, given a value to convert.
+	/// </summary>
+	/// <param name="value">The value to convert.</param>
+	/// <param name="unitEntryFrom">The UnitEntry the value is currently in.</param>
+	/// <param name="unitEntryTo">The UnitEntry that the value is to be converted to.</param>
+	/// <param name="output">The converted value.</param>
+	/// <returns>Unit result value.</returns>
+	public UnitResult UnsafeConvertUnits(double value, UnitEntry unitEntryFrom, UnitEntry unitEntryTo, out double output)
+	{
+		UnitResult result = ConvertToStandard(value, unitEntryFrom, out output);
+		if (result != UnitResult.NoError)
+		{
+			return result;
+		}
+
+		result = ConvertFromStandard(output, unitEntryTo, out output);
+		if (result != UnitResult.NoError)
+		{
+			return result;
+		}
 
 		return UnitResult.NoError;
 	}
