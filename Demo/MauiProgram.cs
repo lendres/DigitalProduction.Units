@@ -33,8 +33,8 @@ public static class MauiProgram
 
 	static void RegisterViewsAndViewModels(IServiceCollection services)
 	{
-		services.AddSingleton<ParsingViewModel>();
-		services.AddSingleton<ParseView>();
+		services.AddTransient<ParsingViewModel>();
+		services.AddTransient<ParseView>();
 
 		services.AddTransientPopup<Thor.Maui.UnitEntryView, Thor.Maui.UnitEntryViewModel>();
 

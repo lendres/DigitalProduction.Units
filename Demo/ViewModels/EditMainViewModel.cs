@@ -10,9 +10,6 @@ public partial class EditMainViewModel : ObservableObject
 	#region Fields
 
 	[ObservableProperty]
-	private UnitConverter?				_unitConverter;
-
-	[ObservableProperty]
 	private string						_input							= "";
 
 	[ObservableProperty]
@@ -35,7 +32,6 @@ public partial class EditMainViewModel : ObservableObject
 	[ObservableProperty]
 	private bool						_isSubmittable;
 
-
 	#endregion
 
 	#region Construction
@@ -47,6 +43,12 @@ public partial class EditMainViewModel : ObservableObject
 		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.Path);
 		AddValidations();
 	}
+
+	#endregion
+
+	#region Properties
+
+	public UnitConverter? UnitConverter { get => UnitFileIO.UnitConverter; }
 
 	#endregion
 
@@ -71,6 +73,10 @@ public partial class EditMainViewModel : ObservableObject
 	private void ValidateInputFile()
 	{
 		InputFile.Validate();
+		if (InputFile.IsValid)
+		{
+			UnitFileIO.LoadUnitsFile(InputFile.Value!);
+		}
 		ValidateSubmittable();
 	}
 
@@ -102,9 +108,11 @@ public partial class EditMainViewModel : ObservableObject
 
 	#endregion
 
+	#region Methods
+
 	public void OnSubmit()
 	{
-		UnitConverter = UnitFileIO.LoadUnitsFile(InputFile.Value!);
+		UnitFileIO.LoadUnitsFile(InputFile.Value!);
 
 		if (UnitConverter == null)
 		{
@@ -117,4 +125,6 @@ public partial class EditMainViewModel : ObservableObject
 			Message = "";
 		}
 	}
+
+	#endregion
 }
