@@ -5,28 +5,26 @@ namespace UnitsConversionDemo;
 
 public static class UnitFileIO
 {
-	public static string	FileNameV2		= "Units v2.0.xml";
+	public static string	FileName = "Units v2.0.xml";
 
-	public static string	Folder { get; private set; } = "";
-
-	public static string	PathV2 { get =>  Path.Combine(Folder, FileNameV2); }
+	public static string	Path { get => System.IO.Path.Combine(Folder, FileName); }
 
 	public static string	Message { get; private set; } = "";
 
 	static UnitFileIO()
 	{
-		string baseDirectory = DigitalProduction.Reflection.Assembly.Path()  ?? ".\\";
-		Folder	= DigitalProduction.IO.Path.ChangeDirectoryDotDot(baseDirectory, 6);
-		Folder	= Path.Combine(Folder, "Input Files");
-		Debug.WriteLine("Root folder: " + Folder);
+		string baseDirectory	= DigitalProduction.Reflection.Assembly.Path()  ?? ".\\";
+		baseDirectory			= DigitalProduction.IO.Path.ChangeDirectoryDotDot(baseDirectory, 6);
+		baseDirectory			= System.IO.Path.Combine(baseDirectory, "Input Files");
+		Debug.WriteLine("Root folder: " + baseDirectory);
 	}
 
-	public static UnitConverter? LoadVersionTwoFile()
+	public static UnitConverter? LoadUnitsFile()
 	{
-		return LoadVersionTwoFile(PathV2);;
+		return LoadUnitsFile(Path);;
 	}
 
-	public static UnitConverter? LoadVersionTwoFile(string path)
+	public static UnitConverter? LoadUnitsFile(string path)
 	{
 		Debug.WriteLine("File: " + path);
 		Message = "";

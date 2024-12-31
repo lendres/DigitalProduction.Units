@@ -7,7 +7,6 @@ namespace UnitsConversionDemo.ViewModels;
 
 public partial class EditMainViewModel : ObservableObject
 {
-
 	#region Fields
 
 	[ObservableProperty]
@@ -43,9 +42,9 @@ public partial class EditMainViewModel : ObservableObject
 
 	public EditMainViewModel()
     {
-		InputFile.Value			= UnitFileIO.PathV2;
-		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.PathV2);
-		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.PathV2);
+		InputFile.Value			= UnitFileIO.Path;
+		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.Path);
+		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.Path);
 		AddValidations();
 	}
 
@@ -105,12 +104,12 @@ public partial class EditMainViewModel : ObservableObject
 
 	public void OnSubmit()
 	{
-		UnitConverter = UnitFileIO.LoadVersionTwoFile(InputFile.Value!);
+		UnitConverter = UnitFileIO.LoadUnitsFile(InputFile.Value!);
 
 		if (UnitConverter == null)
 		{
-			Message = "The Units file could not be loaded." + Environment.NewLine +
-						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
+			Message =	"The Units file could not be loaded." + Environment.NewLine +
+						"File: " + UnitFileIO.Path + Environment.NewLine +
 						"Message: " + UnitFileIO.Message;
 		}
 		else

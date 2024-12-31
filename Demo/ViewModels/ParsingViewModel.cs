@@ -5,7 +5,6 @@ namespace UnitsConversionDemo.ViewModels;
 
 public partial class ParsingViewModel : ObservableObject
 {
-
 	#region Fields
 
 	[ObservableProperty]
@@ -28,11 +27,11 @@ public partial class ParsingViewModel : ObservableObject
 
 	public ParsingViewModel()
     {
-		UnitsConverter = UnitFileIO.LoadVersionTwoFile();
+		UnitsConverter = UnitFileIO.LoadUnitsFile();
 		if (UnitsConverter == null)
 		{
 			Message =	"The Units file could not be loaded." + Environment.NewLine +
-						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
+						"File: " + UnitFileIO.Path + Environment.NewLine +
 						"Message: " + UnitFileIO.Message;
 		}
 	}
