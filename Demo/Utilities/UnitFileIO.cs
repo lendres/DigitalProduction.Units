@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Core.Primitives;
-using DigitalProduction.Delegates;
-using Microsoft.Maui.Media;
+﻿using DigitalProduction.Delegates;
 using System.Diagnostics;
 using Thor.Units;
 
@@ -8,6 +6,8 @@ namespace UnitsConversionDemo;
 
 public static class UnitFileIO
 {
+	#region Fields, Events, and Properties
+
 	public static event				NoArgumentsEventHandler?				UnitsFileChanged;
 
 	public static string			FileName								= "Units v2.0.xml";
@@ -15,6 +15,10 @@ public static class UnitFileIO
 	public static UnitConverter?	UnitConverter { get; private set; }		= null!;
 	public static string			Path { get; set; }						= "";
 	public static string			Message	{ get; private set; }			= "";
+
+	#endregion
+
+	#region Construction
 
 	static UnitFileIO()
 	{
@@ -24,6 +28,10 @@ public static class UnitFileIO
 		Path					= System.IO.Path.Combine(baseDirectory, FileName);
 		Debug.WriteLine("Root folder: "+baseDirectory);
 	}
+
+	#endregion
+
+	#region Methods
 
 	public static void LoadUnitsFile()
 	{
@@ -62,4 +70,6 @@ public static class UnitFileIO
 	{
 		Debug.WriteLine("Error: " + eventArgs.DetailMessage);
 	}
+
+	#endregion
 }
