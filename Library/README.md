@@ -10,10 +10,10 @@ Features:
 ## Usage
 UnitConverter.Deserialize("units.xml");
 
-// Parsing.
+// Parsing.\
 UnitResult result = unitConverter.ParseUnitString("1 m", out double value, out string inUnits);
 
-// Conversion.
+// Conversion.\
 result = unitConverter.ConvertUnits(value, inUnits, "ft", out double convertedValue);
 
 ## User Interface
