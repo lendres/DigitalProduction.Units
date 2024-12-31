@@ -7,4 +7,28 @@
 		<Company>None</Company>
 		<Description>Interface components for using the Thunder Units conversion library in .Net Maui.</Description>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="DigitalProduction.Reflection.AuthorsAttribute">
+			<_Parameter1>Lance A. Endres</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="DigitalProduction.Reflection.WebsiteAttribute">
+			<_Parameter1>https://github.com/lendres/Thunder-Units-Dot-Net-Library</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="DigitalProduction.Reflection.IssuesAddressAttribute">
+			<_Parameter1>https://github.com/lendres/Thunder-Units-Dot-Net-Library/issues</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="DigitalProduction.Reflection.DocumentationAddressAttribute">
+			<_Parameter1>https://github.com/lendres/Thunder-Units-Dot-Net-Library/wiki</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 </Project>

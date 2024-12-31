@@ -19,7 +19,25 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<RootNamespace>Thor.Maui</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Company>Digital Production</Company>
+		<Authors>Lance A. Endres</Authors>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<RepositoryUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</RepositoryUrl>
+		<PackageTags>Units;conversion;.Net;C#,Maui,MVVM</PackageTags>
+		<PackageProjectUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</PackageProjectUrl>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="akgul.Maui.DataGrid" Version="4.0.5" />

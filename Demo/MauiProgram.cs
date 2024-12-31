@@ -44,7 +44,6 @@ public static class MauiProgram
 		services.AddTransient<Thor.Maui.UnitGroupViewModel>();
 	}
 
-
 	static void RegisterEssentials(in IServiceCollection services)
 	{
 		services.AddSingleton<IFileSaver>(FileSaver.Default);

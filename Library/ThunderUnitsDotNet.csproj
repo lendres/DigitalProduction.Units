@@ -17,18 +17,19 @@
 	<!-- Import version information from the folder containing the project if the file exists -->
 	<Import Project="$(MSBuildProjectDirectory)/Publishing/Assembly.props" Condition="Exists('$(MSBuildProjectDirectory)/Publishing/Assembly.props')" />
 	<Import Project="$(MSBuildProjectDirectory)/Publishing/Version.props" Condition="Exists('$(MSBuildProjectDirectory)/Publishing/Version.props')" />
+
 	<ItemGroup>
 	  <None Include="..\LICENSE">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
-	  <None Include="..\README.md">
+	  <None Include="README.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
 	</ItemGroup>
+
 	<ItemGroup>
 	  <PackageReference Include="DigitalProductionDotNetLibrary" Version="0.3.0" />
 	</ItemGroup>
-
 </Project>
