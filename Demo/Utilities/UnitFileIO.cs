@@ -19,7 +19,7 @@ public static class UnitFileIO
 	static UnitFileIO()
 	{
 		string baseDirectory	= DigitalProduction.Reflection.Assembly.Path()  ?? ".\\";
-		baseDirectory			= DigitalProduction.IO.Path.ChangeDirectoryDotDot(baseDirectory, 6);
+		baseDirectory			= DigitalProduction.IO.Path.ChangeDirectoryDotDot(baseDirectory, 5);
 		baseDirectory			= System.IO.Path.Combine(baseDirectory, "Input Files");
 		Path					= System.IO.Path.Combine(baseDirectory, FileName);
 		Debug.WriteLine("Root folder: "+baseDirectory);
