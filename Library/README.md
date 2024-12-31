@@ -16,15 +16,10 @@ UnitResult result = unitConverter.ParseUnitString("1 m", out double value, out s
 // Conversion.
 result = unitConverter.ConvertUnits(value, inUnits, "ft", out double convertedValue);
 
-
 ## User Interface
 A companion package exists which adds user interface components (ThunderUnitsMauiUI).  That package adds view models and views for .Net Maui.  It can be used directly, or the source code (available at the package repository) can be used and modified as required.
 
 ## History
 Originally created by Robert Harwood (<robharwood@runbox.com>) and posted as open-sourced on Code Project.  The original page has been lost over time.  This version has been updated to work with newer .Net language features.
 
-# User Interface Components for Thunder Unit Conversion Library
-Library of components built in .Net Maui for interacting with the Thunder Units library.
-
-# Units Conversion Demo
-Demonstration project for the library and user interface components.
+Version 2 changes the format of the XML file to correspond to a change in philosophy.  The primary method of editing the XML file through a user interface rather than directly editing it.  To support this, and clean up the source code, the format was changed.  It is no longer compatible with the original format.

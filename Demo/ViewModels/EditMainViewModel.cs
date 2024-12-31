@@ -7,11 +7,7 @@ namespace UnitsConversionDemo.ViewModels;
 
 public partial class EditMainViewModel : ObservableObject
 {
-
 	#region Fields
-
-	[ObservableProperty]
-	private UnitConverter?				_unitConverter;
 
 	[ObservableProperty]
 	private string						_input							= "";
@@ -36,18 +32,23 @@ public partial class EditMainViewModel : ObservableObject
 	[ObservableProperty]
 	private bool						_isSubmittable;
 
-
 	#endregion
 
 	#region Construction
 
 	public EditMainViewModel()
     {
-		InputFile.Value			= UnitFileIO.PathV2;
-		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.PathV2);
-		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.PathV2);
+		InputFile.Value			= UnitFileIO.Path;
+		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.Path);
+		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.Path);
 		AddValidations();
 	}
+
+	#endregion
+
+	#region Properties
+
+	public UnitConverter? UnitConverter { get => UnitFileIO.UnitConverter; }
 
 	#endregion
 
@@ -72,6 +73,10 @@ public partial class EditMainViewModel : ObservableObject
 	private void ValidateInputFile()
 	{
 		InputFile.Validate();
+		if (InputFile.IsValid)
+		{
+			UnitFileIO.LoadUnitsFile(InputFile.Value!);
+		}
 		ValidateSubmittable();
 	}
 
@@ -103,14 +108,16 @@ public partial class EditMainViewModel : ObservableObject
 
 	#endregion
 
+	#region Methods
+
 	public void OnSubmit()
 	{
-		UnitConverter = UnitFileIO.LoadVersionTwoFile(InputFile.Value!);
+		UnitFileIO.LoadUnitsFile(InputFile.Value!);
 
 		if (UnitConverter == null)
 		{
-			Message = "The Units file could not be loaded." + Environment.NewLine +
-						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
+			Message =	"The Units file could not be loaded." + Environment.NewLine +
+						"File: " + UnitFileIO.Path + Environment.NewLine +
 						"Message: " + UnitFileIO.Message;
 		}
 		else
@@ -118,4 +125,6 @@ public partial class EditMainViewModel : ObservableObject
 			Message = "";
 		}
 	}
+
+	#endregion
 }

@@ -6,9 +6,6 @@ namespace UnitsConversionDemo;
 
 public partial class EditMainView : ContentPage
 {
-	#region Fields
-	#endregion
-
 	#region Construction
 
 	public EditMainView()
@@ -62,7 +59,7 @@ public partial class EditMainView : ContentPage
 		
 		if (!DigitalProduction.IO.Path.PathIsWritable(viewModel.OutputFileFullPath))
 		{
-			await DisplayAlert("Error", "The output file is not writable.  The file may be open by another application.  Please resolve the situation or choose another file name.", "Ok");
+			await DisplayAlert("Error", "The output file is not writable.  The path may not exist or the file may be open by another application.  Please resolve the situation or choose another file name.", "Ok");
 			return;
 		}
 
@@ -89,8 +86,5 @@ public partial class EditMainView : ContentPage
 		}
 	}
 
-	#endregion
-
-	#region Methods
 	#endregion
 }
