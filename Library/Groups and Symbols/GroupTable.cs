@@ -4,7 +4,7 @@
  * 
  * Please see included license.txt file for information on redistribution and usage.
  */
-using DigitalProduction.XML.Serialization;
+using DigitalProduction.Xml.Serialization;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml.Serialization;
