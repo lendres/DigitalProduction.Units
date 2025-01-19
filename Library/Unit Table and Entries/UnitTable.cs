@@ -7,7 +7,7 @@
 using DigitalProduction.Xml.Serialization;
 using System.Diagnostics;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Contains a table, mapping units to their names.

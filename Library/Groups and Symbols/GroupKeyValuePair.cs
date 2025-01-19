@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Add serialization to a dictionary.

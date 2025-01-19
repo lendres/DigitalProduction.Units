@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0305:Simplify collection initialization", Justification = "Left for readability.", Scope = "namespaceanddescendants", Target = "~N:Thor.Maui")]
+[assembly: SuppressMessage("Style", "IDE0305:Simplify collection initialization", Justification = "Left for readability.", Scope = "namespaceanddescendants", Target = "~N:DigitalProduction.Units.Maui.)]

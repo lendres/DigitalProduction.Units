@@ -1,6 +1,6 @@
-﻿using DigitalProduction.Views;
+﻿using DigitalProduction.Maui.Views;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 public partial class NameView : PopupView
 {

@@ -9,7 +9,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Contains a table of unit groups.

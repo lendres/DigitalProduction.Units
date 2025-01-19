@@ -8,7 +8,7 @@ using DigitalProduction.Xml.Serialization;
 using System.Collections;
 using System.Diagnostics;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Contains a table, mapping unit symbols to the unit class.

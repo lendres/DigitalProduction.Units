@@ -4,7 +4,7 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// The method form for the unit conversion classes event handling.

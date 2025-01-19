@@ -6,7 +6,7 @@
  */
 using System;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Summary description for DataString.

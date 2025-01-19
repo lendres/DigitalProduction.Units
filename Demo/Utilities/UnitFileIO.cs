@@ -1,6 +1,6 @@
 ﻿using DigitalProduction.Delegates;
 using System.Diagnostics;
-using Thor.Units;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo;
 
@@ -47,7 +47,7 @@ public static class UnitFileIO
 		try
 		{
 			UnitConverter			= UnitConverter.Deserialize(path);
-			UnitConverter.OnError	+= new Thor.Units.UnitEventHandler(Converter_OnError);
+			UnitConverter.OnError	+= new DigitalProduction.Units.UnitEventHandler(Converter_OnError);
 		}
 		catch (Exception exception)
 		{
@@ -66,7 +66,7 @@ public static class UnitFileIO
 	/// </summary>
 	/// <param name="sender">Sender.</param>
 	/// <param name="eventArgs">Event arguments.</param>
-	private static void Converter_OnError(object sender, Thor.Units.UnitEventArgs eventArgs)
+	private static void Converter_OnError(object sender, DigitalProduction.Units.UnitEventArgs eventArgs)
 	{
 		Debug.WriteLine("Error: " + eventArgs.DetailMessage);
 	}
