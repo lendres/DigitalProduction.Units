@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Maui.Views;
-using DigitalProduction.Controls;
-using Thor.Units;
+using DigitalProduction.Maui.Controls;
+using DigitalProduction.Units;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 public partial class UnitsGroupsView : DigitalProductionMainPage
 {

@@ -1,4 +1,4 @@
-﻿namespace Thor.Units;
+﻿namespace DigitalProduction.Units;
 
 [Flags]
 public enum DataStringFlags : int

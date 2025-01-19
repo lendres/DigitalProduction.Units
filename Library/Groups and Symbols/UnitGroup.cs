@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Represents a group of units (i.e Temperature, Speed etc..).

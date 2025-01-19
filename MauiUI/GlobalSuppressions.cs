@@ -4,5 +4,4 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 using System.Diagnostics.CodeAnalysis;
-
-[assembly: SuppressMessage("Style", "IDE0305:Simplify collection initialization", Justification = "Left for readability.", Scope = "namespaceanddescendants", Target = "~N:Thor.Maui")]
+[assembly: SuppressMessage("Style", "IDE0130:Namespace does not match folder structure", Justification = "<Pending>", Scope = "namespace", Target = "~N:DigitalProduction.Units.Maui")]

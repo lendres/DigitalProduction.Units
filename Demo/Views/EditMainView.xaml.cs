@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Maui.Storage;
-using Thor.Maui;
+using DigitalProduction.Units.Maui;
 using UnitsConversionDemo.ViewModels;
 
 namespace UnitsConversionDemo;

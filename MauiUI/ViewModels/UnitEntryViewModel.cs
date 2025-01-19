@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
-using DigitalProduction.Validation;
+using DigitalProduction.Maui.Validation;
 using Microsoft.Maui.Media;
-using Thor.Units;
+using DigitalProduction.Units;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 public partial class UnitEntryViewModel : ObservableObject
 {

@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using Thor.Units;
+using DigitalProduction.Units;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 /// <summary>
 /// Interface for a UnitsGroupsViewModel.
