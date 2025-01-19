@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
-using DigitalProduction.Validation;
-using DigitalProduction.ViewModels;
+using DigitalProduction.Maui.Validation;
+using DigitalProduction.Maui.ViewModels;
 using System.Collections.ObjectModel;
-using Thor.Units;
+using DigitalProduction.Units;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 [QueryProperty(nameof(UnitConverter), "UnitsConverter")]
 [QueryProperty(nameof(UnitGroup), "UnitGroup")]

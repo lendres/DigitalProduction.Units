@@ -5,7 +5,7 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Represents a set of parameters sent with events generated  by the unit conversion class.

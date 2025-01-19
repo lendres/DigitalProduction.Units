@@ -36,12 +36,12 @@ public static class MauiProgram
 		services.AddTransient<ParsingViewModel>();
 		services.AddTransient<ParseView>();
 
-		services.AddTransientPopup<Thor.Maui.UnitEntryView, Thor.Maui.UnitEntryViewModel>();
+		services.AddTransientPopup<DigitalProduction.Units.Maui.UnitEntryView, DigitalProduction.Units.Maui.UnitEntryViewModel>();
 
-		services.AddTransient<Thor.Maui.UnitsGroupsView>();
-		services.AddTransient<Thor.Maui.UnitsGroupView>();
-		services.AddTransient<Thor.Maui.IUnitsGroupsViewModel, UnitsGroupsViewModel>();
-		services.AddTransient<Thor.Maui.UnitGroupViewModel>();
+		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupsView>();
+		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupView>();
+		services.AddTransient<DigitalProduction.Units.Maui.IUnitsGroupsViewModel, UnitsGroupsViewModel>();
+		services.AddTransient<DigitalProduction.Units.Maui.UnitGroupViewModel>();
 	}
 
 	static void RegisterEssentials(in IServiceCollection services)

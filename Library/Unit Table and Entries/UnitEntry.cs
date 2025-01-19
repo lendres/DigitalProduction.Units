@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Represents a single unit loaded from the units file.

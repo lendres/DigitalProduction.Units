@@ -12,6 +12,7 @@
 		<PackageTags>Units;conversion;.Net;C#</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>Robert Harwood, Lance A. Endres</Authors>
+		<Title>DigitalProduction.Units</Title>
 	</PropertyGroup>
 
 	<!-- Import version information from the folder containing the project if the file exists -->
@@ -30,6 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DigitalProductionDotNetLibrary" Version="0.3.0" />
+	  <PackageReference Include="DigitalProduction.Net" Version="0.5.2" />
 	</ItemGroup>
 </Project>

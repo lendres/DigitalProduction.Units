@@ -3,12 +3,10 @@
     x:Class="UnitsConversionDemo.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:thormaui="clr-namespace:Thor.Maui;assembly=ThunderUnitsMauiUI"
     xmlns:local="clr-namespace:UnitsConversionDemo"
-    Shell.FlyoutBehavior="Disabled"
+    FlyoutBehavior="Disabled"
 	FlyoutWidth="100"
-	FlyoutBackgroundColor="{StaticResource Primary}"
-	FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}">
+	FlyoutBackgroundColor="{StaticResource Primary}">
 
 	<Shell.ItemTemplate>
 		<DataTemplate>

@@ -5,12 +5,12 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 using DigitalProduction.Interface;
-using DigitalProduction.XML.Serialization;
+using DigitalProduction.Xml.Serialization;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Unit conversion class, contains methods for loading a unit file

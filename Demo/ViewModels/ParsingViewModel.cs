@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Thor.Units;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;
 

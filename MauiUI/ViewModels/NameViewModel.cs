@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
-using DigitalProduction.Validation;
+using DigitalProduction.Maui.Validation;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 public partial class NameViewModel : ObservableObject
 {

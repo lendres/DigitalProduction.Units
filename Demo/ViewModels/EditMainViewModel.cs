@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DigitalProduction.Validation;
-using Thor.Units;
+using DigitalProduction.Maui.Validation;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;
 

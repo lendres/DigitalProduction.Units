@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Thor.Units;
+using DigitalProduction.Units;
 
 namespace xUnitTests;
 
@@ -37,7 +37,7 @@ public static class UnitFileLoading
 	/// </summary>
 	/// <param name="sender">Sender.</param>
 	/// <param name="eventArgs">Event arguments.</param>
-	private static void Converter_OnError(object sender, Thor.Units.UnitEventArgs eventArgs)
+	private static void Converter_OnError(object sender, DigitalProduction.Units.UnitEventArgs eventArgs)
 	{
 		Debug.WriteLine("Error: " + eventArgs.DetailMessage);
 	}

@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DigitalProduction.ViewModels;
+using DigitalProduction.Maui.ViewModels;
 using System.Collections.ObjectModel;
-using Thor.Units;
+using DigitalProduction.Units;
 
-namespace Thor.Maui;
+namespace DigitalProduction.Units.Maui;
 
 [QueryProperty(nameof(UnitConverter), "UnitConverter")]
 public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<UnitGroup>
