@@ -10,7 +10,7 @@ public static class UnitFileIO
 
 	public static event				NoArgumentsEventHandler?				UnitsFileChanged;
 
-	public static string			FileName								= "Units v2.0.xml";
+	public static string			FileName { get => "Units v2.0.xml"; }
 
 	public static UnitConverter?	UnitConverter { get; private set; }		= null!;
 	public static string			Path { get; set; }						= "";

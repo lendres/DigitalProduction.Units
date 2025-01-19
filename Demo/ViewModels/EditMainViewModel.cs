@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DigitalProduction.Validation;
+using DigitalProduction.Maui.Validation;
 using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;

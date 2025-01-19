@@ -1,4 +1,4 @@
-﻿using Thor.Maui;
+﻿using DigitalProduction.Units.Maui;
 using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;

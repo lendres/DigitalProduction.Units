@@ -68,7 +68,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Library\DigitalProduction.Units.csproj" />
-	  <ProjectReference Include="..\ThunderMauiUI\DigitalProduction.Units.Maui.csproj" />
+	  <ProjectReference Include="..\MauiUI\DigitalProduction.Units.Maui.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

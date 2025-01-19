@@ -26,6 +26,7 @@
 		<RepositoryUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</RepositoryUrl>
 		<PackageTags>Units;conversion;.Net;C#,Maui,MVVM</PackageTags>
 		<PackageProjectUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</PackageProjectUrl>
+		<Title>DigitalProduction.Units.Maui</Title>
 	</PropertyGroup>
 
 	<ItemGroup>
