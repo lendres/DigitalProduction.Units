@@ -16,19 +16,19 @@
 
 	<ItemGroup>
 		<AssemblyAttribute Include="DigitalProduction.Reflection.WebsiteAttribute">
-			<_Parameter1>https://github.com/lendres/Thunder-Units-Dot-Net-Library</_Parameter1>
+			<_Parameter1>https://github.com/lendres/DigitalProduction.Units</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
 
 	<ItemGroup>
 		<AssemblyAttribute Include="DigitalProduction.Reflection.IssuesAddressAttribute">
-			<_Parameter1>https://github.com/lendres/Thunder-Units-Dot-Net-Library/issues</_Parameter1>
+			<_Parameter1>https://github.com/lendres/DigitalProduction.Units/issues</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
 
 	<ItemGroup>
 		<AssemblyAttribute Include="DigitalProduction.Reflection.DocumentationAddressAttribute">
-			<_Parameter1>https://github.com/lendres/Thunder-Units-Dot-Net-Library/wiki</_Parameter1>
+			<_Parameter1>https://github.com/lendres/DigitalProduction.Units/wiki</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
 </Project>
