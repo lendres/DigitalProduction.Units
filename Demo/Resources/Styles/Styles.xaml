@@ -527,23 +527,27 @@
 	</Style>
 
 	<!-- Flyout Buttons -->
-	<FontImage x:Key="TabOneInactive"
-               FontFamily="FontAwesome"
-               Color="{StaticResource Inactive}"
-               Glyph="{x:Static local:IconFont.Vial}"/>
-	<FontImage x:Key="TabOneActive"
-               FontFamily="FontAwesome"
-               Color="{StaticResource Active}"
-               Glyph="{x:Static local:IconFont.Vial}"/>
-	<FontImage x:Key="TabTwoInactive"
-               FontFamily="FontAwesome"
-               Color="{StaticResource Inactive}"
-               Glyph="{x:Static local:IconFont.Pen}"/>
-	<FontImage x:Key="TabTwoActive"
-               FontFamily="FontAwesome"
-               Color="{StaticResource Active}"
-               Glyph="{x:Static local:IconFont.Pen}"/>
-	
+	<FontImage 
+		x:Key="TabOneInactive"
+		FontFamily="FontAwesome"
+		Color="{StaticResource Inactive}"
+		Glyph="{x:Static local:IconFont.Vial}"/>
+	<FontImage
+		x:Key="TabOneActive"
+		FontFamily="FontAwesome"
+		Color="{StaticResource Active}"
+		Glyph="{x:Static local:IconFont.Vial}"/>
+	<FontImage
+		x:Key="TabTwoInactive"
+		FontFamily="FontAwesome"
+		Color="{StaticResource Inactive}"
+		Glyph="{x:Static local:IconFont.Pen}"/>
+	<FontImage
+		x:Key="TabTwoActive"
+		FontFamily="FontAwesome"
+		Color="{StaticResource Active}"
+		Glyph="{x:Static local:IconFont.Pen}"/>
+
 	<Style TargetType="FlyoutItem" x:Key="ParseFlyout">
 		<Style.Triggers>
 			<Trigger TargetType="FlyoutItem" Property="IsChecked" Value="False">
