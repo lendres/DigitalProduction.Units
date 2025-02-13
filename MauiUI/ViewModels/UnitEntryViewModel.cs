@@ -2,8 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Data.Translation.Validation;
 using DigitalProduction.Maui.Validation;
-using Microsoft.Maui.Media;
-using DigitalProduction.Units;
 
 namespace DigitalProduction.Units.Maui;
 
@@ -11,38 +9,8 @@ public partial class UnitEntryViewModel : ObservableObject
 {
 	#region Fields
 
-	[ObservableProperty]
-	private string							_title;
-
 	private readonly UnitConverter			_unitConverter;
 	private readonly UnitGroup				_unitGroup;
-
-	[ObservableProperty]
-	private UnitEntry						_unitEntry;
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_name								= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_defaultSymbol						= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_alternateSymbol					= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_preadder							= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_multiplier							= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_postadder							= new();
-
-	[ObservableProperty]
-	private string							_conversionMessage					= "";
-
-	[ObservableProperty]
-	private bool							_isSubmittable						= false;
 
 	#endregion
 
@@ -69,6 +37,37 @@ public partial class UnitEntryViewModel : ObservableObject
 	#endregion
 		
 	#region Properties
+
+	[ObservableProperty]
+	public partial string							Title { get; set; }
+
+	[ObservableProperty]
+	public partial UnitEntry						UnitEntry { get; set; }
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		Name { get; set; }					= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		DefaultSymbol { get; set; }			= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		AlternateSymbol { get; set; }		= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		Preadder { get; set; }				= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		Multiplier { get; set; }			= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		Postadder { get; set; }				= new();
+
+	[ObservableProperty]
+	public partial string							ConversionMessage { get; set; }		= "";
+
+	[ObservableProperty]
+	public partial bool								IsSubmittable { get; set; }			= false;
+
 	#endregion
 
 	#region Initialize and Validation
@@ -96,7 +95,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		Name.Validations.Add(new IsNotDuplicateStringRule 
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _unitConverter.UnitTable.Keys.ToList(),
+			Values					= [.. _unitConverter.UnitTable.Keys],
 			ExcludeValue			= UnitEntry.Name
 		});
 		ValidateName();
@@ -105,7 +104,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		DefaultSymbol.Validations.Add(new IsNotDuplicateStringRule
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _unitConverter.SymbolTable.Keys.ToList(),
+			Values					= [.. _unitConverter.SymbolTable.Keys],
 			ExcludeValue			= UnitEntry.DefaultSymbol
 		});
 		ValidateDefaultSymbol();
@@ -113,7 +112,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		AlternateSymbol.Validations.Add(new IsNotDuplicateStringRule
 		{
 			ValidationMessage		= "The value is already in use.",
-			Values					= _unitConverter.SymbolTable.Keys.ToList(),
+			Values					= [.. _unitConverter.SymbolTable.Keys],
 			ExcludeValue			= UnitEntry.AlternateSymbol
 		});
 		ValidateAlternateSymbol();

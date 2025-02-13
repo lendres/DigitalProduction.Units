@@ -9,15 +9,7 @@ public partial class NameViewModel : ObservableObject
 {
 	#region Fields
 
-	[ObservableProperty]
-	private string							_title;
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_nameValidator						= new();
-	private List<string>					_excludedNames						= new List<string>();
-
-	[ObservableProperty]
-	private bool							_isSubmittable						= false;
+	private readonly List<string>					_excludedNames									= [];
 
 	#endregion
 
@@ -42,7 +34,16 @@ public partial class NameViewModel : ObservableObject
 
     #region Properties
 
-    public string Name { get => NameValidator.Value!; }
+	[ObservableProperty]
+	public partial string							Title { get; set; }
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>		NameValidator { get; set; }						= new();
+
+	[ObservableProperty]
+	public partial bool								IsSubmittable { get; set; }						= false;
+
+    public string									Name { get => NameValidator.Value!; }
 
 	#endregion
 

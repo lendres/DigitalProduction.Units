@@ -6,19 +6,6 @@ namespace UnitsConversionDemo.ViewModels;
 public partial class ParsingViewModel : ObservableObject
 {
 	#region Fields
-
-	[ObservableProperty]
-	private string						_input					= "";
-
-	[ObservableProperty]
-	private string						_outputUnits			= "";
-
-	[ObservableProperty]
-	private string						_result					= "";
-
-	[ObservableProperty]
-	private string						_message				= "";
-
 	#endregion
 
 	#region Construction
@@ -32,6 +19,22 @@ public partial class ParsingViewModel : ObservableObject
 			UnitFileIO.LoadUnitsFile();
 		}
 	}
+
+	#endregion
+
+	#region Properties
+
+	[ObservableProperty]
+	public partial string						Input { get; set; }					= "";
+
+	[ObservableProperty]
+	public partial string						OutputUnits { get; set; }			= "";
+
+	[ObservableProperty]
+	public partial string						Result { get; set; }				= "";
+
+	[ObservableProperty]
+	public partial string						Message { get; set; }				= "";
 
 	#endregion
 

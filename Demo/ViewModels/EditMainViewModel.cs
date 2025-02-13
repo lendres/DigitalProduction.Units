@@ -8,30 +8,6 @@ namespace UnitsConversionDemo.ViewModels;
 public partial class EditMainViewModel : ObservableObject
 {
 	#region Fields
-
-	[ObservableProperty]
-	private string						_input							= "";
-
-	[ObservableProperty]
-	private string						_message							= "";
-
-	// Input file.
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>	_inputFile							= new();
-
-	// Output file name.
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>	_outputDirectory					= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>	_outputFileName						= new();
-
-	[ObservableProperty]
-	private string						_outputFileFullPath					= "";
-
-	[ObservableProperty]
-	private bool						_isSubmittable;
-
 	#endregion
 
 	#region Construction
@@ -47,6 +23,29 @@ public partial class EditMainViewModel : ObservableObject
 	#endregion
 
 	#region Properties
+
+	[ObservableProperty]
+	public partial string						Input { get; set; }							= "";
+
+	[ObservableProperty]
+	public partial string						Message { get; set; }						= "";
+
+	// Input file.
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	InputFile { get; set; }						= new();
+
+	// Output file name.
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	OutputDirectory { get; set; }				= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	OutputFileName { get; set; }				= new();
+
+	[ObservableProperty]
+	public partial string						OutputFileFullPath { get; set; }			= "";
+
+	[ObservableProperty]
+	public partial bool							IsSubmittable { get; set; }
 
 	public UnitConverter? UnitConverter { get => UnitFileIO.UnitConverter; }
 
