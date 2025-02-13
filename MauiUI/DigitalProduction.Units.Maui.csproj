@@ -30,6 +30,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
+		<!-- Enabling this causes the bindings like 'ItemsSource="{Binding BindingContext.Property, Source={Reference self}}"' to fail. -->
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
