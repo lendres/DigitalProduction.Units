@@ -7,7 +7,13 @@
 	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
 	xmlns:local="clr-namespace:UnitsConversionDemo">
 
-	<!-- Flyout Buttons -->
+    <Style TargetType="Grid" Class="PageGridStyle">
+        <Setter Property="RowSpacing" Value="10"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="RowDefinitions" Value="Auto,*"/>
+    </Style>
+
+    <!-- Flyout Buttons -->
 	<FontImage 
 		x:Key="TabOneInactive"
 		FontFamily="FontAwesome"

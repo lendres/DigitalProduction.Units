@@ -23,7 +23,7 @@
 
             <!-- Input File -->
             <Grid StyleClass="FileBrowsingGridStyle">
-                <Label Grid.Row="0" Text="Input File" StyleClass="TitleLabel"/>
+                <Label Grid.Row="0" Text="Input File" StyleClass="ControlLabel"/>
                 <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
 					x:Name="InputFileEntry"
 					Placeholder="Input File"
@@ -41,7 +41,7 @@
 
             <!-- Output File -->
             <Grid StyleClass="FileBrowsingGridStyle">
-                <Label Grid.Row="0" Text="Output Directory" StyleClass="TitleLabel"/>
+                <Label Grid.Row="0" Text="Output Directory" StyleClass="ControlLabel"/>
                 <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
 					x:Name="OutputDirectoryEntry"
 					Placeholder="Output Directory"
@@ -58,7 +58,7 @@
             </Grid>
 
             <Grid StyleClass="FileBrowsingGridStyle">
-                <Label Grid.Row="0" Text="Output File Name" StyleClass="TitleLabel"/>
+                <Label Grid.Row="0" Text="Output File Name" StyleClass="ControlLabel"/>
                 <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
 					x:Name="OutputFileEntry"
 					Placeholder="Output File Name"

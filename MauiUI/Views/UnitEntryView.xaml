@@ -3,6 +3,7 @@
 	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui.AppToolkit"
 	xmlns:viewmodel="clr-namespace:DigitalProduction.Units.Maui"
 	xmlns:dpviews="clr-namespace:DigitalProduction.Maui.Views;assembly=DigitalProduction.Maui.AppToolkit"
@@ -10,7 +11,7 @@
 	x:DataType="viewmodel:UnitEntryViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="400" >
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="400">
 
 		<Border.Resources>
 			<ResourceDictionary>
@@ -23,21 +24,26 @@
 
 			<Grid RowSpacing="10" Padding="0" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="200,200" ColumnSpacing="10">
 				<VerticalStackLayout Grid.Row="0" Grid.Column="0"  StyleClass="TitleVerticalStackStyle">
-					<Label Text="Name" StyleClass="TitleLabel"/>
+					<Label Text="Name" StyleClass="ControlLabel"/>
 					<Entry
+                        x:Name="NameEntry"
 						Placeholder="Name"
 						Loaded="OnLoadedSetFocus"
 						Text="{Binding Name.Value}"
 						HorizontalOptions="FillAndExpand">
 						<Entry.Behaviors>
-							<toolkit:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="TextChanged"/>
+							<toolkit:EventToCommandBehavior
+                                x:TypeArguments="system:EventArgs"
+                                Command="{Binding ValidateNameCommand}"
+                                BindingContext="{Binding Path=BindingContext, Source={x:Reference NameEntry}, x:DataType=Entry}"
+                                EventName="TextChanged"/>
 						</Entry.Behaviors>
 					</Entry>
 					<Label Text="{Binding Name.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Grid.Row="1" Grid.Column="0" StyleClass="TitleVerticalStackStyle">
-					<Label Text="Default Symbol" StyleClass="TitleLabel"/>
+					<Label Text="Default Symbol" StyleClass="ControlLabel"/>
 					<Entry
 						Placeholder="Default Symbol"
 						Text="{Binding DefaultSymbol.Value}"
@@ -51,7 +57,7 @@
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Grid.Row="2" Grid.Column="0" StyleClass="TitleVerticalStackStyle">
-					<Label Text="Alternate Symbol" StyleClass="TitleLabel"/>
+					<Label Text="Alternate Symbol" StyleClass="ControlLabel"/>
 					<Entry
 						Placeholder="Alternate Symbol"
 						Text="{Binding AlternateSymbol.Value}"
@@ -65,7 +71,7 @@
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Grid.Row="0" Grid.Column="1" StyleClass="TitleVerticalStackStyle">
-					<Label Text="Preadder" StyleClass="TitleLabel"/>
+					<Label Text="Preadder" StyleClass="ControlLabel"/>
 					<Entry
 						Placeholder="Preadder"
 						Text="{Binding Preadder.Value}"
@@ -79,7 +85,7 @@
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Grid.Row="1" Grid.Column="1" StyleClass="TitleVerticalStackStyle">
-					<Label Text="Multiplier" StyleClass="TitleLabel"/>
+					<Label Text="Multiplier" StyleClass="ControlLabel"/>
 					<Entry
 						Placeholder="Multiplier"
 						Text="{Binding Multiplier.Value}"
@@ -93,7 +99,7 @@
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Grid.Row="2" Grid.Column="1" StyleClass="TitleVerticalStackStyle">
-					<Label Text="Postadder" StyleClass="TitleLabel"/>
+					<Label Text="Postadder" StyleClass="ControlLabel"/>
 					<Entry
 						Placeholder="Postadder"
 						Text="{Binding Postadder.Value}"
@@ -108,7 +114,7 @@
 			</Grid>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
-				<Label Text="Example Output" StyleClass="TitleLabel"/>
+				<Label Text="Example Output" StyleClass="ControlLabel"/>
 				<Border Padding="8">
 					<Label Text="{Binding ConversionMessage}" LineBreakMode="WordWrap"/>
 				</Border>

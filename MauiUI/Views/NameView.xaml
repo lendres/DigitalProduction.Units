@@ -23,7 +23,7 @@
 			<Label Text="{Binding Title}" StyleClass="Title" HorizontalOptions="Start"/>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
-				<Label Text="Name" StyleClass="TitleLabel"/>
+                <Label Text="Name" StyleClass="ControlLabel"/>
 				<Entry
 					Placeholder="Name"
 					Loaded="OnLoadedSetFocus"
