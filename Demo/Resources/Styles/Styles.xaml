@@ -16,12 +16,6 @@
 		<Setter Property="SelectedIndicatorColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray100}}"/>
 	</Style>
 
-	<Style TargetType="Border">
-		<Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
-		<Setter Property="StrokeShape" Value="Rectangle"/>
-		<Setter Property="StrokeThickness" Value="1"/>
-	</Style>
-
 	<Style TargetType="BoxView">
 		<Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
 	</Style>
@@ -140,11 +134,19 @@
 		</Setter>
 	</Style>
 
-	<Style TargetType="Frame">
+	<Style TargetType="Border">
+		<Setter Property="Stroke" Value="{AppThemeBinding Light={DynamicResource Gray200}, Dark={DynamicResource Gray500}}"/>
+		<Setter Property="StrokeShape" Value="Rectangle"/>
+		<Setter Property="StrokeThickness" Value="1"/>
+		<Setter Property="Border.StrokeShape">
+			<RoundRectangle CornerRadius="8"/>
+		</Setter>
+	</Style>
+	<!--<Style TargetType="Border">
 		<Setter Property="HasShadow" Value="False" />
 		<Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
 		<Setter Property="CornerRadius" Value="8" />
-	</Style>
+	</Style>-->
 
 	<Style TargetType="ImageButton">
 		<Setter Property="Opacity" Value="1" />
@@ -615,9 +617,12 @@
 	<Style TargetType="toolkit:Popup" ApplyToDerivedTypes="True">
 		<Setter Property="Color" Value="Transparent"/>
 	</Style>
-	<Style TargetType="Frame" Class="PopupFrameStyle">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Gray900}}"/>
-		<Setter Property="CornerRadius" Value="20"/>
+	<Style TargetType="Border" Class="PopupFrameStyle">
+		<Setter Property="Background" Value="{AppThemeBinding Light={DynamicResource LightGray}, Dark={DynamicResource Gray900}}"/>
+		<Setter Property="Padding" Value="20"/>
+		<Setter Property="Border.StrokeShape">
+			<RoundRectangle CornerRadius="20"/>
+		</Setter>
 	</Style>
 	
 </ResourceDictionary>

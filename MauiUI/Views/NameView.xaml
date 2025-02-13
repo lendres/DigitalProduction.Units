@@ -10,13 +10,13 @@
 	x:DataType="viewmodel:NameViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Frame StyleClass="PopupFrameStyle" MinimumWidthRequest="300" >
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="300" >
 
-		<Frame.Resources>
+		<Border.Resources>
 			<ResourceDictionary>
 				<dpconverters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
 			</ResourceDictionary>
-		</Frame.Resources>
+		</Border.Resources>
 
 		<VerticalStackLayout StyleClass="VerticalLayoutStyle">
 
@@ -50,5 +50,5 @@
 			</HorizontalStackLayout>
 
 		</VerticalStackLayout>
-	</Frame>
+	</Border>
 </dpviews:PopupView>

@@ -10,13 +10,13 @@
 	x:DataType="viewmodel:UnitEntryViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Frame StyleClass="PopupFrameStyle" MinimumWidthRequest="400" >
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="400" >
 
-		<Frame.Resources>
+		<Border.Resources>
 			<ResourceDictionary>
 				<dpconverters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
 			</ResourceDictionary>
-		</Frame.Resources>
+		</Border.Resources>
 
 		<VerticalStackLayout StyleClass="VerticalLayoutStyle">
 			<Label Text="{Binding Title}" StyleClass="Title" HorizontalOptions="Start"/>
@@ -109,9 +109,9 @@
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
 				<Label Text="Example Output" StyleClass="TitleLabel"/>
-				<Frame Padding="8">
+				<Border Padding="8">
 					<Label Text="{Binding ConversionMessage}" LineBreakMode="WordWrap"/>
-				</Frame>
+				</Border>
 			</VerticalStackLayout>
 
 			<HorizontalStackLayout Padding="0" StyleClass="BottomButtonRowStyle">
@@ -128,5 +128,5 @@
 			</HorizontalStackLayout>
 
 		</VerticalStackLayout>
-	</Frame>
+	</Border>
 </dpviews:PopupView>
