@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<!--<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>-->
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
-		<WindowsSdkPackageVersion Condition="$([MSBuild]::IsOSPlatform('windows'))">10.0.19041.41</WindowsSdkPackageVersion>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<!--<WindowsSdkPackageVersion Condition="$([MSBuild]::IsOSPlatform('windows'))">10.0.19041.41</WindowsSdkPackageVersion>-->
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -40,6 +40,12 @@
 		<!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<!-- Enabling this causes the bindings like 'ItemsSource="{Binding BindingContext.Property, Source={Reference self}}"' to fail. -->
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -48,7 +54,6 @@
 		<!--<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -58,16 +63,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="akgul.Maui.DataGrid" Version="4.0.5" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
-		<PackageReference Include="DigitalProduction.Maui" Version="0.4.5" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	  <Compile Remove="Resources\Images\**" />
+	  <EmbeddedResource Remove="Resources\Images\**" />
+	  <MauiCss Remove="Resources\Images\**" />
+	  <MauiXaml Remove="Resources\Images\**" />
+	  <None Remove="Resources\Images\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Library\DigitalProduction.Units.csproj" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />
+		<PackageReference Include="DigitalProduction.Maui" Version="0.5.0" />
+		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.8.3" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\MauiUI\DigitalProduction.Units.Maui.csproj" />
 	</ItemGroup>
 
@@ -81,13 +92,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Images\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="Views\EditMainView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PRIResource Remove="Resources\Images\**" />
 	</ItemGroup>
 
 </Project>

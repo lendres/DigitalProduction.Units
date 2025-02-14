@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<RootNamespace>Thor.Units</RootNamespace>
+		<TargetFramework>net9.0</TargetFramework>
+		<RootNamespace>DigitalProduction.Units</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -31,6 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DigitalProduction.Net" Version="0.5.2" />
+	  <PackageReference Include="DigitalProduction.Net" Version="0.6.0" />
 	</ItemGroup>
 </Project>

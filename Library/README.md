@@ -1,4 +1,6 @@
-# Thunder Unit Conversion Library
+# DigitalProduction.Units
+Unit conversion library for .Net.
+
 ## Summary
 A C# library for handling unit conversions.  
 

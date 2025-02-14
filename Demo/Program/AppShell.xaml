@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UnitsConversionDemo"
-    FlyoutBehavior="Disabled"
+    FlyoutBehavior="{OnPlatform WinUI=Locked, Default=Flyout}"
 	FlyoutWidth="100"
 	FlyoutBackgroundColor="{StaticResource Primary}">
 
@@ -13,6 +13,7 @@
 			<Grid ColumnDefinitions="70" RowDefinitions="40,40" Style="{StaticResource FloutItemStyle}">
 				<Image
 					Grid.Row="0"
+					x:DataType="FlyoutItem"
 					Source="{Binding FlyoutIcon}"
 					VerticalOptions="End"
 					HorizontalOptions="Center"                               
@@ -21,6 +22,7 @@
 				<Label
 					Grid.Row="1"
 					x:Name="_flyoutLabel"
+					x:DataType="FlyoutItem"
 					Text="{Binding Title}"
 					FontAttributes="Bold"
 					FontSize="Small"

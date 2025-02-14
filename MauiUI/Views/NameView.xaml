@@ -3,34 +3,40 @@
 	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui"
+	xmlns:system="clr-namespace:System;assembly=mscorlib"
+	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui.AppToolkit"
 	xmlns:viewmodel="clr-namespace:DigitalProduction.Units.Maui"
-	xmlns:dpviews="clr-namespace:DigitalProduction.Maui.Views;assembly=DigitalProduction.Maui"
+	xmlns:dpviews="clr-namespace:DigitalProduction.Maui.Views;assembly=DigitalProduction.Maui.AppToolkit"
 	x:Class="DigitalProduction.Units.Maui.NameView"
 	x:DataType="viewmodel:NameViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Frame StyleClass="PopupFrameStyle" MinimumWidthRequest="300" >
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="300" >
 
-		<Frame.Resources>
+		<Border.Resources>
 			<ResourceDictionary>
 				<dpconverters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
 			</ResourceDictionary>
-		</Frame.Resources>
+		</Border.Resources>
 
 		<VerticalStackLayout StyleClass="VerticalLayoutStyle">
 
 			<Label Text="{Binding Title}" StyleClass="Title" HorizontalOptions="Start"/>
 
 			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
-				<Label Text="Name" StyleClass="TitleLabel"/>
+                <Label Text="Name" StyleClass="ControlLabel"/>
 				<Entry
+					x:Name="NameEntry"
 					Placeholder="Name"
 					Loaded="OnLoadedSetFocus"
 					Text="{Binding NameValidator.Value}"
 					HorizontalOptions="FillAndExpand">
 					<Entry.Behaviors>
-						<toolkit:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="TextChanged"/>
+						<toolkit:EventToCommandBehavior
+							x:TypeArguments="system:EventArgs"
+							Command="{Binding ValidateNameCommand}"
+							BindingContext="{Binding Path=BindingContext, Source={x:Reference NameEntry}, x:DataType=Entry}"
+							EventName="TextChanged"/>
 					</Entry.Behaviors>
 				</Entry>
                 <Label Text="{Binding NameValidator.Errors, Converter={StaticResource FirstValidationErrorConverter}}" StyleClass="InvalidLabelStyle"/>
@@ -50,5 +56,5 @@
 			</HorizontalStackLayout>
 
 		</VerticalStackLayout>
-	</Frame>
+	</Border>
 </dpviews:PopupView>

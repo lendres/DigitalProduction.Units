@@ -4,7 +4,6 @@ using Data.Translation.Validation;
 using DigitalProduction.Maui.Validation;
 using DigitalProduction.Maui.ViewModels;
 using System.Collections.ObjectModel;
-using DigitalProduction.Units;
 
 namespace DigitalProduction.Units.Maui;
 
@@ -17,12 +16,6 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 	private UnitConverter?					_unitConverter;
 	private UnitGroup?						_unitGroup;
 
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>		_name								= new();
-
-	[ObservableProperty]
-	private bool							_isSubmittable						= false;
-
 	#endregion
 
 	#region Construction
@@ -34,6 +27,12 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 	#endregion
 		
 	#region Properties
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	Name { get; set; }					= new();
+
+	[ObservableProperty]
+	public partial bool							IsSubmittable { get; set; }			= false;
 
 	public UnitConverter? UnitConverter
 	{

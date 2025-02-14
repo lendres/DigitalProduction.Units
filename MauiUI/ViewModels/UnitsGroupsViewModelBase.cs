@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using DigitalProduction.Maui.ViewModels;
 using System.Collections.ObjectModel;
-using DigitalProduction.Units;
 
 namespace DigitalProduction.Units.Maui;
 
@@ -10,10 +9,6 @@ namespace DigitalProduction.Units.Maui;
 public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<UnitGroup>
 {
 	#region Fields
-
-	[ObservableProperty]
-	private UnitConverter?						_unitConverter;
-
 	#endregion
 
 	#region Construction
@@ -23,6 +18,14 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 	}
 
 	#endregion
+
+	#region
+
+	[ObservableProperty]
+	public partial UnitConverter?						UnitConverter { get; set; }
+
+	#endregion
+
 
 	#region File Related Methods
 
