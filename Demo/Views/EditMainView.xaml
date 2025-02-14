@@ -3,6 +3,7 @@
 	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	xmlns:system="clr-namespace:System;assembly=mscorlib"
 	xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"						
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui.AppToolkit"
 	x:DataType="viewmodel:EditMainViewModel"
@@ -23,13 +24,17 @@
 
             <!-- Input File -->
             <Grid StyleClass="FileBrowsingGridStyle">
-                <Label Grid.Row="0" Text="Input File" StyleClass="TitleLabel"/>
+                <Label Grid.Row="0" Text="Input File" StyleClass="ControlLabel"/>
                 <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
 					x:Name="InputFileEntry"
 					Placeholder="Input File"
 					Text="{Binding InputFile.Value}">
                     <Entry.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding ValidateInputFileCommand}" EventName="TextChanged"/>
+                        <toolkit:EventToCommandBehavior
+							x:TypeArguments="system:EventArgs"
+							Command="{Binding ValidateInputFileCommand}"
+							BindingContext="{Binding Path=BindingContext, Source={x:Reference InputFileEntry}, x:DataType=Entry}"
+							EventName="TextChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label Grid.Row="2" Grid.Column="0" StyleClass="InvalidLabelStyle"
@@ -41,13 +46,17 @@
 
             <!-- Output File -->
             <Grid StyleClass="FileBrowsingGridStyle">
-                <Label Grid.Row="0" Text="Output Directory" StyleClass="TitleLabel"/>
+                <Label Grid.Row="0" Text="Output Directory" StyleClass="ControlLabel"/>
                 <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
 					x:Name="OutputDirectoryEntry"
 					Placeholder="Output Directory"
 					Text="{Binding OutputDirectory.Value}">
                     <Entry.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding ValidateOutputDirectoryCommand}" EventName="TextChanged"/>
+                        <toolkit:EventToCommandBehavior
+							x:TypeArguments="system:EventArgs"
+							Command="{Binding ValidateOutputDirectoryCommand}"
+							BindingContext="{Binding Path=BindingContext, Source={x:Reference OutputDirectoryEntry}, x:DataType=Entry}"
+							EventName="TextChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label Grid.Row="2" Grid.Column="0" StyleClass="InvalidLabelStyle"
@@ -58,13 +67,17 @@
             </Grid>
 
             <Grid StyleClass="FileBrowsingGridStyle">
-                <Label Grid.Row="0" Text="Output File Name" StyleClass="TitleLabel"/>
+                <Label Grid.Row="0" Text="Output File Name" StyleClass="ControlLabel"/>
                 <Entry Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
 					x:Name="OutputFileEntry"
 					Placeholder="Output File Name"
 					Text="{Binding OutputFileName.Value}">
                     <Entry.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding ValidateOutputFileNameCommand}" EventName="TextChanged"/>
+                        <toolkit:EventToCommandBehavior
+							x:TypeArguments="system:EventArgs"
+							Command="{Binding ValidateOutputFileNameCommand}"
+							BindingContext="{Binding Path=BindingContext, Source={x:Reference OutputFileEntry}, x:DataType=Entry}"
+							EventName="TextChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label Grid.Row="2" Grid.Column="0" StyleClass="InvalidLabelStyle"
