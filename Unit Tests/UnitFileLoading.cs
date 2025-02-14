@@ -10,9 +10,9 @@ namespace xUnitTests;
 
 public static class UnitFileLoading
 {
-	public static string	FileNameV2		= "Units v2.0.xml";
+	public static string FileNameV2												= "Units v2.0.xml";
 
-	public static string Folder { get; set; } = "";
+	public static string Folder { get; set; }									= "";
 
 	public static string PathV2 { get =>  Path.Combine(Folder, FileNameV2); }
 

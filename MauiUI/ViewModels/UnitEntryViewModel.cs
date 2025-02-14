@@ -122,7 +122,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		ValidatePreadder();
 
 		Multiplier.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A multiplier is required.  If none is required, use \"1\"." });
-		Multiplier.Validations.Add(new IsNumericRule { ValidationMessage = "The multiplier must be numeric." });
+		Multiplier.Validations.Add(new IsNotZeroNumericRule { ValidationMessage = "The multiplier must be numeric and not zero." });
 		ValidateMultiplier();
 
 		Postadder.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A postadder is required.  If none is required, use \"0\"." });

@@ -52,7 +52,7 @@
                             <defaultsymbol>C</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
-                            <multiplier>0</multiplier>
+                            <multiplier>1</multiplier>
                             <adder>273.15</adder>
                         </unit>
                     </unitkeyvaluepair>
@@ -62,7 +62,7 @@
                             <defaultsymbol>centigrade</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
-                            <multiplier>0</multiplier>
+                            <multiplier>1</multiplier>
                             <adder>273.15</adder>
                         </unit>
                     </unitkeyvaluepair>
@@ -1042,7 +1042,7 @@
                             <defaultsymbol>grad</defaultsymbol>
                             <alternatesymbol />
                             <preadder>0</preadder>
-                            <multiplier>0</multiplier>
+                            <multiplier>1</multiplier>
                             <adder>0.01570796326795</adder>
                         </unit>
                     </unitkeyvaluepair>
