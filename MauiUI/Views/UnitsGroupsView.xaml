@@ -18,13 +18,7 @@
 	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="700">
 		<Label Grid.Row="0" Text="Unit Groups" StyleClass="Title"/>
 
-		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
-
-			<Label
-				Grid.Row="0"
-				Text="The units file is not loaded.  Check that the correct file location is specified in the settings and that the file is valid."
-				IsVisible="{Binding Items, Converter={StaticResource IsNullConverter}}"
-				Style="{StaticResource LargeErrorMessageStyle}"/>
+		<Grid Grid.Row="1" StyleClass="DataGridEditStyle">
 
 			<Grid Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Start">
 				<Grid.ColumnDefinitions>
