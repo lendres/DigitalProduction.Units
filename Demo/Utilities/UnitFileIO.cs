@@ -1,47 +1,64 @@
-﻿using System.Diagnostics;
-using Thor.Units;
+﻿using DigitalProduction.Delegates;
+using System.Diagnostics;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo;
 
 public static class UnitFileIO
 {
-	public static string	FileNameV2		= "Units v2.0.xml";
+	#region Fields, Events, and Properties
 
-	public static string	Folder { get; private set; } = "";
+	public static event				NoArgumentsEventHandler?				UnitsFileChanged;
 
-	public static string	PathV2 { get =>  Path.Combine(Folder, FileNameV2); }
+	public static string			FileName { get => "Units v2.0.xml"; }
 
-	public static string	Message { get; private set; } = "";
+	public static UnitConverter?	UnitConverter { get; private set; }		= null!;
+	public static string			Path { get; set; }						= "";
+	public static string			Message	{ get; private set; }			= "";
+
+	#endregion
+
+	#region Construction
 
 	static UnitFileIO()
 	{
-		string baseDirectory = DigitalProduction.Reflection.Assembly.Path()  ?? ".\\";
-		Folder	= DigitalProduction.IO.Path.ChangeDirectoryDotDot(baseDirectory, 6);
-		Folder	= Path.Combine(Folder, "Input Files");
-		Debug.WriteLine("Root folder: " + Folder);
+		string baseDirectory	= DigitalProduction.Reflection.Assembly.Path()  ?? ".\\";
+		baseDirectory			= DigitalProduction.IO.Path.ChangeDirectoryDotDot(baseDirectory, 5);
+		baseDirectory			= System.IO.Path.Combine(baseDirectory, "Input Files");
+		Path					= System.IO.Path.Combine(baseDirectory, FileName);
+		Debug.WriteLine("Root folder: "+baseDirectory);
 	}
 
-	public static UnitConverter? LoadVersionTwoFile()
+	#endregion
+
+	#region Methods
+
+	public static void LoadUnitsFile()
 	{
-		return LoadVersionTwoFile(PathV2);;
+		LoadUnitsFile(Path);;
 	}
 
-	public static UnitConverter? LoadVersionTwoFile(string path)
+	public static void LoadUnitsFile(string path)
 	{
-		Debug.WriteLine("File: " + path);
+		Debug.WriteLine("Loading file: " + path);
 		Message = "";
-		UnitConverter? unitConverter = null;
+		UnitConverter = null;
 
 		try
 		{
-			unitConverter = UnitConverter.Deserialize(path);
+			UnitConverter			= UnitConverter.Deserialize(path);
+			UnitConverter.OnError	+= new DigitalProduction.Units.UnitEventHandler(Converter_OnError);
 		}
 		catch (Exception exception)
 		{
 			Message = exception.Message;
 		}
+		OnUnitsFileChanged();
+	}
 
-		return unitConverter;
+	private static void OnUnitsFileChanged()
+	{
+		UnitsFileChanged?.Invoke();
 	}
 
 	/// <summary>
@@ -49,8 +66,10 @@ public static class UnitFileIO
 	/// </summary>
 	/// <param name="sender">Sender.</param>
 	/// <param name="eventArgs">Event arguments.</param>
-	private static void Converter_OnError(object sender, Thor.Units.UnitEventArgs eventArgs)
+	private static void Converter_OnError(object sender, DigitalProduction.Units.UnitEventArgs eventArgs)
 	{
 		Debug.WriteLine("Error: " + eventArgs.DetailMessage);
 	}
+
+	#endregion
 }

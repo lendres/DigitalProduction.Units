@@ -1,5 +1,5 @@
-﻿using Thor.Maui;
-using Thor.Units;
+﻿using DigitalProduction.Units.Maui;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;
 

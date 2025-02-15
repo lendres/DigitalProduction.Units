@@ -5,12 +5,12 @@
  * Please see included license.txt file for information on redistribution and usage.
  */
 using DigitalProduction.Interface;
-using DigitalProduction.XML.Serialization;
+using DigitalProduction.Xml.Serialization;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Thor.Units;
+namespace DigitalProduction.Units;
 
 /// <summary>
 /// Unit conversion class, contains methods for loading a unit file
@@ -424,62 +424,6 @@ public class UnitConverter : IModified
 	#region Conversion Methods
 
 	/// <summary>
-	/// Given a value and the current unit, converts the value back to the standard.
-	/// </summary>
-	/// <param name="value">Value to convert.</param>
-	/// <param name="unitFrom">Name of the current units the value is in.</param>
-	/// <param name="output">Variable to hold the converted value.</param>
-	/// <returns>A unit result value.</returns>
-	public UnitResult ConvertToStandard(double value, string? unitFrom, out double output)
-	{
-		UnitEntry? unitEntryFrom = GetUnitBySymbol(unitFrom);
-
-		// Make sure the unit exists.
-		if (unitEntryFrom == null)
-		{
-			// Default to the fail safe value.
-			output = FAILSAFE_VALUE;
-			return UnitResult.BadUnit;
-		}
-
-		return ConvertToStandard(value, unitEntryFrom, out output);
-	}
-
-	/// <summary>
-	/// Given a value and the current unit, converts the value back to the standard.
-	/// </summary>
-	/// <param name="value">Value to convert.</param>
-	/// <param name="unitEntryFrom">UnitEntry the current units the value is in.</param>
-	/// <param name="output">Variable to hold the converted value.</param>
-	/// <returns>A unit result value.</returns>
-	public UnitResult ConvertToStandard(double value, UnitEntry unitEntryFrom, out double output)
-	{
-		double x = value;
-
-		// Default to the fail safe value.
-		output = FAILSAFE_VALUE;
-
-		try
-		{
-			// Convert the value back to the standard.
-			x += unitEntryFrom.Preadder;
-			if (unitEntryFrom.Multiplier > 0.0)
-			{
-				x *= unitEntryFrom.Multiplier;
-			}
-			x += unitEntryFrom.Postadder;
-
-			output = x;
-		}
-		catch
-		{
-			// Probably overflowed or something.
-			return UnitResult.BadValue;
-		}
-		return UnitResult.NoError;
-	}
-
-	/// <summary>
 	/// Performs a unit conversion between two units, given a value to convert.
 	/// </summary>
 	/// <param name="value">The value to convert.</param>
@@ -563,6 +507,62 @@ public class UnitConverter : IModified
 	}
 
 	/// <summary>
+	/// Given a value and the current unit, converts the value back to the standard.
+	/// </summary>
+	/// <param name="value">Value to convert.</param>
+	/// <param name="unitFrom">Name of the current units the value is in.</param>
+	/// <param name="output">Variable to hold the converted value.</param>
+	/// <returns>A unit result value.</returns>
+	public UnitResult ConvertToStandard(double value, string? unitFrom, out double output)
+	{
+		UnitEntry? unitEntryFrom = GetUnitBySymbol(unitFrom);
+
+		// Make sure the unit exists.
+		if (unitEntryFrom == null)
+		{
+			// Default to the fail safe value.
+			output = FAILSAFE_VALUE;
+			return UnitResult.BadUnit;
+		}
+
+		return ConvertToStandard(value, unitEntryFrom, out output);
+	}
+
+	/// <summary>
+	/// Given a value and the current unit, converts the value back to the standard.
+	/// </summary>
+	/// <param name="value">Value to convert.</param>
+	/// <param name="unitEntryFrom">UnitEntry the current units the value is in.</param>
+	/// <param name="output">Variable to hold the converted value.</param>
+	/// <returns>A unit result value.</returns>
+	public UnitResult ConvertToStandard(double value, UnitEntry unitEntryFrom, out double output)
+	{
+		double x = value;
+
+		// Default to the fail safe value.
+		output = FAILSAFE_VALUE;
+
+		try
+		{
+			// Convert the value back to the standard.
+			x += unitEntryFrom.Preadder;
+			if (unitEntryFrom.Multiplier > 0.0)
+			{
+				x *= unitEntryFrom.Multiplier;
+			}
+			x += unitEntryFrom.Postadder;
+
+			output = x;
+		}
+		catch
+		{
+			// Probably overflowed or something.
+			return UnitResult.BadValue;
+		}
+		return UnitResult.NoError;
+	}
+
+	/// <summary>
 	/// Performs a unit conversion from the standard value into the specified unit.
 	/// </summary>
 	/// <param name="value">The value to convert.</param>
@@ -600,13 +600,13 @@ public class UnitConverter : IModified
 
 		try
 		{
-			// Convert to the new unit from the standard
-			x -= unitEntryTo.Preadder;
+			// Convert to the new unit from the standard.
+			x -= unitEntryTo.Postadder;
 			if (unitEntryTo.Multiplier > 0.0)
 			{
-				x *= Math.Pow(unitEntryTo.Multiplier, -1);
+				x /= unitEntryTo.Multiplier;
 			}
-			x -= unitEntryTo.Postadder;
+			x -= unitEntryTo.Preadder;
 
 			output = x;
 		}

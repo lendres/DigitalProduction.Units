@@ -1,39 +1,56 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Thor.Units;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;
 
 public partial class ParsingViewModel : ObservableObject
 {
-
 	#region Fields
-
-	[ObservableProperty]
-	private UnitConverter?				_unitsConverter;
-
-	[ObservableProperty]
-	private string						_input					= "";
-
-
-	[ObservableProperty]
-	private string						_outputUnits			= "";
-
-	[ObservableProperty]
-	private string						_result					= "";
-
-	[ObservableProperty]
-	private string						_message				= "";
-
 	#endregion
+
+	#region Construction
 
 	public ParsingViewModel()
     {
-		UnitsConverter = UnitFileIO.LoadVersionTwoFile();
-		if (UnitsConverter == null)
+		UnitFileIO.UnitsFileChanged += OnUnitsFileChanged;
+
+		if (UnitFileIO.UnitConverter == null)
 		{
-			Message =	"The Units file could not be loaded." + Environment.NewLine +
-						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
+			UnitFileIO.LoadUnitsFile();
+		}
+	}
+
+	#endregion
+
+	#region Properties
+
+	[ObservableProperty]
+	public partial string						Input { get; set; }					= "";
+
+	[ObservableProperty]
+	public partial string						OutputUnits { get; set; }			= "";
+
+	[ObservableProperty]
+	public partial string						Result { get; set; }				= "";
+
+	[ObservableProperty]
+	public partial string						Message { get; set; }				= "";
+
+	#endregion
+
+	#region Methods
+
+	private void OnUnitsFileChanged()
+	{
+		if (UnitFileIO.UnitConverter == null)
+		{
+			Message =	"The Units file could not be loaded.  Set the file on the \"Edit\" page." + Environment.NewLine +
+						"File: " + UnitFileIO.Path + Environment.NewLine +
 						"Message: " + UnitFileIO.Message;
+		}
+		else
+		{
+			Message = "";
 		}
 	}
 
@@ -49,15 +66,13 @@ public partial class ParsingViewModel : ObservableObject
 
 	private void TryConvertUnits()
 	{
-		if (UnitsConverter == null)
+		if (UnitFileIO.UnitConverter == null)
 		{
 			return;
 		}
 		Result = "";
 
-		UnitResult result = UnitResult.NoError;
-
-		result = UnitsConverter.ParseUnitString(Input, out double inputValue, out string inputUnits);
+		UnitResult result = UnitFileIO.UnitConverter.ParseUnitString(Input, out double inputValue, out string inputUnits);
 
 		if (result == UnitResult.BadUnit)
 		{
@@ -68,7 +83,7 @@ public partial class ParsingViewModel : ObservableObject
 			Message = "Bad input value.";
 		}
 
-		UnitEntry? out_unit = UnitsConverter.GetUnitBySymbol(OutputUnits);
+		UnitEntry? out_unit = UnitFileIO.UnitConverter.GetUnitBySymbol(OutputUnits);
 
 		if (out_unit == null)
 		{
@@ -76,7 +91,7 @@ public partial class ParsingViewModel : ObservableObject
 			return;
 		}
 
-		if (!UnitsConverter.CompatibleUnits(inputUnits, OutputUnits))
+		if (!UnitFileIO.UnitConverter.CompatibleUnits(inputUnits, OutputUnits))
 		{
 			Message = "Units are of different types.";
 			return;
@@ -85,8 +100,15 @@ public partial class ParsingViewModel : ObservableObject
 		// No errors, clear the messages.
 		Message = "";
 
-		result = UnitsConverter.ConvertUnits(inputValue, inputUnits, OutputUnits, out double outputValue);
+		result = UnitFileIO.UnitConverter.ConvertUnits(inputValue, inputUnits, OutputUnits, out double outputValue);
+		if (result != UnitResult.NoError)
+		{
+			Message = "Error during conversion.";
+			return;
+		}
 
 		Result = outputValue.ToString() + " " + out_unit.DefaultSymbol;
 	}
+
+	#endregion
 }

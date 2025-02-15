@@ -1,53 +1,53 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DigitalProduction.Validation;
-using Thor.Units;
+using DigitalProduction.Maui.Validation;
+using DigitalProduction.Units;
 
 namespace UnitsConversionDemo.ViewModels;
 
 public partial class EditMainViewModel : ObservableObject
 {
-
 	#region Fields
-
-	[ObservableProperty]
-	private UnitConverter?				_unitConverter;
-
-	[ObservableProperty]
-	private string						_input							= "";
-
-	[ObservableProperty]
-	private string						_message							= "";
-
-	// Input file.
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>	_inputFile							= new();
-
-	// Output file name.
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>	_outputDirectory					= new();
-
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	private ValidatableObject<string>	_outputFileName						= new();
-
-	[ObservableProperty]
-	private string						_outputFileFullPath					= "";
-
-	[ObservableProperty]
-	private bool						_isSubmittable;
-
-
 	#endregion
 
 	#region Construction
 
 	public EditMainViewModel()
     {
-		InputFile.Value			= UnitFileIO.PathV2;
-		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.PathV2);
-		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.PathV2);
+		InputFile.Value			= UnitFileIO.Path;
+		OutputDirectory.Value	= System.IO.Path.GetDirectoryName(UnitFileIO.Path);
+		OutputFileName.Value	= System.IO.Path.GetFileName(UnitFileIO.Path);
 		AddValidations();
 	}
+
+	#endregion
+
+	#region Properties
+
+	[ObservableProperty]
+	public partial string						Input { get; set; }							= "";
+
+	[ObservableProperty]
+	public partial string						Message { get; set; }						= "";
+
+	// Input file.
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	InputFile { get; set; }						= new();
+
+	// Output file name.
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	OutputDirectory { get; set; }				= new();
+
+	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
+	public partial ValidatableObject<string>	OutputFileName { get; set; }				= new();
+
+	[ObservableProperty]
+	public partial string						OutputFileFullPath { get; set; }			= "";
+
+	[ObservableProperty]
+	public partial bool							IsSubmittable { get; set; }
+
+	public UnitConverter? UnitConverter { get => UnitFileIO.UnitConverter; }
 
 	#endregion
 
@@ -72,6 +72,10 @@ public partial class EditMainViewModel : ObservableObject
 	private void ValidateInputFile()
 	{
 		InputFile.Validate();
+		if (InputFile.IsValid)
+		{
+			UnitFileIO.LoadUnitsFile(InputFile.Value!);
+		}
 		ValidateSubmittable();
 	}
 
@@ -103,14 +107,16 @@ public partial class EditMainViewModel : ObservableObject
 
 	#endregion
 
+	#region Methods
+
 	public void OnSubmit()
 	{
-		UnitConverter = UnitFileIO.LoadVersionTwoFile(InputFile.Value!);
+		UnitFileIO.LoadUnitsFile(InputFile.Value!);
 
 		if (UnitConverter == null)
 		{
-			Message = "The Units file could not be loaded." + Environment.NewLine +
-						"File: " + UnitFileIO.PathV2 + Environment.NewLine +
+			Message =	"The Units file could not be loaded." + Environment.NewLine +
+						"File: " + UnitFileIO.Path + Environment.NewLine +
 						"Message: " + UnitFileIO.Message;
 		}
 		else
@@ -118,4 +124,6 @@ public partial class EditMainViewModel : ObservableObject
 			Message = "";
 		}
 	}
+
+	#endregion
 }
