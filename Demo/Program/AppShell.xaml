@@ -26,7 +26,7 @@
 					Text="{Binding Title}"
 					FontAttributes="Bold"
 					FontSize="Small"
-					HorizontalOptions="FillAndExpand"
+					HorizontalOptions="Fill"
 					VerticalTextAlignment="Start"
 					HorizontalTextAlignment="Center"/>
 			</Grid>
