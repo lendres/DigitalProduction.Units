@@ -11,7 +11,7 @@
 	x:DataType="viewmodel:UnitEntryViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="660" MinimumHeightRequest="520">
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="660" MinimumHeightRequest="470" MaximumHeightRequest="471">
 
 		<Border.Resources>
 			<ResourceDictionary>
@@ -30,7 +30,7 @@
 						Placeholder="Name"
 						Loaded="OnLoadedSetFocus"
 						Text="{Binding Name.Value}"
-						HorizontalOptions="FillAndExpand">
+						HorizontalOptions="Fill">
 						<Entry.Behaviors>
 							<toolkit:EventToCommandBehavior
 								x:TypeArguments="system:EventArgs"
@@ -48,7 +48,7 @@
 						x:Name="DefaultSymbolEntry"
 						Placeholder="Default Symbol"
 						Text="{Binding DefaultSymbol.Value}"
-						HorizontalOptions="FillAndExpand"
+						HorizontalOptions="Fill"
 						StyleClass="EntryStyle">
 						<Entry.Behaviors>
 							<toolkit:EventToCommandBehavior
@@ -67,7 +67,7 @@
 						x:Name="AlternateSymbolEntry"
 						Placeholder="Alternate Symbol"
 						Text="{Binding AlternateSymbol.Value}"
-						HorizontalOptions="FillAndExpand"
+						HorizontalOptions="Fill"
 						StyleClass="EntryStyle">
 						<Entry.Behaviors>
 							<toolkit:EventToCommandBehavior
@@ -86,7 +86,7 @@
 						x:Name="PreadderEntry"
 						Placeholder="Preadder"
 						Text="{Binding Preadder.Value}"
-						HorizontalOptions="FillAndExpand"
+						HorizontalOptions="Fill"
 						StyleClass="EntryStyle">
 						<Entry.Behaviors>
 							<toolkit:EventToCommandBehavior
@@ -105,7 +105,7 @@
 						x:Name="MultiplierEntry"
 						Placeholder="Multiplier"
 						Text="{Binding Multiplier.Value}"
-						HorizontalOptions="FillAndExpand"
+						HorizontalOptions="Fill"
 						StyleClass="EntryStyle">
 						<Entry.Behaviors>
 							<toolkit:EventToCommandBehavior
@@ -124,7 +124,7 @@
 						x:Name="PostadderEntry"
 						Placeholder="Postadder"
 						Text="{Binding Postadder.Value}"
-						HorizontalOptions="FillAndExpand"
+						HorizontalOptions="Fill"
 						StyleClass="EntryStyle">
 						<Entry.Behaviors>
 							<toolkit:EventToCommandBehavior

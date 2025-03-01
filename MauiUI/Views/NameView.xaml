@@ -11,7 +11,7 @@
 	x:DataType="viewmodel:NameViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="300" >
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="300" MinimumHeightRequest="220" MaximumHeightRequest="221">
 
 		<Border.Resources>
 			<ResourceDictionary>
@@ -30,7 +30,7 @@
 					Placeholder="Name"
 					Loaded="OnLoadedSetFocus"
 					Text="{Binding NameValidator.Value}"
-					HorizontalOptions="FillAndExpand">
+					HorizontalOptions="Fill">
 					<Entry.Behaviors>
 						<toolkit:EventToCommandBehavior
 							x:TypeArguments="system:EventArgs"

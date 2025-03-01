@@ -19,7 +19,7 @@
 				<Entry
 					Placeholder="Input"
 					Text="{Binding Input}"
-					HorizontalOptions="FillAndExpand"
+					HorizontalOptions="Fill"
 					StyleClass="EntryStyle"/>
 			</VerticalStackLayout>
 
@@ -28,7 +28,7 @@
 				<Entry
 					Placeholder="Output Units"
 					Text="{Binding OutputUnits}"
-					HorizontalOptions="FillAndExpand"
+					HorizontalOptions="Fill"
 					StyleClass="EntryStyle"/>
 			</VerticalStackLayout>
 

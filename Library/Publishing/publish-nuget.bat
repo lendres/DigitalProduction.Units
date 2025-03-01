@@ -8,12 +8,16 @@ rem Change to the package directory.
 chdir /d ../bin/Release
 echo %cd%
 
-rem Publish.
+rem Find only the latest package version.
+set "latest_file="
 for /f %%a in ('call dir *.nupkg /b') do (
-	echo.
-	echo Processing: %%a
-	dotnet nuget push %%a --api-key %api-key% --source https://api.nuget.org/v3/index.json --skip-duplicate
+	set "latest_file=%%a"
 )
+
+rem Publish.
+echo.
+echo Processing: %latest_file%
+dotnet nuget push %latest_file% --api-key %api-key% --source https://api.nuget.org/v3/index.json --skip-duplicate
 
 echo.
 pause
