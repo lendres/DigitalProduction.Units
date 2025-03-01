@@ -6,9 +6,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageProjectUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/lendres/DigitalProduction.Units</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/lendres/Thunder-Units-Dot-Net-Library</RepositoryUrl>
+		<RepositoryUrl>https://github.com/lendres/DigitalProduction.Units</RepositoryUrl>
 		<PackageTags>Units;conversion;.Net;C#</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>Robert Harwood, Lance A. Endres</Authors>
