@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<dpcontrols:DigitalProductionMainPage 
+<dptkcontrols:DigitalProductionMainPage 
 	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
-	xmlns:dpcontrols="clr-namespace:DigitalProduction.Maui.Controls;assembly=DigitalProduction.Maui"
-	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui"
+	xmlns:dptkcontrols="clr-namespace:DigitalProduction.Maui.Controls;assembly=DigitalProduction.Maui.AppToolkit"
+	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui.AppToolkit"
 	xmlns:viewmodel="clr-namespace:DigitalProduction.Units.Maui"
 	x:DataType="viewmodel:UnitGroupViewModel"
 	x:Class="DigitalProduction.Units.Maui.UnitsGroupView">
@@ -73,32 +73,24 @@
 
 			<dg:DataGrid
 				Grid.Row="1"
+				Style="{DynamicResource DataGridDefaultLooseStyle}"
 				IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
 				ItemsSource="{Binding Items}" SelectionMode="{Binding SelectionMode}"
 				SelectedItem="{Binding SelectedItem}" RowToEdit="{Binding ItemToEdit}"
 				RefreshingEnabled="true" PullToRefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
-				BorderColor="{StaticResource DataGridBorderColor}" BorderThickness="{Binding BorderThickness}"
-				HeaderBackground="{StaticResource DataGridHeaderBackgroundColor}" HeaderBordersVisible="{Binding HeaderBordersVisible}"
-				BackgroundColor="{AppThemeBinding Light={StaticResource DataGridBackgroundColorLight}, Dark={StaticResource DataGridBackgroundColorDark}}"
-				FooterBackground="{StaticResource DataGridFooterBackgroundColor}"
 				PaginationEnabled="false"
-				ActiveRowColor="{StaticResource DataGridActiveRowColor}"
-				RowsBackgroundColorPalette="{AppThemeBinding Light={StaticResource DataGridColorPaletteLight}, Dark={StaticResource DataGridColorPaletteDark}}"
-				HeaderLabelStyle="{StaticResource DataGridTitle}"
-				RowHeight="36" HeaderHeight="40"
 				RowTappedCommand="{Binding TappedCommand}">
-
 				<dg:DataGrid.Columns>
 
 					<!-- Name column. -->
 					<dg:DataGridColumn Title="Name" PropertyName="Name" Width="0.5*" SortingEnabled="true"
-						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
+						CellTemplate="{StaticResource DataGridDefaultStringCellTempate}"/>
 
 					<dg:DataGridColumn Title="Default Symbol" PropertyName="DefaultSymbol" Width="0.25*" SortingEnabled="true"
-						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
+						CellTemplate="{StaticResource DataGridDefaultStringCellTempate}"/>
 
 					<dg:DataGridColumn Title="Alt Symbol" PropertyName="AlternateSymbol" Width="0.25*" SortingEnabled="true"
-						CellTemplate="{StaticResource DataGridDefaultCellTempate}"/>
+						CellTemplate="{StaticResource DataGridDefaultStringCellTempate}"/>
 
 				</dg:DataGrid.Columns>
 			</dg:DataGrid>
@@ -107,4 +99,4 @@
 
 	</Grid>
 
-</dpcontrols:DigitalProductionMainPage>
+</dptkcontrols:DigitalProductionMainPage>

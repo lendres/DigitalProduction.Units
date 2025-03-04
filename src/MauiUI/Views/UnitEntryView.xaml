@@ -11,7 +11,7 @@
 	x:DataType="viewmodel:UnitEntryViewModel"
 	CanBeDismissedByTappingOutsideOfPopup="False">
 
-	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="660" MinimumHeightRequest="470" MaximumHeightRequest="471">
+	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="660" MinimumHeightRequest="472" MaximumHeightRequest="473">
 
 		<Border.Resources>
 			<ResourceDictionary>
@@ -147,7 +147,7 @@
 
 			<HorizontalStackLayout StyleClass="BottomButtonRowStyle">
 				<Button 
-					Text="Save"
+					Text="OK"
 					HorizontalOptions="End"
 					StyleClass="StandardSizeButtonStyle"
 					Clicked="OnSaveButtonClicked"/>

@@ -47,8 +47,11 @@ public interface IUnitsGroupsViewModel
 
 	#region Methods
 
-	void RenameSelected(string name);
+	void ReplaceSelected(UnitGroup newItem);
 
+	void Insert(UnitGroup item, int position = 0);
+
+	void RenameSelected(string name);
 
     void Delete();
 

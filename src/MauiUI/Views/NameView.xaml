@@ -44,7 +44,7 @@
 
 			<HorizontalStackLayout Padding="0" StyleClass="BottomButtonRowStyle">
 				<Button 
-					Text="Save"
+					Text="OK"
 					HorizontalOptions="End"
 					StyleClass="StandardSizeButtonStyle"
 					Clicked="OnSaveButtonClicked"/>

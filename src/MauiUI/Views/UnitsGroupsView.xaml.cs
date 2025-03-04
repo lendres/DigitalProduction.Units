@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui.Views;
 using DigitalProduction.Maui.Controls;
-using DigitalProduction.Units;
 
 namespace DigitalProduction.Units.Maui;
 
@@ -21,6 +20,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
 		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
+		System.Diagnostics.Debug.Assert(unitsViewModel != null);
 
         // Get the name of the new UnitGroup.
         NameViewModel	viewModel	= new();
@@ -29,7 +29,10 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 
 		if (result is bool boolResult && boolResult)
 		{
-			await Edit(unitsViewModel, new UnitGroup() { Name = viewModel.Name });
+			// Create a new UnitGroup, add it, and then immediatly go to edit it.
+			UnitGroup unitGroup = new() { Name = viewModel.Name };
+			unitsViewModel.Insert(unitGroup);
+			await Edit(unitsViewModel, unitGroup);
 		}
 	}
 

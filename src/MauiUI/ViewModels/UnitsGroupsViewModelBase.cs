@@ -19,13 +19,12 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 
 	#endregion
 
-	#region
+	#region Properties
 
 	[ObservableProperty]
 	public partial UnitConverter?						UnitConverter { get; set; }
 
 	#endregion
-
 
 	#region File Related Methods
 

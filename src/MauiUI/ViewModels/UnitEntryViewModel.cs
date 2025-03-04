@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Data.Translation.Validation;
 using DigitalProduction.Maui.Validation;
 
 namespace DigitalProduction.Units.Maui;
@@ -205,6 +204,10 @@ public partial class UnitEntryViewModel : ObservableObject
 	private bool ValidateSubmittable() => IsSubmittable = Name.IsValid && DefaultSymbol.IsValid && AlternateSymbol.IsValid && AreNumericalValuesValid();
 
 	private bool AreNumericalValuesValid() => Preadder.IsValid && Multiplier.IsValid && Postadder.IsValid;
+
+	#endregion
+
+	#region Methods
 
 	private void ConvertExample()
 	{
