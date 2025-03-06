@@ -1,6 +1,5 @@
-﻿using DigitalProduction.Delegates;
+﻿using DigitalProduction.Units;
 using System.Diagnostics;
-using DigitalProduction.Units;
 
 namespace UnitsConversionDemo;
 
@@ -8,13 +7,13 @@ public static class UnitFileIO
 {
 	#region Fields, Events, and Properties
 
-	public static event				NoArgumentsEventHandler?				UnitsFileChanged;
+	public static event	Action?		UnitsFileChanged;
 
 	public static string			FileName { get => "Units v2.0.xml"; }
 
-	public static UnitConverter?	UnitConverter { get; private set; }		= null!;
-	public static string			Path { get; set; }						= "";
-	public static string			Message	{ get; private set; }			= "";
+	public static UnitConverter?	UnitConverter { get; private set; }			= null!;
+	public static string			Path { get; set; }							= "";
+	public static string			Message	{ get; private set; }				= "";
 
 	#endregion
 

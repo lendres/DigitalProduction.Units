@@ -1,11 +1,12 @@
-﻿using System.Xml.Serialization;
+﻿using DigitalProduction.ComponentModel;
+using System.Xml.Serialization;
 
 namespace DigitalProduction.Units;
 
 /// <summary>
 /// Represents a single unit loaded from the units file.
 /// </summary>
-public class UnitEntry
+public class UnitEntry : NotifyPropertyChangedBase
 {
 	#region Construction
 
@@ -34,22 +35,23 @@ public class UnitEntry
 	#region Properties
 
 	[XmlElement("name")]
-	public string Name { get; set;	} = "";
+	public string Name { get => GetValueOrDefault<string>(""); set => SetValue(value); }
 	
 	[XmlElement("defaultsymbol")]
-	public string DefaultSymbol { get; set; } = "";
+	public string DefaultSymbol { get => GetValueOrDefault<string>(""); set => SetValue(value); }
 
 	[XmlElement("alternatesymbol")]
-	public string AlternateSymbol { get; set; } = "";
+	public string AlternateSymbol { get => GetValueOrDefault<string>(""); set => SetValue(value); }
 
 	[XmlElement("preadder")]
-	public double Preadder { get; set; } = 0;
+	public double Preadder { get => GetValueOrDefault<double>(0); set => SetValue(value); }
 
 	[XmlElement("multiplier")]
-	public double Multiplier { get; set; } = 1;
+	public double Multiplier { get => GetValueOrDefault<double>(1); set => SetValue(value); }
 
 	[XmlElement("adder")]
-	public double Postadder { get; set; } = 0;
+	public double Postadder { get => GetValueOrDefault<double>(0); set => SetValue(value); }
+
 	#endregion
 
 } // End class.

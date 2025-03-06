@@ -58,6 +58,15 @@ public class UnitTable : CustomSerializableDictionary<string, UnitEntry, UnitKey
 	}
 
 	/// <summary>
+	/// Override Remove to convert the name to lower.
+	/// </summary>
+	/// <param name="groupName">Name of the group.</param>
+	public new void Remove(string unitName)
+	{
+		base.Remove(unitName.ToLower());
+	}
+
+	/// <summary>
 	/// Get a list of all the names of the UnitEntrys in this UnitTable.
 	/// </summary>
 	public string[] GetAllUnitNames()

@@ -7,11 +7,19 @@ namespace DigitalProduction.Units.Maui;
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class UnitsGroupView : DigitalProductionMainPage
 {
+	#region Fields
+
+	private readonly UnitGroupViewModel _viewModel;
+
+	#endregion
+
 	#region Construction
 
-	public UnitsGroupView()
+	public UnitsGroupView(UnitGroupViewModel viewModel)
 	{
 		InitializeComponent();
+		_viewModel = viewModel;
+		BindingContext = viewModel;
 	}
 
 	#endregion
@@ -20,32 +28,26 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 	
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
-		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
-		System.Diagnostics.Debug.Assert(unitsViewModel != null);
-
-		UnitEntryViewModel  viewModel	= new(unitsViewModel.UnitGroup!, unitsViewModel.UnitConverter!);
+		UnitEntryViewModel  viewModel	= new(_viewModel.UnitGroup!, _viewModel.UnitConverter!);
 		UnitEntryView       view		= new(viewModel);
 		object?				result		= await Shell.Current.ShowPopupAsync(view);
 
 		if (result is bool boolResult && boolResult)
 		{
-			unitsViewModel?.Insert(viewModel.UnitEntry);
+			_viewModel.Insert(viewModel.UnitEntry);
 		}
 	}
 
 	async void OnEdit(object sender, EventArgs eventArgs)
 	{
-		UnitGroupViewModel? unitsViewModel = BindingContext as UnitGroupViewModel;
-		System.Diagnostics.Debug.Assert(unitsViewModel != null);
-
-		UnitEntry			unitEntry	= new(unitsViewModel.SelectedItem!);
-		UnitEntryViewModel  viewModel	= new(unitEntry, unitsViewModel.UnitGroup!, unitsViewModel.UnitConverter!);
+		UnitEntry			unitEntry	= new(_viewModel.SelectedItem!);
+		UnitEntryViewModel  viewModel	= new(unitEntry, _viewModel.UnitGroup!, _viewModel.UnitConverter!);
 		UnitEntryView       view		= new(viewModel);
 		object?				result		= await Shell.Current.ShowPopupAsync(view);
 
 		if (result is bool boolResult && boolResult)
 		{
-			unitsViewModel.ReplaceSelected(viewModel.UnitEntry);
+			_viewModel.ReplaceSelected(viewModel.UnitEntry);
 		}
 	}
 

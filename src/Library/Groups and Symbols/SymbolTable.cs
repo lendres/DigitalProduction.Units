@@ -36,14 +36,14 @@ public class SymbolTable : Dictionary<string, UnitEntry>
 	{
 		get
 		{
-			//If we contain a symbol matching the key then return it.
+			// If we contain a symbol matching the key then return it.
 			if (ContainsKey(symbolName))
 			{
 				return base[symbolName] as UnitEntry;
 			}
 			else
 			{
-				//Symbol doesn't exist.
+				// Symbol doesn't exist.
 				return null;
 			}
 		}
@@ -55,7 +55,7 @@ public class SymbolTable : Dictionary<string, UnitEntry>
 			// Already added?  Warn developer (this is probably not a good thing).
 			Debug.Assert((!ContainsKey(symbolName)), "Symbol table warning", String.Format("The symbol '{0}' has been overwritten.", symbolName));
 
-			//Link the symbol to the unit
+			// Link the symbol to the unit.
 			base[symbolName] = value;
 		} 
 	}

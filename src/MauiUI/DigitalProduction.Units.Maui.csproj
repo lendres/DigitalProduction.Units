@@ -29,6 +29,10 @@
 		<Title>DigitalProduction.Units.Maui</Title>
 	</PropertyGroup>
 
+	<Target Name="RunPostBuildEventAfterPack" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">
+		<Exec Command="call &quot;$(MSBuildProjectDirectory)\Publishing\copy-nuget.bat&quot; &quot;$(MSBuildProjectDirectory)&quot;" />
+	</Target>
+
 	<PropertyGroup>
 		<!-- Enabling this causes the bindings like 'ItemsSource="{Binding BindingContext.Property, Source={Reference self}}"' to fail. -->
 		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
@@ -48,7 +52,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
-		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.10.5" />
+		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.11.4" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
 	</ItemGroup>
 

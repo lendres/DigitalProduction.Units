@@ -4,7 +4,7 @@
  *
  * Please see included license.txt file for information on redistribution and usage.
  */
-using DigitalProduction.Interface;
+using DigitalProduction.ComponentModel;
 using DigitalProduction.Xml.Serialization;
 using System.Diagnostics;
 using System.Xml;
@@ -17,7 +17,7 @@ namespace DigitalProduction.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter : IModified
+public class UnitConverter : INotifyModifiedChanged
 {
 	#region Events
 
@@ -29,7 +29,7 @@ public class UnitConverter : IModified
 	/// <summary>
 	/// Event for when the object was modified.
 	/// </summary>
-	public event ModifiedEventHandler? OnModifiedChanged;
+	public event ModifiedChangedEventHandler? ModifiedChanged;
 
 	#endregion
 
@@ -54,9 +54,9 @@ public class UnitConverter : IModified
 	public UnitConverter()
 	{
 		// Set up the tables we need
-		_symbolTable = new SymbolTable();
-		_unitTable       = new UnitTable();
-		_groupTable  = new GroupTable();
+		_symbolTable	= new SymbolTable();
+		_unitTable		= new UnitTable();
+		_groupTable		= new GroupTable();
 	}
 
 	/// <summary>
@@ -107,12 +107,12 @@ public class UnitConverter : IModified
 	{
 		get => _modified;
 
-		set
+		private set
 		{
 			if (_modified != value)
 			{
 				_modified = value;
-				RaiseOnModifiedChangedEvent();
+				RaiseModifiedChangedEvent();
 			}
 		}
 	}
@@ -161,6 +161,17 @@ public class UnitConverter : IModified
 		{
 			return false;
 		}
+	}
+
+	/// <summary>
+	/// Asynchonous serialization.
+	/// </summary>
+	public async Task<bool> SerializeAsync(string path)
+	{
+		return await Task.Run(() =>
+		{
+			return Serialize(path);
+		});
 	}
 
 	/// <summary>
@@ -257,7 +268,7 @@ public class UnitConverter : IModified
 	/// <summary>
 	/// Access for manually firing event for external sources.
 	/// </summary>
-	private void RaiseOnModifiedChangedEvent() => OnModifiedChanged?.Invoke(_modified);
+	private void RaiseModifiedChangedEvent() => ModifiedChanged?.Invoke(this, _modified);
 
 	#endregion
 

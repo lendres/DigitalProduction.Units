@@ -1267,5 +1267,107 @@
                 </units>
             </unitgroup>
         </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="area">
+            <unitgroup name="Area">
+                <units>
+                    <unitkeyvaluepair name="meter**2">
+                        <unit>
+                            <name>meter**2</name>
+                            <defaultsymbol>m**2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="feet**2">
+                        <unit>
+                            <name>feet**2</name>
+                            <defaultsymbol>ft**2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.092903</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="centimeter**2">
+                        <unit>
+                            <name>centimeter**2</name>
+                            <defaultsymbol>cm**2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>0.0001</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="millimeter**2">
+                        <unit>
+                            <name>millimeter**2</name>
+                            <defaultsymbol>mm**2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1E-06</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="mile**2">
+                        <unit>
+                            <name>mile**2</name>
+                            <defaultsymbol>mile**2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>2590000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="acre">
+                        <unit>
+                            <name>acre</name>
+                            <defaultsymbol>acre</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>4046.86</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="kilometer**2">
+                        <unit>
+                            <name>kilometer**2</name>
+                            <defaultsymbol>km**2</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1000000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                    <unitkeyvaluepair name="hectare">
+                        <unit>
+                            <name>hectare</name>
+                            <defaultsymbol>hectare</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>10000</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
+        <unitgroupkeyvaluepair name="density">
+            <unitgroup name="Density">
+                <units>
+                    <unitkeyvaluepair name="kilogram / meter**3">
+                        <unit>
+                            <name>Kilogram / meter**3</name>
+                            <defaultsymbol>kg/m**3</defaultsymbol>
+                            <alternatesymbol />
+                            <preadder>0</preadder>
+                            <multiplier>1</multiplier>
+                            <adder>0</adder>
+                        </unit>
+                    </unitkeyvaluepair>
+                </units>
+            </unitgroup>
+        </unitgroupkeyvaluepair>
     </groups>
 </unitfile>

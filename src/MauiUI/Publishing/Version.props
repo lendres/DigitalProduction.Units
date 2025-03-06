@@ -2,8 +2,8 @@
 <Project>
 	<PropertyGroup>
 		<Major Condition=" '$(Major)' == '' ">0</Major>
-		<Minor Condition=" '$(Minor)' == '' ">3</Minor>
-		<BuildNumber Condition=" '$(BuildNumber)' == '' ">4</BuildNumber>
+		<Minor Condition=" '$(Minor)' == '' ">5</Minor>
+		<BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
 
 		<VersionPrefix Condition=" '$(Major)' != '' and '$(Minor)' != '' and '$(BuildNumber)' != ''">$(Major).$(Minor).$(BuildNumber)</VersionPrefix>
 		<VersionPrefix Condition=" '$(Major)' != '' and '$(Minor)' != '' and '$(BuildNumber)' == ''">$(Major).$(Minor)</VersionPrefix>
