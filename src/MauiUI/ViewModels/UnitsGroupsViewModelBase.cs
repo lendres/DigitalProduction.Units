@@ -36,7 +36,7 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 			{ 
 				UnitGroup[]? unitGroups = UnitConverter.GroupTable.GetAllGroups();
 				Items = unitGroups != null ? new ObservableCollection<UnitGroup>(unitGroups) : null;
-				UnitConverter.OnModifiedChanged += OnModifiedChanged;
+				UnitConverter.ModifiedChanged += OnModifiedChanged;
 			}
 		}
 		catch
@@ -45,7 +45,7 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 		}
 	}
 
-	private void OnModifiedChanged(bool modified)
+	private void OnModifiedChanged(object sender, bool modified)
 	{
 		Modified = modified;
 	}

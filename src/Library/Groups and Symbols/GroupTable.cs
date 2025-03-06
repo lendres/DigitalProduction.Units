@@ -16,7 +16,6 @@ namespace DigitalProduction.Units;
 /// </summary>
 [XmlRoot("groups")]
 public class GroupTable : CustomSerializableDictionary<string, UnitGroup, GroupKeyValuePair>
-//public class GroupTable : SerializableDictionary<string, UnitGroup>
 {
 	#region Construction
 
@@ -127,7 +126,7 @@ public class GroupTable : CustomSerializableDictionary<string, UnitGroup, GroupK
 	/// </summary>
 	public List<string> GetSortedListOfGroupNames()
 	{
-		List<string> categoryNames = new(GetAllGroupNames());
+		List<string> categoryNames = [.. GetAllGroupNames()];
 		categoryNames.Sort();
 		return categoryNames;
 	}

@@ -10,10 +10,6 @@
 	x:DataType="viewmodel:UnitGroupViewModel"
 	x:Class="DigitalProduction.Units.Maui.UnitsGroupView">
 
-	<ContentPage.BindingContext>
-		<viewmodel:UnitGroupViewModel/>
-	</ContentPage.BindingContext>
-	
 	<ContentPage.Resources>
 		<toolkit:IsNullConverter x:Key="IsNullConverter"/>
 		<toolkit:IsNotNullConverter x:Key="IsNotNullConverter"/>

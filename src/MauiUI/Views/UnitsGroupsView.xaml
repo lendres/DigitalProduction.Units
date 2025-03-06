@@ -61,7 +61,7 @@
 
 				<Button 
 					Grid.Column="1"
-					Text="Save Units"
+					Text="Save"
 					IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
 					IsEnabled="{Binding Modified}"
 					StyleClass="WideButtonStyle"

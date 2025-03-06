@@ -52,7 +52,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
-		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.11.3" />
+		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.11.4" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
 	</ItemGroup>
 

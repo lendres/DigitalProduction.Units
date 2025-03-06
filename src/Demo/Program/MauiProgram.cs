@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Media;
 using CommunityToolkit.Maui.Storage;
+using DigitalProduction.Maui;
+using DigitalProduction.Units.Maui;
 using Microsoft.Extensions.Logging;
 using UnitsConversionDemo.ViewModels;
 
@@ -14,6 +16,8 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
+			.UseDigitalProductionMauiAppToolkit()
+			.UseDigitalProductionMauiUnits()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -36,12 +40,7 @@ public static class MauiProgram
 		services.AddTransient<ParsingViewModel>();
 		services.AddTransient<ParseView>();
 
-		services.AddTransientPopup<DigitalProduction.Units.Maui.UnitEntryView, DigitalProduction.Units.Maui.UnitEntryViewModel>();
-
-		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupsView>();
-		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupView>();
 		services.AddTransient<DigitalProduction.Units.Maui.IUnitsGroupsViewModel, UnitsGroupsViewModel>();
-		services.AddTransient<DigitalProduction.Units.Maui.UnitGroupViewModel>();
 	}
 
 	static void RegisterEssentials(in IServiceCollection services)

@@ -5,11 +5,18 @@ namespace DigitalProduction.Units.Maui;
 
 public partial class UnitsGroupsView : DigitalProductionMainPage
 {
+	#region Fields
+
+	private readonly IUnitsGroupsViewModel _viewModel;
+
+	#endregion
+
 	#region Construction
 
 	public UnitsGroupsView(IUnitsGroupsViewModel viewModel)
 	{
 		InitializeComponent();
+		_viewModel = viewModel;
 		BindingContext = viewModel;
 	}
 
@@ -19,9 +26,6 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
-		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
-		System.Diagnostics.Debug.Assert(unitsViewModel != null);
-
         // Get the name of the new UnitGroup.
         NameViewModel	viewModel	= new();
         NameView		view		= new(viewModel);
@@ -31,45 +35,39 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 		{
 			// Create a new UnitGroup, add it, and then immediatly go to edit it.
 			UnitGroup unitGroup = new() { Name = viewModel.Name };
-			unitsViewModel.Insert(unitGroup);
-			await Edit(unitsViewModel, unitGroup);
+			_viewModel.Insert(unitGroup);
+			await Edit(unitGroup);
 		}
 	}
 
 	async void OnEdit(object sender, EventArgs eventArgs)
 	{
-		IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
-
-		await Edit(unitsViewModel, unitsViewModel?.SelectedItem);
+		await Edit(_viewModel.SelectedItem);
 	}
 
     async void OnRename(object sender, EventArgs eventArgs)
     {
-        IUnitsGroupsViewModel? unitsViewModel = BindingContext as IUnitsGroupsViewModel;
-
-        System.Diagnostics.Debug.Assert(unitsViewModel != null);
-        System.Diagnostics.Debug.Assert(unitsViewModel.UnitConverter != null);
+        System.Diagnostics.Debug.Assert(_viewModel.UnitConverter != null);
 
         // Get the name of the new UnitGroup.
-        NameViewModel	viewModel	= new(unitsViewModel.SelectedItem!.Name, unitsViewModel.UnitConverter.GroupTable.GetSortedListOfGroupNames());
+        NameViewModel	viewModel	= new(_viewModel.SelectedItem!.Name, _viewModel.UnitConverter.GroupTable.GetSortedListOfGroupNames());
         NameView		view		= new(viewModel);
         object?			result		= await Shell.Current.ShowPopupAsync(view);
 
         if (result is bool boolResult && boolResult)
         {
-            unitsViewModel.RenameSelected(viewModel.Name);
+            _viewModel.RenameSelected(viewModel.Name);
         }
     }
 
-    private async Task Edit(IUnitsGroupsViewModel? unitsViewModel, UnitGroup? unitGroup)
+    private async Task Edit(UnitGroup? unitGroup)
 	{
-		System.Diagnostics.Debug.Assert(unitsViewModel != null);
-		System.Diagnostics.Debug.Assert(unitsViewModel.UnitConverter != null);
+		System.Diagnostics.Debug.Assert(_viewModel.UnitConverter != null);
 		System.Diagnostics.Debug.Assert(unitGroup != null);
 
 		await Shell.Current.GoToAsync(nameof(UnitsGroupView), true, new Dictionary<string, object>
 		{
-			{"UnitsConverter",  unitsViewModel.UnitConverter},
+			{"UnitsConverter",  _viewModel.UnitConverter},
 			{"UnitGroup",  unitGroup}
 		});
 	}
@@ -80,8 +78,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 
 		if (result)
 		{
-			IUnitsGroupsViewModel? viewModel = BindingContext as IUnitsGroupsViewModel;
-			viewModel?.Delete();
+			_viewModel.Delete();
 		}
 	}
 
