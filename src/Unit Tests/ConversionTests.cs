@@ -1,4 +1,5 @@
 ﻿using DigitalProduction.Units;
+using System.Diagnostics;
 
 namespace xUnitTests;
 
@@ -47,5 +48,26 @@ public class ConversionTests
 		result = _unitConverter.ConvertUnits(value, inUnits, outUnits, out convertedValue);
 		Assert.Equal(UnitResult.NoError, result);
 		Assert.Equal(33.8, convertedValue, 0.0001);
+	}
+
+
+	[Fact]
+	public void TimingTest()
+	{
+		UnitConverter unitConverter	= UnitFileLoading.LoadVersionTwoFile();
+
+		double value	= 1;
+		string inUnits	= "m";
+		string outUnits	= "ft";
+
+		Stopwatch stopwatch = Stopwatch.StartNew(); 
+
+		for (int i = 0; i < 10000000; i++)
+		{
+			UnitResult result = unitConverter.ConvertUnits(value, inUnits, outUnits, out double convertedValue);
+		}
+
+		stopwatch.Stop();
+		Debug.WriteLine("\n\nEllapsed millisecons: " + stopwatch.ElapsedMilliseconds);
 	}
 }

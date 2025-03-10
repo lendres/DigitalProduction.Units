@@ -17,7 +17,7 @@ namespace DigitalProduction.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter : INotifyModifiedChanged
+public class UnitConverter : NotifyModifiedChanged
 {
 	#region Events
 
@@ -25,11 +25,6 @@ public class UnitConverter : INotifyModifiedChanged
 	/// Called when an error occurs in the unit converter.
 	/// </summary>
 	public event UnitEventHandler? OnError;
-
-	/// <summary>
-	/// Event for when the object was modified.
-	/// </summary>
-	public event ModifiedChangedEventHandler? ModifiedChanged;
 
 	#endregion
 
@@ -41,8 +36,6 @@ public class UnitConverter : INotifyModifiedChanged
 	private GroupTable				_groupTable;
 	private readonly SymbolTable	_symbolTable;
 	private readonly UnitTable		_unitTable;
-
-	private bool					_modified					= false;
 
 	#endregion
 
@@ -98,24 +91,6 @@ public class UnitConverter : INotifyModifiedChanged
 	/// </summary>
 	[XmlIgnore()]
 	public UnitTable UnitTable { get => _unitTable;}
-
-	///	<summary>
-	///	Specifies if the project has been modified since last being saved/loaded.
-	///	</summary>
-	[XmlIgnore()]
-	public bool Modified
-	{
-		get => _modified;
-
-		private set
-		{
-			if (_modified != value)
-			{
-				_modified = value;
-				RaiseModifiedChangedEvent();
-			}
-		}
-	}
 
 	#endregion
 
@@ -234,6 +209,8 @@ public class UnitConverter : INotifyModifiedChanged
 		{
 			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
 			{
+				unitEntry.Group = unitGroup;
+
 				// Don't allow duplicate units.
 				if (_symbolTable[unitEntry.DefaultSymbol] != null)
 				{
@@ -260,15 +237,6 @@ public class UnitConverter : INotifyModifiedChanged
 
 		return result;
 	}
-
-	#endregion
-
-	#region Modification
-
-	/// <summary>
-	/// Access for manually firing event for external sources.
-	/// </summary>
-	private void RaiseModifiedChangedEvent() => ModifiedChanged?.Invoke(this, _modified);
 
 	#endregion
 
@@ -311,6 +279,7 @@ public class UnitConverter : INotifyModifiedChanged
 	{
  		_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
 		_unitTable[unitEntry.Name]				= unitEntry;
+		unitEntry.Group                         = _groupTable[groupName];
 		_groupTable[groupName]?.AddUnit(unitEntry);
 		Modified = true;
 	}
@@ -470,21 +439,18 @@ public class UnitConverter : INotifyModifiedChanged
 		}
 
 		// Make sure the units are of the same group.
-		if (!CompatibleUnits(unitEntryFrom.Name, unitEntryTo.Name))
+		if (!(unitEntryFrom.Group!.Name == unitEntryTo.Group!.Name))
 		{
 			return UnitResult.UnitMismatch;
 		}
 
-
-		double x = value;
-		
-		UnitResult result = UnsafeConvertUnits(x, unitEntryFrom, unitEntryTo, out x);
+		UnitResult result = UnsafeConvertUnits(value, unitEntryFrom, unitEntryTo, out value);
 		if (result != UnitResult.NoError)
 		{
 			return result;
 		}
 
-		output = x;
+		output = value;
 
 		return UnitResult.NoError;
 	}
