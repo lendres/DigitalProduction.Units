@@ -6,7 +6,7 @@ namespace DigitalProduction.Units;
 /// <summary>
 /// Represents a single unit loaded from the units file.
 /// </summary>
-public class UnitEntry : NotifyPropertyChangedBase
+public class UnitEntry : NotifyPropertyChanged
 {
 	#region Construction
 
