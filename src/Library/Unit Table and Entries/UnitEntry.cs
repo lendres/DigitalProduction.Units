@@ -28,6 +28,7 @@ public class UnitEntry : NotifyPropertyChanged
 		Preadder		= unitEntry.Preadder;
 		Multiplier		= unitEntry.Multiplier;
 		Postadder		= unitEntry.Postadder;
+		Group           = unitEntry.Group;
 	}
 
 	#endregion
@@ -51,6 +52,12 @@ public class UnitEntry : NotifyPropertyChanged
 
 	[XmlElement("adder")]
 	public double Postadder { get => GetValueOrDefault<double>(0); set => SetValue(value); }
+
+	/// <summary>
+	/// Pointer to the group, used to prevent having to search for the group during conversion.
+	/// </summary>
+	[XmlIgnore()]
+	public UnitGroup? Group { get;  set; }
 
 	#endregion
 

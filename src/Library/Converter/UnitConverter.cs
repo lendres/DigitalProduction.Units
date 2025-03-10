@@ -209,6 +209,8 @@ public class UnitConverter : NotifyModifiedChanged
 		{
 			foreach (UnitEntry unitEntry in unitGroup.Units.Values)
 			{
+				unitEntry.Group = unitGroup;
+
 				// Don't allow duplicate units.
 				if (_symbolTable[unitEntry.DefaultSymbol] != null)
 				{
@@ -277,6 +279,7 @@ public class UnitConverter : NotifyModifiedChanged
 	{
  		_symbolTable[unitEntry.DefaultSymbol]	= unitEntry;
 		_unitTable[unitEntry.Name]				= unitEntry;
+		unitEntry.Group                         = _groupTable[groupName];
 		_groupTable[groupName]?.AddUnit(unitEntry);
 		Modified = true;
 	}
@@ -436,7 +439,7 @@ public class UnitConverter : NotifyModifiedChanged
 		}
 
 		// Make sure the units are of the same group.
-		if (!CompatibleUnits(unitEntryFrom.Name, unitEntryTo.Name))
+		if (!(unitEntryFrom.Group!.Name == unitEntryTo.Group!.Name))
 		{
 			return UnitResult.UnitMismatch;
 		}
