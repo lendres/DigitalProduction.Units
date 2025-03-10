@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:viewmodel="clr-namespace:UnitsConversionDemo.ViewModels"
+			 x:DataType="viewmodel:ParsingViewModel"
+             x:Class="UnitsConversionDemo.ParseView">
+
+	<ContentPage.BindingContext>
+		<viewmodel:ParsingViewModel/>
+	</ContentPage.BindingContext>
+
+	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
+		<Label Grid.Row="0" Text="Convert by Parsing Text" StyleClass="Title"/>
+		
+		<VerticalStackLayout Grid.Row="1" Padding="30,0" Spacing="25">
+
+			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
+                <Label Text="Input" StyleClass="ControlLabel"/>
+				<Entry
+					Placeholder="Input"
+					Text="{Binding Input}"
+					HorizontalOptions="Fill"
+					StyleClass="EntryStyle"/>
+			</VerticalStackLayout>
+
+			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
+				<Label Text="Output Units" StyleClass="ControlLabel"/>
+				<Entry
+					Placeholder="Output Units"
+					Text="{Binding OutputUnits}"
+					HorizontalOptions="Fill"
+					StyleClass="EntryStyle"/>
+			</VerticalStackLayout>
+
+			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
+				<Label Text="Result" StyleClass="ControlLabel"/>
+				<Border Padding="8">
+					<Label Text="{Binding Result}"/>
+				</Border>
+			</VerticalStackLayout>
+
+			<VerticalStackLayout StyleClass="TitleVerticalStackStyle">
+				<Label Text="Messages" StyleClass="ControlLabel"/>
+				<Border Padding="8">
+					<Label Text="{Binding Message}" LineBreakMode="WordWrap"/>
+				</Border>
+			</VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dptkcontrols:DigitalProductionMainPage 
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
+	xmlns:dptkcontrols="clr-namespace:DigitalProduction.Maui.Controls;assembly=DigitalProduction.Maui.AppToolkit"
+	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui.AppToolkit"
+	xmlns:viewmodel="clr-namespace:DigitalProduction.Units.Maui"
+	x:DataType="viewmodel:UnitGroupViewModel"
+	x:Class="DigitalProduction.Units.Maui.UnitsGroupView">
+
+	<ContentPage.Resources>
+		<toolkit:IsNullConverter x:Key="IsNullConverter"/>
+		<toolkit:IsNotNullConverter x:Key="IsNotNullConverter"/>
+	</ContentPage.Resources>
+
+	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
+		<Label Grid.Row="0" Text="{Binding Name.Value}" StyleClass="Title"/>
+
+		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
+
+			<Label
+				Grid.Row="0"
+				Text="The units file is not loaded.  Check that the correct file location is specified in the settings and that the file is valid."
+				IsVisible="{Binding Items, Converter={StaticResource IsNullConverter}}"
+				Style="{StaticResource LargeErrorMessageStyle}"/>
+
+			<Grid Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Start">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="200"/>
+				</Grid.ColumnDefinitions>
+
+				<HorizontalStackLayout Grid.Column="0" StyleClass="TopButtonRowStyle">
+					<Button 
+						Text="New"
+						IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
+						StyleClass="StandardSizeButtonStyle"
+						HorizontalOptions="Start"
+						Clicked="OnNew"/>
+
+					<Button 
+						Text="Edit"
+						IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
+						IsEnabled="{Binding SelectedItem, Converter={StaticResource IsNotNullConverter}}"
+						StyleClass="StandardSizeButtonStyle"
+						HorizontalOptions="Start"
+						Clicked="OnEdit"/>
+
+					<Button 
+						Text="Delete"
+						IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
+						IsEnabled="{Binding SelectedItem, Converter={StaticResource IsNotNullConverter}}"
+						StyleClass="StandardSizeButtonStyle"
+						HorizontalOptions="Start"
+						Clicked="OnDelete"/>
+				</HorizontalStackLayout>
+
+				<!--<Button 
+					Grid.Column="1"
+					Text="Save Units"
+					IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
+					IsEnabled="{Binding Modified}"
+					StyleClass="WideButtonStyle"
+					HorizontalOptions="End"
+					Command="{Binding SaveUnitsCommand}" />-->
+			</Grid>
+
+			<dg:DataGrid
+				Grid.Row="1"
+				Style="{DynamicResource DataGridDefaultLooseStyle}"
+				IsVisible="{Binding Items, Converter={StaticResource IsNotNullConverter}}"
+				ItemsSource="{Binding Items}" SelectionMode="{Binding SelectionMode}"
+				SelectedItem="{Binding SelectedItem}" RowToEdit="{Binding ItemToEdit}"
+				RefreshingEnabled="true" PullToRefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+				PaginationEnabled="false"
+				RowTappedCommand="{Binding TappedCommand}">
+				<dg:DataGrid.Columns>
+
+					<!-- Name column. -->
+					<dg:DataGridColumn Title="Name" PropertyName="Name" Width="0.5*" SortingEnabled="true"
+						CellTemplate="{StaticResource DataGridDefaultStringCellTempate}"/>
+
+					<dg:DataGridColumn Title="Default Symbol" PropertyName="DefaultSymbol" Width="0.25*" SortingEnabled="true"
+						CellTemplate="{StaticResource DataGridDefaultStringCellTempate}"/>
+
+					<dg:DataGridColumn Title="Alt Symbol" PropertyName="AlternateSymbol" Width="0.25*" SortingEnabled="true"
+						CellTemplate="{StaticResource DataGridDefaultStringCellTempate}"/>
+
+				</dg:DataGrid.Columns>
+			</dg:DataGrid>
+
+		</Grid>
+
+	</Grid>
+
+</dptkcontrols:DigitalProductionMainPage>
