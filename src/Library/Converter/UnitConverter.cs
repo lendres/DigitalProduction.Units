@@ -17,7 +17,7 @@ namespace DigitalProduction.Units;
 /// and converting units.
 /// </summary>
 [XmlRoot("unitfile")]
-public class UnitConverter : INotifyModifiedChanged
+public class UnitConverter : NotifyModifiedChanged
 {
 	#region Events
 
@@ -25,11 +25,6 @@ public class UnitConverter : INotifyModifiedChanged
 	/// Called when an error occurs in the unit converter.
 	/// </summary>
 	public event UnitEventHandler? OnError;
-
-	/// <summary>
-	/// Event for when the object was modified.
-	/// </summary>
-	public event ModifiedChangedEventHandler? ModifiedChanged;
 
 	#endregion
 
@@ -41,8 +36,6 @@ public class UnitConverter : INotifyModifiedChanged
 	private GroupTable				_groupTable;
 	private readonly SymbolTable	_symbolTable;
 	private readonly UnitTable		_unitTable;
-
-	private bool					_modified					= false;
 
 	#endregion
 
@@ -98,24 +91,6 @@ public class UnitConverter : INotifyModifiedChanged
 	/// </summary>
 	[XmlIgnore()]
 	public UnitTable UnitTable { get => _unitTable;}
-
-	///	<summary>
-	///	Specifies if the project has been modified since last being saved/loaded.
-	///	</summary>
-	[XmlIgnore()]
-	public bool Modified
-	{
-		get => _modified;
-
-		private set
-		{
-			if (_modified != value)
-			{
-				_modified = value;
-				RaiseModifiedChangedEvent();
-			}
-		}
-	}
 
 	#endregion
 
