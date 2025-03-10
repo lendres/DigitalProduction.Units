@@ -238,15 +238,6 @@ public class UnitConverter : NotifyModifiedChanged
 
 	#endregion
 
-	#region Modification
-
-	/// <summary>
-	/// Access for manually firing event for external sources.
-	/// </summary>
-	private void RaiseModifiedChangedEvent() => ModifiedChanged?.Invoke(this, _modified);
-
-	#endregion
-
 	#region Unit Related Methods
 
 	/// <summary>
@@ -450,16 +441,13 @@ public class UnitConverter : NotifyModifiedChanged
 			return UnitResult.UnitMismatch;
 		}
 
-
-		double x = value;
-		
-		UnitResult result = UnsafeConvertUnits(x, unitEntryFrom, unitEntryTo, out x);
+		UnitResult result = UnsafeConvertUnits(value, unitEntryFrom, unitEntryTo, out value);
 		if (result != UnitResult.NoError)
 		{
 			return result;
 		}
 
-		output = x;
+		output = value;
 
 		return UnitResult.NoError;
 	}
