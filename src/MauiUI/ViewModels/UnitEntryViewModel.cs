@@ -20,7 +20,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		UnitEntry		= new();
 		_unitGroup		= unitGroup;
 		_unitConverter	= unitConverter;
-		Title			= "Add Unit Entry";
+		Title			= "Add Unit";
 		Initialize();
 	}
 
@@ -29,7 +29,7 @@ public partial class UnitEntryViewModel : ObservableObject
 		UnitEntry		= unitEntry;
 		_unitGroup		= unitGroup;
 		_unitConverter	= unitConverter;
-		Title			= "Edit Unit Entry";
+		Title			= "Edit Unit";
 		Initialize();
 	}
 

@@ -16,7 +16,7 @@
 	</ContentPage.Resources>
 
 	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="700">
-		<Label Grid.Row="0" Text="Unit Groups" StyleClass="Title"/>
+		<Label Grid.Row="0" Text="Unit Categories" StyleClass="Title"/>
 
 		<Grid Grid.Row="1" StyleClass="DataGridEditStyle">
 
