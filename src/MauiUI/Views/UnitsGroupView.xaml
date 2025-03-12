@@ -22,7 +22,7 @@
 
 			<Label
 				Grid.Row="0"
-				Text="The units file is not loaded.  Check that the correct file location is specified in the settings and that the file is valid."
+				Text="The units file is not loaded.  Check that the correct file location is specified and that the file is valid."
 				IsVisible="{Binding Items, Converter={StaticResource IsNullConverter}}"
 				Style="{StaticResource LargeErrorMessageStyle}"/>
 

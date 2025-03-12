@@ -65,11 +65,19 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 		System.Diagnostics.Debug.Assert(_viewModel.UnitConverter != null);
 		System.Diagnostics.Debug.Assert(unitGroup != null);
 
-		await Shell.Current.GoToAsync(nameof(UnitsGroupView), true, new Dictionary<string, object>
+		try
 		{
-			{"UnitsConverter",  _viewModel.UnitConverter},
-			{"UnitGroup",  unitGroup}
-		});
+			await Shell.Current.GoToAsync(nameof(UnitsGroupView), true, new Dictionary<string, object>
+			{
+				{"UnitsConverter",  _viewModel.UnitConverter},
+				{"UnitGroup",  unitGroup}
+			});
+		}
+		catch (Exception exception)
+		{
+			System.Diagnostics.Trace.Write(exception.Message);
+		}
+		
 	}
 
 	async void OnDelete(object sender, EventArgs eventArgs)

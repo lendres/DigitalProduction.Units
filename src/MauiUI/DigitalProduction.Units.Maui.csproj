@@ -37,6 +37,7 @@
 		<!-- Enabling this causes the bindings like 'ItemsSource="{Binding BindingContext.Property, Source={Reference self}}"' to fail. -->
 		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 		<LangVersion>preview</LangVersion>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -52,7 +53,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
-		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.11.5" />
+		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.11.6" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
 	</ItemGroup>
 
@@ -71,10 +72,10 @@
 	    <DependentUpon>UnitEntryView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\UnitsGroupsView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
+	    <DependentUpon>UnitsGroupsView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\UnitsGroupView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
+	    <DependentUpon>UnitsGroupsView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

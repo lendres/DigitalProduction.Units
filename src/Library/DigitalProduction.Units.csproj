@@ -13,6 +13,7 @@
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>Robert Harwood, Lance A. Endres</Authors>
 		<Title>DigitalProduction.Units</Title>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<Target Name="RunPostBuildEventAfterPack" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">

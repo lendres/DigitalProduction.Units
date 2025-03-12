@@ -20,6 +20,12 @@
 
 		<Grid Grid.Row="1" StyleClass="DataGridEditStyle">
 
+			<Label
+				Grid.Row="0"
+				Text="The units file is not loaded.  Check that the correct file location is specified and that the file is valid."
+				IsVisible="{Binding Items, Converter={StaticResource IsNullConverter}}"
+				Style="{StaticResource LargeErrorMessageStyle}"/>
+
 			<Grid Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Start">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
