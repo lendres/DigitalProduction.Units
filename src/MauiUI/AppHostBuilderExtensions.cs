@@ -15,11 +15,10 @@ public static class AppHostBuilderExtensions
     public static MauiAppBuilder UseDigitalProductionMauiUnits(this MauiAppBuilder builder)
     {
 		IServiceCollection services = builder.Services;
-		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupsView>();
-		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupView>();
-		services.AddTransient<DigitalProduction.Units.Maui.UnitGroupViewModel>();
 		services.AddTransientPopup<DigitalProduction.Units.Maui.UnitEntryView, DigitalProduction.Units.Maui.UnitEntryViewModel>();
-
+		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupView>();
+		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupViewModel>();
+		services.AddTransient<DigitalProduction.Units.Maui.UnitsGroupsView>();
         return builder;
     }
 }

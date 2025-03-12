@@ -37,8 +37,8 @@ public static class MauiProgram
 
 	static void RegisterViewsAndViewModels(IServiceCollection services)
 	{
-		services.AddTransient<ParsingViewModel>();
 		services.AddTransient<ParseView>();
+		services.AddTransient<ParsingViewModel>();
 
 		services.AddTransient<DigitalProduction.Units.Maui.IUnitsGroupsViewModel, UnitsGroupsViewModel>();
 	}
