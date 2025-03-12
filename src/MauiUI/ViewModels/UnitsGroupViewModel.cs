@@ -8,7 +8,7 @@ namespace DigitalProduction.Units.Maui;
 
 [QueryProperty(nameof(UnitConverter), "UnitsConverter")]
 [QueryProperty(nameof(UnitGroup), "UnitGroup")]
-public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
+public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 {
 	#region Fields
 
@@ -19,7 +19,7 @@ public partial class UnitGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	#region Construction
 
-	public UnitGroupViewModel()
+	public UnitsGroupViewModel()
 	{
 	}
 

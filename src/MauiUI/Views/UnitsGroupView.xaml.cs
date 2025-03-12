@@ -9,13 +9,13 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 {
 	#region Fields
 
-	private readonly UnitGroupViewModel _viewModel;
+	private readonly UnitsGroupViewModel _viewModel;
 
 	#endregion
 
 	#region Construction
 
-	public UnitsGroupView(UnitGroupViewModel viewModel)
+	public UnitsGroupView(UnitsGroupViewModel viewModel)
 	{
 		InitializeComponent();
 		_viewModel = viewModel;
@@ -57,7 +57,7 @@ public partial class UnitsGroupView : DigitalProductionMainPage
 
 		if (result)
 		{
-			UnitGroupViewModel? viewModel = BindingContext as UnitGroupViewModel;
+			UnitsGroupViewModel? viewModel = BindingContext as UnitsGroupViewModel;
 			viewModel?.Delete();
 		}
 	}

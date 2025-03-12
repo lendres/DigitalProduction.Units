@@ -7,7 +7,7 @@
 	xmlns:dptkcontrols="clr-namespace:DigitalProduction.Maui.Controls;assembly=DigitalProduction.Maui.AppToolkit"
 	xmlns:dpconverters="clr-namespace:DigitalProduction.Maui.Converters;assembly=DigitalProduction.Maui.AppToolkit"
 	xmlns:viewmodel="clr-namespace:DigitalProduction.Units.Maui"
-	x:DataType="viewmodel:UnitGroupViewModel"
+	x:DataType="viewmodel:UnitsGroupViewModel"
 	x:Class="DigitalProduction.Units.Maui.UnitsGroupView">
 
 	<ContentPage.Resources>
