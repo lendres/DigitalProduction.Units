@@ -10,17 +10,15 @@ Features:
 - A single conversion for each unit is specified.  It is not necessary to specify every combination of unit conversions.
 
 ## Usage
+```csharp
 UnitConverter.Deserialize("units.xml");
 
-// Parsing.\
+// Parsing.
 UnitResult result = unitConverter.ParseUnitString("1 m", out double value, out string inUnits);
 
-// Conversion.\
+// Conversion.
 result = unitConverter.ConvertUnits(value, inUnits, "ft", out double convertedValue);
-
-## User Interface
-A companion package exists which adds user interface components (see ThunderUnitsMauiUI).
-
+```
 ## History
 Originally created by Robert Harwood (<robharwood@runbox.com>) and posted as open-sourced on Code Project.  The original page has been lost over time.  This version has been updated to work with newer .Net language features.  It was also modified to improve and simplify the code.
 
