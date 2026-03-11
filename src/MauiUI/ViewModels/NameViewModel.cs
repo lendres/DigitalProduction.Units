@@ -14,10 +14,11 @@ public partial class NameViewModel : ObservableObject
 
 	#region Construction
 
-	public NameViewModel()
+	public NameViewModel(List<string> excludedNames)
 	{
 		Title				= "Enter a Name";
         NameValidator.Value	= "";
+		_excludedNames		= excludedNames;
 		Initialize();
 	}
 
