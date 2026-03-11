@@ -101,16 +101,6 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	#region Methods
 
-	public override void ReplaceSelected(UnitEntry newItem)
-	{
-		System.Diagnostics.Debug.Assert(UnitConverter != null);
-		System.Diagnostics.Debug.Assert(UnitGroup != null);
-		System.Diagnostics.Debug.Assert(SelectedItem != null);
-
-		UnitConverter.ReplaceUnit(UnitGroup.Name, SelectedItem.Name, newItem);
-		base.ReplaceSelected(newItem);
-	}
-
 	public override void Insert(UnitEntry item, int position = 0)
 	{
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
