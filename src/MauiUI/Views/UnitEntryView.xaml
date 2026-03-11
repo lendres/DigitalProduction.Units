@@ -150,6 +150,7 @@
 					Text="OK"
 					HorizontalOptions="End"
 					StyleClass="StandardSizeButtonStyle"
+					IsEnabled="{Binding IsSubmittable}"
 					Clicked="OnSaveButtonClicked"/>
 				<Button 
 					Text="Cancel"
