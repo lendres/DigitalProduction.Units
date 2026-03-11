@@ -27,7 +27,7 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
 	async void OnNew(object sender, EventArgs eventArgs)
 	{
         // Get the name of the new UnitGroup.
-        NameViewModel	viewModel	= new();
+        NameViewModel	viewModel	= new(_viewModel.UnitConverter.GroupTable.GetSortedListOfGroupNames());
         NameView		view		= new(viewModel);
         object?			result		= await Shell.Current.ShowPopupAsync(view);
 
