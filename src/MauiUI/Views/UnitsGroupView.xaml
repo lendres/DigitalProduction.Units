@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <dptkcontrols:DigitalProductionMainPage 
 	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -16,7 +16,7 @@
 	</ContentPage.Resources>
 
 	<Grid StyleClass="PageGridStyle" MaximumWidthRequest="650">
-		<Label Grid.Row="0" Text="{Binding Name.Value}" StyleClass="Title"/>
+		<Label Grid.Row="0" Text="{Binding UnitGroup.Name}" StyleClass="Title"/>
 
 		<Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="20" Padding="20" VerticalOptions="Start">
 

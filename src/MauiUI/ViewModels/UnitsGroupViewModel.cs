@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using DigitalProduction.Maui.Enums;
-using DigitalProduction.Maui.Validation;
 using DigitalProduction.Maui.ViewModels;
 using System.Collections.ObjectModel;
 
@@ -28,20 +25,13 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		
 	#region Properties
 
-	[ObservableProperty, NotifyPropertyChangedFor(nameof(IsSubmittable))]
-	public partial ValidatableObject<string>	Name { get; set; }					= new();
-
-	[ObservableProperty]
-	public partial bool							IsSubmittable { get; set; }			= false;
-
 	public UnitConverter? UnitConverter
 	{
 		get => _unitConverter;
 		set
 		{
 			System.Diagnostics.Debug.Assert(value != null);
-			_unitConverter	= value;
-			Initialize();
+			_unitConverter = value;
 		}
 	}
 
@@ -51,53 +41,11 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 		set
 		{
 			System.Diagnostics.Debug.Assert(value != null);
-			_unitGroup	= value;
-			Items		= new ObservableCollection<UnitEntry>(_unitGroup.Units.Values);
-			Initialize();
+			SetProperty(ref _unitGroup, value);
+			Items = new ObservableCollection<UnitEntry>(_unitGroup.Units.Values);
 		}
 	}
 	
-	#endregion
-
-	#region Initialize and Validation
-
-	private void Initialize()
-	{
-		InitializeValues();
-		AddValidations();
-		ValidateSubmittable();
-	}
-
-	private void InitializeValues()
-	{
-		Name.Value = UnitGroup?.Name ?? "";
-	}
-
-	private void AddValidations()
-	{
-		Name.Validations.Clear();
-		Name.Validations.Add(new IsNotNullOrEmptyRule { ValidationMessage = "A name is required." });
-		Name.Validations.Add(new IsNotDuplicateStringRule
-		{
-			ValidationMessage		= "The value is already in use.",
-			Values					= _unitConverter?.GroupTable.GetSortedListOfGroupNames(),
-			ExcludeValue			= UnitGroup?.Name
-		});
-		ValidateName();
-	}
-
-	[RelayCommand]
-	private void ValidateName()
-	{
-		if (Name.Validate())
-		{
-			UnitGroup!.Name = Name.Value ?? "";
-		}
-		ValidateSubmittable();
-	}
-
-	public bool ValidateSubmittable() => IsSubmittable = Name.IsValid;
-
 	#endregion
 
 	#region Methods
