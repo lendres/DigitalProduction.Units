@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DigitalProduction.Maui.Enums;
 using DigitalProduction.Maui.Validation;
 using DigitalProduction.Maui.ViewModels;
 using System.Collections.ObjectModel;
@@ -101,24 +102,26 @@ public partial class UnitsGroupViewModel : DataGridBaseViewModel<UnitEntry>
 
 	#region Methods
 
-	public override void Insert(UnitEntry item, int position = 0)
+	public override void Insert(UnitEntry item, int position = 0, bool select = true)
 	{
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
 		System.Diagnostics.Debug.Assert(UnitGroup != null);
 
 		UnitConverter.AddUnit(UnitGroup.Name, item);
-		base.Insert(item, position);
+		base.Insert(item, position, select);
 	}
 
-	public override void Delete()
+	public override void Delete(bool selectNext = true)
 	{	
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
 		System.Diagnostics.Debug.Assert(UnitGroup != null);
 		System.Diagnostics.Debug.Assert(SelectedItem != null);
 
 		UnitConverter.RemoveUnit(UnitGroup.Name, SelectedItem.Name);
-		base.Delete();
+		base.Delete(selectNext);
 	}
+
+	public override SearchResult Find(string search) => SearchResult.NoItemsFound;
 
 	#endregion
 }

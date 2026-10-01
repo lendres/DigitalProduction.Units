@@ -72,21 +72,21 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
 
 	#region Methods
 
-	public override void ReplaceSelected(UnitGroup newItem)
+	public override void ReplaceSelected(UnitGroup newItem, bool select = true)
 	{
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
 		System.Diagnostics.Debug.Assert(SelectedItem != null);
 
 		UnitConverter.ReplaceGroup(SelectedItem.Name, newItem);
-		base.ReplaceSelected(newItem);
+		base.ReplaceSelected(newItem, select);
 	}
 
-	public override void Insert(UnitGroup item, int position = 0)
+	public override void Insert(UnitGroup item, int position = 0, bool select = true)
 	{
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
 
 		UnitConverter.AddGroup(item);
-		base.Insert(item, position);
+		base.Insert(item, position, select);
 	}
 
     public void RenameSelected(string name)
@@ -99,13 +99,13 @@ public abstract partial class UnitsGroupsViewModelBase : DataGridBaseViewModel<U
         base.ReplaceSelected(SelectedItem);
     }
 
-    public override void Delete()
+    public override void Delete(bool selectNext = true)
 	{	
 		System.Diagnostics.Debug.Assert(UnitConverter != null);
 		System.Diagnostics.Debug.Assert(SelectedItem != null);
 
 		UnitConverter.RemoveGroup(SelectedItem.Name);
-		base.Delete();
+		base.Delete(selectNext);
 	}
 
 	#endregion

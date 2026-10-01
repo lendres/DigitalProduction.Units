@@ -47,13 +47,13 @@ public interface IUnitsGroupsViewModel
 
 	#region Methods
 
-	void ReplaceSelected(UnitGroup newItem);
+	void ReplaceSelected(UnitGroup newItem, bool select = true);
 
-	void Insert(UnitGroup item, int position = 0);
+	void Insert(UnitGroup item, int position = 0, bool select = true);
 
 	void RenameSelected(string name);
 
-    void Delete();
+    void Delete(bool selectNext = true);
 
 	#endregion
 }
