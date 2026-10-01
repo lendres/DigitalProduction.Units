@@ -1,5 +1,6 @@
-﻿using DigitalProduction.Units.Maui;
+﻿using DigitalProduction.Maui.Enums;
 using DigitalProduction.Units;
+using DigitalProduction.Units.Maui;
 
 namespace UnitsConversionDemo.ViewModels;
 
@@ -11,7 +12,6 @@ public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGrou
 	}
 
 	public string? OutputFilePath { get; set; } = null;
-
 
 	/// <summary>
 	/// Write this object to a file.  The Path must be set and represent a valid path or this method will throw an exception.
@@ -26,4 +26,6 @@ public partial class UnitsGroupsViewModel : UnitsGroupsViewModelBase, IUnitsGrou
 			return UnitConverter.Serialize(OutputFilePath);
 		});
 	}
+
+	public override SearchResult Find(string search) => SearchResult.NoItemsFound;
 }
