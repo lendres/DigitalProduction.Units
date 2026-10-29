@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
 using DigitalProduction.Maui.Controls;
 
 namespace DigitalProduction.Units.Maui;
@@ -31,9 +32,9 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
         // Get the name of the new UnitGroup.
         NameViewModel	viewModel	= new(_viewModel.UnitConverter.GroupTable.GetSortedListOfGroupNames());
         NameView		view		= new(viewModel);
-        object?			result		= await Shell.Current.ShowPopupAsync(view);
+        var			result		= await Shell.Current.ShowPopupAsync<bool>(view, new PopupOptions { CanBeDismissedByTappingOutsideOfPopup = false, Shape = null, Shadow = null });
 
-		if (result is bool boolResult && boolResult)
+		if (!result.WasDismissedByTappingOutsideOfPopup && result.Result)
 		{
 			// Create a new UnitGroup, add it, and then immediatly go to edit it.
 			UnitGroup unitGroup = new() { Name = viewModel.Name };
@@ -54,9 +55,9 @@ public partial class UnitsGroupsView : DigitalProductionMainPage
         // Get the name of the new UnitGroup.
         NameViewModel	viewModel	= new(_viewModel.SelectedItem!.Name, _viewModel.UnitConverter.GroupTable.GetSortedListOfGroupNames());
         NameView		view		= new(viewModel);
-        object?			result		= await Shell.Current.ShowPopupAsync(view);
+        var			result		= await Shell.Current.ShowPopupAsync<bool>(view, new PopupOptions { CanBeDismissedByTappingOutsideOfPopup = false, Shape = null, Shadow = null });
 
-        if (result is bool boolResult && boolResult)
+        if (!result.WasDismissedByTappingOutsideOfPopup && result.Result)
         {
             _viewModel.RenameSelected(viewModel.Name);
         }

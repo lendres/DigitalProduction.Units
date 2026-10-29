@@ -8,8 +8,7 @@
 	xmlns:viewmodel="clr-namespace:DigitalProduction.Units.Maui"
 	xmlns:dpviews="clr-namespace:DigitalProduction.Maui.Views;assembly=DigitalProduction.Maui.AppToolkit"
 	x:Class="DigitalProduction.Units.Maui.UnitEntryView"
-	x:DataType="viewmodel:UnitEntryViewModel"
-	CanBeDismissedByTappingOutsideOfPopup="False">
+	x:DataType="viewmodel:UnitEntryViewModel">
 
 	<Border StyleClass="PopupFrameStyle" MinimumWidthRequest="660" MinimumHeightRequest="472" MaximumHeightRequest="473">
 
