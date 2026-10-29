@@ -25,3 +25,9 @@ A companion package exists which adds user interface components (ThunderUnitsMau
 Originally created by Robert Harwood (<robharwood@runbox.com>) and posted as open-sourced on Code Project.  The original page and code has been lost over time.
 
 Now maintained by Lance A. Endres, it has been updated to work with newer .Net language features.  Further updates then warrented moving to a new revision.  Version 2 changes the format of the XML file to correspond to a change in philosophy.  The primary method of editing the XML file through a user interface rather than directly editing it.  To support this, and clean up the source code, the format was changed.  It is no longer compatible with the original format.
+
+## Requirements
+
+DigitalProduction.Units 2.5.0 and DigitalProduction.Units.Maui 0.6.0 require .NET 10. The core library requires DigitalProduction.Net 0.13.0; the MAUI UI requires DigitalProduction.Maui.AppToolKit 0.14.0. Build with the .NET 10 SDK and default C# 14, plus corresponding MAUI workloads for the UI and demo.
+
+Earlier framework releases are no longer maintained.

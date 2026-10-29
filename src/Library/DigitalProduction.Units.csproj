@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<RootNamespace>DigitalProduction.Units</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -36,6 +36,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DigitalProduction.Net" Version="0.12.5" />
+	  <PackageReference Include="DigitalProduction.Net" Version="0.13.0" />
 	</ItemGroup>
 </Project>
