@@ -29,7 +29,7 @@
 		<Title>DigitalProduction.Units.Maui</Title>
 	</PropertyGroup>
 
-	<Target Name="RunPostBuildEventAfterPack" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">
+	<Target Name="RunPostBuildEventAfterPack" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release' and '$(SkipLocalNuGetCopy)' != 'true'">
 		<Exec Command="call &quot;$(MSBuildProjectDirectory)\Publishing\copy-nuget.bat&quot; &quot;$(MSBuildProjectDirectory)&quot;" />
 	</Target>
 
@@ -52,7 +52,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
-		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.14.0" />
+		<PackageReference Include="DigitalProduction.Maui.AppToolKit" Version="0.15.4" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
 	</ItemGroup>
 

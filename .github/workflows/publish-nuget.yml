@@ -1,0 +1,95 @@
+name: Publish NuGet package
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing published release to retry (leave blank for a dry run)
+        type: string
+        required: false
+
+
+jobs:
+  publish:
+    if: github.event_name == 'release' || github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Confirm the release exists
+        if: inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          draft=$(gh release view --repo "$GITHUB_REPOSITORY" --json isDraft --jq '.isDraft' -- "$RELEASE_TAG")
+          if [[ "$draft" != false ]]; then
+            echo "::error::The release must be published before retrying."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.release_tag != '' && format('refs/tags/{0}', inputs.release_tag) || github.ref }}
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Test
+        run: dotnet test "src/Unit Tests/Unit Tests.csproj" --configuration Release -p:SkipLocalNuGetCopy=true
+
+      - name: Pack Units
+        run: dotnet pack "src/Library/DigitalProduction.Units.csproj" --configuration Release --output artifacts -p:GeneratePackageOnBuild=false -p:SkipLocalNuGetCopy=true
+
+      - name: Install MAUI workloads
+        if: "!startsWith(inputs.release_tag || github.ref_name, 'units-v')"
+        run: dotnet workload install maui
+
+      - name: Pack Units MAUI
+        if: "!startsWith(inputs.release_tag || github.ref_name, 'units-v')"
+        run: dotnet pack "src/MauiUI/DigitalProduction.Units.Maui.csproj" --configuration Release --output artifacts -p:GeneratePackageOnBuild=false -p:SkipLocalNuGetCopy=true
+
+      - name: Select the package for this release
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        id: package
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
+        run: |
+          case "$RELEASE_TAG" in
+            units-v*) package="artifacts/DigitalProduction.Units.${RELEASE_TAG#units-v}.nupkg" ;;
+            maui-v*) package="artifacts/DigitalProduction.Units.Maui.${RELEASE_TAG#maui-v}.nupkg" ;;
+            *)
+              echo "::error::Use a units-v or maui-v release tag followed by the package version."
+              exit 1
+              ;;
+          esac
+
+          if [[ ! -f "$package" ]]; then
+            echo "::error::Release tag $RELEASE_TAG does not match the packed version."
+            exit 1
+          fi
+
+          echo "path=$package" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to NuGet.org
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Push to NuGet.org
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+          PACKAGE_PATH: ${{ steps.package.outputs.path }}
+        run: dotnet nuget push "$PACKAGE_PATH" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
